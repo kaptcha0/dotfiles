@@ -1,0 +1,7 @@
+configstore/**
+
+!.git/**
+!.gitignore
+!scoop/**
+!nvim/**
+!powershell/**
