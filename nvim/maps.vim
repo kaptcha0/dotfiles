@@ -65,5 +65,5 @@ nnoremap <silent> <leader>b :NvimTreeToggle<CR>
 nnoremap <silent> <leader>r :NVIMTreeRefresh<CR>
 
 " Terminal
-nnoremap <silent> <leader>t :ToggleTerm size=14 direction=horizontal<CR>
+nnoremap <silent> <leader>t :ToggleTerm size=7 direction=horizontal<CR>
 tnoremap <silent> <esc> <C-\><C-n>

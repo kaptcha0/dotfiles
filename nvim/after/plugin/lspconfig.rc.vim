@@ -15,6 +15,7 @@ local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
   
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
   
   if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_command [[augroup Format]]
@@ -52,11 +53,9 @@ local on_attach = function(client, bufnr)
   }
 end
 
--- Coq setup
-local coq = require 'coq'
-
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'bashls', 'dockerls', 'omnisharp', 'powershell_es', 'rust_analyzer', 'tsserver', 'vimls', 'yamlls' }
+local servers = { 'bashls', 'dockerls', 'sumneko_lua', 'omnisharp', 'powershell_es', 'rust_analyzer', 'tsserver', 'vimls', 'yamlls' }
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local server_options = {
   tsserver = { 
@@ -68,7 +67,8 @@ local server_options = {
 }
 
 local default_config = {
-  on_attach = on_attach
+  on_attach = on_attach,
+  capabilities = capabilities
 }
 
 for _, value in ipairs(servers) do
@@ -84,10 +84,7 @@ for _, value in ipairs(servers) do
      conf[opt] = val 
     end
   end
-
-  lspconfig[value].setup(
-    coq.lsp_ensure_capabilities(conf)
-  )
+  lspconfig[value].setup(conf)
 end
 -- Add prettier/eslint eventually
 -- --

@@ -17,9 +17,9 @@ tree.setup {
   reload_on_bufenter = false,
   respect_buf_cwd = false,
   view = {
-    adaptive_size = true,
+    adaptive_size = false,
     centralize_selection = false,
-    width = 30,
+    width = 25,
     height = 30,
     hide_root_folder = false,
     side = "left",

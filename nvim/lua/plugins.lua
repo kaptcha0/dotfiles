@@ -1,13 +1,14 @@
 vim.cmd [[packadd packer.nvim]]
 
 local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
+    install_path })
 end
 
 return require("packer").startup(
-  function(use) 
+  function(use)
     use 'wbthomason/packer.nvim'
 
     use 'tpope/vim-fugitive'
@@ -15,27 +16,28 @@ return require("packer").startup(
     use 'cohama/lexima.vim'
 
     if fn.has('nvim') == 1 then
-      -- COQ
-      use {
-        'ms-jpq/coq_nvim',
-        branch = 'coq',
-        run = ':COQdeps',
-        requires = {
-          { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
-        }
-      }
-
       -- LSP --
       use {
         'tami5/lspsaga.nvim',
+        'onsails/lspkind.nvim',
+        'williamboman/nvim-lsp-installer',
+        'neovim/nvim-lspconfig',
         {
-          'williamboman/nvim-lsp-installer', 
+          'hrsh7th/nvim-cmp',
+          requires = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'L3MON4D3/LuaSnip',
+            'hrsh7th/cmp-nvim-lua',
+            'Saecki/crates.nvim',
+            'David-Kunz/cmp-npm',
+          }
         },
-        {
-          'neovim/nvim-lspconfig',
-          after = { 'coq_nvim' },
-          config = 'vim.cmd[[COQnow -s]]'
-        }
+        setup = function()
+          require('nvim-lsp-installer').setup {}
+        end
       }
 
       -- Terminal
@@ -44,7 +46,7 @@ return require("packer").startup(
         tag = 'v1.*',
         config = function()
           require("toggleterm").setup {
-            shell = ( vim.fn.has('win32') or vim.fn.has('win32unix') ) and 'pwsh' or 'bash'
+            shell = (vim.fn.has('win32') or vim.fn.has('win32unix')) and 'pwsh' or 'bash'
           }
         end
       }
@@ -53,8 +55,31 @@ return require("packer").startup(
       use 'hoob3rt/lualine.nvim'
       use 'kyazdani42/nvim-web-devicons'
       use {
+        'xiyaowong/nvim-transparent',
+        config = function()
+          require('transparent').setup({
+            enable = true,
+            extra_groups = {
+              "all",
+              "NvimTree"
+            }
+          })
+        end
+      }
+      use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
+      }
+      use {
+        'EdenEast/nightfox.nvim',
+        config = function()
+          require('nightfox').setup {
+            options = {
+              transparent = true,
+              dim_inactive = true
+            }
+          }
+        end
       }
 
       -- File search
@@ -63,10 +88,10 @@ return require("packer").startup(
         'nvim-telescope/telescope.nvim',
         requires = {
           'nvim-lua/popup.nvim',
-          'nvim-lua/plenary.nvim'
+          'nvim-lua/plenary.nvim',
         }
       }
-    end 
+    end
 
     if packer_bootstrap then
       require('packer').sync()

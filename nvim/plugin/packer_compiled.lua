@@ -69,20 +69,55 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["coq.artifacts"] = {
+  LuaSnip = {
     loaded = true,
-    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\coq.artifacts",
-    url = "https://github.com/ms-jpq/coq.artifacts"
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  coq_nvim = {
+  ["cmp-buffer"] = {
     loaded = true,
-    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\coq_nvim",
-    url = "https://github.com/ms-jpq/coq_nvim"
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-buffer",
+    url = "https://github.com/hrsh7th/cmp-buffer"
+  },
+  ["cmp-cmdline"] = {
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-cmdline",
+    url = "https://github.com/hrsh7th/cmp-cmdline"
+  },
+  ["cmp-npm"] = {
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-npm",
+    url = "https://github.com/David-Kunz/cmp-npm"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-nvim-lsp",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
+  },
+  ["cmp-nvim-lua"] = {
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-nvim-lua",
+    url = "https://github.com/hrsh7th/cmp-nvim-lua"
+  },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-path",
+    url = "https://github.com/hrsh7th/cmp-path"
+  },
+  ["crates.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\crates.nvim",
+    url = "https://github.com/Saecki/crates.nvim"
   },
   ["lexima.vim"] = {
     loaded = true,
     path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\lexima.vim",
     url = "https://github.com/cohama/lexima.vim"
+  },
+  ["lspkind.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\lspkind.nvim",
+    url = "https://github.com/onsails/lspkind.nvim"
   },
   ["lspsaga.nvim"] = {
     loaded = true,
@@ -94,18 +129,32 @@ _G.packer_plugins = {
     path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\lualine.nvim",
     url = "https://github.com/hoob3rt/lualine.nvim"
   },
+  ["nightfox.nvim"] = {
+    config = { "\27LJ\2\nk\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\foptions\1\0\0\1\0\2\17dim_inactive\2\16transparent\2\nsetup\rnightfox\frequire\0" },
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nightfox.nvim",
+    url = "https://github.com/EdenEast/nightfox.nvim"
+  },
+  ["nvim-cmp"] = {
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-cmp",
+    url = "https://github.com/hrsh7th/nvim-cmp"
+  },
   ["nvim-lsp-installer"] = {
     loaded = true,
     path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-lsp-installer",
     url = "https://github.com/williamboman/nvim-lsp-installer"
   },
   ["nvim-lspconfig"] = {
-    config = { "vim.cmd[[COQnow -s]]" },
-    load_after = {},
     loaded = true,
-    needs_bufread = false,
-    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\nvim-lspconfig",
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-transparent"] = {
+    config = { "\27LJ\2\nn\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\17extra_groups\1\3\0\0\ball\rNvimTree\1\0\1\venable\2\nsetup\16transparent\frequire\0" },
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-transparent",
+    url = "https://github.com/xiyaowong/nvim-transparent"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -161,19 +210,18 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: nvim-transparent
+time([[Config for nvim-transparent]], true)
+try_loadstring("\27LJ\2\nn\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\17extra_groups\1\3\0\0\ball\rNvimTree\1\0\1\venable\2\nsetup\16transparent\frequire\0", "config", "nvim-transparent")
+time([[Config for nvim-transparent]], false)
 -- Config for: toggleterm.nvim
 time([[Config for toggleterm.nvim]], true)
 try_loadstring("\27LJ\2\n²\1\0\0\6\0\f\0\0256\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\t\0006\3\3\0009\3\4\0039\3\5\3'\5\6\0B\3\2\2\14\0\3\0X\4\a€6\3\3\0009\3\4\0039\3\5\3'\5\a\0B\3\2\2\15\0\3\0X\4\2€'\3\b\0X\4\1€'\3\n\0=\3\v\2B\0\2\1K\0\1\0\nshell\tbash\1\0\0\tpwsh\14win32unix\nwin32\bhas\afn\bvim\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
 time([[Config for toggleterm.nvim]], false)
--- Load plugins in order defined by `after`
-time([[Sequenced loading]], true)
-vim.cmd [[ packadd coq_nvim ]]
-vim.cmd [[ packadd nvim-lspconfig ]]
-
--- Config for: nvim-lspconfig
-vim.cmd[[COQnow -s]]
-
-time([[Sequenced loading]], false)
+-- Config for: nightfox.nvim
+time([[Config for nightfox.nvim]], true)
+try_loadstring("\27LJ\2\nk\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\foptions\1\0\0\1\0\2\17dim_inactive\2\16transparent\2\nsetup\rnightfox\frequire\0", "config", "nightfox.nvim")
+time([[Config for nightfox.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

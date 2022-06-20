@@ -49,9 +49,9 @@ set smarttab
 
 " indents
 filetype plugin indent on
-set shiftwidth=4
-set tabstop=4
-set noexpandtab
+set shiftwidth=2
+set tabstop=2
+" set noexpandtab
 set ai "Auto indent
 set si "Smart indent
 set nowrap "No Wrap lines
@@ -90,14 +90,14 @@ highlight Visual cterm=NONE ctermbg=236 ctermfg=NONE guibg=Grey40
 highlight LineNr cterm=none ctermfg=240 guifg=#2b506e guibg=#000000
 
 augroup BgHighlight
-  autocmd!
-  autocmd WinEnter * set cul
-  autocmd WinLeave * set nocul
+autocmd!
+autocmd WinEnter * set cul
+autocmd WinLeave * set nocul
 augroup END
 
 if &term =~ "screen"
-  autocmd BufEnter * if bufname("") !~ "^?[A-Za-z0-9?]*://" | silent! exe '!echo -n "\ek[`hostname`:`basename $PWD`/`basename %`]\e\\"' | endif
-  autocmd VimLeave * silent!  exe '!echo -n "\ek[`hostname`:`basename $PWD`]\e\\"'
+autocmd BufEnter * if bufname("") !~ "^?[A-Za-z0-9?]*://" | silent! exe '!echo -n "\ek[`hostname`:`basename $PWD`/`basename %`]\e\\"' | endif
+autocmd VimLeave * silent!  exe '!echo -n "\ek[`hostname`:`basename $PWD`]\e\\"'
 endif
 
 "}}}
@@ -122,7 +122,7 @@ autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 
 " Imports "{{{
 " ---------------------------------------------------------------------
-runtime ./plug.vim
+lua require('plugins')
 if has("unix")
   let s:uname = system("uname -s")
   " Do Mac stuff
@@ -148,9 +148,11 @@ if exists("&termguicolors") && exists("&winblend")
   set wildoptions=pum
   set pumblend=5
   set background=dark
-  " Use NeoSolarized
+  let g:transparent_enabled = v:true
   let g:neosolarized_termtrans=1
   colorscheme NeoSolarized
+  " colorscheme terafox
+  " Use NeoSolarized
 endif
 
 "}}}
@@ -163,9 +165,8 @@ augroup packer_user_config
   autocmd!
   autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 augroup end
-
-lua require('plugins')
 "}}}
+
 
 
 " vim: set foldmethod=marker foldlevel=0:
