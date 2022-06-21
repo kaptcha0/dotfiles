@@ -16,6 +16,12 @@ return require("packer").startup(
     use 'cohama/lexima.vim'
 
     if fn.has('nvim') == 1 then
+      -- Editor --
+      use {
+        'prettier/vim-prettier',
+        run = 'yarn install --frozen-lockfile --production'
+      }
+
       -- LSP --
       use {
         'tami5/lspsaga.nvim',
@@ -55,31 +61,8 @@ return require("packer").startup(
       use 'hoob3rt/lualine.nvim'
       use 'kyazdani42/nvim-web-devicons'
       use {
-        'xiyaowong/nvim-transparent',
-        config = function()
-          require('transparent').setup({
-            enable = true,
-            extra_groups = {
-              "all",
-              "NvimTree"
-            }
-          })
-        end
-      }
-      use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
-      }
-      use {
-        'EdenEast/nightfox.nvim',
-        config = function()
-          require('nightfox').setup {
-            options = {
-              transparent = true,
-              dim_inactive = true
-            }
-          }
-        end
       }
 
       -- File search

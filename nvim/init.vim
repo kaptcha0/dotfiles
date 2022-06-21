@@ -75,6 +75,11 @@ endif
 " Turn off paste mode when leaving insert
 autocmd InsertLeave * set nopaste
 
+" Start LSP automatically
+autocmd BufCreate,BufAdd *.* LspStart
+
+autocmd BufUnload *.* LspStop
+
 " Add asterisks in block comments
 set formatoptions+=r
 "}}}
@@ -148,13 +153,18 @@ if exists("&termguicolors") && exists("&winblend")
   set wildoptions=pum
   set pumblend=5
   set background=dark
-  let g:transparent_enabled = v:true
+  " Use NeoSolarized
   let g:neosolarized_termtrans=1
   colorscheme NeoSolarized
-  " colorscheme terafox
-  " Use NeoSolarized
 endif
 
+"}}}
+
+"Editor setup "{{{
+" ---------------------------------------------------------------------
+let g:prettier#quickfix_enabled = 0
+
+autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.svelte,*.yaml,*.html PrettierAsync
 "}}}
 
 " Extras "{{{

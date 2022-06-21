@@ -54,12 +54,12 @@ local on_attach = function(client, bufnr)
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'bashls', 'dockerls', 'sumneko_lua', 'omnisharp', 'powershell_es', 'rust_analyzer', 'tsserver', 'vimls', 'yamlls' }
+local servers = { 'bashls', 'dockerls', 'emmet_ls', 'eslint', 'html', 'sumneko_lua', 'omnisharp', 'powershell_es', 'rust_analyzer', 'tsserver', 'vimls', 'yamlls' }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local server_options = {
   tsserver = { 
-    filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' }
+    filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'typescript.tsx' }
   },
   omnisharp = {
     cmd = { 'omnisharp', '-lsp', '-hpid', tostring(pid) },
