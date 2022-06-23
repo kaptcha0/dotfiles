@@ -17,15 +17,25 @@ return require("packer").startup(
 
     if fn.has('nvim') == 1 then
       -- Editor --
+      use 'voldikss/vim-floaterm'
+      use 'EdenEast/nightfox.nvim'
+      use 'sbdchd/neoformat'
+      use 'b0o/schemastore.nvim'
       use {
-        'prettier/vim-prettier',
-        run = 'yarn install --frozen-lockfile --production'
+        'weilbith/nvim-code-action-menu',
+        cmd = 'CodeActionMenu',
       }
 
       -- LSP --
       use {
         'tami5/lspsaga.nvim',
         'onsails/lspkind.nvim',
+        {
+          'onsails/diaglist.nvim',
+          config = function()
+            require('diaglist').init {}
+          end
+        },
         'williamboman/nvim-lsp-installer',
         'neovim/nvim-lspconfig',
         {
@@ -39,21 +49,19 @@ return require("packer").startup(
             'hrsh7th/cmp-nvim-lua',
             'Saecki/crates.nvim',
             'David-Kunz/cmp-npm',
+            'petertriho/cmp-git',
+            {
+              'KadoBOT/cmp-plugins',
+              config = function()
+                require('cmp-plugins').setup {
+                  files = { 'lua/plugins.lua' }
+                }
+              end
+            }
           }
         },
         setup = function()
           require('nvim-lsp-installer').setup {}
-        end
-      }
-
-      -- Terminal
-      use {
-        "akinsho/toggleterm.nvim",
-        tag = 'v1.*',
-        config = function()
-          require("toggleterm").setup {
-            shell = (vim.fn.has('win32') or vim.fn.has('win32unix')) and 'pwsh' or 'bash'
-          }
         end
       }
 

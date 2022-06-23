@@ -1,4 +1,4 @@
-configstore/**
+**
 
 !.git/**
 !.gitignore

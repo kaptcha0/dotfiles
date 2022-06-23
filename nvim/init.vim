@@ -117,7 +117,7 @@ au BufNewFile,BufRead *.tsx setf typescriptreact
 au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.mdx set filetype=markdown
 
-set suffixesadd=.js,.es,.jsx,.json,.css,.less,.sass,.styl,.php,.py,.md
+set suffixesadd=.ts,.tsx,.cs,.csproj,.sln,.js,.es,.jsx,.json,.css,.less,.sass,.styl,.php,.py,.md
 
 autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
@@ -149,22 +149,34 @@ runtime ./maps.vim
 if exists("&termguicolors") && exists("&winblend")
   syntax enable
   set termguicolors
-  set winblend=0
+  set winblend=10
   set wildoptions=pum
   set pumblend=5
-  set background=dark
+  
+  colorscheme nightfox
   " Use NeoSolarized
-  let g:neosolarized_termtrans=1
-  colorscheme NeoSolarized
+  " let g:neosolarized_termtrans=1
+  " colorscheme NeoSolarized
 endif
 
 "}}}
 
 "Editor setup "{{{
 " ---------------------------------------------------------------------
-let g:prettier#quickfix_enabled = 0
+"  Formatting
+let g:neoformat_try_node_exe = 1
+let g:neoformat_try_formatprg = 1
 
-autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.svelte,*.yaml,*.html PrettierAsync
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
+
+" Mouse support
+set mouse=a
+
+" Neovide
+set guifont=JetBrainsMono\ NF,codicon,Cascadia\ Code\ PL:h10
 "}}}
 
 " Extras "{{{
@@ -175,6 +187,8 @@ augroup packer_user_config
   autocmd!
   autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 augroup end
+
+
 "}}}
 
 

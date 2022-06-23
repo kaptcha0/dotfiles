@@ -40,7 +40,7 @@ function which ($command) {
 
 
 # Aliases
-Set-Alias vim nvim
+Set-Alias vim neovide
 Set-Alias ll ls
 Set-Alias grep findstr
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'

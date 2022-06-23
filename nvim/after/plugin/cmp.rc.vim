@@ -19,13 +19,19 @@ lua << EOF
       ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
-    sources = cmp.config.sources({
+    sources = {
       { name = 'nvim_lsp' },
-    }, {
-        { name = 'buffer' }
-    }),
+      { name = 'path' },
+      { name = 'buffer' },
+      { name = 'nvim_lua' },
+      { name = 'crates' },
+      { name = 'npm' },
+      { name = 'cmdline' },
+      { name = 'git' },
+      { name = 'plugins' }
+    },
     formatting = {
-      format = lspkind.cmp_format({ with_text = false, maxwidth = 50 })
+      format = lspkind.cmp_format({ mode = 'symbol_text', preset = 'codicons', maxwidth = 50 })
     }
   })
 

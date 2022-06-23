@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-cmdline",
     url = "https://github.com/hrsh7th/cmp-cmdline"
   },
+  ["cmp-git"] = {
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-git",
+    url = "https://github.com/petertriho/cmp-git"
+  },
   ["cmp-npm"] = {
     loaded = true,
     path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-npm",
@@ -104,10 +109,22 @@ _G.packer_plugins = {
     path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
+  ["cmp-plugins"] = {
+    config = { "\27LJ\2\nb\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\nfiles\1\0\0\1\2\0\0\20lua/plugins.lua\nsetup\16cmp-plugins\frequire\0" },
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-plugins",
+    url = "https://github.com/KadoBOT/cmp-plugins"
+  },
   ["crates.nvim"] = {
     loaded = true,
     path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\crates.nvim",
     url = "https://github.com/Saecki/crates.nvim"
+  },
+  ["diaglist.nvim"] = {
+    config = { "\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\tinit\rdiaglist\frequire\0" },
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\diaglist.nvim",
+    url = "https://github.com/onsails/diaglist.nvim"
   },
   ["lexima.vim"] = {
     loaded = true,
@@ -129,10 +146,28 @@ _G.packer_plugins = {
     path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\lualine.nvim",
     url = "https://github.com/hoob3rt/lualine.nvim"
   },
+  neoformat = {
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\neoformat",
+    url = "https://github.com/sbdchd/neoformat"
+  },
+  ["nightfox.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nightfox.nvim",
+    url = "https://github.com/EdenEast/nightfox.nvim"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-code-action-menu"] = {
+    commands = { "CodeActionMenu" },
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\nvim-code-action-menu",
+    url = "https://github.com/weilbith/nvim-code-action-menu"
   },
   ["nvim-lsp-installer"] = {
     loaded = true,
@@ -174,26 +209,25 @@ _G.packer_plugins = {
     path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
+  ["schemastore.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\schemastore.nvim",
+    url = "https://github.com/b0o/schemastore.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
-  ["toggleterm.nvim"] = {
-    config = { "\27LJ\2\n²\1\0\0\6\0\f\0\0256\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\t\0006\3\3\0009\3\4\0039\3\5\3'\5\6\0B\3\2\2\14\0\3\0X\4\a€6\3\3\0009\3\4\0039\3\5\3'\5\a\0B\3\2\2\15\0\3\0X\4\2€'\3\b\0X\4\1€'\3\n\0=\3\v\2B\0\2\1K\0\1\0\nshell\tbash\1\0\0\tpwsh\14win32unix\nwin32\bhas\afn\bvim\nsetup\15toggleterm\frequire\0" },
+  ["vim-floaterm"] = {
     loaded = true,
-    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\toggleterm.nvim",
-    url = "https://github.com/akinsho/toggleterm.nvim"
+    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-floaterm",
+    url = "https://github.com/voldikss/vim-floaterm"
   },
   ["vim-fugitive"] = {
     loaded = true,
     path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
-  },
-  ["vim-prettier"] = {
-    loaded = true,
-    path = "C:\\Users\\JCKab\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-prettier",
-    url = "https://github.com/prettier/vim-prettier"
   },
   ["vim-rhubarb"] = {
     loaded = true,
@@ -203,10 +237,20 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: toggleterm.nvim
-time([[Config for toggleterm.nvim]], true)
-try_loadstring("\27LJ\2\n²\1\0\0\6\0\f\0\0256\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\t\0006\3\3\0009\3\4\0039\3\5\3'\5\6\0B\3\2\2\14\0\3\0X\4\a€6\3\3\0009\3\4\0039\3\5\3'\5\a\0B\3\2\2\15\0\3\0X\4\2€'\3\b\0X\4\1€'\3\n\0=\3\v\2B\0\2\1K\0\1\0\nshell\tbash\1\0\0\tpwsh\14win32unix\nwin32\bhas\afn\bvim\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
-time([[Config for toggleterm.nvim]], false)
+-- Config for: diaglist.nvim
+time([[Config for diaglist.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\tinit\rdiaglist\frequire\0", "config", "diaglist.nvim")
+time([[Config for diaglist.nvim]], false)
+-- Config for: cmp-plugins
+time([[Config for cmp-plugins]], true)
+try_loadstring("\27LJ\2\nb\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\nfiles\1\0\0\1\2\0\0\20lua/plugins.lua\nsetup\16cmp-plugins\frequire\0", "config", "cmp-plugins")
+time([[Config for cmp-plugins]], false)
+
+-- Command lazy-loads
+time([[Defining lazy-load commands]], true)
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file CodeActionMenu lua require("packer.load")({'nvim-code-action-menu'}, { cmd = "CodeActionMenu", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+time([[Defining lazy-load commands]], false)
+
 if should_profile then save_profiles() end
 
 end)
