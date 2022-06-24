@@ -11,7 +11,7 @@ nnoremap + <C-a>
 nnoremap - <C-x>
 
 " Select all
-nmap <C-a> gg<S-v>G
+nnoremap <C-a> gg<S-v>G
 
 " Save with root permission
 if has('win32') || has('win32unix') 
@@ -36,16 +36,16 @@ vnoremap <silent> # :<C-U>
 " Tabs
 
 " Open current directory
-nmap te :tabedit 
-nmap <S-Tab> :tabprev<Return>
-nmap <Tab> :tabnext<Return>
+nnoremap te :tabedit 
+nnoremap <S-Tab> :tabprev<Return>
+nnoremap <Tab> :tabnext<Return>
 
 "------------------------------
 " Windows
 
 " Split window
-nmap ss :split<Return><C-w>w
-nmap sv :vsplit<Return><C-w>w
+nnoremap ss :split<Return><C-w>w
+nnoremap sv :vsplit<Return><C-w>w
 
 " Move window
 nnoremap <leader>h <C-w>h
@@ -54,16 +54,20 @@ nnoremap <leader>j <C-w>j
 nnoremap <leader>l <C-w>l
 
 " Resize window
-nmap <C-w><left> <C-w><
-nmap <C-w><right> <C-w>>
-nmap <C-w><up> <C-w>+
-nmap <C-w><down> <C-w>-
+nnoremap <C-w><left> <C-w><
+nnoremap <C-w><right> <C-w>>
+nnoremap <C-w><up> <C-w>+
+nnoremap <C-w><down> <C-w>-
 
 " CTRL+C/X/V setup
-vmap <C-c> "+yi
-vmap <C-x> "+c
-vmap <C-v> c<ESC>"+p
-imap <C-v> <C-r><C-o>+
+vnoremap <C-c> "+yi
+vnoremap <C-x> "+c
+vnoremap <C-v> c<ESC>"+p
+inoremap <C-v> <C-r><C-o>+
+
+" Duplicate Line up/down
+nnoremap <c-a-up> Vyp
+nnoremap <c-a-down> VyP
 
 " NvimTree
 nnoremap <silent> <leader>b :NvimTreeToggle<CR>

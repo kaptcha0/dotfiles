@@ -153,10 +153,9 @@ if exists("&termguicolors") && exists("&winblend")
   set wildoptions=pum
   set pumblend=5
   
-  colorscheme nightfox
-  " Use NeoSolarized
-  " let g:neosolarized_termtrans=1
-  " colorscheme NeoSolarized
+  set background=dark
+  let g:material_style = 'darker'
+  colorscheme material
 endif
 
 "}}}
