@@ -22,27 +22,7 @@ return require("packer").startup(function(use)
 
 	if fn.has("nvim") == 1 then
 		-- Themes --
-		use({
-			"marko-cerovac/material.nvim",
-			after = "lualine",
-			config = function()
-				require("material").setup({
-					contrast = {
-						floating_windows = true,
-						non_current_windows = true,
-						cursor_line = true,
-					},
-					italics = {
-						comments = false,
-						keywords = false,
-						functions = false,
-						strings = false,
-						variables = false,
-					},
-					lualine_style = "stealth",
-				})
-			end,
-		})
+		use("marko-cerovac/material.nvim")
 		-- use("Mofiqul/vscode.nvim")
 		-- use("EdenEast/nightfox.nvim")
 
