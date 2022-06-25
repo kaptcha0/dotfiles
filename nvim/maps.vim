@@ -66,8 +66,13 @@ vnoremap <C-v> c<ESC>"+p
 inoremap <C-v> <C-r><C-o>+
 
 " Duplicate Line up/down
-nnoremap <c-a-up> Vyp
-nnoremap <c-a-down> VyP
+nnoremap <s-a-up> Vyp
+vnoremap <s-a-up> yp
+inoremap <silent> <s-a-up> <esc>Vypi
+
+nnoremap <s-a-down> VyP
+vnoremap <s-a-down> yP
+inoremap <silent> <s-a-down> <esc>VyPi
 
 " NvimTree
 nnoremap <silent> <leader>b :NvimTreeToggle<CR>
@@ -98,3 +103,8 @@ nnoremap <leader>bd <cmd>lua require('diaglist').open_buffer_diagnostics()<cr>
 
 " Code Actions
 nnoremap <leader>ca <cmd>CodeActionMenu<cr>
+
+" Force format
+nnoremap <s-a-f> <cmd>Neoformat<cr>
+vnoremap <c-k><c-f> <cmd>Neoformat! &filetype<cr>
+inoremap <s-a-f> <cmd>Neoformat<cr>

@@ -19,6 +19,7 @@ return require("packer").startup(function(use)
 	use("tpope/vim-fugitive")
 	use("tpope/vim-rhubarb")
 	use("cohama/lexima.vim")
+	use("editorconfig/editorconfig-vim")
 
 	if fn.has("nvim") == 1 then
 		-- Themes --
@@ -30,6 +31,12 @@ return require("packer").startup(function(use)
 		use("voldikss/vim-floaterm")
 		use("sbdchd/neoformat")
 		use("b0o/schemastore.nvim")
+		use({
+			"numToStr/Comment.nvim",
+			config = function()
+				require("Comment").setup()
+			end,
+		})
 		use({
 			"weilbith/nvim-code-action-menu",
 			cmd = "CodeActionMenu",

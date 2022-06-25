@@ -54,7 +54,9 @@ end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = {
+	"clangd",
 	"bashls",
+	"diagnosticls",
 	"dockerls",
 	"emmet_ls",
 	"eslint",
@@ -63,10 +65,12 @@ local servers = {
 	"omnisharp",
 	"powershell_es",
 	"rust_analyzer",
+	"taplo",
 	"tsserver",
 	"vimls",
 	"yamlls",
 }
+
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local server_options = {
@@ -97,17 +101,12 @@ local default_config = {
 }
 
 for _, value in ipairs(servers) do
-	local conf = {}
+	local conf = vim.deepcopy(default_config)
 	local lang_opts = server_options[value]
 
-	for k, v in pairs(default_config) do
-		conf[k] = v
+	if lang_opts ~= nil then
+		conf = vim.tbl_deep_extend("keep", default_config, lang_opts)
 	end
 
-	if lang_opts ~= nil then
-		for opt, val in pairs(server_options[value]) do
-			conf[opt] = val
-		end
-	end
 	lspconfig[value].setup(conf)
 end
