@@ -32,6 +32,10 @@ return require("packer").startup(function(use)
 		use("sbdchd/neoformat")
 		use("b0o/schemastore.nvim")
 		use({
+			"Pocco81/dap-buddy.nvim",
+			requires = "mfussenegger/nvim-dap",
+		})
+		use({
 			"numToStr/Comment.nvim",
 			config = function()
 				require("Comment").setup()

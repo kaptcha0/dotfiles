@@ -1,7 +1,9 @@
+**
+
 !.git/
 !.gitignore
 !scoop/
-!nvim/
+!nvim/after/**
+!nvim/colors/**
+!nvim/*
 !powershell/
-
-**

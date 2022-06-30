@@ -66,13 +66,13 @@ vnoremap <C-v> c<ESC>"+p
 inoremap <C-v> <C-r><C-o>+
 
 " Duplicate Line up/down
-nnoremap <s-a-up> Vyp
-vnoremap <s-a-up> yp
-inoremap <silent> <s-a-up> <esc>Vypi
+nnoremap <s-a-up> VyP
+vnoremap <s-a-up> yP
+inoremap <silent> <s-a-up> <esc>VyPi
 
-nnoremap <s-a-down> VyP
-vnoremap <s-a-down> yP
-inoremap <silent> <s-a-down> <esc>VyPi
+nnoremap <s-a-down> Vyp
+vnoremap <s-a-down> yp
+inoremap <silent> <s-a-down> <esc>Vypi
 
 " NvimTree
 nnoremap <silent> <leader>b :NvimTreeToggle<CR>
