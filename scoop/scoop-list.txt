@@ -1,4 +1,195 @@
 {
+    "apps": [
+        {
+            "Version": "22.01",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-07-19T12:16:14.3613287-04:00",
+            "Name": "7zip"
+        },
+        {
+            "Version": "0.6.8",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-06-23T09:47:42.8988955-04:00",
+            "Name": "bottom"
+        },
+        {
+            "Version": "3.23.2",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-06-18T14:25:52.4280986-04:00",
+            "Name": "cmake"
+        },
+        {
+            "Version": "7.84.0_6",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-07-22T11:35:51.9245068-04:00",
+            "Name": "curl"
+        },
+        {
+            "Version": "0.31.0",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-07-22T11:35:52.765777-04:00",
+            "Name": "fzf"
+        },
+        {
+            "Version": "11.2.0",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-07-18T17:07:25.3784347-04:00",
+            "Name": "gcc"
+        },
+        {
+            "Version": "1.18.4",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-07-22T11:47:59.7266924-04:00",
+            "Name": "go"
+        },
+        {
+            "Version": "1.6",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-06-08T14:20:13.1345579-04:00",
+            "Name": "jq"
+        },
+        {
+            "Version": "0.18.1",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-06-22T16:50:14.8274409-04:00",
+            "Name": "lazydocker"
+        },
+        {
+            "Version": "0.35",
+            "Info": "",
+            "Source": "extras",
+            "Updated": "2022-07-22T11:35:54.0383607-04:00",
+            "Name": "lazygit"
+        },
+        {
+            "Version": "0.2018.07.25",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-06-09T16:32:53.8219972-04:00",
+            "Name": "ln"
+        },
+        {
+            "Version": "0.9.0",
+            "Info": "",
+            "Source": "extras",
+            "Updated": "2022-07-14T09:43:45.9659157-04:00",
+            "Name": "neovide"
+        },
+        {
+            "Version": "0.7.2",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-07-14T09:44:08.3885911-04:00",
+            "Name": "neovim"
+        },
+        {
+            "Version": "1.12",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-06-10T10:02:23.8784676-04:00",
+            "Name": "netcat"
+        },
+        {
+            "Version": "7.92",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-06-10T09:37:08.0297386-04:00",
+            "Name": "nmap"
+        },
+        {
+            "Version": "1.1.9",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-06-09T10:46:26.5893947-04:00",
+            "Name": "nvm"
+        },
+        {
+            "Version": "1.39.0",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-06-09T18:31:47.7746141-04:00",
+            "Name": "omnisharp"
+        },
+        {
+            "Version": "0.60.1",
+            "Info": "",
+            "Source": "extras",
+            "Updated": "2022-07-19T12:46:59.9365814-04:00",
+            "Name": "powertoys"
+        },
+        {
+            "Version": "13.0.0",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-06-18T15:17:19.6048325-04:00",
+            "Name": "ripgrep"
+        },
+        {
+            "Version": "3.1",
+            "Info": "",
+            "Source": "extras",
+            "Updated": "2022-07-22T10:48:41.0219601-04:00",
+            "Name": "roundedtb"
+        },
+        {
+            "Version": "1.979.0",
+            "Info": "",
+            "Source": "snyk",
+            "Updated": "2022-07-22T11:36:05.3134516-04:00",
+            "Name": "snyk"
+        },
+        {
+            "Version": "3.39.2",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-07-22T11:36:08.1208401-04:00",
+            "Name": "sqlite"
+        },
+        {
+            "Version": "1.9.1",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-07-22T13:35:57.277029-04:00",
+            "Name": "starship"
+        },
+        {
+            "Version": "0.2020.01.26",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-06-08T14:20:13.3220579-04:00",
+            "Name": "sudo"
+        },
+        {
+            "Version": "2021.5",
+            "Info": "",
+            "Source": "extras",
+            "Updated": "2022-07-22T10:48:52.055107-04:00",
+            "Name": "translucenttb"
+        },
+        {
+            "Version": "0.75.1",
+            "Info": "",
+            "Source": "main",
+            "Updated": "2022-07-18T17:33:45.3627059-04:00",
+            "Name": "uncrustify"
+        },
+        {
+            "Version": "14.32.31332.0",
+            "Info": "",
+            "Source": "extras",
+            "Updated": "2022-07-14T09:47:26.2308393-04:00",
+            "Name": "vcredist2022"
+        }
+    ],
     "buckets": [
         {
             "Name": "extras",
@@ -23,197 +214,6 @@
             "Source": "https://github.com/ScoopInstaller/Versions",
             "Updated": "2022-07-22T12:56:54-04:00",
             "Manifests": 349
-        }
-    ],
-    "apps": [
-        {
-            "Updated": "2022-07-19T12:16:14.3613287-04:00",
-            "Name": "7zip",
-            "Source": "main",
-            "Info": "",
-            "Version": "22.01"
-        },
-        {
-            "Updated": "2022-06-23T09:47:42.8988955-04:00",
-            "Name": "bottom",
-            "Source": "main",
-            "Info": "",
-            "Version": "0.6.8"
-        },
-        {
-            "Updated": "2022-06-18T14:25:52.4280986-04:00",
-            "Name": "cmake",
-            "Source": "main",
-            "Info": "",
-            "Version": "3.23.2"
-        },
-        {
-            "Updated": "2022-07-22T11:35:51.9245068-04:00",
-            "Name": "curl",
-            "Source": "main",
-            "Info": "",
-            "Version": "7.84.0_6"
-        },
-        {
-            "Updated": "2022-07-22T11:35:52.765777-04:00",
-            "Name": "fzf",
-            "Source": "main",
-            "Info": "",
-            "Version": "0.31.0"
-        },
-        {
-            "Updated": "2022-07-18T17:07:25.3784347-04:00",
-            "Name": "gcc",
-            "Source": "main",
-            "Info": "",
-            "Version": "11.2.0"
-        },
-        {
-            "Updated": "2022-07-22T11:47:59.7266924-04:00",
-            "Name": "go",
-            "Source": "main",
-            "Info": "",
-            "Version": "1.18.4"
-        },
-        {
-            "Updated": "2022-06-08T14:20:13.1345579-04:00",
-            "Name": "jq",
-            "Source": "main",
-            "Info": "",
-            "Version": "1.6"
-        },
-        {
-            "Updated": "2022-06-22T16:50:14.8274409-04:00",
-            "Name": "lazydocker",
-            "Source": "main",
-            "Info": "",
-            "Version": "0.18.1"
-        },
-        {
-            "Updated": "2022-07-22T11:35:54.0383607-04:00",
-            "Name": "lazygit",
-            "Source": "extras",
-            "Info": "",
-            "Version": "0.35"
-        },
-        {
-            "Updated": "2022-06-09T16:32:53.8219972-04:00",
-            "Name": "ln",
-            "Source": "main",
-            "Info": "",
-            "Version": "0.2018.07.25"
-        },
-        {
-            "Updated": "2022-07-14T09:43:45.9659157-04:00",
-            "Name": "neovide",
-            "Source": "extras",
-            "Info": "",
-            "Version": "0.9.0"
-        },
-        {
-            "Updated": "2022-07-14T09:44:08.3885911-04:00",
-            "Name": "neovim",
-            "Source": "main",
-            "Info": "",
-            "Version": "0.7.2"
-        },
-        {
-            "Updated": "2022-06-10T10:02:23.8784676-04:00",
-            "Name": "netcat",
-            "Source": "main",
-            "Info": "",
-            "Version": "1.12"
-        },
-        {
-            "Updated": "2022-06-10T09:37:08.0297386-04:00",
-            "Name": "nmap",
-            "Source": "main",
-            "Info": "",
-            "Version": "7.92"
-        },
-        {
-            "Updated": "2022-06-09T10:46:26.5893947-04:00",
-            "Name": "nvm",
-            "Source": "main",
-            "Info": "",
-            "Version": "1.1.9"
-        },
-        {
-            "Updated": "2022-06-09T18:31:47.7746141-04:00",
-            "Name": "omnisharp",
-            "Source": "main",
-            "Info": "",
-            "Version": "1.39.0"
-        },
-        {
-            "Updated": "2022-07-19T12:46:59.9365814-04:00",
-            "Name": "powertoys",
-            "Source": "extras",
-            "Info": "",
-            "Version": "0.60.1"
-        },
-        {
-            "Updated": "2022-06-18T15:17:19.6048325-04:00",
-            "Name": "ripgrep",
-            "Source": "main",
-            "Info": "",
-            "Version": "13.0.0"
-        },
-        {
-            "Updated": "2022-07-22T10:48:41.0219601-04:00",
-            "Name": "roundedtb",
-            "Source": "extras",
-            "Info": "",
-            "Version": "3.1"
-        },
-        {
-            "Updated": "2022-07-22T11:36:05.3134516-04:00",
-            "Name": "snyk",
-            "Source": "snyk",
-            "Info": "",
-            "Version": "1.979.0"
-        },
-        {
-            "Updated": "2022-07-22T11:36:08.1208401-04:00",
-            "Name": "sqlite",
-            "Source": "main",
-            "Info": "",
-            "Version": "3.39.2"
-        },
-        {
-            "Updated": "2022-07-22T13:35:57.277029-04:00",
-            "Name": "starship",
-            "Source": "main",
-            "Info": "",
-            "Version": "1.9.1"
-        },
-        {
-            "Updated": "2022-06-08T14:20:13.3220579-04:00",
-            "Name": "sudo",
-            "Source": "main",
-            "Info": "",
-            "Version": "0.2020.01.26"
-        },
-        {
-            "Updated": "2022-07-22T10:48:52.055107-04:00",
-            "Name": "translucenttb",
-            "Source": "extras",
-            "Info": "",
-            "Version": "2021.5"
-        },
-        {
-            "Updated": "2022-07-18T17:33:45.3627059-04:00",
-            "Name": "uncrustify",
-            "Source": "main",
-            "Info": "",
-            "Version": "0.75.1"
-        },
-        {
-            "Updated": "2022-07-14T09:47:26.2308393-04:00",
-            "Name": "vcredist2022",
-            "Source": "extras",
-            "Info": "",
-            "Version": "14.32.31332.0"
         }
     ]
 }
