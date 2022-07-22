@@ -77,7 +77,7 @@ format = "[$symbol$branch(:$remote_branch)]($style) "
 symbol = " "
 
 [git_status]
-format = "[(\\[$staged$conflicted$untracked$modified$renamed$deleted\\])(218) ($ahead_behind$stashed)]($style)"
+format = "[\\[($staged$conflicted$untracked$modified$renamed$deleted)(218)($ahead_behind$stashed)\\]]($style) "
 style = "cyan"
 conflicted = ""
 untracked = "a"
