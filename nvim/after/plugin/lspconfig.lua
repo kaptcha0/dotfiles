@@ -54,16 +54,18 @@ end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = {
-	"clangd",
 	"bashls",
+	"clangd",
+  "cssls",
 	"diagnosticls",
 	"dockerls",
 	"emmet_ls",
 	"eslint",
+  "html",
 	"jsonls",
-	"sumneko_lua",
-	"omnisharp",
 	"powershell_es",
+	"omnisharp",
+	"sumneko_lua",
 	"rust_analyzer",
 	"taplo",
 	"tsserver",

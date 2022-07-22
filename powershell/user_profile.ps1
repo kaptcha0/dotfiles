@@ -2,15 +2,7 @@
 $env:CONFIG_DIR = "$HOME\.config"
 
 # Prompt
-Import-Module posh-git
-
-function Get-ScriptDirectory { Split-Path $MyInvocation.ScriptName }
-$THEME = Join-Path (Get-ScriptDirectory) 'kaptcha.omp.yaml'
-# Alt theme
-# $THEME = "$(scoop prefix oh-my-posh)\themes\takuya.omp.json"
-
-oh-my-posh init pwsh --config $THEME | Invoke-Expression
-
+Invoke-Expression (&starship init powershell)
 
 # PSReadLine
 Import-Module PSReadLine

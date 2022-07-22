@@ -1,9 +1,5 @@
-**
-
-!.git/
-!.gitignore
-!scoop/
-!nvim/after/**
-!nvim/colors/**
-!nvim/*
-!powershell/
+configstore/
+.luarc.json
+config.yml
+state.yml
+nvim/plugin/

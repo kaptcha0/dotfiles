@@ -162,17 +162,6 @@ endif
 
 "Editor setup "{{{
 " ---------------------------------------------------------------------
-"  Formatting
-let g:neoformat_try_node_exe = 1
-let g:neoformat_try_formatprg = 1
-
-
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
-
-" Mouse support
 set mouse=a
 
 " Neovide

@@ -23,39 +23,81 @@ return require("packer").startup(function(use)
 
 	if fn.has("nvim") == 1 then
 		-- Themes --
-		use("marko-cerovac/material.nvim")
-		-- use("Mofiqul/vscode.nvim")
-		-- use("EdenEast/nightfox.nvim")
+	use({
+		"marko-cerovac/material.nvim",
+		config = function()
+      require("material").setup({
+			contrast = {
+				floating_windows = true,
+				non_current_windows = true,
+				cursor_line = true,
+			},
+			italics = {
+				comments = false,
+				keywords = false,
+				functions = false,
+				strings = false,
+				variables = false,
+			},
+			lualine_style = "stealth",
+		})
+  end
+	})
 
 		-- Editor --
 		use("voldikss/vim-floaterm")
-		use("sbdchd/neoformat")
+    use("jose-elias-alvarez/null-ls.nvim")
 		use("b0o/schemastore.nvim")
+		use({
+			"nvim-treesitter/nvim-treesitter",
+			run = ":TSUpdate",
+		})
+
 		use({
 			"Pocco81/dap-buddy.nvim",
 			requires = "mfussenegger/nvim-dap",
 		})
+
 		use({
 			"numToStr/Comment.nvim",
 			config = function()
 				require("Comment").setup()
 			end,
 		})
+
+    use {
+      "folke/todo-comments.nvim",
+      config = function()
+        require("todo-comments").setup()
+      end
+    }
+
+    use {
+      "folke/trouble.nvim",
+      config = function()
+        require("trouble").setup()
+      end
+    }
+
+		-- Asthetics
+    use 'folke/lsp-colors.nvim'
+		use("hoob3rt/lualine.nvim")
+		use("kyazdani42/nvim-web-devicons")
+
+		-- File search
+		use("kyazdani42/nvim-tree.lua")
 		use({
-			"weilbith/nvim-code-action-menu",
-			cmd = "CodeActionMenu",
+			"nvim-telescope/telescope.nvim",
+			requires = {
+				"nvim-lua/popup.nvim",
+				"nvim-lua/plenary.nvim",
+			},
 		})
 
 		-- LSP --
 		use({
 			"tami5/lspsaga.nvim",
 			"onsails/lspkind.nvim",
-			{
-				"onsails/diaglist.nvim",
-				config = function()
-					require("diaglist").init({})
-				end,
-			},
 			"williamboman/nvim-lsp-installer",
 			"neovim/nvim-lspconfig",
 			{
@@ -85,23 +127,6 @@ return require("packer").startup(function(use)
 			end,
 		})
 
-		-- Asthetics
-		use("hoob3rt/lualine.nvim")
-		use("kyazdani42/nvim-web-devicons")
-		use({
-			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
-		})
-
-		-- File search
-		use("kyazdani42/nvim-tree.lua")
-		use({
-			"nvim-telescope/telescope.nvim",
-			requires = {
-				"nvim-lua/popup.nvim",
-				"nvim-lua/plenary.nvim",
-			},
-		})
 	end
 
 	if packer_bootstrap then

@@ -14,8 +14,8 @@ nnoremap - <C-x>
 nnoremap <C-a> gg<S-v>G
 
 " Save with root permission
-if has('win32') || has('win32unix') 
-  command! W w !sudo tee > NULL %
+if has('win32') || has('win32unix')
+  command! W w
 else
   command! W w !sudo tee > /dev/null %
 endif
@@ -97,14 +97,16 @@ nnoremap <silent> <leader>lg :FloatermNew lazygit<cr>
 nnoremap <silent> <leader>ld :FloatermNew lazydocker<cr>
 nnoremap <silent> <leader>lp :FloatermNew sudo btm<cr>
 
-" Diaglist
-nnoremap <leader>ad <cmd>lua require('diaglist').open_all_diagnostics()<cr>
-nnoremap <leader>bd <cmd>lua require('diaglist').open_buffer_diagnostics()<cr>
-
 " Code Actions
-nnoremap <leader>ca <cmd>CodeActionMenu<cr>
+nnoremap <leader>ca <cmd>TroubleToggle<cr>
+
+" Todos
+nnoremap <leader>td <cmd>TodoTelescope<cr>
 
 " Force format
-nnoremap <s-a-f> <cmd>Neoformat<cr>
-vnoremap <c-k><c-f> <cmd>Neoformat! &filetype<cr>
-inoremap <s-a-f> <cmd>Neoformat<cr>
+command Format lua require("config.null-ls.formatters").format()
+command FormatRange lua require("config.null-ls.formatters").format_range()
+
+nnoremap <s-a-f> <cmd>Format<cr>
+vnoremap <c-k><c-f> <cmd>FormatRange<cr>
+inoremap <s-a-f> <cmd>Format<cr>
