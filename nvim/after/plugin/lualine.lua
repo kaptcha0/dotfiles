@@ -1,6 +1,7 @@
-local status, lualine = pcall(require, "lualine")
-if not status then
-	return
+local lualine = require('utils').get_package('lualine')
+
+if not lualine then
+  return
 end
 
 lualine.setup({

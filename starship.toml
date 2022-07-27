@@ -64,6 +64,7 @@ symbol = " "
 [directory]
 format = "[$path]($style)[$read_only]($read_only_style) "
 read_only = " "
+use_os_path_sep = false
 
 [elixir]
 symbol = " "
@@ -76,10 +77,15 @@ format = "[$symbol$branch(:$remote_branch)]($style) "
 symbol = " "
 
 [git_status]
-format = "([\\[($staged$conflicted$untracked$modified$renamed$deleted)(218)($ahead_behind$stashed)\\]]($style)) "
+format = """(\
+[\
+(\\[($conflicted$deleted$modified$renamed$staged)(218)\\])\
+((\\($ahead_behind$stashed)\\))\
+]($style)\
+)"""
 style = "cyan"
-conflicted = ""
-untracked = "a"
+conflicted = "c"
+untracked = "u"
 modified = "m"
 staged = "s"
 renamed = "r"

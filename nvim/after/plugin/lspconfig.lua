@@ -1,10 +1,14 @@
-if not vim.fn.exists("g:lspconfig") then
-	return
+local lsp = require('lsp')
+local utils = require('utils')
+
+local lspconfig = utils.get_package("lspconfig")
+local cmp = utils.get_package("cmp_nvim_lsp")
+
+if not cmp or not lspconfig then
+  return
 end
 
 -- lspconfig setup --
-require("nvim-lsp-installer").setup({})
-local lspconfig = require("lspconfig")
 local protocol = require("vim.lsp.protocol")
 
 -- Custom on_attach
@@ -53,62 +57,22 @@ local on_attach = function(client, bufnr)
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {
-	"bashls",
-	"clangd",
-  "cssls",
-	"diagnosticls",
-	"dockerls",
-	"emmet_ls",
-	"eslint",
-  "html",
-	"jsonls",
-	"powershell_es",
-	"omnisharp",
-	"sumneko_lua",
-	"rust_analyzer",
-	"taplo",
-	"tsserver",
-	"vimls",
-	"yamlls",
-}
-
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-local server_options = {
-	emmet_ls = {
-		filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
-	},
-	jsonls = {
-		schemas = require("schemastore").json.schemas({}),
-		validate = { enable = true },
-	},
-	omnisharp = {
-		cmd = { "omnisharp", "-lsp", "-hpid", tostring(pid) },
-	},
-	tsserver = {
-		filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx" },
-	},
-	yamlls = {
-		schemas = {
-			["https://raw.githubusercontent.com/quantumblacklabs/kedro/develop/static/jsonschema/kedro-catalog-0.17.json"] = "conf/**/*catalog*",
-			["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-		},
-	},
-}
+local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local default_config = {
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
 
-for _, value in ipairs(servers) do
-	local conf = vim.deepcopy(default_config)
-	local lang_opts = server_options[value]
+for _, value in ipairs(lsp.servers) do
+  value = lsp.lspconfig_mapping[value] or value
+	-- local conf = vim.deepcopy(default_config)
+	local lang_opts = lsp.server_options[value]
+  local conf = vim.deepcopy(default_config) or vim.tbl_deep_extend("keep", default_config, lang_opts)
 
-	if lang_opts ~= nil then
-		conf = vim.tbl_deep_extend("keep", default_config, lang_opts)
-	end
+	-- if not lang_opts then
+	-- 	conf = vim.tbl_deep_extend("keep", default_config, lang_opts)
+	-- end
 
 	lspconfig[value].setup(conf)
 end

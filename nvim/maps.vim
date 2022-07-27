@@ -44,8 +44,8 @@ nnoremap <Tab> :tabnext<Return>
 " Windows
 
 " Split window
-nnoremap ss :split<Return><C-w>w
-nnoremap sv :vsplit<Return><C-w>w
+nnoremap ss <silent> :split<Return><C-w>w
+nnoremap sv <silent> :vsplit<Return><C-w>w
 
 " Move window
 nnoremap <leader>h <C-w>h

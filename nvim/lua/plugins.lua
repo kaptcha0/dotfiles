@@ -19,9 +19,7 @@ return require("packer").startup(function(use)
 	use("tpope/vim-fugitive")
 	use("tpope/vim-rhubarb")
 	use("cohama/lexima.vim")
-	use("editorconfig/editorconfig-vim")
 
-	if fn.has("nvim") == 1 then
 		-- Themes --
 	use({
 		"marko-cerovac/material.nvim",
@@ -44,90 +42,90 @@ return require("packer").startup(function(use)
   end
 	})
 
-		-- Editor --
-		use("voldikss/vim-floaterm")
-    use("jose-elias-alvarez/null-ls.nvim")
-		use("b0o/schemastore.nvim")
-		use({
-			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
-		})
+  -- Editor --
+  use("voldikss/vim-floaterm")
+  use("b0o/schemastore.nvim")
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  })
 
-		use({
-			"Pocco81/dap-buddy.nvim",
-			requires = "mfussenegger/nvim-dap",
-		})
+  use({
+    "Pocco81/dap-buddy.nvim",
+    requires = "mfussenegger/nvim-dap",
+  })
 
-		use({
-			"numToStr/Comment.nvim",
-			config = function()
-				require("Comment").setup()
-			end,
-		})
+  use({
+    "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup()
+    end,
+  })
 
-    use {
-      "folke/todo-comments.nvim",
-      config = function()
-        require("todo-comments").setup()
-      end
-    }
+  use {
+    "folke/todo-comments.nvim",
+    config = function()
+      require("todo-comments").setup()
+    end
+  }
 
-    use {
-      "folke/trouble.nvim",
-      config = function()
-        require("trouble").setup()
-      end
-    }
+  use {
+    "folke/trouble.nvim",
+    config = function()
+      require("trouble").setup()
+    end
+  }
 
-		-- Asthetics
-    use 'folke/lsp-colors.nvim'
-		use("hoob3rt/lualine.nvim")
-		use("kyazdani42/nvim-web-devicons")
+  -- Asthetics
+  use 'folke/lsp-colors.nvim'
+  use("hoob3rt/lualine.nvim")
+  use("kyazdani42/nvim-web-devicons")
 
-		-- File search
-		use("kyazdani42/nvim-tree.lua")
-		use({
-			"nvim-telescope/telescope.nvim",
-			requires = {
-				"nvim-lua/popup.nvim",
-				"nvim-lua/plenary.nvim",
-			},
-		})
+  -- File search
+  use("kyazdani42/nvim-tree.lua")
+  use({
+    "nvim-telescope/telescope.nvim",
+    requires = {
+      "nvim-lua/popup.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+  })
 
-		-- LSP --
-		use({
-			"tami5/lspsaga.nvim",
-			"onsails/lspkind.nvim",
-			"williamboman/nvim-lsp-installer",
-			"neovim/nvim-lspconfig",
-			{
-				"hrsh7th/nvim-cmp",
-				requires = {
-					"hrsh7th/cmp-nvim-lsp",
-					"hrsh7th/cmp-buffer",
-					"hrsh7th/cmp-path",
-					"hrsh7th/cmp-cmdline",
-					"L3MON4D3/LuaSnip",
-					"hrsh7th/cmp-nvim-lua",
-					"Saecki/crates.nvim",
-					"David-Kunz/cmp-npm",
-					"petertriho/cmp-git",
-					{
-						"KadoBOT/cmp-plugins",
-						config = function()
-							require("cmp-plugins").setup({
-								files = { "lua/plugins.lua" },
-							})
-						end,
-					},
-				},
-			},
-			setup = function()
-				require("nvim-lsp-installer").setup({})
-			end,
-		})
-
-	end
+  -- LSP --
+  use({
+    "tami5/lspsaga.nvim",
+    "onsails/lspkind.nvim",
+    { "neovim/nvim-lspconfig", after = "mason.nvim" },
+    {
+      "williamboman/mason.nvim",
+      requires = {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        -- "williamboman/mason-lspconfig.nvim",
+      }
+    },
+    {
+      "hrsh7th/nvim-cmp",
+      requires = {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        "L3MON4D3/LuaSnip",
+        "hrsh7th/cmp-nvim-lua",
+        "Saecki/crates.nvim",
+        "David-Kunz/cmp-npm",
+        "petertriho/cmp-git",
+        {
+          "KadoBOT/cmp-plugins",
+          config = function()
+            require("cmp-plugins").setup({
+              files = { "lua/plugins.lua" },
+            })
+          end,
+        },
+      },
+    },
+  })
 
 	if packer_bootstrap then
 		require("packer").sync()
