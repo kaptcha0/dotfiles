@@ -82,7 +82,7 @@ format = """(\
 (\\[($conflicted$deleted$modified$renamed$staged)(218)\\])\
 ((\\($ahead_behind$stashed)\\))\
 ]($style)\
-)"""
+) """
 style = "cyan"
 conflicted = "c"
 untracked = "u"

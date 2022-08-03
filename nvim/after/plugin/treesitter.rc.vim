@@ -1,7 +1,13 @@
 if !exists('g:loaded_nvim_treesitter') | finish | end
 
 lua << EOF
-require 'nvim-treesitter.configs'.setup {
+local configs = import('nvim-treesitter.configs')
+
+if not configs then
+  return
+end
+
+configs.setup {
   highlight = {
     enable = true,
     disable = {}
@@ -11,22 +17,22 @@ require 'nvim-treesitter.configs'.setup {
     disable = {},
   },
   ensure_installed = {
-    'javascript',
-    'typescript',
-    'tsx',
-    'toml',
-    'rust',
-    'json',
-    'yaml',
-    'lua',
     'c_sharp',
     'cpp',
-    'dockerfile',
-    'markdown',
-    'vim',
-    'html',
     'css',
-    'scss'
+    'dockerfile',    
+    'html',
+    'javascript',
+    'json',
+    'lua',
+    'markdown',
+    'rust',
+    'scss',
+    'toml',
+    'tsx',
+    'typescript',
+    'vim',
+    'yaml',
   }
 }
 EOF

@@ -4,9 +4,14 @@ nnoremap <silent> \\ <cmd>Telescope buffers<CR>
 nnoremap <silent> ;; <cmd>Telescope help_tags<CR>
 
 lua << EOF
-local actions = require 'telescope.actions'
+local actions = import('telescope.actions')
+local telescope = import('telescope')
 
-require('telescope').setup {
+if not actions or not telescope then
+  return
+end
+
+telescope.setup {
   defaults = {
     mappings = {
       n = {

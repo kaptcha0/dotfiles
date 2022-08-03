@@ -1,7 +1,11 @@
 if !exists('g:loaded_lspsaga') | finish | endif
 
 lua << EOF
-local saga = require('lspsaga')
+local saga = import('lspsaga')
+
+if not saga then
+  return
+end
 
 saga.init_lsp_saga {
   error_sign = '',

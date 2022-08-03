@@ -1,239 +1,260 @@
 {
     "apps": [
         {
+            "Info": "",
             "Updated": "2022-07-19T12:16:14.3613287-04:00",
             "Version": "22.01",
             "Name": "7zip",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-06-23T09:47:42.8988955-04:00",
             "Version": "0.6.8",
             "Name": "bottom",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
-            "Updated": "2022-06-18T14:25:52.4280986-04:00",
-            "Version": "3.23.2",
+            "Info": "",
+            "Updated": "2022-08-01T17:32:10.4887777-04:00",
+            "Version": "3.23.3",
             "Name": "cmake",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
-            "Updated": "2022-07-22T11:35:51.9245068-04:00",
-            "Version": "7.84.0_6",
+            "Info": "",
+            "Updated": "2022-08-03T11:10:28.0953838-04:00",
+            "Version": "7.84.0_8",
             "Name": "curl",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
-            "Updated": "2022-07-22T11:35:52.765777-04:00",
-            "Version": "0.31.0",
+            "Info": "",
+            "Updated": "2022-08-03T11:10:28.704726-04:00",
+            "Version": "0.32.0",
             "Name": "fzf",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-07-18T17:07:25.3784347-04:00",
             "Version": "11.2.0",
             "Name": "gcc",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
-            "Updated": "2022-07-26T14:37:55.4744384-04:00",
-            "Version": "2.14.3",
-            "Name": "gh",
-            "Source": "main",
-            "Info": ""
-        },
-        {
-            "Updated": "2022-07-22T11:47:59.7266924-04:00",
-            "Version": "1.18.4",
+            "Info": "",
+            "Updated": "2022-08-03T11:11:34.6493239-04:00",
+            "Version": "1.19",
             "Name": "go",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-06-08T14:20:13.1345579-04:00",
             "Version": "1.6",
             "Name": "jq",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-06-22T16:50:14.8274409-04:00",
             "Version": "0.18.1",
             "Name": "lazydocker",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-07-22T11:35:54.0383607-04:00",
             "Version": "0.35",
             "Name": "lazygit",
-            "Source": "extras",
-            "Info": ""
+            "Source": "extras"
         },
         {
+            "Info": "",
             "Updated": "2022-06-09T16:32:53.8219972-04:00",
             "Version": "0.2018.07.25",
             "Name": "ln",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
+            "Updated": "2022-08-01T17:34:40.7009433-04:00",
+            "Version": "4.3",
+            "Name": "make",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Updated": "2022-08-01T17:31:34.077801-04:00",
+            "Version": "2.15.05",
+            "Name": "nasm",
+            "Source": "main"
+        },
+        {
+            "Info": "",
             "Updated": "2022-07-14T09:43:45.9659157-04:00",
             "Version": "0.9.0",
             "Name": "neovide",
-            "Source": "extras",
-            "Info": ""
+            "Source": "extras"
         },
         {
+            "Info": "",
             "Updated": "2022-07-14T09:44:08.3885911-04:00",
             "Version": "0.7.2",
             "Name": "neovim",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
+            "Updated": "2022-08-03T11:14:19.7463947-04:00",
+            "Version": "0.8.0-dev-768-gb8dcbcc73",
+            "Name": "neovim-nightly",
+            "Source": "versions"
+        },
+        {
+            "Info": "",
             "Updated": "2022-06-10T10:02:23.8784676-04:00",
             "Version": "1.12",
             "Name": "netcat",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-06-10T09:37:08.0297386-04:00",
             "Version": "7.92",
             "Name": "nmap",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-06-09T10:46:26.5893947-04:00",
             "Version": "1.1.9",
             "Name": "nvm",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
-            "Updated": "2022-06-09T18:31:47.7746141-04:00",
-            "Version": "1.39.0",
+            "Info": "",
+            "Updated": "2022-08-01T17:34:03.3647112-04:00",
+            "Version": "1.39.1",
             "Name": "omnisharp",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-07-19T12:46:59.9365814-04:00",
             "Version": "0.60.1",
             "Name": "powertoys",
-            "Source": "extras",
-            "Info": ""
+            "Source": "extras"
         },
         {
+            "Info": "",
+            "Updated": "2022-08-03T14:32:59.069031-04:00",
+            "Version": "0.77",
+            "Name": "putty",
+            "Source": "extras"
+        },
+        {
+            "Info": "",
             "Updated": "2022-06-18T15:17:19.6048325-04:00",
             "Version": "13.0.0",
             "Name": "ripgrep",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-07-22T10:48:41.0219601-04:00",
             "Version": "3.1",
             "Name": "roundedtb",
-            "Source": "extras",
-            "Info": ""
+            "Source": "extras"
         },
         {
-            "Updated": "2022-07-22T11:36:05.3134516-04:00",
-            "Version": "1.979.0",
+            "Info": "",
+            "Updated": "2022-08-03T11:11:54.8639738-04:00",
+            "Version": "1.982.0",
             "Name": "snyk",
-            "Source": "snyk",
-            "Info": ""
+            "Source": "snyk"
         },
         {
+            "Info": "",
             "Updated": "2022-07-22T11:36:08.1208401-04:00",
             "Version": "3.39.2",
             "Name": "sqlite",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-07-22T13:35:57.277029-04:00",
             "Version": "1.9.1",
             "Name": "starship",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
-            "Updated": "2022-07-26T20:10:10.5272361-04:00",
-            "Version": "0.14.1",
+            "Info": "",
+            "Updated": "2022-08-01T17:34:23.114639-04:00",
+            "Version": "0.14.2",
             "Name": "stylua",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-06-08T14:20:13.3220579-04:00",
             "Version": "0.2020.01.26",
             "Name": "sudo",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-07-26T12:42:26.5767054-04:00",
             "Version": "0.2018.07.25",
             "Name": "touch",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-07-22T10:48:52.055107-04:00",
             "Version": "2021.5",
             "Name": "translucenttb",
-            "Source": "extras",
-            "Info": ""
+            "Source": "extras"
         },
         {
+            "Info": "",
             "Updated": "2022-07-18T17:33:45.3627059-04:00",
             "Version": "0.75.1",
             "Name": "uncrustify",
-            "Source": "main",
-            "Info": ""
+            "Source": "main"
         },
         {
+            "Info": "",
             "Updated": "2022-07-14T09:47:26.2308393-04:00",
             "Version": "14.32.31332.0",
             "Name": "vcredist2022",
-            "Source": "extras",
-            "Info": ""
+            "Source": "extras"
         }
     ],
     "buckets": [
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
-            "Updated": "2022-07-26T16:27:24-04:00",
-            "Manifests": 1617
+            "Updated": "2022-08-03T12:30:49-04:00",
+            "Manifests": 1627
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
-            "Updated": "2022-07-26T16:29:38-04:00",
-            "Manifests": 1065
+            "Updated": "2022-08-03T14:02:45-04:00",
+            "Manifests": 1067
         },
         {
             "Name": "snyk",
             "Source": "https://github.com/snyk/scoop-snyk",
-            "Updated": "2022-07-25T20:18:38-04:00",
+            "Updated": "2022-08-02T20:21:30-04:00",
             "Manifests": 0
         },
         {
             "Name": "versions",
             "Source": "https://github.com/ScoopInstaller/Versions",
-            "Updated": "2022-07-26T16:37:07-04:00",
+            "Updated": "2022-08-03T12:51:38-04:00",
             "Manifests": 350
         }
     ]

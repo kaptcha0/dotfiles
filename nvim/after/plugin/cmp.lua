@@ -1,7 +1,7 @@
 local utils = require('utils')
 
-local cmp = utils.get_package('cmp')
-local lspkind = utils.get_package('lspkind')
+local cmp = import('cmp')
+local lspkind = import('lspkind')
 
 if not cmp or not lspkind then
   return
@@ -12,7 +12,7 @@ vim.api.nvim_set_option("completeopt", "menuone,noinsert,noselect")
 cmp.setup({
   snippet = {
     expand = function(args)
-      local luasnip = utils.get_package('luasnip', utils.verbosity.none)
+      local luasnip = import('luasnip', utils.verbosity.none)
 
       if not luasnip then
         utils.info('disabling luasnip snippets as they are not found')

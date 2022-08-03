@@ -81,7 +81,7 @@ autocmd BufCreate,BufAdd *.* LspStart
 autocmd BufUnload *.* LspStop
 
 " Add asterisks in block comments
-set formatoptions+=r
+set formatoptions+=cro
 "}}}
 
 " Highlights "{{{
@@ -127,7 +127,9 @@ autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 
 " Imports "{{{
 " ---------------------------------------------------------------------
+lua require('globals')
 lua require('plugins')
+
 if has("unix")
   let s:uname = system("uname -s")
   " Do Mac stuff
@@ -154,8 +156,6 @@ if exists("&termguicolors") && exists("&winblend")
   set pumblend=5
   
   set background=dark
-  let g:material_style = 'darker'
-  colorscheme material
 endif
 
 "}}}

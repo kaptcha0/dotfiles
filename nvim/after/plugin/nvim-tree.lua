@@ -1,4 +1,4 @@
-local tree = require('utils').get_package('nvim-tree')
+local tree = import('nvim-tree')
 
 if not tree then
   return

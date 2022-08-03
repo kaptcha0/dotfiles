@@ -5,7 +5,7 @@ M.servers = {
 	"clangd",
   "css-lsp",
 	"diagnostic-languageserver",
-	"dockerfile-languageserver",
+	"dockerfile-language-server",
 	"emmet-ls",
   "html-lsp",
 	"json-lsp",
@@ -25,7 +25,7 @@ M.lspconfig_mapping = {
   ['bash-language-server'] = 'bashls',
   ['css-lsp'] = 'cssls',
   ['diagnostic-languageserver'] = 'diagnosticls',
-  ['dockerfile-languageserver'] = 'dockerls',
+  ['dockerfile-language-server'] = 'dockerls',
   ['emmet-ls'] = 'emmet_ls',
   ['html-lsp'] = 'html',
   ['json-lsp'] = 'jsonls',
@@ -47,7 +47,10 @@ M.server_options = {
 		validate = { enable = true },
 	},
 	omnisharp = {
-		cmd = { "omnisharp", "-lsp", "-hpid", tostring(pid) },
+    cmd = { 'omnisharp' },
+    enable_roslyn_analyzers = true,
+    organize_imports_on_format = true,
+    enable_import_completion = true,
 	},
 	tsserver = {
 		filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx" },
@@ -60,19 +63,20 @@ M.server_options = {
 	},
 }
 
+M.debuggers = {}
+
+M.formatters = {
+  "csharpier",
+  "prettierd",
+  "stylua"
+}
+
 M.linters = {
   "editorconfig-checker",
   "eslint_d",
   "flake8",
   "pylint",
   "yamllint"
-}
-
-M.debuggers = {}
-
-M.formatters = {
-  "prettierd",
-  "stylua"
 }
 
 return M

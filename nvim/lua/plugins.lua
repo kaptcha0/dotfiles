@@ -2,6 +2,7 @@ vim.cmd([[packadd packer.nvim]])
 
 local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+
 if fn.empty(fn.glob(install_path)) > 0 then
 	packer_bootstrap = fn.system({
 		"git",
@@ -20,27 +21,15 @@ return require("packer").startup(function(use)
 	use("tpope/vim-rhubarb")
 	use("cohama/lexima.vim")
 
-		-- Themes --
-	use({
-		"marko-cerovac/material.nvim",
-		config = function()
-      require("material").setup({
-			contrast = {
-				floating_windows = true,
-				non_current_windows = true,
-				cursor_line = true,
-			},
-			italics = {
-				comments = false,
-				keywords = false,
-				functions = false,
-				strings = false,
-				variables = false,
-			},
-			lualine_style = "stealth",
-		})
-  end
-	})
+  -- Themes --
+  use({
+    'Mofiqul/vscode.nvim',
+    config = function ()
+     require('vscode').setup({
+        italic_comments = false
+      })
+    end
+  })
 
   -- Editor --
   use("voldikss/vim-floaterm")
@@ -50,10 +39,6 @@ return require("packer").startup(function(use)
     run = ":TSUpdate",
   })
 
-  use({
-    "Pocco81/dap-buddy.nvim",
-    requires = "mfussenegger/nvim-dap",
-  })
 
   use({
     "numToStr/Comment.nvim",
@@ -95,7 +80,7 @@ return require("packer").startup(function(use)
   use({
     "tami5/lspsaga.nvim",
     "onsails/lspkind.nvim",
-    { "neovim/nvim-lspconfig", after = "mason.nvim" },
+    "neovim/nvim-lspconfig",
     {
       "williamboman/mason.nvim",
       requires = {
@@ -126,6 +111,14 @@ return require("packer").startup(function(use)
       },
     },
   })
+
+  -- Code Editing --
+  use({
+    "mfussenegger/nvim-dap",
+  })
+
+  use("jose-elias-alvarez/null-ls.nvim")
+
 
 	if packer_bootstrap then
 		require("packer").sync()
