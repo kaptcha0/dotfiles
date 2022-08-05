@@ -37,15 +37,15 @@ vnoremap <silent> # :<C-U>
 
 " Open current directory
 nnoremap te :tabedit 
-nnoremap <S-Tab> :tabprev<Return>
-nnoremap <Tab> :tabnext<Return>
+nnoremap <S-Tab> :tabprev<CR>
+nnoremap <Tab> :tabnext<CR>
 
 "------------------------------
 " Windows
 
 " Split window
-nnoremap ss <silent> :split<Return><C-w>w
-nnoremap sv <silent> :vsplit<Return><C-w>w
+nnoremap <silent> ss :split<CR><C-w>w
+nnoremap <silent> sv :vsplit<CR><C-w>w
 
 " Move window
 nnoremap <leader>h <C-w>h
@@ -104,9 +104,7 @@ nnoremap <leader>ca <cmd>TroubleToggle<cr>
 nnoremap <leader>td <cmd>TodoTelescope<cr>
 
 " Force format
-command Format lua require("config.null-ls.formatters").format()
-command FormatRange lua require("config.null-ls.formatters").format_range()
+command Format lua require('config.null-ls').lsp_formatting(0)
 
 nnoremap <s-a-f> <cmd>Format<cr>
-vnoremap <c-k><c-f> <cmd>FormatRange<cr>
 inoremap <s-a-f> <cmd>Format<cr>

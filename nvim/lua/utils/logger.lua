@@ -30,20 +30,4 @@ function M.info(msg, name)
   vim.notify('[' .. name .. '] ' .. msg, M.verbosity.info, { title = name })
 end
 
--- Concatenates 2 or more array-like tables together
--- Later tables will override earlier ones
--- @param ... table
--- @return table
-function M.merge(...)
-  local result = {}
-
-  for _, tbl in ipairs({ ... }) do
-    for _, v in ipairs(tbl) do
-      result[#result + 1] = v
-    end
-  end
-
-  return result
-end
-
 return M
