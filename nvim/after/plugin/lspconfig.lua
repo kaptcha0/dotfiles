@@ -1,5 +1,5 @@
 local protocol = require('vim.lsp.protocol')
-local lsp = require('lsp')
+local lsp = require('config.lsp')
 
 local lspconfig = import('lspconfig')
 local cmp = import('cmp_nvim_lsp')

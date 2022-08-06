@@ -1,1 +1,10 @@
-{}
+{
+	"useTabs": true,
+	"tabWidth": 4,
+	"editorconfig": true,
+	"singleQuote": true,
+	"quoteProps": "consistent",
+	"jsxSingleQuote": true,
+	"bracketSameLine": true,
+	"endOfLine": "auto"
+}

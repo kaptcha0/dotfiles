@@ -5,16 +5,34 @@ local M = {}
 -- @param ... table[]
 -- @return table
 function M.merge(...)
+  local temp = {}
+  local index = 1
   local result = {}
+
+  math.randomseed(os.time())
 
   for i, tbl in ipairs({ ... }) do
     for k, v in pairs(tbl) do
-      if type(k) ~= 'number' then
-        result[k] = v
-      else
-        result[i] = v
+      if type(k) == 'number' then
+        -- randomize numeric keys
+        k = math.random() * i * k
       end
+
+      temp[k] = v
     end
+  end
+
+  for k, v in pairs(temp) do
+    if type(k) == 'number' then
+      -- Sort numeric keys into order
+      if result[index] then
+        index = index + 1
+      end
+
+      k = index
+    end
+
+    result[k] = v
   end
 
   return result
@@ -29,13 +47,14 @@ function M.join(...)
   local path = ''
 
   for _, segment in ipairs(segments) do
-    path = path .. segment .. sep
+    -- Convert separators are '/' by default
+    path = path .. segment .. '/'
   end
 
   path = path:sub(1, #path - 1)
 
   -- Replace other separators for other systems if possible
-  return path:gsub((IS_WINDOWS and '/' or '\\'), sep)
+  return path:gsub((not IS_WINDOWS and '\\' or '/'), sep)
 end
 
 return M

@@ -1,10 +1,9 @@
 local M = {}
 
-local lsp = require('lsp')
+local lsp = require('config.lsp')
 local utils = require('utils')
 
 local mason = import('mason')
--- local installer = import('mason-lspconfig')
 local installer = import('mason-tool-installer')
 
 if not mason or not installer then

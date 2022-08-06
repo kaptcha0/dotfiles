@@ -1,5 +1,5 @@
 configstore/
-.luarc.json
+scoop/
 config.yml
 state.yml
-nvim/plugin/
+nvim/plugin

@@ -1,4 +1,5 @@
 local utils = require('utils')
+local config = require('config.cmp')
 
 local cmp = import('cmp')
 local lspkind = import('lspkind')
@@ -7,7 +8,8 @@ if not cmp or not lspkind then
   return
 end
 
-vim.api.nvim_set_option("completeopt", "menuone,noinsert,noselect")
+vim.api.nvim_set_option('completeopt', 'menuone,noinsert,noselect')
+config.set_groups()
 
 cmp.setup({
   snippet = {
@@ -19,7 +21,7 @@ cmp.setup({
       end
 
       luasnip.lsp_expand(args.body)
-    end
+    end,
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -37,37 +39,60 @@ cmp.setup({
     { name = 'npm' },
     { name = 'cmdline' },
     { name = 'git' },
-    { name = 'plugins' }
+    { name = 'plugins' },
   },
+  window = {
+    completion = {
+      winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
+      col_offset = -3,
+      side_padding = 0,
+    },
+  },
+
   formatting = {
-    format = lspkind.cmp_format({ mode = 'symbol_text', preset = 'codicons', maxwidth = 50 })
-  }
+    fields = { 'kind', 'abbr', 'menu' },
+    format = function(entry, vim_item)
+      local kind = lspkind.cmp_format({ mode = 'symbol', maxwidth = 50 })(entry, vim_item)
+      local strings = vim.split(kind.kind, '%s', { trimempty = true })
+      kind.kind = ' ' .. strings[1] .. ' '
+
+      return kind
+    end,
+  },
 })
 
+-- Enable completion for gitcommit files
 cmp.setup.filetype('gitcommit', {
   sources = cmp.config.sources({
-    { name = 'cmp_git' }
+    { name = 'cmp_git' },
   }, {
-    { name = 'buffer' }
-  })
+    { name = 'buffer' },
+  }),
+})
+
+-- Enable completion for the nvim-dap
+cmp.setup.filetype({ 'dap-repl', 'dapui_watches' }, {
+  sources = {
+    { name = 'dap' },
+  },
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'buffer' }
-  }
+    { name = 'buffer' },
+  },
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' }
+    { name = 'path' },
   }, {
-    { name = 'cmdline' }
-  })
+    { name = 'cmdline' },
+  }),
 })
 
-vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
+vim.cmd([[highlight! default link CmpItemKind CmpItemMenuDefault]])

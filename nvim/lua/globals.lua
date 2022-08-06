@@ -11,6 +11,7 @@ _G.dump = function(...)
   return vim.inspect(...)
 end
 
+-- Imports module if available and returns it
 -- @param name string
 -- @param verbosity `M.verbosity`
 --  utils.verbosity.warn is the default
@@ -35,4 +36,18 @@ _G.import = function(name, verbosity)
   end
 
   return package
+end
+
+-- Sets neovim keybindings
+-- @param mode string
+-- @param lhs string
+-- @param rhs string
+-- @param opts table
+function _G.map(mode, lhs, rhs, opts)
+  local options = { noremap = true }
+  if opts then
+    options = vim.tbl_extend('force', options, opts)
+  end
+
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end

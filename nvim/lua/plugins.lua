@@ -17,16 +17,19 @@ end
 return require('packer').startup(function(use)
   use('wbthomason/packer.nvim')
 
+  -- Common Dependencies --
   use('tpope/vim-fugitive')
   use('tpope/vim-rhubarb')
   use('cohama/lexima.vim')
+  use('nvim-lua/popup.nvim')
+  use('nvim-lua/plenary.nvim')
 
-  -- Themes --
+  -- Theme --
   use({
-    'Mofiqul/vscode.nvim',
+    'navarasu/onedark.nvim',
     config = function()
-      require('vscode').setup({
-        italic_comments = false,
+      require('onedark').load({
+        style = 'darker',
       })
     end,
   })
@@ -34,6 +37,7 @@ return require('packer').startup(function(use)
   -- Editor --
   use('voldikss/vim-floaterm')
   use('b0o/schemastore.nvim')
+
   use({
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
@@ -60,63 +64,69 @@ return require('packer').startup(function(use)
     end,
   })
 
+  -- Debugger
+  use('rcarriga/nvim-dap-ui')
+  use('mfussenegger/nvim-dap-python')
+  use('simrat39/rust-tools.nvim')
+
+  use({
+    'mxsdev/nvim-dap-vscode-js',
+    requires = {
+      'microsoft/vscode-js-debug',
+      opt = true,
+      run = 'npm install --legacy-peer-deps && npm run compile',
+    },
+  })
+
+  use({
+    'mfussenegger/nvim-dap',
+    after = { 'nvim-dap-python', 'rust-tools.nvim', 'nvim-dap-ui', 'nvim-dap-vscode-js' },
+    config = function()
+      require('config.nvim-dap').setup()
+    end,
+  })
+
   -- Asthetics
   use('folke/lsp-colors.nvim')
   use('hoob3rt/lualine.nvim')
+  use('romgrk/barbar.nvim')
   use('kyazdani42/nvim-web-devicons')
 
-  -- File search
+  -- Files
   use('kyazdani42/nvim-tree.lua')
-  use({
-    'nvim-telescope/telescope.nvim',
-    requires = {
-      'nvim-lua/popup.nvim',
-      'nvim-lua/plenary.nvim',
-    },
-  })
+  use('nvim-telescope/telescope.nvim')
+  use('nvim-telescope/telescope-ui-select.nvim')
 
   -- LSP --
-  use({
-    'tami5/lspsaga.nvim',
-    'onsails/lspkind.nvim',
-    'neovim/nvim-lspconfig',
-    {
-      'williamboman/mason.nvim',
-      requires = {
-        'WhoIsSethDaniel/mason-tool-installer.nvim',
-        -- "williamboman/mason-lspconfig.nvim",
-      },
-    },
-    {
-      'hrsh7th/nvim-cmp',
-      requires = {
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-cmdline',
-        'L3MON4D3/LuaSnip',
-        'hrsh7th/cmp-nvim-lua',
-        'Saecki/crates.nvim',
-        'David-Kunz/cmp-npm',
-        'petertriho/cmp-git',
-        {
-          'KadoBOT/cmp-plugins',
-          config = function()
-            require('cmp-plugins').setup({
-              files = { 'lua/plugins.lua' },
-            })
-          end,
-        },
-      },
-    },
-  })
+  use('neovim/nvim-lspconfig')
+  use('tami5/lspsaga.nvim')
+  use('onsails/lspkind.nvim')
 
-  -- Code Editing --
-  use({
-    'mfussenegger/nvim-dap',
-  })
+  use('williamboman/mason.nvim')
+  use('WhoIsSethDaniel/mason-tool-installer.nvim')
 
   use('jose-elias-alvarez/null-ls.nvim')
+
+  use('hrsh7th/nvim-cmp')
+  use('hrsh7th/cmp-nvim-lsp')
+  use('hrsh7th/cmp-buffer')
+  use('hrsh7th/cmp-path')
+  use('hrsh7th/cmp-cmdline')
+  use('hrsh7th/cmp-nvim-lua')
+  use('David-Kunz/cmp-npm')
+  use('petertriho/cmp-git')
+  use('rcarriga/cmp-dap')
+  use('L3MON4D3/LuaSnip')
+  use('Saecki/crates.nvim')
+
+  use({
+    'KadoBOT/cmp-plugins',
+    config = function()
+      require('cmp-plugins').setup({
+        files = { 'lua/plugins.lua' },
+      })
+    end,
+  })
 
   if packer_bootstrap then
     require('packer').sync()

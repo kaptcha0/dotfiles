@@ -1,7 +1,6 @@
-let mapleader = "\<Space>"
 " Description: Keymaps
+let mapleader = "\<Space>"
 
-nnoremap <S-C-p> "0p
 " Delete without yank
 nnoremap <leader>d "_d
 nnoremap x "_x
@@ -20,25 +19,23 @@ else
   command! W w !sudo tee > /dev/null %
 endif
 
-" Search for selected text, forwards or backwards.
-vnoremap <silent> * :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy/<C-R><C-R>=substitute(
-  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-
 "-----------------------------
 " Tabs
 
 " Open current directory
-nnoremap te :tabedit 
-nnoremap <S-Tab> :tabprev<CR>
-nnoremap <Tab> :tabnext<CR>
+noremap <silent> <tab> <cmd>BufferNext<cr>
+inoremap <silent> <C-Tab> <cmd>BufferNext<cr>
+
+noremap <silent> <S-tab> <cmd>BufferPrevious<cr>
+inoremap <silent> <C-S-Tab> <cmd>BufferNext<cr>
+
+noremap <silent> <leader>qq <cmd>BufferClose<cr>
+nnoremap <silent> <leader>p <cmd>BufferPin<cr>
+
+nnoremap <silent> <leader>bb <Cmd>BufferOrderByBufferNumber<CR>
+nnoremap <silent> <leader>bd <Cmd>BufferOrderByDirectory<CR>
+nnoremap <silent> <leader>bl <Cmd>BufferOrderByLanguage<CR>
+nnoremap <silent> <leader>bw <Cmd>BufferOrderByWindowNumber<CR>
 
 "------------------------------
 " Windows
@@ -67,11 +64,11 @@ inoremap <C-v> <C-r><C-o>+
 
 " Duplicate Line up/down
 nnoremap <s-a-up> VyP
-vnoremap <s-a-up> yP
+vnoremap <s-a-up> `<yP
 inoremap <silent> <s-a-up> <esc>VyPi
 
 nnoremap <s-a-down> Vyp
-vnoremap <s-a-down> yp
+vnoremap <s-a-down> `>yp
 inoremap <silent> <s-a-down> <esc>Vypi
 
 " NvimTree
