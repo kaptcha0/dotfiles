@@ -105,3 +105,6 @@ command Format lua require('config.null-ls').lsp_formatting(0)
 
 nnoremap <s-a-f> <cmd>Format<cr>
 inoremap <s-a-f> <cmd>Format<cr>
+
+" Outline
+nnoremap <leader>o <cmd>SymbolsOutline<cr>

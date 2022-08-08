@@ -95,9 +95,9 @@ highlight Visual cterm=NONE ctermbg=236 ctermfg=NONE guibg=Grey40
 highlight LineNr cterm=none ctermfg=240 guifg=#2b506e guibg=#000000
 
 augroup BgHighlight
-autocmd!
-autocmd WinEnter * set cul
-autocmd WinLeave * set nocul
+  autocmd!
+  autocmd WinEnter * set cul
+  autocmd WinLeave * set nocul
 augroup END
 
 if &term =~ "screen"
@@ -130,13 +130,6 @@ autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 lua require('globals')
 lua require('plugins')
 
-if has("unix")
-  let s:uname = system("uname -s")
-  " Do Mac stuff
-  if s:uname == "Darwin\n"
-    runtime ./macos.vim
-  endif
-endif
 if has('win32')
   runtime ./windows.vim
 endif
@@ -164,8 +157,14 @@ endif
 " ---------------------------------------------------------------------
 set mouse=a
 
+" Minimap
+
 " Neovide
-set guifont=JetBrainsMono\ NF,codicon,Cascadia\ Code\ PL:h10
+if exists('g:neovide')
+  set guifont=JetBrainsMono\ NF,codicon,Cascadia\ Code\ PL:h10
+  let g:transparency = 0.8
+  let g:neovide_background_color = '#0f1117'.printf('%x', float2nr(255 * g:transparency))
+endif
 "}}}
 
 " Extras "{{{

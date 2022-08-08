@@ -1,5 +1,6 @@
 local utils = require('utils')
 local config = require('config.cmp')
+local icons = require('config.lsp_icons')
 
 local cmp = import('cmp')
 local lspkind = import('lspkind')
@@ -52,7 +53,7 @@ cmp.setup({
   formatting = {
     fields = { 'kind', 'abbr', 'menu' },
     format = function(entry, vim_item)
-      local kind = lspkind.cmp_format({ mode = 'symbol', maxwidth = 50 })(entry, vim_item)
+      local kind = lspkind.cmp_format({ mode = 'symbol', symbol_map = icons, maxwidth = 50 })(entry, vim_item)
       local strings = vim.split(kind.kind, '%s', { trimempty = true })
       kind.kind = ' ' .. strings[1] .. ' '
 

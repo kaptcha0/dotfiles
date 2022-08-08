@@ -1,6 +1,7 @@
 local lualine = import('lualine')
+local navic = import('nvim-navic')
 
-if not lualine then
+if not lualine or not navic then
   return
 end
 
@@ -16,8 +17,10 @@ lualine.setup({
     lualine_a = {
       { 'mode', separator = { left = '' }, right_padding = 2 },
     },
-    lualine_b = { 'branch', { 'filename', path = 0 } },
-    lualine_c = {},
+    lualine_b = { 'branch', { 'filename', path = 1 } },
+    lualine_c = {
+      { navic.get_location, cond = navic.is_available },
+    },
     lualine_x = {
       {
         'diagnostics',
@@ -40,7 +43,7 @@ lualine.setup({
     lualine_c = {
       {
         'filename',
-        path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
+        path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
       },
     },
     lualine_x = {},

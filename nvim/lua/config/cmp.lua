@@ -4,43 +4,26 @@ M.highlight_groups = {
   PmenuSel = { bg = '#282C34', fg = 'NONE' },
   Pmenu = { fg = '#C5CDD9', bg = '#22252A' },
 
-  CmpItemAbbrDeprecated = { fg = '#7E8294', bg = 'NONE', strikethrough = true },
-  CmpItemAbbrMatch = { fg = '#82AAFF', bg = 'NONE', bold = true },
-  CmpItemAbbrMatchFuzzy = { fg = '#82AAFF', bg = 'NONE', bold = true },
-  CmpItemMenu = { fg = '#C792EA', bg = 'NONE', italic = true },
+  -- gray
+  CmpItemAbbrDeprecated = { bg = 'NONE', fg = '#808080', strikethrough = true },
 
-  CmpItemKindField = { fg = '#EED8DA', bg = '#B5585F' },
-  CmpItemKindProperty = { fg = '#EED8DA', bg = '#B5585F' },
-  CmpItemKindEvent = { fg = '#EED8DA', bg = '#B5585F' },
+  -- blue
+  CmpItemAbbrMatch = { bg = 'NONE', fg = '#569CD6', bold = true },
+  CmpItemAbbrMatchFuzzy = { bg = 'NONE', fg = '#569CD6', bold = true },
 
-  CmpItemKindText = { fg = '#C3E88D', bg = '#9FBD73' },
-  CmpItemKindEnum = { fg = '#C3E88D', bg = '#9FBD73' },
-  CmpItemKindKeyword = { fg = '#C3E88D', bg = '#9FBD73' },
+  -- light blue
+  CmpItemKindVariable = { bg = 'NONE', fg = '#9CDCFE' },
+  CmpItemKindInterface = { bg = 'NONE', fg = '#9CDCFE' },
+  CmpItemKindText = { bg = 'NONE', fg = '#9CDCFE' },
 
-  CmpItemKindConstant = { fg = '#FFE082', bg = '#D4BB6C' },
-  CmpItemKindConstructor = { fg = '#FFE082', bg = '#D4BB6C' },
-  CmpItemKindReference = { fg = '#FFE082', bg = '#D4BB6C' },
+  -- pink
+  CmpItemKindFunction = { bg = 'NONE', fg = '#C586C0' },
+  CmpItemKindMethod = { bg = 'NONE', fg = '#C586C0' },
 
-  CmpItemKindFunction = { fg = '#EADFF0', bg = '#A377BF' },
-  CmpItemKindStruct = { fg = '#EADFF0', bg = '#A377BF' },
-  CmpItemKindClass = { fg = '#EADFF0', bg = '#A377BF' },
-  CmpItemKindModule = { fg = '#EADFF0', bg = '#A377BF' },
-  CmpItemKindOperator = { fg = '#EADFF0', bg = '#A377BF' },
-
-  CmpItemKindVariable = { fg = '#C5CDD9', bg = '#7E8294' },
-  CmpItemKindFile = { fg = '#C5CDD9', bg = '#7E8294' },
-
-  CmpItemKindUnit = { fg = '#F5EBD9', bg = '#D4A959' },
-  CmpItemKindSnippet = { fg = '#F5EBD9', bg = '#D4A959' },
-  CmpItemKindFolder = { fg = '#F5EBD9', bg = '#D4A959' },
-
-  CmpItemKindMethod = { fg = '#DDE5F5', bg = '#6C8ED4' },
-  CmpItemKindValue = { fg = '#DDE5F5', bg = '#6C8ED4' },
-  CmpItemKindEnumMember = { fg = '#DDE5F5', bg = '#6C8ED4' },
-
-  CmpItemKindInterface = { fg = '#D8EEEB', bg = '#58B5A8' },
-  CmpItemKindColor = { fg = '#D8EEEB', bg = '#58B5A8' },
-  CmpItemKindTypeParameter = { fg = '#D8EEEB', bg = '#58B5A8' },
+  -- front
+  CmpItemKindKeyword = { bg = 'NONE', fg = '#D4D4D4' },
+  CmpItemKindProperty = { bg = 'NONE', fg = '#D4D4D4' },
+  CmpItemKindUnit = { bg = 'NONE', fg = '#D4D4D4' },
 }
 
 function M.set_groups()

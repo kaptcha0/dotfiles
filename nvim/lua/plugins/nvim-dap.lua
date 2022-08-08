@@ -1,10 +1,6 @@
-local dap, dapui = import('dap'), import('dapui')
+local dap, dapui = require('dap'), require('dapui')
 local dap_py, dap_rust, dap_vscode_js = import('dap-python'), import('rust-tools'), import('dap-vscode-js')
 local utils = require('utils')
-
-if not dap or not dapui then
-  return
-end
 
 if not dap_py or not dap_rust or not dap_vscode_js then
   return
@@ -52,6 +48,25 @@ M.configs = {
       cwd = '${workspaceFolder}',
     },
   },
+  {
+    {
+      type = 'nlua',
+      request = 'attach',
+      name = 'Attach to running Neovim instance',
+      host = function()
+        local value = vim.fn.input('Host [127.0.0.1]: ')
+        if value ~= '' then
+          return value
+        end
+        return '127.0.0.1'
+      end,
+      port = function()
+        local val = tonumber(vim.fn.input('Port: '))
+        assert(val, 'Please provide a port number')
+        return val
+      end,
+    },
+  },
   python = {
     {
       type = 'python',
@@ -75,6 +90,9 @@ M.adapters = {
     command = vim.fn.exepath('netcoredbg'),
     args = { '--interpreter=vscode' },
   },
+  nlua = function(callback, config)
+    callback({ type = 'server', host = config.host, port = config.port })
+  end,
 }
 
 function M.breakpoint()
@@ -142,7 +160,7 @@ function M.extentions()
   elseif IS_MAC then
     liblldb_path = utils.join(codelldb_path, 'lib/liblldb.dylib')
   else
-    utils.error('liblldb is not found', '[nvim-dap.lua]: extentions')
+    utils.error('liblldb is not found', '[nvim-dap.lua].extentions')
   end
 
   local opts = {
