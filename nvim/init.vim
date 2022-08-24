@@ -157,7 +157,11 @@ endif
 " ---------------------------------------------------------------------
 set mouse=a
 
-" Minimap
+" python
+lua << EOF
+  vim.g.python3_host_prog = IS_WINDOWS and vim.fn.exepath("python") or vim.fn.exepath("python3")
+  -- let g:python3_host_prog = exepath("python")
+EOF
 
 " Neovide
 if exists('g:neovide')

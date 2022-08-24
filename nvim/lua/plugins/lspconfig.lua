@@ -6,9 +6,8 @@ local icons = require('config.lsp_icons')
 
 local lspconfig = require('lspconfig')
 local cmp = import('cmp_nvim_lsp')
-local navic = import('nvim-navic')
 
-if not cmp or not navic then
+if not cmp then
   return
 end
 
@@ -27,7 +26,6 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
 
   protocol.CompletionItemKind = icons
-  navic.attach(client, bufnr)
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp

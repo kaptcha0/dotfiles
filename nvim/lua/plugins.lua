@@ -78,29 +78,6 @@ return require('packer').startup({
 
     -- Theme --
     use({
-      'wfxr/minimap.vim',
-      config = function()
-        vim.g.minimap_highlight_range = 1
-        vim.g.minimap_git_colors = 1
-        vim.cmd([[
-          let ftToIgnore = ['fugitive', 'nerdtree', 'tagbar', 'fzf', 'nofile', 'nowrite', 'quickfix', 'terminal', 'prompt', 'startify', 'netrw', 'vim-plug' ]
-          augroup MinimapInit
-            autocmd!
-            autocmd BufEnter * if index(ftToIgnore, &ft) < 0 | Minimap
-            autocmd BufLeave * if index(ftToIgnore, &ft) < 0 | MinimapToggle
-          augroup END
-        ]])
-      end,
-    })
-
-    use({
-      'SmiteshP/nvim-navic',
-      config = function()
-        require('plugins.nvim-navic')
-      end,
-    })
-
-    use({
       'navarasu/onedark.nvim',
       config = function()
         require('plugins.onedark')

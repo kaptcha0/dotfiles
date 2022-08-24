@@ -72,27 +72,26 @@ vnoremap <s-a-down> `>yp
 inoremap <silent> <s-a-down> <esc>Vypi
 
 " NvimTree
-nnoremap <silent> <leader>b :NvimTreeToggle<CR>
-nnoremap <silent> <leader>r :NVIMTreeRefresh<CR>
+nnoremap <silent> <leader>b <cmd>NvimTreeToggle<CR>
 
 " Floaterm
 tnoremap <silent> <c-n> <c-\><c-n>
 
-nnoremap <silent> <leader>ft :FloatermNew<cr>
+nnoremap <silent> <leader>ft <cmd>FloatermNew<cr>
 tnoremap <silent> <c-t> <c-\><c-n>:FloatermNew<cr>
 
-nnoremap <silent> <leader>fn :FloatermNext<cr>
+nnoremap <silent> <leader>fn <cmd>FloatermNext<cr>
 tnoremap <silent> <c-s-tab> <c-\><c-n>:FloatermNext<cr>
 
-nnoremap <silent> <leader>fp :FloatermPrev<cr>
+nnoremap <silent> <leader>fp <cmd>FloatermPrev<cr>
 tnoremap <silent> <c-tab> <c-\><c-n>:FloatermPrev<cr>
 
-nnoremap <silent> <leader>tt :FloatermToggle<cr>
+nnoremap <silent> <leader>tt <cmd>FloatermToggle<cr>
 tnoremap <silent> <c-q> <c-\><c-n>:FloatermToggle<cr>
 
-nnoremap <silent> <leader>lg :FloatermNew lazygit<cr>
-nnoremap <silent> <leader>ld :FloatermNew lazydocker<cr>
-nnoremap <silent> <leader>lp :FloatermNew sudo btm<cr>
+nnoremap <silent> <leader>lg <cmd>FloatermNew lazygit<cr>
+nnoremap <silent> <leader>ld <cmd>FloatermNew lazydocker<cr>
+nnoremap <silent> <leader>lp <cmd>FloatermNew sudo btm<cr>
 
 " Code Actions
 nnoremap <leader>ca <cmd>TroubleToggle<cr>

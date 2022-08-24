@@ -7,13 +7,13 @@ M.tool_names = {
     'editorconfig_checker',
     alias = 'editorconfig-checker',
   },
-  'eslint_d',
+  'eslint',
   'flake8',
   {
-    'prettierd',
+    'prettier',
     opts = {
       env = {
-        PRETTIERD_DEFAULT_CONFIG = vim.fn.stdpath('config') .. '/configs/.prettierrc.json',
+        PRETTIERD_DEFAULT_CONFIG = vim.fn.stdpath('config') .. '/configs/.prettierrc.yml',
       },
     },
   },

@@ -48,13 +48,13 @@ M.debuggers = {
 
 M.formatters = {
   'csharpier',
-  'prettierd',
+  'prettier',
   'stylua',
 }
 
 M.linters = {
   'editorconfig-checker',
-  'eslint_d',
+  'eslint-lsp',
   'flake8',
   'pylint',
   'yamllint',

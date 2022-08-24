@@ -7,10 +7,14 @@ local M = {
     validate = { enable = true },
   },
   omnisharp = {
-    cmd = { 'omnisharp' },
-    enable_roslyn_analyzers = true,
-    organize_imports_on_format = true,
     enable_import_completion = true,
+    enable_roslyn_analyzers = true,
+    cmd = { 'omnisharp' },
+    organize_imports_on_format = true,
+  },
+  stylelint_lsp = {
+    cssInJs = true,
+    filetypes = { 'css', 'less', 'postcss', 'sass', 'scss', 'sugarss', 'vue', 'wxss' },
   },
   taplo = {
     cmd = { vim.fn.exepath('taplo'), 'lsp', 'stdio' },
@@ -19,10 +23,7 @@ local M = {
     filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'typescript.tsx' },
   },
   yamlls = {
-    schemas = {
-      ['https://raw.githubusercontent.com/quantumblacklabs/kedro/develop/static/jsonschema/kedro-catalog-0.17.json'] = 'conf/**/*catalog*',
-      ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
-    },
+    singleQuote = true,
   },
 }
 
