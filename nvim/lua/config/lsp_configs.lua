@@ -2,6 +2,9 @@ local M = {
   emmet_ls = {
     filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
   },
+  gopls = {
+    cmd = { vim.fn.exepath('gopls') },
+  },
   jsonls = {
     schemas = require('schemastore').json.schemas({}),
     validate = { enable = true },

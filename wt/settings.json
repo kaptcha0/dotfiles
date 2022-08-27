@@ -16,6 +16,22 @@
             "keys": "ctrl+c"
         },
         {
+            "command": "closePane",
+            "keys": "ctrl+shift+w"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+f4"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+t"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+n"
+        },
+        {
             "command": "find",
             "keys": "ctrl+shift+f"
         },
@@ -31,6 +47,31 @@
         {
             "command": "toggleFocusMode",
             "keys": "f11"
+        },
+        {
+            "command": "closeWindow",
+            "keys": "ctrl+shift+q"
+        },
+        {
+            "command": 
+            {
+                "action": "newWindow"
+            },
+            "keys": "ctrl+n"
+        },
+        {
+            "command": 
+            {
+                "action": "newTab"
+            },
+            "keys": "ctrl+t"
+        },
+        {
+            "command": 
+            {
+                "action": "closeTab"
+            },
+            "keys": "ctrl+w"
         }
     ],
     "alwaysShowNotificationIcon": true,

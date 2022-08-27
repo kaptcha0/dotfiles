@@ -21,6 +21,7 @@ configs.setup {
     'cpp',
     'css',
     'dockerfile',    
+    'go',
     'html',
     'javascript',
     'json',

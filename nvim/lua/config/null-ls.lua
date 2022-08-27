@@ -10,6 +10,11 @@ M.tool_names = {
   'eslint',
   'flake8',
   {
+    'golangci_lint',
+    alias = 'golangci-lint',
+  },
+  'goimports',
+  {
     'prettier',
     opts = {
       env = {
@@ -18,6 +23,7 @@ M.tool_names = {
     },
   },
   'pylint',
+  'refactoring',
   'stylua',
   'taplo',
   'yamllint',

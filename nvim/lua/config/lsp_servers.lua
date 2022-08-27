@@ -7,6 +7,7 @@ M.servers = {
   'diagnostic-languageserver',
   'dockerfile-language-server',
   'emmet-ls',
+  'gopls',
   'html-lsp',
   'json-lsp',
   'lua-language-server',
@@ -48,6 +49,7 @@ M.debuggers = {
 
 M.formatters = {
   'csharpier',
+  'goimports',
   'prettier',
   'stylua',
 }
@@ -56,6 +58,7 @@ M.linters = {
   'editorconfig-checker',
   'eslint-lsp',
   'flake8',
+  'golangci-lint',
   'pylint',
   'yamllint',
 }
