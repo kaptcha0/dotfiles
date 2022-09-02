@@ -41,6 +41,15 @@ function M.setup()
     local server = lsp.lspconfig_mapping[value] or value
 
     local lang_opts = server_configs[server]
+    local exe = vim.fn.exepath(value)
+
+    if lang_opts then
+      local cmd = { exe, unpack(lang_opts.args or {}) }
+
+      lang_opts.cmd = cmd
+      lang_opts.args = nil
+    end
+
     local conf = lang_opts and vim.tbl_deep_extend('keep', default_config, lang_opts) or vim.deepcopy(default_config)
 
     lspconfig[server].setup(conf)
