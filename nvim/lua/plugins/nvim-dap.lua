@@ -125,7 +125,8 @@ function M.keybindings()
   }
 
   for k, v in pairs(maps) do
-    map('n', k, "<cmd>lua require('dap')." .. v .. '()<cr>', { silent = true })
+    local cmd = M[v]
+    map('n', k, cmd, { silent = true })
   end
 end
 

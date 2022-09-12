@@ -76,12 +76,11 @@ return require('packer').startup({
       end,
     })
 
-    -- Theme --
     use({
-      'navarasu/onedark.nvim',
+      'ThePrimeagen/refactoring.nvim',
       config = function()
-        require('plugins.onedark')
-      end,
+        require('refactoring').setup({})
+      end
     })
 
     -- Editor --
@@ -147,16 +146,46 @@ return require('packer').startup({
       end,
     })
 
-    -- Asthetics --
-    use('folke/lsp-colors.nvim')
-    use('hoob3rt/lualine.nvim')
-    use('romgrk/barbar.nvim')
-    use('kyazdani42/nvim-web-devicons')
-
     -- Files --
     use('kyazdani42/nvim-tree.lua')
     use('nvim-telescope/telescope.nvim')
     use('nvim-telescope/telescope-ui-select.nvim')
+
+    -- Asthetics --
+    use('folke/lsp-colors.nvim')
+    use({
+      'hoob3rt/lualine.nvim',
+      after = 'edge',
+      config = function()
+        require('plugins.lualine')
+      end
+    })
+    use('romgrk/barbar.nvim')
+    use('kyazdani42/nvim-web-devicons')
+
+    -- Theme --
+    use({
+      'sainnhe/edge',
+      config = function ()
+        local opts = {
+          'edge',
+          edge_better_performance = 1,
+          edge_dim_foreground = 1,
+          edge_disable_italic_comment = 1,
+          -- edge_style = 'aura',
+          edge_transparent_background = vim.g.neovide and 0 or 2
+        }
+
+        require('config.theme').setup(opts)
+      end
+    })
+    use({
+      'navarasu/onedark.nvim',
+      disable = true,
+      config = function()
+        require('plugins.onedark')
+      end,
+    })
 
     if packer_bootstrap then
       require('packer').sync()

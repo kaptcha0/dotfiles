@@ -41,7 +41,7 @@ end
 -- Sets neovim keybindings
 -- @param mode string
 -- @param lhs string
--- @param rhs string
+-- @param rhs string/function
 -- @param opts table
 function _G.map(mode, lhs, rhs, opts)
   local options = { noremap = true }
@@ -49,5 +49,5 @@ function _G.map(mode, lhs, rhs, opts)
     options = vim.tbl_extend('force', options, opts)
   end
 
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  vim.keymap.set(mode, lhs, rhs, opts)
 end
