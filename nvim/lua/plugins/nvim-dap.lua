@@ -175,8 +175,7 @@ function M.extentions()
 
   -- dap-vscode-js
   dap_vscode_js.setup({
-    -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
-    -- debugger_path = "(runtimedir)/site/pack/packer/opt/vscode-js-debug", -- Path to vscode-js-debug installation.
+    debugger_path = utils.join(vim.fn.stdpath('data'), "site/pack/packer/opt/vscode-js-debug"), -- Path to vscode-js-debug installation.
     adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
   })
 end

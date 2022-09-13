@@ -20,15 +20,15 @@ local get_sources = function()
   for _, v in ipairs(null_config.tool_names) do
     local name = (type(v) == 'string' and v or v[1])
     local cmd = (IS_WINDOWS and 'cmd /c ' or '')
-      .. utils.join(directory, (v.alias or name) .. (IS_WINDOWS and '.cmd' or ''))
+        .. utils.join(directory, (v.alias or name) .. (IS_WINDOWS and '.cmd' or ''))
 
     local opts = {
       timeout = 5000,
       dynamic_command = function(params)
         return command_resolver.from_node_modules(params)
-          or command_resolver.from_yarn_pnp(params)
-          or vim.fn.executable(params.command) == 1 and params.command
-          or cmd
+            or command_resolver.from_yarn_pnp(params)
+            or vim.fn.executable(params.command) == 1 and params.command
+            or cmd
       end,
     }
 
@@ -36,8 +36,8 @@ local get_sources = function()
       opts = utils.merge(opts, v.opts)
     end
 
-    for builtin_name, builtin in pairs(builtins) do
-      local ok = import(string.format('null-ls.builtins.%s.%s', builtin_name, name), utils.verbosity.none)
+    for bi_type, builtin in pairs(builtins) do
+      local ok = import(string.format('null-ls.builtins.%s.%s', bi_type, name), utils.verbosity.none)
 
       if ok then
         table.insert(sources, builtin[name].with(opts))

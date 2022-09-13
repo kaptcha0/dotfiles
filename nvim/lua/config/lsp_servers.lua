@@ -40,7 +40,7 @@ M.lspconfig_mapping = {
 }
 
 M.debuggers = {
-  'chrome-debug-adapter', -- and/or firefox-debug-adapter
+  -- 'chrome-debug-adapter', -- and/or firefox-debug-adapter
   'codelldb',
   'debugpy',
   'go-debug-adapter',

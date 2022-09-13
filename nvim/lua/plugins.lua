@@ -154,10 +154,10 @@ return require('packer').startup({
     -- Asthetics --
     use('folke/lsp-colors.nvim')
     use({
-      'hoob3rt/lualine.nvim',
+      'glepnir/galaxyline.nvim',
       after = 'edge',
-      config = function()
-        require('plugins.lualine')
+      config = function ()
+        require('plugins.galaxyline')
       end
     })
     use('romgrk/barbar.nvim')
@@ -178,13 +178,6 @@ return require('packer').startup({
 
         require('config.theme').setup(opts)
       end
-    })
-    use({
-      'navarasu/onedark.nvim',
-      disable = true,
-      config = function()
-        require('plugins.onedark')
-      end,
     })
 
     if packer_bootstrap then
