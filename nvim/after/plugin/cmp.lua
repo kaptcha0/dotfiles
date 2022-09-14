@@ -18,7 +18,7 @@ cmp.setup({
       local luasnip = import('luasnip', utils.verbosity.none)
 
       if not luasnip then
-        utils.info('disabling luasnip snippets as they are not found')
+        utils.warn('cmp setup (snippet.expand)', 'disabling luasnip snippets as they are not found')
       end
 
       luasnip.lsp_expand(args.body)

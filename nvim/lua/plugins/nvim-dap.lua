@@ -161,7 +161,7 @@ function M.extentions()
   elseif IS_MAC then
     liblldb_path = utils.join(codelldb_path, 'lib/liblldb.dylib')
   else
-    utils.error('liblldb is not found', '[nvim-dap.lua].extentions')
+    utils.error('plugins.nvim-dap', 'liblldb is not found')
   end
 
   local opts = {

@@ -12,21 +12,21 @@ function M.t(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-function M.log(msg, hl, name)
+function M.log(name, msg, hl)
   name = name or 'Neovim'
   hl = hl or 'Todo'
   vim.api.nvim_echo({ { '[' .. name .. '] ', hl }, { msg } }, true, {})
 end
 
-function M.warn(msg, name)
+function M.warn(name, msg)
   vim.notify('[' .. name .. '] ' .. msg, M.verbosity.warn, { title = name })
 end
 
-function M.error(msg, name)
+function M.error(name, msg)
   vim.notify('[' .. name .. '] ' .. msg, M.verbosity.error, { title = name })
 end
 
-function M.info(msg, name)
+function M.info(name, msg)
   vim.notify('[' .. name .. '] ' .. msg, M.verbosity.info, { title = name })
 end
 

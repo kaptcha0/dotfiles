@@ -53,7 +53,13 @@ return require('packer').startup({
       end,
     })
 
-    use('jose-elias-alvarez/null-ls.nvim')
+    use({
+      'jose-elias-alvarez/null-ls.nvim',
+      after = 'mason.nvim',
+      config = function()
+        require('plugins.null-ls')
+      end,
+    })
 
     use('hrsh7th/nvim-cmp')
     use('hrsh7th/cmp-nvim-lsp')
@@ -80,7 +86,7 @@ return require('packer').startup({
       'ThePrimeagen/refactoring.nvim',
       config = function()
         require('refactoring').setup({})
-      end
+      end,
     })
 
     -- Editor --
@@ -156,9 +162,9 @@ return require('packer').startup({
     use({
       'glepnir/galaxyline.nvim',
       after = 'edge',
-      config = function ()
+      config = function()
         require('plugins.galaxyline')
-      end
+      end,
     })
     use('romgrk/barbar.nvim')
     use('kyazdani42/nvim-web-devicons')
@@ -166,18 +172,18 @@ return require('packer').startup({
     -- Theme --
     use({
       'sainnhe/edge',
-      config = function ()
+      config = function()
         local opts = {
           'edge',
           edge_better_performance = 1,
           edge_dim_foreground = 1,
           edge_disable_italic_comment = 1,
           -- edge_style = 'aura',
-          edge_transparent_background = vim.g.neovide and 0 or 2
+          edge_transparent_background = vim.g.neovide and 0 or 2,
         }
 
         require('config.theme').setup(opts)
-      end
+      end,
     })
 
     if packer_bootstrap then

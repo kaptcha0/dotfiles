@@ -31,7 +31,7 @@ _G.import = function(name, verbosity)
   local status, package = pcall(require, name)
 
   if not status then
-    fn(name .. ' not installed or loaded', name .. ' setup')
+    fn(name .. ' setup', name .. ' not installed or loaded')
     return nil
   end
 

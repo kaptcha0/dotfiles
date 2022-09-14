@@ -19,16 +19,26 @@ local get_sources = function()
 
   for _, v in ipairs(null_config.tool_names) do
     local name = (type(v) == 'string' and v or v[1])
-    local cmd = (IS_WINDOWS and 'cmd /c ' or '')
-        .. utils.join(directory, (v.alias or name) .. (IS_WINDOWS and '.cmd' or ''))
+    local cmd = utils.join(directory, (v.alias or name) .. (IS_WINDOWS and '.cmd' or ''))
 
     local opts = {
       timeout = 5000,
       dynamic_command = function(params)
-        return command_resolver.from_node_modules(params)
-            or command_resolver.from_yarn_pnp(params)
-            or vim.fn.executable(params.command) == 1 and params.command
-            or cmd
+        local node_modules = command_resolver.from_node_modules(params)(params)
+        local yarn_pnp = command_resolver.from_yarn_pnp(params)(params)
+        local exec = vim.fn.executable(params.command) == 1 and params.command or cmd
+
+        local res = exec
+
+        if node_modules ~= params.command then
+          res = node_modules
+        end
+
+        if yarn_pnp ~= params.command then
+          res = yarn_pnp
+        end
+
+        return res
       end,
     }
 
@@ -54,7 +64,7 @@ local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 -- add to your shared on_attach callback
 local on_attach = function(client, bufnr)
   if client.supports_method('textDocument/formatting') then
-    print("Attached Null-Ls")
+    print('Attached Null-Ls')
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd('BufWritePre', {
       group = augroup,

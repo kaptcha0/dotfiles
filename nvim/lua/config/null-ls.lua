@@ -37,7 +37,7 @@ function M.lsp_formatting(bufnr)
     end,
     bufnr = bufnr,
   })
-  utils.info('Formatted ' .. vim.api.nvim_buf_get_name(bufnr) .. ' successfully', 'null_ls formatting')
+  utils.info('null-ls formatting', 'Formatted ' .. vim.api.nvim_buf_get_name(bufnr) .. ' successfully')
 end
 
 return M
