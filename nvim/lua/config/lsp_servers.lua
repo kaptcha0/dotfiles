@@ -1,6 +1,8 @@
 local M = {}
 
 M.servers = {
+  -- Doesn't install correctly
+  -- 'asm-lsp',
   'bash-language-server',
   'clangd',
   'css-lsp',
@@ -12,7 +14,7 @@ M.servers = {
   'json-lsp',
   'lua-language-server',
   'omnisharp',
-  'powershell-editor-services',
+  IS_WINDOWS and 'powershell-editor-services',
   'pyright',
   'rust-analyzer',
   'stylelint-lsp',
@@ -23,6 +25,7 @@ M.servers = {
 }
 
 M.lspconfig_mapping = {
+  -- ['asm-lsp'] = 'asm_lsp',
   ['bash-language-server'] = 'bashls',
   ['css-lsp'] = 'cssls',
   ['diagnostic-languageserver'] = 'diagnosticls',
@@ -40,7 +43,6 @@ M.lspconfig_mapping = {
 }
 
 M.debuggers = {
-  -- 'chrome-debug-adapter', -- and/or firefox-debug-adapter
   'codelldb',
   'debugpy',
   'go-debug-adapter',

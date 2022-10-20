@@ -46,6 +46,10 @@ symbol = " "
 [c]
 symbol = " "
 
+[character]
+success_symbol = "[➜](green) "
+error_symbol = "[➜](red) "
+
 [cmd_duration]
 format = "[$duration]($style) "
 style = "bold bright-black"

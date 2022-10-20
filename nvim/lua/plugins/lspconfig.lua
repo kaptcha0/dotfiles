@@ -4,10 +4,10 @@ local lsp = require('config.lsp_servers')
 local server_configs = require('config.lsp_configs')
 local icons = require('config.lsp_icons')
 
-local lspconfig = require('lspconfig')
+local lspconfig = import('lspconfig')
 local cmp = import('cmp_nvim_lsp')
 
-if not cmp then
+if not cmp or not lspconfig then
   return
 end
 
@@ -30,7 +30,7 @@ end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 function M.setup()
-  local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = cmp.default_capabilities()
 
   local default_config = {
     on_attach = on_attach,

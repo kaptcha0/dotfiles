@@ -13,7 +13,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
     install_path,
   })
 end
-
 local packer_config = {
   display = {
     open_fn = function()
@@ -179,7 +178,6 @@ return require('packer').startup({
           edge_dim_foreground = 1,
           edge_disable_italic_comment = 1,
           -- edge_style = 'aura',
-          edge_transparent_background = vim.g.neovide and 0 or 2,
         }
 
         require('config.theme').setup(opts)

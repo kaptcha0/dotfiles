@@ -132,6 +132,8 @@ lua require('plugins')
 
 if has('win32')
   runtime ./windows.vim
+else
+  runtime ./unix.vim
 endif
 
 runtime ./maps.vim
@@ -165,7 +167,8 @@ EOF
 
 " Neovide
 if exists('g:neovide')
-  set guifont=JetBrainsMono\ NF,codicon,Cascadia\ Code\ PL:h10
+  set guifont=CaskaydiaCove_NF,JetBrainsMono_NF,codicon,Cascadia_Code_PL:h10
+  let g:neovide_scale_factor=0.9    
   let g:transparency = 0.8
   let g:neovide_background_color = '#0f1117'.printf('%x', float2nr(255 * g:transparency))
 endif
