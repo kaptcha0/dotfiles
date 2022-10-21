@@ -8,6 +8,7 @@ brew "libavif"
 brew "gd"
 brew "gh"
 brew "graphviz"
+brew "htop"
 brew "lazydocker"
 brew "lazygit"
 brew "neovim", args: ["HEAD"]
