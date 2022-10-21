@@ -8,4 +8,3 @@ bass source ~/.profile
 
 # Sources
 source $HOME/.config/fish/conf.d/abbr.fish
-kubectl completion fish | source
