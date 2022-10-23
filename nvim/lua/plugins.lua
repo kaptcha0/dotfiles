@@ -160,7 +160,7 @@ return require('packer').startup({
     use('folke/lsp-colors.nvim')
     use({
       'glepnir/galaxyline.nvim',
-      after = 'edge',
+      after = 'gruvbox-material',
       config = function()
         require('plugins.galaxyline')
       end,
@@ -170,7 +170,22 @@ return require('packer').startup({
 
     -- Theme --
     use({
+      'sainnhe/gruvbox-material',
+      config = function()
+        local opts = {
+          'gruvbox-material',
+          gruvbox_material_background = 'hard',
+          gruvbox_material_better_performance = 1,
+          gruvbox_material_disable_italic_comment = 1,
+        }
+
+        require('config.theme').setup(opts)
+      end,
+    })
+
+    use({
       'sainnhe/edge',
+      disable = true,
       config = function()
         local opts = {
           'edge',
