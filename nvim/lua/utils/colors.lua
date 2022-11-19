@@ -10,15 +10,15 @@ end
 local M = {
   bg = get_color('StatusLine').bg,
   fg = get_color('StatusLine').fg,
-  yellow = get_color('Yellow').fg,
-  cyan = get_color('Aqua').fg,
+  yellow = get_color('WarningMsg').fg,
+  cyan = get_color('SpecialKey').fg,
   darkblue = get_color('Identifier').fg,
-  green = get_color('Green').fg,
+  green = get_color('String').fg,
   orange = get_color('Constant').fg,
-  violet = '#a9a1e1',
-  magenta = get_color('Purple').fg,
-  blue = get_color('Blue').fg,
-  red = get_color('Red').fg,
+  violet = get_color('Todo').fg,
+  magenta = get_color('Todo').fg,
+  blue = get_color('Function').fg,
+  red = get_color('ErrorMsg').fg,
 }
 
 return M

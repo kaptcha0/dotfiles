@@ -47,6 +47,7 @@ return require('packer').startup({
     use({
       'neovim/nvim-lspconfig',
       event = 'VimEnter',
+      after = 'cmp-nvim-lsp',
       config = function()
         require('plugins.lspconfig').setup()
       end,
@@ -60,8 +61,7 @@ return require('packer').startup({
       end,
     })
 
-    use('hrsh7th/nvim-cmp')
-    use('hrsh7th/cmp-nvim-lsp')
+    use({ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' })
     use('hrsh7th/cmp-buffer')
     use('hrsh7th/cmp-path')
     use('hrsh7th/cmp-cmdline')
@@ -71,6 +71,13 @@ return require('packer').startup({
     use({ 'rcarriga/cmp-dap', after = 'nvim-dap' })
     use('L3MON4D3/LuaSnip')
     use('Saecki/crates.nvim')
+
+    use({
+      'hrsh7th/nvim-cmp',
+      config = function()
+        require('plugins.cmp').setup()
+      end,
+    })
 
     use({
       'KadoBOT/cmp-plugins',
@@ -150,7 +157,7 @@ return require('packer').startup({
         require('plugins.nvim-dap').setup()
       end,
     })
-
+    --
     -- Files --
     use('kyazdani42/nvim-tree.lua')
     use('nvim-telescope/telescope.nvim')
@@ -160,7 +167,7 @@ return require('packer').startup({
     use('folke/lsp-colors.nvim')
     use({
       'glepnir/galaxyline.nvim',
-      after = 'gruvbox-material',
+      after = 'onedarkpro.nvim',
       config = function()
         require('plugins.galaxyline')
       end,
@@ -170,30 +177,13 @@ return require('packer').startup({
 
     -- Theme --
     use({
-      'sainnhe/gruvbox-material',
+      'olimorris/onedarkpro.nvim',
       config = function()
         local opts = {
-          'gruvbox-material',
-          gruvbox_material_background = 'hard',
-          gruvbox_material_better_performance = 1,
-          gruvbox_material_disable_italic_comment = 1,
+          'onedarkpro',
         }
 
-        require('config.theme').setup(opts)
-      end,
-    })
-
-    use({
-      'sainnhe/edge',
-      disable = true,
-      config = function()
-        local opts = {
-          'edge',
-          edge_better_performance = 1,
-          edge_dim_foreground = 1,
-          edge_disable_italic_comment = 1,
-          -- edge_style = 'aura',
-        }
+        require('onedarkpro').setup({ theme = 'onedark' })
 
         require('config.theme').setup(opts)
       end,
