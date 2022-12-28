@@ -167,7 +167,7 @@ return require('packer').startup({
     use('folke/lsp-colors.nvim')
     use({
       'glepnir/galaxyline.nvim',
-      after = 'onedarkpro.nvim',
+      after = 'material.vim',
       config = function()
         require('plugins.galaxyline')
       end,
@@ -177,13 +177,28 @@ return require('packer').startup({
 
     -- Theme --
     use({
-      'olimorris/onedarkpro.nvim',
-      config = function()
+      'rmehri01/onenord.nvim',
+      config = function ()
         local opts = {
-          'onedarkpro',
+          theme = 'dark',
+          fade_nc = true,
+          disable = {
+            background = true
+          }
         }
 
-        require('onedarkpro').setup({ theme = 'onedark' })
+        require('onenord').setup(opts)
+      end
+    })
+    
+    use({
+      'kaicataldo/material.vim',
+      disabled = true,
+      config = function()
+        local opts = {
+          'material',
+          material_theme_style = 'darker-community',
+        }
 
         require('config.theme').setup(opts)
       end,
