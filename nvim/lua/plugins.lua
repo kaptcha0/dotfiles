@@ -167,7 +167,7 @@ return require('packer').startup({
     use('folke/lsp-colors.nvim')
     use({
       'glepnir/galaxyline.nvim',
-      after = 'material.vim',
+      after = 'nightfox.nvim',
       config = function()
         require('plugins.galaxyline')
       end,
@@ -177,20 +177,18 @@ return require('packer').startup({
 
     -- Theme --
     use({
-      'rmehri01/onenord.nvim',
-      config = function ()
-        local opts = {
-          theme = 'dark',
-          fade_nc = true,
-          disable = {
-            background = true
-          }
-        }
+      'EdenEast/nightfox.nvim',
+      config = function()
+        require('nightfox').setup({
+          options = {
+            dim_inactive = true,
+          },
+        })
 
-        require('onenord').setup(opts)
-      end
+        vim.cmd('colorscheme carbonfox')
+      end,
     })
-    
+
     use({
       'kaicataldo/material.vim',
       disabled = true,

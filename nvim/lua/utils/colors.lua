@@ -1,3 +1,5 @@
+local palette = require('nightfox.palette').load('carbonfox')
+
 local function get_color(group)
   local colors = vim.api.nvim_get_hl_by_name(group, true)
 
@@ -8,17 +10,17 @@ local function get_color(group)
 end
 
 local M = {
-  bg = get_color('StatusLine').bg,
-  fg = get_color('StatusLine').fg,
-  yellow = get_color('WarningMsg').fg,
-  cyan = get_color('SpecialKey').fg,
-  darkblue = get_color('Identifier').fg,
-  green = get_color('String').fg,
-  orange = get_color('Constant').fg,
-  violet = get_color('Todo').fg,
-  magenta = get_color('Todo').fg,
-  blue = get_color('Function').fg,
-  red = get_color('ErrorMsg').fg,
+  bg = palette.bg0,
+  fg = palette.fg2,
+  yellow = palette.yellow.base,
+  cyan = palette.cyan.base,
+  blue = palette.blue.base,
+  darkblue = palette.blue.dim,
+  green = palette.green.base,
+  orange = palette.orange.base,
+  violet = palette.pink.base,
+  magenta = palette.magenta.base,
+  red = palette.red.base,
 }
 
 return M
