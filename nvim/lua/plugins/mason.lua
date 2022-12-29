@@ -1,4 +1,4 @@
-local lsp = require('config.lsp_servers')
+local lsp = require('config.lsp.servers')
 local utils = require('utils')
 
 local mason = require('mason')

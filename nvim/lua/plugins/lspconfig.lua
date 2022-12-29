@@ -1,8 +1,8 @@
 local M = {}
 local protocol = require('vim.lsp.protocol')
-local lsp = require('config.lsp_servers')
-local server_configs = require('config.lsp_configs')
-local icons = require('config.lsp_icons')
+local lsp = require('config.lsp.servers')
+local server_configs = require('config.lsp.configs')
+local icons = require('config.lsp.icons')
 
 local lspconfig = import('lspconfig')
 local cmp = import('cmp_nvim_lsp')

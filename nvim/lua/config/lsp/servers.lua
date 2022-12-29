@@ -1,8 +1,6 @@
 local M = {}
 
 M.servers = {
-  -- Doesn't install correctly
-  -- 'asm-lsp',
   'bash-language-server',
   'clangd',
   'css-lsp',
@@ -13,6 +11,7 @@ M.servers = {
   'html-lsp',
   'json-lsp',
   'lua-language-server',
+  'marksman',
   'omnisharp',
   IS_WINDOWS and 'powershell-editor-services',
   'pyright',

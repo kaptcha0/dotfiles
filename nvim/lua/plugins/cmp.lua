@@ -2,7 +2,7 @@ local M = {}
 
 local utils = require('utils')
 local config = require('config.cmp')
-local icons = require('config.lsp_icons')
+local icons = require('config.lsp.icons')
 
 local cmp = import('cmp')
 local lspkind = import('lspkind')
