@@ -16,7 +16,7 @@ nnoremap <C-a> gg<S-v>G
 if has('win32') || has('win32unix')
   command! W w
 else
-  command! W w !sudo tee > /dev/null %
+  command! W w !sudo -A tee > /dev/null %
 endif
 
 "-----------------------------
