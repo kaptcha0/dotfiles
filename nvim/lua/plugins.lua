@@ -2,7 +2,6 @@ vim.cmd([[packadd packer.nvim]])
 
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({
     'git',
@@ -13,6 +12,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
     install_path,
   })
 end
+
 local packer_config = {
   display = {
     open_fn = function()
@@ -20,7 +20,6 @@ local packer_config = {
     end,
   },
 }
-
 return require('packer').startup({
   function(use)
     use('wbthomason/packer.nvim')
@@ -165,40 +164,39 @@ return require('packer').startup({
 
     -- Asthetics --
     use('folke/lsp-colors.nvim')
+    use('kyazdani42/nvim-web-devicons')
+    use('SmiteshP/nvim-navic')
+
     use({
-      'glepnir/galaxyline.nvim',
-      after = 'nightfox.nvim',
+      'nanozuki/tabby.nvim',
       config = function()
-        require('plugins.galaxyline')
+        require('plugins.tabby')
       end,
     })
-    use('romgrk/barbar.nvim')
-    use('kyazdani42/nvim-web-devicons')
+
+    use({
+      'feline-nvim/feline.nvim',
+      config = function()
+        require('plugins.feline')
+      end,
+    })
+
+    use({
+      'lewis6991/gitsigns.nvim',
+      config = function()
+        require('gitsigns').setup()
+      end,
+    })
 
     -- Theme --
     use({
       'EdenEast/nightfox.nvim',
       config = function()
         require('nightfox').setup({
-          options = {
-            dim_inactive = true,
-          },
+          options = {},
         })
 
         vim.cmd('colorscheme carbonfox')
-      end,
-    })
-
-    use({
-      'kaicataldo/material.vim',
-      disabled = true,
-      config = function()
-        local opts = {
-          'material',
-          material_theme_style = 'darker-community',
-        }
-
-        require('config.theme').setup(opts)
       end,
     })
 

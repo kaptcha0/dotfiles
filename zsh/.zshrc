@@ -1,5 +1,5 @@
 export ZSH="$HOME/.config/zsh"
-source $ZSH/antigen.zsh
+
 source $HOME/.profile
 
 # User configuration
@@ -16,5 +16,5 @@ export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
-# Load Antigen
-antigen init $ZSH/.antigenrc
+source "$ZSH/zplug.zsh"
+source "$ZSH/aliases.zsh"

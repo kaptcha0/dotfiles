@@ -13,6 +13,7 @@ M.tool_names = {
     'golangci_lint',
     alias = 'golangci-lint',
   },
+  'gitsigns',
   'goimports',
   {
     'prettier',

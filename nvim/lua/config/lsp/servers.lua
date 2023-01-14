@@ -24,7 +24,6 @@ M.servers = {
 }
 
 M.lspconfig_mapping = {
-  -- ['asm-lsp'] = 'asm_lsp',
   ['bash-language-server'] = 'bashls',
   ['css-lsp'] = 'cssls',
   ['diagnostic-languageserver'] = 'diagnosticls',

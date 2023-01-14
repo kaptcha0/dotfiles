@@ -6,6 +6,10 @@ let g:floaterm_keymap_toggle='<Leader>tt'
 
 if executable('pwsh')
   let g:floaterm_shell = 'pwsh'
+elseif executable('zsh')
+  let g:floaterm_shell = 'zsh'
+elseif executable('fish')
+  let g:floaterm_shell = 'fish'
 elseif executable('bash')
   let g:floaterm_shell = 'bash'
 endif
