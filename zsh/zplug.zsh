@@ -16,7 +16,6 @@ zplug "plugins/sudo", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/fzf", from:oh-my-zsh
-zplug "plugins/kubectl", from:oh-my-zsh
 zplug "plugins/nmap", from:oh-my-zsh
 zplug "plugins/nvm", from:oh-my-zsh
 zplug "plugins/z", from:oh-my-zsh
