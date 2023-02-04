@@ -1,4 +1,4 @@
-local palette = require('nightfox.palette').load('carbonfox')
+local palette = require('catppuccin.palettes').get_palette()
 
 local function get_color(group)
   local colors = vim.api.nvim_get_hl_by_name(group, true)
@@ -10,17 +10,17 @@ local function get_color(group)
 end
 
 local M = {
-  bg = palette.bg0,
-  fg = palette.fg2,
-  yellow = palette.yellow.base,
-  cyan = palette.cyan.base,
-  blue = palette.blue.base,
-  darkblue = palette.blue.dim,
-  green = palette.green.base,
-  orange = palette.orange.base,
-  violet = palette.pink.base,
-  magenta = palette.magenta.base,
-  red = palette.red.base,
+  bg = palette.mantle,
+  fg = palette.text,
+  yellow = palette.yellow,
+  cyan = palette.teal,
+  blue = palette.blue,
+  darkblue = palette.sapphire,
+  green = palette.green,
+  orange = palette.peach,
+  violet = palette.pink,
+  magenta = palette.mauve,
+  red = palette.red,
 }
 
 return M

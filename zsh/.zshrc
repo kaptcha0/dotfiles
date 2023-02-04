@@ -26,3 +26,5 @@ source "$ZSH/themes/current.zsh"
 
 source "$ZSH/zplug.zsh"
 source "$ZSH/aliases.zsh"
+
+fastfetch

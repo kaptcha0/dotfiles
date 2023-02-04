@@ -170,7 +170,7 @@ return require('packer').startup({
     use({
       'nanozuki/tabby.nvim',
       config = function()
-        require('plugins.tabby')
+        -- require('plugins.tabby')
       end,
     })
 
@@ -190,16 +190,20 @@ return require('packer').startup({
 
     -- Theme --
     use({
-      'EdenEast/nightfox.nvim',
+      'catppuccin/nvim',
       config = function()
-        require('nightfox').setup({
-          options = {},
+        require('catppuccin').setup({
+          flavor = 'mocha',
+          no_italic = true,
+          integrations = {
+            native_lsp = { enabled = true },
+          },
         })
 
-        vim.cmd('colorscheme carbonfox')
+        vim.cmd('colorscheme catppuccin')
       end,
+      as = 'catppuccin',
     })
-
     if packer_bootstrap then
       require('packer').sync()
     end
