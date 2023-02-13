@@ -37,6 +37,9 @@ DialogWidth=1350
 immutability=1
 plugin=org.kde.plasma.betterinlineclock
 
+[Containments][13][Applets][101][Configuration]
+PreloadWeight=100
+
 [Containments][13][Applets][101][Configuration][Appearance]
 fixedFont=true
 fontSize=12
@@ -57,10 +60,12 @@ DialogWidth=671
 
 [Containments][13][Applets][102][Configuration][General]
 boldFont=false
+capitalFont=false
 containmentType=Latte
 filterActivityInfo=false
+fixedLength=124
 lengthPolicy=Maximum
-maximumLength=228
+maximumLength=196
 style=Title
 
 [Containments][13][Applets][103]
@@ -239,7 +244,7 @@ PreloadWeight=42
 
 [Containments][14][Applets][54][Configuration][General]
 isInLatteDock=true
-launchers59=applications:org.kde.discover.desktop,applications:systemsettings.desktop,applications:org.kde.dolphin.desktop,file:///latte-separator4.desktop,applications:min.desktop,applications:microsoft-edge.desktop,applications:firefox.desktop,applications:google-chrome.desktop,file:///latte-separator2.desktop,applications:code.desktop,applications:kitty.desktop,file:///latte-separator3.desktop,applications:FFPWA-01GM0FVC1T40BSS41C6NY1AF74.desktop,applications:com.spotify.Client.desktop,file:///latte-separator1.desktop,applications:com.discordapp.Discord.desktop,file:///latte-separator5.desktop
+launchers59=applications:org.kde.discover.desktop,applications:systemsettings.desktop,applications:org.kde.dolphin.desktop,file:///latte-separator4.desktop,applications:brave-browser.desktop,applications:firefox.desktop,applications:google-chrome.desktop,file:///latte-separator2.desktop,applications:code.desktop,applications:kitty.desktop,file:///latte-separator3.desktop,applications:brave-agimnkijcaahngcdmfeangaknmldooml-Default.desktop,applications:com.spotify.Client.desktop,file:///latte-separator1.desktop,applications:com.discordapp.Discord.desktop,file:///latte-separator5.desktop,applications:md.obsidian.Obsidian.desktop
 showWindowActions=true
 
 [Containments][14][ConfigDialog]
@@ -304,6 +309,10 @@ viewType=0
 visibility=0
 wallpaperplugin=org.kde.image
 
+[Containments][15][Applets][108]
+immutability=1
+plugin=org.kde.plasma.pager
+
 [Containments][15][Applets][70]
 immutability=1
 plugin=org.kde.plasma.kickoff
@@ -313,7 +322,7 @@ PreloadWeight=100
 
 [Containments][15][Applets][70][Configuration][ConfigDialog]
 DialogHeight=720
-DialogWidth=671
+DialogWidth=1350
 
 [Containments][15][Applets][70][Configuration][General]
 compactMode=true
@@ -321,23 +330,11 @@ favoritesPortedToKAstats=true
 systemFavorites=suspend\\,hibernate\\,reboot\\,shutdown
 
 [Containments][15][Applets][70][Shortcuts]
-global=Meta+A
+global=Meta+Ctrl+L
 
 [Containments][15][Applets][71]
 immutability=1
 plugin=org.kde.latte.separator
-
-[Containments][15][Applets][72]
-immutability=1
-plugin=org.kde.plasma.pager
-
-[Containments][15][Applets][72][Configuration][ConfigDialog]
-DialogHeight=720
-DialogWidth=671
-
-[Containments][15][Applets][72][Configuration][General]
-showOnlyCurrentScreen=true
-wrapPage=true
 
 [Containments][15][Applets][74]
 immutability=1
@@ -421,7 +418,7 @@ PreloadWeight=0
 [Containments][15][General]
 alignment=1
 alignmentUpgraded=true
-appletOrder=88;70;86;71;85;72;84;75;83;74
+appletOrder=88;70;86;71;85;108;84;75;83;74
 appletShadowsEnabled=false
 autoDecreaseIconSize=false
 autoSizeEnabled=false
@@ -432,7 +429,7 @@ dragActiveWindowEnabled=true
 floatingInternalGapIsForced=false
 iconSize=18
 lastWindowsVisibilityMode=6
-lockedZoomApplets=88;70;86;85;72;84;83;74
+lockedZoomApplets=88;70;86;85;84;83;74
 maxLength=33
 mouseWheelActions=false
 panelPosition=10
@@ -475,6 +472,13 @@ plugin=org.kde.plasma.private.systemtray
 popupHeight=480
 popupWidth=480
 wallpaperplugin=org.kde.image
+
+[Containments][36][Applets][105]
+immutability=1
+plugin=org.kde.plasma.bluetooth
+
+[Containments][36][Applets][105][Configuration]
+PreloadWeight=100
 
 [Containments][36][Applets][37]
 immutability=1
@@ -527,7 +531,7 @@ immutability=1
 plugin=org.kde.plasma.printmanager
 
 [Containments][36][Applets][44][Configuration]
-PreloadWeight=60
+PreloadWeight=65
 
 [Containments][36][Applets][45]
 immutability=1
@@ -556,14 +560,14 @@ immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][36][Applets][50][Configuration]
-PreloadWeight=92
+PreloadWeight=100
 
 [Containments][36][Applets][98]
 immutability=1
 plugin=org.kde.plasma.mediacontroller
 
 [Containments][36][Applets][98][Configuration]
-PreloadWeight=49
+PreloadWeight=45
 
 [Containments][36][Applets][98][Configuration][ConfigDialog]
 DialogHeight=720
@@ -573,13 +577,16 @@ DialogWidth=671
 immutability=1
 plugin=org.kde.kscreen
 
+[Containments][36][Applets][99][Configuration]
+PreloadWeight=55
+
 [Containments][36][ConfigDialog]
 DialogHeight=720
 DialogWidth=671
 
 [Containments][36][General]
-extraItems=org.kde.plasma.networkmanagement,org.kde.kdeconnect,org.kde.plasma.volume,org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.notifications,org.kde.plasma.printmanager,org.kde.plasma.keyboardindicator,org.kde.plasma.nightcolorcontrol,org.kde.plasma.vault,org.kde.plasma.mediacontroller,org.kde.kscreen
-hiddenItems=ibus-ui-gtk3,org.kde.plasma.vault,Discover Notifier_org.kde.DiscoverNotifier,org.kde.plasma.mediacontroller,org.kde.kscreen,org.kde.plasma.clipboard
+extraItems=org.kde.plasma.networkmanagement,org.kde.kdeconnect,org.kde.plasma.volume,org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.notifications,org.kde.plasma.printmanager,org.kde.plasma.keyboardindicator,org.kde.plasma.nightcolorcontrol,org.kde.plasma.vault,org.kde.plasma.mediacontroller,org.kde.kscreen,org.kde.plasma.bluetooth,Proton VPN Tray
+hiddenItems=ibus-ui-gtk3,org.kde.plasma.vault,org.kde.plasma.mediacontroller,org.kde.kscreen,org.kde.plasma.clipboard,org.kde.plasma.bluetooth,chrome_status_icon_1,Proton VPN Tray
 knownItems=org.kde.plasma.networkmanagement,org.kde.kdeconnect,org.kde.plasma.volume,org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.manage-inputmethod,org.kde.plasma.mediacontroller,org.kde.plasma.notifications,org.kde.plasma.keyboardlayout,org.kde.plasma.printmanager,org.kde.plasma.keyboardindicator,org.kde.plasma.nightcolorcontrol,org.kde.plasma.vault,org.kde.plasma.bluetooth
 scaleIconsToFit=true
 shownItems=org.kde.plasma.battery,org.kde.plasma.notifications

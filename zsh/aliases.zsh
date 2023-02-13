@@ -5,4 +5,5 @@ alias rm="rm -i"
 alias vim="nvim"
 alias watch="viddy"
 alias which="command -v"
+alias open="open_command"
 

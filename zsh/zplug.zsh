@@ -21,6 +21,8 @@ zplug "plugins/nvm", from:oh-my-zsh
 zplug "plugins/z", from:oh-my-zsh
 
 ## Others
+zplug "jirutka/zsh-shift-select"
+
 zplug "hlissner/zsh-autopair", defer:2
 zplug "marlonrichert/zsh-autocomplete"
 zplug "zsh-users/zsh-completions"
