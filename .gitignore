@@ -3,3 +3,4 @@ scoop/
 config.yml
 state.yml
 nvim/plugin
+zsh/cache

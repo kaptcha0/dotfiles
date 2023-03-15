@@ -1,0 +1,11 @@
+user-theme@gnome-shell-extensions.gcampax.github.com
+appindicatorsupport@rgcjonas.gmail.com
+drive-menu@gnome-shell-extensions.gcampax.github.com
+dash-to-dock@micxgx.gmail.com
+dash-animator@icedman.github.com
+floating-panel@aylur
+gestureImprovements@gestures
+tiling-assistant@leleat-on-github
+top-bar-organizer@julian.gse.jsts.xyz
+blur-my-shell@aunetx
+gnome-clipboard@b00f.github.io

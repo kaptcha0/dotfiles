@@ -1,4 +1,6 @@
-local palette = require('catppuccin.palettes').get_palette()
+local colors = require('kanagawa.colors').setup()
+local palette_colors = colors.palette
+local theme_colors = colors.theme
 
 local function get_color(group)
   local colors = vim.api.nvim_get_hl_by_name(group, true)
@@ -10,17 +12,17 @@ local function get_color(group)
 end
 
 local M = {
-  bg = palette.mantle,
-  fg = palette.text,
-  yellow = palette.yellow,
-  cyan = palette.teal,
-  blue = palette.blue,
-  darkblue = palette.sapphire,
-  green = palette.green,
-  orange = palette.peach,
-  violet = palette.pink,
-  magenta = palette.mauve,
-  red = palette.red,
+  bg = theme_colors.ui.bg_dim,
+  fg = theme_colors.ui.fg,
+  yellow = palette_colors.winterYellow,
+  cyan = palette_colors.springBlue,
+  blue = palette_colors.dragonBlue,
+  darkblue = palette_colors.winterBlue,
+  green = palette_colors.waveAqua1,
+  orange = palette_colors.lotusOrange2,
+  violet = palette_colors.oniViolet,
+  magenta = palette_colors.dragonPink,
+  red = palette_colors.samuraiRed,
 }
 
 return M

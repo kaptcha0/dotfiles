@@ -30,7 +30,6 @@ return require('packer').startup({
     use('cohama/lexima.vim')
     use('nvim-lua/popup.nvim')
     use('nvim-lua/plenary.nvim')
-
     -- LSP --
     use('WhoIsSethDaniel/mason-tool-installer.nvim')
     use({
@@ -161,6 +160,7 @@ return require('packer').startup({
     use('kyazdani42/nvim-tree.lua')
     use('nvim-telescope/telescope.nvim')
     use('nvim-telescope/telescope-ui-select.nvim')
+    use('lewis6991/gitsigns.nvim')
 
     -- Asthetics --
     use('folke/lsp-colors.nvim')
@@ -175,35 +175,21 @@ return require('packer').startup({
     })
 
     use({
-      'feline-nvim/feline.nvim',
+      'freddiehaddad/feline.nvim',
+      after = 'kanagawa.nvim',
       config = function()
         require('plugins.feline')
       end,
     })
 
-    use({
-      'lewis6991/gitsigns.nvim',
-      config = function()
-        require('gitsigns').setup()
-      end,
-    })
-
     -- Theme --
     use({
-      'catppuccin/nvim',
+      'rebelot/kanagawa.nvim',
       config = function()
-        require('catppuccin').setup({
-          flavor = 'mocha',
-          no_italic = true,
-          integrations = {
-            native_lsp = { enabled = true },
-          },
-        })
-
-        vim.cmd('colorscheme catppuccin')
+        require('plugins.kanagawa')
       end,
-      as = 'catppuccin',
     })
+
     if packer_bootstrap then
       require('packer').sync()
     end

@@ -6,4 +6,5 @@ alias vim="nvim"
 alias watch="viddy"
 alias which="command -v"
 alias open="open_command"
-
+alias bettercap="sudo $(which bettercap)"
+alias wireshark="sudo $(which wireshark)"

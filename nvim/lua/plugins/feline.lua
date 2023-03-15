@@ -49,10 +49,10 @@ end
 
 local function lsp_diagnostics_info()
   return {
-    errs = lsp.get_diagnostics_count('Error'),
-    warns = lsp.get_diagnostics_count('Warning'),
-    infos = lsp.get_diagnostics_count('Information'),
-    hints = lsp.get_diagnostics_count('Hint'),
+    errs = lsp.get_diagnostics_count(vim.diagnostic.severity.ERROR),
+    warns = lsp.get_diagnostics_count(vim.diagnostic.severity.WARN),
+    infos = lsp.get_diagnostics_count(vim.diagnostic.severity.INFO),
+    hints = lsp.get_diagnostics_count(vim.diagnostic.severity.HINT),
   }
 end
 
@@ -77,9 +77,6 @@ local function vimode_hl()
     fg = vi_mode_utils.get_mode_color(),
   }
 end
-
--- LuaFormatter off
-
 local comps = {
   vi_mode = {
     left = {
@@ -216,6 +213,7 @@ local comps = {
     enabled = function()
       return navic.is_available()
     end,
+    left_sep = ' ',
   },
 }
 
@@ -234,48 +232,47 @@ local properties = {
   },
 }
 
-local components = {
+local active = {
   {
-    active = {
-      comps.vi_mode.left,
-      -- comps.file.info,
-      -- comps.lsp.name,
-      -- comps.diagnos.err,
-      -- comps.diagnos.warn,
-      -- comps.diagnos.hint,
-      -- comps.diagnos.info,
-    },
-    inactive = {
-      -- comps.vi_mode.left,
-      -- comps.file.info,
-    },
+    comps.vi_mode.left,
+    comps.file.info,
+    comps.lsp.name,
   },
   {
-    active = {
-      -- comps.navic,
-    },
-    inactive = {},
+    comps.navic,
   },
   {
-    active = {
-      -- comps.git.add,
-      -- comps.git.change,
-      -- comps.git.remove,
-      -- comps.file.os,
-      -- comps.git.branch,
-      -- comps.line_percentage,
-      -- comps.scroll_bar,
-      -- comps.vi_mode.right,
-    },
-    inactive = {},
+    comps.diagnos.err,
+    comps.diagnos.warn,
+    comps.diagnos.hint,
+    comps.diagnos.info,
+
+    comps.git.add,
+    comps.git.change,
+    comps.git.remove,
+    comps.git.branch,
+    comps.file.os,
+    comps.line_percentage,
+    comps.scroll_bar,
+    comps.vi_mode.right,
   },
 }
 
--- LuaFormatter on
+local inactive = {
+  {
+    comps.vi_mode.left,
+    comps.file.info,
+  },
+  {},
+  {},
+}
 require('feline').setup({
   default_bg = colors.bg,
   default_fg = colors.fg,
-  -- components = components,
+  components = {
+    active = active,
+    inactive = inactive,
+  },
   properties = properties,
   vi_mode_colors = vi_mode_colors,
 })

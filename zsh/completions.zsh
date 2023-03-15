@@ -1,8 +1,8 @@
 autoload -Uz compinit
 compinit
 
-source <(kubectl completion zsh)
 source <(gh completion -s zsh)
+source <(kubectl completion zsh)
 source <(buf completion zsh)
 
 if type brew &>/dev/null
