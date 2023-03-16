@@ -1,26 +1,32 @@
-./gnome/extensions.txt:
+./gnome/:
 	@echo "GNOME EXTENSIONS"
 	@echo "================"
 	
-	@echo "Backing up gnome-extensions"
+	@echo "Backing up actual extensions"
+	cp -vr ~/.local/share/gnome-shell/extensions/ ./gnome
+	@echo ""
+	
+	@echo "Saving enabled extension list to file"
 	gnome-extensions list --enabled > ./gnome/extensions.txt
 	
 	@echo ""
 
-Brewfile:
+./brew/:
 	@echo "HOMEBREW"
 	@echo "========"
 	
 	@echo "Updating homebrew"
 	brew upgrade --fetch-HEAD
+	@echo ""
 	
 	@echo "Backing up brew"
-	brew bundle dump --force
+	mkdir -p $@
+	cd $@ && brew bundle dump --force --describe
 	
 	@echo ""
 
-backup: ./gnome/extensions.txt ./Brewfile
-	@echo "Everything is backed up"
+backup: ./gnome/ ./brew/
+	@echo "$^ updated"
 
 clean:
-	rm -f ./Brewfile ./gnome/extensions.txt
+	rm -rf ./brew/ ./gnome/

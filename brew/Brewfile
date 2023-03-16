@@ -1,0 +1,77 @@
+tap "bufbuild/buf"
+tap "homebrew/bundle"
+tap "homebrew/core"
+# GNOME XML library
+brew "libxml2"
+# Swiss army knife for network attacks and monitoring
+brew "bettercap"
+# New way of working with Protocol Buffers
+brew "buf"
+# Windows XML Event Log parser
+brew "evtx"
+# Modern replacement for 'ls'
+brew "exa"
+# Like neofetch, but much faster because written in C
+brew "fastfetch"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# Library for encoding and decoding .avif files
+brew "libavif"
+# Graphics library to dynamically manipulate images
+brew "gd"
+# International domain name library (IDNA2008, Punycode and TR46)
+brew "libidn2"
+# GNU Transport Layer Security (TLS) Library
+brew "gnutls"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Graph visualization software from AT&T and Bell Labs
+brew "graphviz"
+# GNU Ubiquitous Intelligent Language for Extensions
+brew "guile"
+# Kubernetes package manager
+brew "helm"
+# Improved top (interactive process viewer)
+brew "htop"
+# Enhanced version of john, a UNIX password cracker
+brew "john-jumbo"
+# Little helper to run CNCF's k3s in Docker
+brew "k3d"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
+# Template-free customization of Kubernetes YAML manifests
+brew "kustomize"
+# Lazier way to manage everything docker
+brew "lazydocker"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Mock code autogenerator for Golang
+brew "mockery"
+# Message broker implementing the MQTT protocol
+brew "mosquitto"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# No Nonsense Neovim Client in Rust
+brew "neovide"
+# Manage multiple Node.js versions
+brew "nvm"
+# 📦🚀 Fast, disk space efficient package manager
+brew "pnpm"
+# Protocol buffers (Google's data interchange format)
+brew "protobuf"
+# Python version management
+brew "pyenv"
+# Reverse engineering framework
+brew "radare2"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Easy and Repeatable Kubernetes Development
+brew "skaffold"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Modern watch command
+brew "viddy"
+# Advanced memory forensics framework
+brew "volatility"

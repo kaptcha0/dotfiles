@@ -19,6 +19,7 @@ zplug "plugins/fzf", from:oh-my-zsh
 zplug "plugins/nmap", from:oh-my-zsh
 zplug "plugins/nvm", from:oh-my-zsh
 zplug "plugins/z", from:oh-my-zsh
+zplug "sunlei/zsh-ssh"
 
 ## Others
 zplug "jirutka/zsh-shift-select"

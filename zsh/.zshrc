@@ -14,6 +14,7 @@ eval "$(pyenv init -)"
 
 source "$ZSH/themes/current.zsh"
 
+source "$ZSH/env-variables.zsh"
 source "$ZSH/aliases.zsh"
 source "$ZSH/bindings.zsh"
 source "$ZSH/completions.zsh"

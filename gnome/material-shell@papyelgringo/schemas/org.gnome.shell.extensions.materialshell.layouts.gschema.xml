@@ -1,0 +1,99 @@
+<schemalist>
+  <schema id="org.gnome.shell.extensions.materialshell.layouts" path="/org/gnome/shell/extensions/materialshell/layouts/">
+    <key name="maximize" type="b">
+      <default>true</default>
+      <summary>Maximize layout</summary>
+      <description>Maximize all windows</description>
+    </key>
+    <key name="split" type="b">
+      <default>true</default>
+      <summary>Split layout</summary>
+      <description>Put all windows side by side, two at a time</description>
+    </key>
+    <key name="half" type="b">
+      <default>true</default>
+      <summary>Half layout</summary>
+      <description>Tile windows according to screen ratio</description>
+    </key>
+    <key name="half-horizontal" type="b">
+      <default>false</default>
+      <summary>Half horizontal layout</summary>
+      <description>Tile windows horizontally</description>
+    </key>
+    <key name="half-vertical" type="b">
+      <default>false</default>
+      <summary>Half vertical layout</summary>
+      <description>Tile windows vertically</description>
+    </key>
+    <key name="ratio" type="b">
+      <default>false</default>
+      <summary>Ratio based grid layout</summary>
+      <description>Tile windows in both way according to the ratio of the remaining space</description>
+    </key>
+    <key name="ratio-value" type="d">
+      <default>0.6180339887498948</default>
+      <summary>Ratio of the ratio layout</summary>
+      <description>Determines the ratio of the tiling</description>
+    </key>
+    <key name="grid" type="b">
+      <default>false</default>
+      <summary>Regular grid layout</summary>
+      <description>Tile windows according to a regular grid</description>
+    </key>
+    <key name="float" type="b">
+      <default>true</default>
+      <summary>Float layout</summary>
+      <description>No tiling is done, windows are floating freely</description>
+    </key>
+    <key name="simple" type="b">
+      <default>false</default>
+      <summary>Simple layout</summary>
+      <description>Split screen unidirectionally according to screen ratio</description>
+    </key>
+    <key name="simple-horizontal" type="b">
+      <default>false</default>
+      <summary>Simple horizontal layout</summary>
+      <description>Split screen horizontally</description>
+    </key>
+    <key name="simple-vertical" type="b">
+      <default>false</default>
+      <summary>Simple vertical layout</summary>
+      <description>Split screen vertically</description>
+    </key>
+    <key name="gap" type="i">
+      <default>0</default>
+      <summary>Gap size around tiled windows</summary>
+      <description>Determines the gap size between windows</description>
+    </key>
+    <key name="use-screen-gap" type="b">
+      <default>false</default>
+      <summary>Use a different gap size for screen</summary>
+      <description>Determines whether to use the screen gap config</description>
+    </key>
+    <key name="screen-gap" type="i">
+      <default>0</default>
+      <summary>Screen gap size around tiled windows</summary>
+      <description>Determines the screen edge gap size between windows</description>
+    </key>
+    <key name="tween-time" type="d">
+      <default>0.25</default>
+      <summary>Animation duration</summary>
+      <description>Adjust duration of window move/resize animation</description>
+    </key>
+    <key name="default-layout" type="s">
+      <default>'maximize'</default>
+      <summary>Default layout</summary>
+      <description>Determines the default layout for new workspace</description>
+    </key>
+    <key name="windows-excluded" type="s">
+      <default>''</default>
+      <summary>Excluded window classes</summary>
+      <description>Comma separated list of window classes that will be ignored by Material shell. In order to get the class name for an active application: Press Alt + F2, type "lg" and click on the window tab.</description>
+    </key>
+    <key name="roles-excluded" type="s">
+      <default>''</default>
+      <summary>Excluded window roles</summary>
+      <description>Comma separated list of window roles that will be ignored by Material shell.</description>
+    </key>
+  </schema>
+</schemalist>

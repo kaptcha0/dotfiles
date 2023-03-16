@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-clipboard">
+  <schema id="org.gnome.shell.extensions.gnome-clipboard" path="/org/gnome/shell/extensions/gnome-clipboard/">
+    <!-- See also: https://developer.gnome.org/glib/stable/gvariant-format-strings.html -->
+
+    <key type="u" name="history-size">
+      <default>100</default>
+      <summary>Maximum size of history</summary>
+    </key>
+
+    <key type="u" name="history-sort">
+      <default>0</default>
+      <summary>Sort history by</summary>
+    </key>
+
+    <key type="b" name="clipboard-timer">
+      <default>false</default>
+      <summary>Read clipboard by timer</summary>
+    </key>
+
+    <key type="u" name="timer-interval">
+      <default>1000</default>
+      <summary>Timer interval (Millisecond)</summary>
+    </key>
+
+    <key type="b" name="save-pinned">
+      <default>false</default>
+      <summary>Save only pinned items</summary>
+    </key>
+
+    <key type="b" name="show-notifications">
+      <default>false</default>
+      <summary>Show notifications</summary>
+    </key>
+
+    <key type="u" name="log-level">
+      <default>0</default>
+      <summary>
+          Derive some log4j level/order
+          0 - OFF
+          1 - ERROR
+          2 - WARN
+          3 - INFO
+          4 - DEBUG
+      </summary>
+    </key>
+
+  </schema>
+</schemalist>

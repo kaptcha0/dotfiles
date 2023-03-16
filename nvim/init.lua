@@ -39,14 +39,6 @@ vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.o.path = vim.o.path .. '**'
 vim.o.wildignore = vim.o.wildignore .. '*/node_modules/*'
 
-if vim.fn.has('win32') or vim.fn.has('win32unix') then
-  vim.o.fileformat = 'dos'
-  vim.o.fileformats = 'dos,unix'
-else
-  vim.o.fileformat = 'unix'
-  vim.o.fileformats = 'unix,dos'
-end
-
 vim.cmd([[
   " init autocmd
   autocmd!
@@ -103,14 +95,8 @@ vim.cmd([[
 -- Imports
 require('globals')
 require('plugins')
-
-if vim.fn.has('win32') then
-  vim.cmd([[runtime ./windows.vim]])
-else
-  vim.cmd([[runtime ./unix.vim]])
-end
-
-vim.cmd([[runtime ./maps.vim]])
+require('nvim.os')
+require('nvim.keymaps')
 
 -- Syntax theme
 if vim.fn.exists('&termguicolors') and vim.fn.exists('&winblend') then

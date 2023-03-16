@@ -173,7 +173,7 @@ local comps = {
       left_sep = ' ',
       icon = icons.lsp,
       hl = {
-        fg = colors.yellow,
+        fg = colors.blue,
       },
     },
   },
@@ -236,10 +236,6 @@ local active = {
   {
     comps.vi_mode.left,
     comps.file.info,
-    comps.lsp.name,
-  },
-  {
-    comps.navic,
   },
   {
     comps.diagnos.err,
@@ -263,10 +259,14 @@ local inactive = {
     comps.vi_mode.left,
     comps.file.info,
   },
-  {},
-  {},
+  {
+    comps.vi_mode.right,
+  },
 }
-require('feline').setup({
+
+local feline = require('feline')
+
+feline.setup({
   default_bg = colors.bg,
   default_fg = colors.fg,
   components = {
@@ -275,4 +275,24 @@ require('feline').setup({
   },
   properties = properties,
   vi_mode_colors = vi_mode_colors,
+})
+
+local winbar_active = {
+  {
+    comps.vi_mode.left,
+    comps.navic,
+  },
+  {
+    comps.lsp.name,
+    comps.vi_mode.right,
+  },
+}
+
+local winbar_inactive = {}
+
+feline.winbar.setup({
+  components = {
+    active = winbar_active,
+    inactive = winbar_inactive,
+  },
 })

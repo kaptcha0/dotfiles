@@ -14,7 +14,7 @@ end
 local M = {
   bg = theme_colors.ui.bg_dim,
   fg = theme_colors.ui.fg,
-  yellow = palette_colors.winterYellow,
+  yellow = palette_colors.roninYellow,
   cyan = palette_colors.springBlue,
   blue = palette_colors.dragonBlue,
   darkblue = palette_colors.winterBlue,

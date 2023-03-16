@@ -108,6 +108,7 @@ symbol = " "
 [hostname]
 format = "@[$ssh_symbol$hostname]($style) "
 style = "cyan dimmed bold"
+ssh_only = false
 
 [java]
 symbol = " "
@@ -118,6 +119,7 @@ symbol = " "
 [localip]
 format = "[$localipv4]($style) as "
 style = "bold bright-black"
+ssh_only = false
 disabled = false
 
 [memory_usage]
@@ -157,5 +159,6 @@ style = "bold bright-black"
 
 [username]
 format = "[$user]($style)"
+show_always = true
 style_user = "cyan bold"
 style_root = "green bold"
