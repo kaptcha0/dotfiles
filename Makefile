@@ -28,5 +28,8 @@
 backup: ./gnome/ ./brew/
 	@echo "$^ updated"
 
+to_unix:
+	dos2unix ./**/*
+
 clean:
 	rm -rf ./brew/ ./gnome/
