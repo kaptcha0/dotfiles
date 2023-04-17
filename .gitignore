@@ -4,3 +4,6 @@ config.yml
 state.yml
 nvim/plugin
 zsh/cache
+fish/functions
+fish/fish_variables
+fish/completions
