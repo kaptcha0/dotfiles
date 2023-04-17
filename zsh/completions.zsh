@@ -1,6 +1,7 @@
 autoload -Uz compinit
 compinit
 
+source <(gh completion --shell zsh)
 source <(buf completion zsh)
 
 if type brew &>/dev/null

@@ -24,8 +24,6 @@ zinit snippet OMZ::plugins/sudo
 zinit ice svn blockf
 zinit snippet OMZ::plugins/docker
 zinit ice svn blockf
-zinit snippet OMZ::plugins/gh
-zinit ice svn blockf
 zinit snippet OMZ::plugins/git
 zinit ice svn blockf
 zinit snippet OMZ::plugins/fzf
@@ -52,6 +50,7 @@ zinit light hlissner/zsh-autopair
 zinit light marlonrichert/zsh-autocomplete
 zinit light zsh-users/zsh-syntax-highlighting
 
+zinit ice wait"1"
 zinit light Aloxaf/fzf-tab
 
 zinit self-update
