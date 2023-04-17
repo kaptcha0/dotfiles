@@ -502,18 +502,6 @@ var WindowManager = GObject.registerClass(
           if (!focusNodeWindow) {
             focusNodeWindow = this.findNodeWindow(this.focusMetaWindow);
           }
-          this.queueEvent({
-            name: "focus",
-            callback: () => {
-              if (!focusNodeWindow) return;
-              if (this.eventQueue.length <= 0) {
-                this.unfreezeRender();
-                this.updateTabbedFocus(focusNodeWindow);
-                this.updateStackedFocus(focusNodeWindow);
-                this.renderTree("focus-queue", true);
-              }
-            },
-          });
           break;
         case "Swap":
           if (!focusNodeWindow) return;
@@ -1384,7 +1372,6 @@ var WindowManager = GObject.registerClass(
                       name: "raise-float",
                       callback: () => {
                         this.renderTree("raise-float-queue");
-                        focusNodeWindow.nodeValue.raise();
                       },
                     });
                   }
@@ -1603,7 +1590,7 @@ var WindowManager = GObject.registerClass(
 
               // Ensure that the workspace tiling is honored
               if (this.isActiveWindowWorkspaceTiled(metaWindow)) {
-                if (!global.display.get_grab_op() === Meta.GrabOp.WINDOW_BASE)
+                if (!this.grabOp === Meta.GrabOp.WINDOW_BASE)
                   this.updateTabbedFocus(existNodeWindow);
                 this.updateStackedFocus(existNodeWindow);
               } else {
@@ -2140,6 +2127,7 @@ var WindowManager = GObject.registerClass(
     }
 
     _handleGrabOpBegin(_display, _metaWindow, grabOp) {
+      this.grabOp = grabOp;
       this.trackCurrentMonWs();
       let focusMetaWindow = this.focusMetaWindow;
 
@@ -2215,7 +2203,7 @@ var WindowManager = GObject.registerClass(
 
     _handleResizing(focusNodeWindow) {
       if (!focusNodeWindow) return;
-      let grabOp = global.display.get_grab_op();
+      let grabOp = this.grabOp;
       let initGrabOp = focusNodeWindow.initGrabOp;
       let direction = Utils.directionFromGrab(grabOp);
       let orientation = Utils.orientationFromGrab(grabOp);

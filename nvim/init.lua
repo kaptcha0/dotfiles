@@ -31,7 +31,7 @@ vim.cmd([[filetype plugin indent on]])
 
 vim.o.ai = true -- Auto indent
 vim.o.si = true -- Smart indent
-vim.o.nowrap = true
+vim.o.wrap = false
 vim.o.backspace = 'start,eol,indent'
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'

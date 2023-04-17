@@ -26,7 +26,6 @@ zplug "jirutka/zsh-shift-select"
 
 zplug "hlissner/zsh-autopair", defer:2
 zplug "marlonrichert/zsh-autocomplete"
-zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
 
 if ! zplug check --verbose; then

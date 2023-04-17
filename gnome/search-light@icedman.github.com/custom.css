@@ -1,0 +1,5 @@
+
+#searchLight {
+  background: rgba(0,0,0,0.3);}
+#searchLightBox > StEntry, #searchLightBox > StEntry:focus { font-size: 16pt !important; }
+/* empty */

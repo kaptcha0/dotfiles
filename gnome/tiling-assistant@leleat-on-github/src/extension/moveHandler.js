@@ -24,6 +24,8 @@ var Handler = class TilingMoveHandler {
 
         this._displaySignals = [];
         const g1Id = global.display.connect('grab-op-begin', (src, window, grabOp) => {
+            grabOp &= ~1024; // META_GRAB_OP_WINDOW_FLAG_UNCONSTRAINED
+
             if (window && moveOps.includes(grabOp))
                 this._onMoveStarted(window, grabOp);
         });
@@ -427,7 +429,7 @@ var Handler = class TilingMoveHandler {
     }
 
     _restoreSizeAndRestartGrab(window, px, py, grabOp) {
-        global.display.end_grab_op(global.get_current_time());
+        global.display.end_grab_op?.(global.get_current_time());
 
         const rect = window.get_frame_rect();
         const x = px - rect.x;
@@ -438,13 +440,19 @@ var Handler = class TilingMoveHandler {
             xAnchor: px,
             skipAnim: this._wasMaximizedOnStart
         });
+
+        if (!global.display.begin_grab_op) {
+            this._onMoveStarted(window, grabOp);
+            return;
+        }
+
         // untiledRect is null, if the window was maximized via non-extension
         // way (dblc-ing the titlebar, maximize button...). So just get the
         // restored window's rect directly... doesn't work on Wayland because
-        // get_frame_rect() doesnt return the correct size immediately after
+        // get_frame_rect() doesn't return the correct size immediately after
         // calling untile()... in that case just guess a random size
         if (!untiledRect && !Meta.is_wayland_compositor())
-            untiledRect = new Rect(rect);
+            untiledRect = new Rect(window.get_frame_rect());
 
         const untiledWidth = untiledRect?.width ?? 1000;
         const postUntileRect = window.get_frame_rect();
@@ -486,7 +494,8 @@ var Handler = class TilingMoveHandler {
                     // Only update the monitorNr, if the latest timer timed out.
                     if (timerId === this._latestMonitorLockTimerId) {
                         this._monitorNr = global.display.get_current_monitor();
-                        if (global.display.get_grab_op() === grabOp) // !
+                        if (global.display.is_grabbed?.() ||
+                            global.display.get_grab_op?.() === grabOp) // !
                             this._edgeTilingPreview(window, grabOp);
                     }
 
@@ -666,8 +675,8 @@ var Handler = class TilingMoveHandler {
         if (splitHorizontally || splitVertically) {
             const idx = atTop && !atRight || atLeft ? 0 : 1;
             const size = splitHorizontally ? hoveredRect.width : hoveredRect.height;
-            const orienation = splitHorizontally ? Orientation.V : Orientation.H;
-            this._tileRect = hoveredRect.getUnitAt(idx, size / 2, orienation);
+            const orientation = splitHorizontally ? Orientation.V : Orientation.H;
+            this._tileRect = hoveredRect.getUnitAt(idx, size / 2, orientation);
         } else {
             this._tileRect = hoveredRect.copy();
         }
@@ -696,7 +705,7 @@ var Handler = class TilingMoveHandler {
     }
 
     /**
-     * Similiar to _adaptiveTilingPreviewSingle(). But it's activated by hovering
+     * Similar to _adaptiveTilingPreviewSingle(). But it's activated by hovering
      * the very edges of a tiled window. And instead of affecting just 1 window
      * it can possibly re-tile multiple windows. A tiled window will be affected,
      * if it aligns with the edge that is being hovered. It's probably easier
@@ -709,7 +718,7 @@ var Handler = class TilingMoveHandler {
      *      `hoveredRect` is hovered.
      */
     _adaptiveTilingPreviewGroup(window, hoveredRect, topTileGroup, hovered) {
-        // Find the smallest window that will be affected and use it to calcuate
+        // Find the smallest window that will be affected and use it to calculate
         // the sizes of the preview. Determine the new tileRects for the rest
         // of the tileGroup via Rect.minus().
         const smallestWindow = topTileGroup.reduce((smallest, w) => {

@@ -220,14 +220,14 @@ function __classPrivateFieldSet(receiver, state, value, kind, f) {
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 }
 
-const GObject$8 = imports.gi.GObject;
+const GObject$9 = imports.gi.GObject;
 const Signals$2 = imports.signals;
 function registerGObjectClass(target) {
     if (Object.prototype.hasOwnProperty.call(target, 'metaInfo')) {
-        return GObject$8.registerClass(target.metaInfo, target);
+        return GObject$9.registerClass(target.metaInfo, target);
     }
     else {
-        return GObject$8.registerClass(target);
+        return GObject$9.registerClass(target);
     }
 }
 class WithSignals {
@@ -409,10 +409,11 @@ RippleBackground = __decorate([
 ], RippleBackground);
 
 const Clutter$u = imports.gi.Clutter;
-const GObject$7 = imports.gi.GObject;
+const GObject$8 = imports.gi.GObject;
 const Meta$a = imports.gi.Meta;
 const St$p = imports.gi.St;
-const Me$H = imports.misc.extensionUtils.getCurrentExtension();
+const Me$J = imports.misc.extensionUtils.getCurrentExtension();
+const beforeGnome44$1 = compareVersions(gnomeVersionNumber, parseVersion('44.0')) < 0;
 let MatButton = class MatButton extends St$p.Widget {
     _init(params) {
         const isPrimary = params.primary;
@@ -450,10 +451,10 @@ let MatButton = class MatButton extends St$p.Widget {
         clickAction.connect('long-press', this._onLongPress.bind(this));
         this.add_action(clickAction);
         this.connect('enter-event', () => {
-            Me$H.msThemeManager.setCursor(Meta$a.Cursor.POINTING_HAND);
+            Me$J.msThemeManager.setCursor(Meta$a.Cursor.POINTING_HAND);
         });
         this.connect('leave-event', () => {
-            Me$H.msThemeManager.setCursor(Meta$a.Cursor.DEFAULT);
+            Me$J.msThemeManager.setCursor(Meta$a.Cursor.DEFAULT);
         });
     }
     _onLongPress(action, actor, state) {
@@ -461,7 +462,7 @@ let MatButton = class MatButton extends St$p.Widget {
             const event = action.event;
             if (this._longPressLater)
                 return true;
-            this._longPressLater = Meta$a.later_add(Meta$a.LaterType.BEFORE_REDRAW, () => {
+            const callback = () => {
                 delete this._longPressLater;
                 if (this.clicked) {
                     delete this.clicked;
@@ -470,7 +471,12 @@ let MatButton = class MatButton extends St$p.Widget {
                 action.release();
                 this.emit('drag-start', event);
                 return false;
-            });
+            };
+            this._longPressLater = beforeGnome44$1
+                ? Meta$a.later_add(Meta$a.LaterType.BEFORE_REDRAW, callback)
+                : global.compositor
+                    .get_laters()
+                    .add(Meta$a.LaterType.BEFORE_REDRAW, callback);
         }
         if (state == Clutter$u.LongPressState.ACTIVATE) {
             this.emit('secondary-action');
@@ -512,7 +518,7 @@ MatButton.metaInfo = {
     GTypeName: 'MatButton',
     Signals: {
         clicked: {
-            param_types: [GObject$7.TYPE_INT],
+            param_types: [GObject$8.TYPE_INT],
         },
         'primary-action': {},
         'secondary-action': {},
@@ -564,30 +570,30 @@ const PropagateClickAction = (() => {
 })();
 
 const St$o = imports.gi.St;
-const Me$G = imports.misc.extensionUtils.getCurrentExtension();
+const Me$I = imports.misc.extensionUtils.getCurrentExtension();
 let MatPanelButton = class MatPanelButton extends MatButton {
     _init(params = {}) {
         super._init(params);
         this.add_style_class_name('mat-panel-button');
-        const panelSizeSignal = Me$G.msThemeManager.connect('panel-size-changed', () => {
+        const panelSizeSignal = Me$I.msThemeManager.connect('panel-size-changed', () => {
             this.queue_relayout();
         });
         this.connect('destroy', () => {
-            Me$G.msThemeManager.disconnect(panelSizeSignal);
+            Me$I.msThemeManager.disconnect(panelSizeSignal);
         });
     }
     vfunc_get_preferred_width(_forHeight) {
         const { scaleFactor } = St$o.ThemeContext.get_for_stage(global.stage);
         return [
-            Me$G.msThemeManager.getPanelSizeNotScaled() * scaleFactor,
-            Me$G.msThemeManager.getPanelSizeNotScaled() * scaleFactor,
+            Me$I.msThemeManager.getPanelSizeNotScaled() * scaleFactor,
+            Me$I.msThemeManager.getPanelSizeNotScaled() * scaleFactor,
         ];
     }
     vfunc_get_preferred_height(_forWidth) {
         const { scaleFactor } = St$o.ThemeContext.get_for_stage(global.stage);
         return [
-            Me$G.msThemeManager.getPanelSizeNotScaled() * scaleFactor,
-            Me$G.msThemeManager.getPanelSizeNotScaled() * scaleFactor,
+            Me$I.msThemeManager.getPanelSizeNotScaled() * scaleFactor,
+            Me$I.msThemeManager.getPanelSizeNotScaled() * scaleFactor,
         ];
     }
 };
@@ -598,7 +604,7 @@ MatPanelButton = __decorate([
     registerGObjectClass
 ], MatPanelButton);
 
-const Me$F = imports.misc.extensionUtils.getCurrentExtension();
+const Me$H = imports.misc.extensionUtils.getCurrentExtension();
 const Clutter$t = imports.gi.Clutter;
 class MsManager extends WithSignals {
     constructor() {
@@ -627,28 +633,28 @@ class MsManager extends WithSignals {
                     signal.from.disconnect(signal.id);
                 }
                 catch (error) {
-                    Me$F.log(`Failed to disconnect signal ${signal.id} from ${signal.from} ${signal.from.constructor.name} ${signal.from.toString()}  `);
+                    Me$H.log(`Failed to disconnect signal ${signal.id} from ${signal.from} ${signal.from.constructor.name} ${signal.from.toString()}  `);
                 }
             }
         });
     }
 }
 
-const Me$E = imports.misc.extensionUtils.getCurrentExtension();
+const Me$G = imports.misc.extensionUtils.getCurrentExtension();
 function logAsyncException(e) {
     if (e instanceof Error) {
-        Me$E.log(`\nException when running asynchronous function:\n${e}\n${e.stack}\n`);
+        Me$G.log(`\nException when running asynchronous function:\n${e}\n${e.stack}\n`);
     }
     else {
-        Me$E.logWithStackTrace(`\nException when running asynchronous function: ${e}\n`);
+        Me$G.logWithStackTrace(`\nException when running asynchronous function: ${e}\n`);
     }
 }
 function mslog(...args) {
-    Me$E.log(...args);
+    Me$G.log(...args);
 }
 
 const GLib$m = imports.gi.GLib;
-const Me$D = imports.misc.extensionUtils.getCurrentExtension();
+const Me$F = imports.misc.extensionUtils.getCurrentExtension();
 class Async {
     static addTimeout(priority, interval, func) {
         const timeoutId = GLib$m.timeout_add(priority, interval, () => {
@@ -718,7 +724,7 @@ class AsyncDebounce {
 
 const GLib$l = imports.gi.GLib;
 const { main: Main$l } = imports.ui;
-const Me$C = imports.misc.extensionUtils.getCurrentExtension();
+const Me$E = imports.misc.extensionUtils.getCurrentExtension();
 const range = (to) => Array(to)
     .fill(0)
     .map((_, i) => i);
@@ -780,7 +786,7 @@ const reparentActor = (actor, parent, first = false) => {
     const currentParent = actor.get_parent();
     if (currentParent === parent)
         return;
-    Me$C.reparentInProgress = true;
+    Me$E.reparentInProgress = true;
     const restoreFocusTo = actor.has_key_focus()
         ? actor
         : isParentOfActor(actor, global.stage.key_focus)
@@ -801,16 +807,16 @@ const reparentActor = (actor, parent, first = false) => {
     if (restoreFocusTo) {
         restoreFocusTo.grab_key_focus();
     }
-    Me$C.reparentInProgress = false;
+    Me$E.reparentInProgress = false;
 };
 const InfinityTo0 = (number) => {
     return Math.abs(number) === Infinity ? 0 : number;
 };
 
 const Gio$g = imports.gi.Gio;
-const Me$B = imports.misc.extensionUtils.getCurrentExtension();
+const Me$D = imports.misc.extensionUtils.getCurrentExtension();
 const getSettings = (key) => {
-    const schema = Gio$g.SettingsSchemaSource.new_from_directory(Me$B.dir.get_child('schemas').get_path(), Gio$g.SettingsSchemaSource.get_default(), false).lookup(Me$B.metadata[key], true);
+    const schema = Gio$g.SettingsSchemaSource.new_from_directory(Me$D.dir.get_child('schemas').get_path(), Gio$g.SettingsSchemaSource.get_default(), false).lookup(Me$D.metadata[key], true);
     if (schema !== null) {
         return new Gio$g.Settings({
             settings_schema: schema,
@@ -828,7 +834,7 @@ const GLib$k = imports.gi.GLib;
 const Meta$9 = imports.gi.Meta;
 const St$n = imports.gi.St;
 const { main: Main$k } = imports.ui;
-const Me$A = imports.misc.extensionUtils.getCurrentExtension();
+const Me$C = imports.misc.extensionUtils.getCurrentExtension();
 const VerticalPanelPositionEnum = {
     LEFT: 0,
     RIGHT: 1,
@@ -869,7 +875,7 @@ class MsThemeManager extends MsManager {
         this.themeContext = St$n.ThemeContext.get_for_stage(global.stage);
         this.theme = this.themeContext.get_theme();
         this.themeSettings = getSettings('theme');
-        this.themeFile = Gio$f.file_new_for_path(`${GLib$k.get_user_cache_dir()}/${Me$A.uuid}-theme.css`);
+        this.themeFile = Gio$f.file_new_for_path(`${GLib$k.get_user_cache_dir()}/${Me$C.uuid}-theme.css`);
         this.themeValue = this.themeSettings.get_string('theme');
         this.primary = this.themeSettings.get_string('primary-color');
         this.primaryColor = parseCoglColor(this.primary);
@@ -882,7 +888,7 @@ class MsThemeManager extends MsManager {
             return global.display.set_cursor(this.metaCursor);
         }, 16, { leading: false });
         this.observe(this.themeContext, 'changed', () => {
-            Me$A.log('theme changed');
+            Me$C.log('theme changed');
             this.theme = this.themeContext.get_theme();
             if (Main$k.layoutManager.uiGroup.has_style_class_name('no-theme')) {
                 Main$k.layoutManager.uiGroup.remove_style_class_name('no-theme');
@@ -964,9 +970,8 @@ class MsThemeManager extends MsManager {
     get clockAppLauncher() {
         return this.themeSettings.get_boolean('clock-app-launcher');
     }
-    getPanelSize(monitorIndex) {
-        return (this.themeSettings.get_int('panel-size') *
-            global.display.get_monitor_scale(monitorIndex));
+    getPanelSize() {
+        return this.getScaledSize(this.themeSettings.get_int('panel-size'));
     }
     getPanelSizeNotScaled() {
         return this.themeSettings.get_int('panel-size');
@@ -1029,7 +1034,7 @@ class MsThemeManager extends MsManager {
         });
     }
     async buildThemeStylesheetToFile(file) {
-        const originThemeFile = Gio$f.file_new_for_path(`${Me$A.path}/style-${this.themeValue}-theme.css`);
+        const originThemeFile = Gio$f.file_new_for_path(`${Me$C.path}/style-${this.themeValue}-theme.css`);
         let content = await this.readFileContent(originThemeFile);
         content = content.replace(/#3f51b5/g, this.primary);
         content = content.replace(/0.876/g, `${this.panelOpacity / 100}`);
@@ -1058,7 +1063,7 @@ class MsThemeManager extends MsManager {
     }
     destroy() {
         super.destroy();
-        if (!Me$A.locked) {
+        if (!Me$C.locked) {
             this.unloadStylesheet();
         }
     }
@@ -1092,10 +1097,10 @@ function getExtensionSettings(extensionUUID) {
 const Clutter$s = imports.gi.Clutter;
 const Gio$d = imports.gi.Gio;
 const GnomeDesktop$2 = imports.gi.GnomeDesktop;
-const Shell$b = imports.gi.Shell;
+const Shell$a = imports.gi.Shell;
 const St$m = imports.gi.St;
 const { dateMenu, main: Main$i, panel } = imports.ui;
-const Me$z = imports.misc.extensionUtils.getCurrentExtension();
+const Me$B = imports.misc.extensionUtils.getCurrentExtension();
 const isBeforeGnome43 = compareVersions(gnomeVersionNumber, parseVersion('43.0')) < 0;
 let MsStatusArea = class MsStatusArea extends Clutter$s.Actor {
     _init() {
@@ -1113,9 +1118,9 @@ let MsStatusArea = class MsStatusArea extends Clutter$s.Actor {
         this.rightBoxActors = [];
         this.dateMenu = this.gnomeShellPanel.statusArea.dateMenu;
         this.enable();
-        const panelSizeSignal = Me$z.msThemeManager.connect('panel-size-changed', () => this.onPanelSizeChanged());
+        const panelSizeSignal = Me$B.msThemeManager.connect('panel-size-changed', () => this.onPanelSizeChanged());
         this.connect('destroy', () => {
-            Me$z.msThemeManager.disconnect(panelSizeSignal);
+            Me$B.msThemeManager.disconnect(panelSizeSignal);
             this.restoreAppIndicatorSettings();
         });
         this.onPanelSizeChanged();
@@ -1262,7 +1267,7 @@ let MsStatusArea = class MsStatusArea extends Clutter$s.Actor {
         });
     }
     iconSize() {
-        return Math.max(16.0, Math.round(Me$z.msThemeManager.getPanelSizeNotScaled() / 3));
+        return Math.max(16.0, Math.round(Me$B.msThemeManager.getPanelSizeNotScaled() / 3));
     }
     recursivelySetProperties(actor, controlledByMS) {
         if (actor instanceof St$m.BoxLayout) {
@@ -1285,7 +1290,7 @@ let MsStatusArea = class MsStatusArea extends Clutter$s.Actor {
                 actor.set_style(null);
             }
         }
-        if (actor instanceof Shell$b.TrayIcon) {
+        if (actor instanceof Shell$a.TrayIcon) {
             if (controlledByMS) {
                 const iconSize = this.iconSize();
                 actor.marginTop = Math.round(iconSize * 0.5);
@@ -1317,7 +1322,7 @@ let MsStatusArea = class MsStatusArea extends Clutter$s.Actor {
                 menu._boxPointer.oldArrowSideFunction =
                     menu._boxPointer._calculateArrowSide;
                 menu._boxPointer._calculateArrowSide = function () {
-                    return Me$z.msThemeManager.verticalPanelPosition ===
+                    return Me$B.msThemeManager.verticalPanelPosition ===
                         VerticalPanelPositionEnum.LEFT
                         ? St$m.Side.LEFT
                         : St$m.Side.RIGHT;
@@ -1337,7 +1342,7 @@ let MsStatusArea = class MsStatusArea extends Clutter$s.Actor {
         }
     }
     disable() {
-        Me$z.logFocus('disable statusArea');
+        Me$B.logFocus('disable statusArea');
         this.unVerticaliseDateMenuButton();
         this.restorePanelMenuSide();
         this.restorePanelActors();
@@ -1367,14 +1372,14 @@ let MsDateMenuBox = class MsDateMenuBox extends St$m.Widget {
         this._wallClock = new GnomeDesktop$2.WallClock({ time_only: true });
         this.clockLabel = new St$m.Label({});
         this.notificationIcon = new St$m.Icon({
-            gicon: Gio$d.icon_new_for_string(`${Me$z.path}/assets/icons/bell-symbolic.svg`),
+            gicon: Gio$d.icon_new_for_string(`${Me$B.path}/assets/icons/bell-symbolic.svg`),
         });
         this.notificationIconRing = new St$m.Icon({
             style_class: 'primary',
-            gicon: Gio$d.icon_new_for_string(`${Me$z.path}/assets/icons/bell-ring-symbolic.svg`),
+            gicon: Gio$d.icon_new_for_string(`${Me$B.path}/assets/icons/bell-ring-symbolic.svg`),
         });
         this.dndIcon = new St$m.Icon({
-            gicon: Gio$d.icon_new_for_string(`${Me$z.path}/assets/icons/bell-off-symbolic.svg`),
+            gicon: Gio$d.icon_new_for_string(`${Me$B.path}/assets/icons/bell-off-symbolic.svg`),
         });
         this._settings = new Gio$d.Settings({
             schema_id: 'org.gnome.desktop.notifications',
@@ -1383,14 +1388,14 @@ let MsDateMenuBox = class MsDateMenuBox extends St$m.Widget {
         this.iconDisplay.add_child(this.notificationIcon);
         this.iconDisplay.add_child(this.notificationIconRing);
         this.iconDisplay.add_child(this.dndIcon);
-        if (Me$z.msThemeManager.clockHorizontal) {
+        if (Me$B.msThemeManager.clockHorizontal) {
             this.add_child(this.iconDisplay);
         }
         else {
             this.add_child(this.clockLabel);
         }
-        const clockHorizontalSignal = Me$z.msThemeManager.connect('clock-horizontal-changed', () => {
-            if (Me$z.msThemeManager.clockHorizontal) {
+        const clockHorizontalSignal = Me$B.msThemeManager.connect('clock-horizontal-changed', () => {
+            if (Me$B.msThemeManager.clockHorizontal) {
                 this.remove_child(this.clockLabel);
                 this.add_child(this.iconDisplay);
             }
@@ -1405,7 +1410,7 @@ let MsDateMenuBox = class MsDateMenuBox extends St$m.Widget {
         this.dateMenuSignal = this._wallClock.connect('notify::clock', this.updateClock.bind(this));
         this.indicatorSignal = this.indicatorActor.connect('notify::visible', this.updateVisibility.bind(this));
         this.connect('destroy', () => {
-            Me$z.msThemeManager.disconnect(clockHorizontalSignal);
+            Me$B.msThemeManager.disconnect(clockHorizontalSignal);
             this.indicatorActor.disconnect(this.indicatorSignal);
             this._wallClock.disconnect(this.dateMenuSignal);
             delete this._wallClock;
@@ -1426,7 +1431,7 @@ let MsDateMenuBox = class MsDateMenuBox extends St$m.Widget {
     updateVisibility() {
         const doNotDisturb = !this._settings.get_boolean('show-banners');
         if (this.indicatorActor.visible) {
-            if (Me$z.msThemeManager.clockHorizontal) {
+            if (Me$B.msThemeManager.clockHorizontal) {
                 if (doNotDisturb) {
                     this.dndIcon.show();
                     this.notificationIconRing.hide();
@@ -1450,7 +1455,7 @@ let MsDateMenuBox = class MsDateMenuBox extends St$m.Widget {
             }
         }
         else {
-            if (Me$z.msThemeManager.clockHorizontal) {
+            if (Me$B.msThemeManager.clockHorizontal) {
                 this.notificationIcon.show();
                 this.notificationIconRing.hide();
                 this.dndIcon.hide();
@@ -1493,7 +1498,7 @@ function set_style_class(widget, style_class, enabled) {
 }
 
 const Util$2 = imports.misc.util;
-const Me$y = imports.misc.extensionUtils.getCurrentExtension();
+const Me$A = imports.misc.extensionUtils.getCurrentExtension();
 const updateTitleBarVisibility = function (metaWindow) {
     var _a, _b;
     const msWorkspaceIsInFloatLayout = (_b = ((_a = metaWindow.msWindow) === null || _a === void 0 ? void 0 : _a.msWorkspace.layout.state.key) === 'float') !== null && _b !== void 0 ? _b : false;
@@ -1521,7 +1526,7 @@ const setTitleBarVisibility = function (metaWindow, visible) {
         ]);
     }
     catch (e) {
-        Me$y.logFocus('xprop', e);
+        Me$A.logFocus('xprop', e);
     }
     metaWindow.titleBarVisible = visible;
 };
@@ -1533,10 +1538,10 @@ const getWindowXID = function (win) {
 
 const Clutter$q = imports.gi.Clutter;
 const GLib$j = imports.gi.GLib;
-const GObject$6 = imports.gi.GObject;
+const GObject$7 = imports.gi.GObject;
 const St$l = imports.gi.St;
 const Animation = imports.ui.animation;
-const Me$x = imports.misc.extensionUtils.getCurrentExtension();
+const Me$z = imports.misc.extensionUtils.getCurrentExtension();
 let AppPlaceholder = class AppPlaceholder extends St$l.Widget {
     _init(icon, textLabel) {
         super._init({
@@ -1678,7 +1683,7 @@ AppPlaceholder.metaInfo = {
     GTypeName: 'AppPlaceholder',
     Signals: {
         activated: {
-            param_types: [GObject$6.TYPE_INT],
+            param_types: [GObject$7.TYPE_INT],
             accumulator: 0.0,
         },
     },
@@ -1687,11 +1692,11 @@ AppPlaceholder = __decorate([
     registerGObjectClass
 ], AppPlaceholder);
 
-const Me$w = imports.misc.extensionUtils.getCurrentExtension();
+const Me$y = imports.misc.extensionUtils.getCurrentExtension();
 const Clutter$p = imports.gi.Clutter;
 const GLib$i = imports.gi.GLib;
 const { PRIORITY_DEFAULT, SOURCE_CONTINUE, SOURCE_REMOVE } = imports.gi.GLib;
-const GObject$5 = imports.gi.GObject;
+const GObject$6 = imports.gi.GObject;
 const Meta$8 = imports.gi.Meta;
 const { WindowTracker } = imports.gi.Shell;
 const St$k = imports.gi.St;
@@ -1826,7 +1831,7 @@ let MsWindow = class MsWindow extends Clutter$p.Actor {
     }
     set persistent(boolean) {
         this._persistent = boolean;
-        Me$w.stateManager.stateChanged();
+        Me$y.stateManager.stateChanged();
     }
     trackAppChanges() {
         assert(this.appSignalId === undefined, 'Expected the signalId to be undefined');
@@ -1880,7 +1885,7 @@ let MsWindow = class MsWindow extends Clutter$p.Actor {
     }
     get dragged() {
         var _a;
-        return (((_a = Me$w.msWindowManager.msDndManager.dragInProgress) === null || _a === void 0 ? void 0 : _a.msWindow) === this);
+        return (((_a = Me$y.msWindowManager.msDndManager.dragInProgress) === null || _a === void 0 ? void 0 : _a.msWindow) === this);
     }
     get followMetaWindow() {
         if (!this.msWorkspace)
@@ -2298,7 +2303,7 @@ let MsWindow = class MsWindow extends Clutter$p.Actor {
             if (metaWindow.get_monitor() != this.msWorkspace.monitor.index) {
                 metaWindow.move_to_monitor(this.msWorkspace.monitor.index);
             }
-            const workspace = Me$w.msWorkspaceManager.getWorkspaceOfMsWorkspace(this.msWorkspace);
+            const workspace = Me$y.msWorkspaceManager.getWorkspaceOfMsWorkspace(this.msWorkspace);
             if (workspace && metaWindow.get_workspace() != workspace) {
                 metaWindow.change_workspace(workspace);
             }
@@ -2385,7 +2390,7 @@ let MsWindow = class MsWindow extends Clutter$p.Actor {
     }
     grab_key_focus() {
         this.focusDialogs();
-        if (!Me$w.msWindowManager.msFocusManager.requestFocus(this))
+        if (!Me$y.msWindowManager.msFocusManager.requestFocus(this))
             return;
         if (this.metaWindow) {
             this.metaWindow.activate(global.get_current_time());
@@ -2424,7 +2429,7 @@ let MsWindow = class MsWindow extends Clutter$p.Actor {
         const isMainMetaWindow = metaWindow === state.metaWindow;
         const dialog = state.dialogs.some((dialog) => dialog.metaWindow === metaWindow);
         if (!isMainMetaWindow && !dialog) {
-            Me$w.log('Cannot find the window which was unmanaged');
+            Me$y.log('Cannot find the window which was unmanaged');
             return;
         }
         if (dialog) {
@@ -2527,7 +2532,7 @@ let MsWindow = class MsWindow extends Clutter$p.Actor {
         if (metaWindow) {
             const shouldBeHidden = !this.visible ||
                 this.get_parent() === null ||
-                Me$w.msWindowManager.msDndManager.dragInProgress;
+                Me$y.msWindowManager.msDndManager.dragInProgress;
             if (shouldBeHidden && !metaWindow.minimized) {
                 metaWindow.minimize();
             }
@@ -2558,11 +2563,11 @@ MsWindow.metaInfo = {
     GTypeName: 'MsWindow',
     Signals: {
         title_changed: {
-            param_types: [GObject$5.TYPE_STRING],
+            param_types: [GObject$6.TYPE_STRING],
             accumulator: 0,
         },
         dragged_changed: {
-            param_types: [GObject$5.TYPE_BOOLEAN],
+            param_types: [GObject$6.TYPE_BOOLEAN],
             accumulator: 0,
         },
         request_new_meta_window: {
@@ -2665,11 +2670,11 @@ class IdleDebounce {
     }
 }
 
-const Shell$a = imports.gi.Shell;
+const Shell$9 = imports.gi.Shell;
 class AppsManager {
     static getApps() {
-        const usage = Shell$a.AppUsage.get_default();
-        const appSystem = Shell$a.AppSystem.get_default();
+        const usage = Shell$9.AppUsage.get_default();
+        const appSystem = Shell$9.AppSystem.get_default();
         const appsInstalled = appSystem.get_installed().filter((appInfo) => {
             try {
                 const _ = appInfo.get_id();
@@ -2732,10 +2737,10 @@ class SignalObserver {
 
 const Clutter$n = imports.gi.Clutter;
 const GnomeDesktop$1 = imports.gi.GnomeDesktop;
-const Shell$9 = imports.gi.Shell;
+const Shell$8 = imports.gi.Shell;
 const St$j = imports.gi.St;
 const { main: Main$g } = imports.ui;
-const Me$v = imports.misc.extensionUtils.getCurrentExtension();
+const Me$x = imports.misc.extensionUtils.getCurrentExtension();
 const BUTTON_SIZE = 124;
 let MsApplicationLauncher = class MsApplicationLauncher extends St$j.Widget {
     _init(msWorkspace) {
@@ -2747,10 +2752,10 @@ let MsApplicationLauncher = class MsApplicationLauncher extends St$j.Widget {
         this.add_style_class_name('surface-darker');
         this.appListContainer = new MsApplicationButtonContainer(this.msWorkspace);
         this.initAppListContainer();
-        this.launcherChangedSignal = SignalHandle.connect(Me$v.msThemeManager, 'clock-app-launcher-changed', () => {
+        this.launcherChangedSignal = SignalHandle.connect(Me$x.msThemeManager, 'clock-app-launcher-changed', () => {
             this.restartAppListContainer();
         });
-        this.installedChangedSignal = SignalHandle.connect(Shell$9.AppSystem.get_default(), 'installed-changed', () => {
+        this.installedChangedSignal = SignalHandle.connect(Shell$8.AppSystem.get_default(), 'installed-changed', () => {
             this.restartAppListContainer();
         });
         this.connect('key-focus-in', () => {
@@ -2787,7 +2792,7 @@ let MsApplicationLauncher = class MsApplicationLauncher extends St$j.Widget {
                 this.appListContainer.highlightButton(button);
             });
             button.connect('clicked', () => {
-                Me$v.msWindowManager.openApp(app, this.msWorkspace);
+                Me$x.msWindowManager.openApp(app, this.msWorkspace);
                 this.appListContainer.reset();
             });
             this.appListContainer.addAppButton(button);
@@ -2836,7 +2841,7 @@ let MsApplicationButtonContainer = class MsApplicationButtonContainer extends St
         this.numberOfRow = 1;
         this.numberOfColumn = 1;
         this.maxIndex = 1;
-        if (Me$v.msThemeManager.clockAppLauncher) {
+        if (Me$x.msThemeManager.clockAppLauncher) {
             const clockLabel = new St$j.Label({
                 style_class: 'headline-6 text-medium-emphasis margin-right-x2',
                 y_align: Clutter$n.ActorAlign.CENTER,
@@ -2859,7 +2864,7 @@ let MsApplicationButtonContainer = class MsApplicationButtonContainer extends St
                 if (clockLabel.mapped) {
                     clockLabel.text = this._wallClock.clock;
                     const date = new Date();
-                    const dateFormat = Shell$9.util_translate_time_string(N_('%A %B %-d'));
+                    const dateFormat = Shell$8.util_translate_time_string(N_('%A %B %-d'));
                     dateLabel.text = date.toLocaleFormat(dateFormat);
                 }
             };
@@ -2944,16 +2949,13 @@ let MsApplicationButtonContainer = class MsApplicationButtonContainer extends St
         this.container.set_style('border-radius:16px;');
         this.add_child(this.container);
     }
-    get monitorScale() {
-        return global.display.get_monitor_scale(this.msWorkspace.monitor.index);
-    }
     get buttonSize() {
-        return BUTTON_SIZE * this.monitorScale;
+        return Me$x.msThemeManager.getScaledSize(BUTTON_SIZE);
     }
     reset() {
         if (this.inputContainer.get_text() === '' &&
             this.currentButtonFocused === null) {
-            this.msWorkspace.focusPrecedentTileable();
+            this.msWorkspace.focusPreviousTileableFromHistory();
             return;
         }
         if (this.inputContainer.get_text().length) {
@@ -3143,10 +3145,10 @@ let MsApplicationButtonContainer = class MsApplicationButtonContainer extends St
         this.set_allocation(box);
         const themeNode = this.get_theme_node();
         const contentBox = themeNode.get_content_box(box);
-        const containerPadding = 16 * this.monitorScale;
-        const clockHeight = (Me$v.msThemeManager.clockAppLauncher ? 64 : 0) * this.monitorScale;
-        const searchHeight = 48 * this.monitorScale;
-        const searchMargin = 24 * this.monitorScale;
+        const containerPadding = Me$x.msThemeManager.getScaledSize(16);
+        const clockHeight = Me$x.msThemeManager.getScaledSize(Me$x.msThemeManager.clockAppLauncher ? 64 : 0);
+        const searchHeight = Me$x.msThemeManager.getScaledSize(48);
+        const searchMargin = Me$x.msThemeManager.getScaledSize(24);
         const availableWidth = contentBox.get_width() - containerPadding * 2;
         const availableHeight = contentBox.get_height() -
             containerPadding * 2 -
@@ -3263,7 +3265,7 @@ let MsApplicationButton = class MsApplicationButton extends MatButton {
             });
             this.layout.add_child(this.icon);
             this.layout.add_child(this.title);
-            Me$v.tooltipManager.add(this.title, { relativeActor: this });
+            Me$x.tooltipManager.add(this.title, { relativeActor: this });
         }
         this.layout.set_style('padding:12px;');
         this.set_child(this.layout);
@@ -3277,10 +3279,10 @@ MsApplicationButton = __decorate([
 ], MsApplicationButton);
 
 const Clutter$m = imports.gi.Clutter;
-const GObject$4 = imports.gi.GObject;
+const GObject$5 = imports.gi.GObject;
 const St$i = imports.gi.St;
 const DND$2 = imports.ui.dnd;
-const Me$u = imports.misc.extensionUtils.getCurrentExtension();
+const Me$w = imports.misc.extensionUtils.getCurrentExtension();
 let ReorderableList = class ReorderableList extends Clutter$m.Actor {
     _init(vertical = false, classAccepted = []) {
         super._init({
@@ -3419,10 +3421,10 @@ ReorderableList.metaInfo = {
         'drag-start': {},
         'drag-end': {},
         'actor-moved': {
-            param_types: [Clutter$m.Actor.$gtype, GObject$4.TYPE_INT],
+            param_types: [Clutter$m.Actor.$gtype, GObject$5.TYPE_INT],
         },
         'foreign-actor-inserted': {
-            param_types: [Clutter$m.Actor.$gtype, GObject$4.TYPE_INT],
+            param_types: [Clutter$m.Actor.$gtype, GObject$5.TYPE_INT],
         },
     },
 };
@@ -3462,12 +3464,12 @@ DropPlaceholder = __decorate([
 const Clutter$l = imports.gi.Clutter;
 const Gio$c = imports.gi.Gio;
 const GLib$g = imports.gi.GLib;
-const GObject$3 = imports.gi.GObject;
-const Shell$8 = imports.gi.Shell;
+const GObject$4 = imports.gi.GObject;
+const Shell$7 = imports.gi.Shell;
 const St$h = imports.gi.St;
 const { main: Main$f, popupMenu: PopupMenu$1 } = imports.ui;
 const DND$1 = imports.ui.dnd;
-const Me$t = imports.misc.extensionUtils.getCurrentExtension();
+const Me$v = imports.misc.extensionUtils.getCurrentExtension();
 const isTileableItem = (obj) => {
     return obj instanceof TileableItem;
 };
@@ -3496,16 +3498,16 @@ let TaskBar = class TaskBar extends St$h.Widget {
         });
         this.taskButtonContainer.connect('foreign-actor-inserted', (_, actor, index) => {
             if (actor.tileable instanceof MsWindow) {
-                Me$t.msWorkspaceManager.setWindowToMsWorkspace(actor.tileable, this.msWorkspace);
+                Me$v.msWorkspaceManager.setWindowToMsWorkspace(actor.tileable, this.msWorkspace);
                 this.msWorkspace.setTileableAtIndex(actor.tileable, index);
                 this.msWorkspace.focusTileable(actor.tileable);
-                Me$t.msWorkspaceManager.stateChanged();
+                Me$v.msWorkspaceManager.stateChanged();
             }
         });
-        this.taskButtonContainer.connect('drag-start', (_, actor, foreignActor) => {
+        this.taskButtonContainer.connect('drag-start', (_, _actor, _foreignActor) => {
             this.taskActiveIndicator.hide();
         });
-        this.taskButtonContainer.connect('drag-end', (_, actor, foreignActor) => {
+        this.taskButtonContainer.connect('drag-end', (_, _actor, _foreignActor) => {
             this.taskActiveIndicator.show();
         });
         this.add_child(this.taskButtonContainer);
@@ -3529,7 +3531,7 @@ let TaskBar = class TaskBar extends St$h.Widget {
                     break;
             }
         });
-        this.tracker = Shell$8.WindowTracker.get_default();
+        this.tracker = Shell$7.WindowTracker.get_default();
         this.windowFocused = null;
         this.menuManager = panelMenuManager;
         this.onTileableListChange(this.msWorkspace.tileableList);
@@ -3572,6 +3574,7 @@ let TaskBar = class TaskBar extends St$h.Widget {
         if (!nextItem)
             return;
         nextItem.setActive(true);
+        this.queue_relayout();
     }
     getActiveItem() {
         if (this.items.length > 0) {
@@ -3596,7 +3599,7 @@ let TaskBar = class TaskBar extends St$h.Widget {
             });
         }
         else {
-            item = new IconTaskBarItem(tileable, Gio$c.icon_new_for_string(`${Me$t.path}/assets/icons/plus-symbolic.svg`));
+            item = new IconTaskBarItem(tileable, Gio$c.icon_new_for_string(`${Me$v.path}/assets/icons/plus-symbolic.svg`));
         }
         item.connect('left-clicked', (_) => {
             this.msWorkspace.focusTileable(item.tileable);
@@ -3704,7 +3707,7 @@ let TaskBarItem = class TaskBarItem extends MatButton {
         }
     }
     vfunc_get_preferred_height(_forWidth) {
-        const height = Me$t.msThemeManager.getPanelSize(this.monitor.index);
+        const height = Me$v.msThemeManager.getPanelSize();
         return [height, height];
     }
     setActive(active) {
@@ -3721,7 +3724,7 @@ TaskBarItem.metaInfo = {
     Signals: {
         'drag-dropped': {},
         'drag-over': {
-            param_types: [GObject$3.TYPE_BOOLEAN],
+            param_types: [GObject$4.TYPE_BOOLEAN],
         },
         'left-clicked': {},
         'middle-clicked': {},
@@ -3753,7 +3756,7 @@ let TileableItem = class TileableItem extends TaskBarItem {
             this.endIconContainer.set_child(this.persistentIcon);
             this.makePersistentAction.hide();
             this.unmakePersistentAction.show();
-        }, Gio$c.icon_new_for_string(`${Me$t.path}/assets/icons/pin-symbolic.svg`));
+        }, Gio$c.icon_new_for_string(`${Me$v.path}/assets/icons/pin-symbolic.svg`));
         this.unmakePersistentAction = this.menu.addAction('Unpin tab', () => {
             if (this.tileable instanceof MsWindow) {
                 this.tileable.persistent = false;
@@ -3761,17 +3764,17 @@ let TileableItem = class TileableItem extends TaskBarItem {
             this.endIconContainer.set_child(this.closeButton);
             this.makePersistentAction.show();
             this.unmakePersistentAction.hide();
-        }, Gio$c.icon_new_for_string(`${Me$t.path}/assets/icons/pin-off-symbolic.svg`));
+        }, Gio$c.icon_new_for_string(`${Me$v.path}/assets/icons/pin-off-symbolic.svg`));
         this.menu.addAction('Close', () => {
             this.emit('close-clicked');
-        }, Gio$c.icon_new_for_string(`${Me$t.path}/assets/icons/close-symbolic.svg`));
+        }, Gio$c.icon_new_for_string(`${Me$v.path}/assets/icons/close-symbolic.svg`));
         Main$f.layoutManager.uiGroup.add_actor(this.menu.actor);
         this.menu.actor.hide();
         this.title = new St$h.Label({
             style_class: 'task-bar-item-title',
             y_align: Clutter$l.ActorAlign.CENTER,
         });
-        Me$t.tooltipManager.add(this.title, { relativeActor: this });
+        Me$v.tooltipManager.add(this.title, { relativeActor: this });
         this.signalManager = new MsManager();
         this.style = getSettings('theme').get_string('taskbar-item-style');
         this.signalManager.observe(getSettings('theme'), 'changed::taskbar-item-style', () => {
@@ -3783,7 +3786,7 @@ let TileableItem = class TileableItem extends TaskBarItem {
         this.connect('destroy', this._onDestroy.bind(this));
         this.closeIcon = new St$h.Icon({
             style_class: 'task-small-icon',
-            gicon: Gio$c.icon_new_for_string(`${Me$t.path}/assets/icons/close-symbolic.svg`),
+            gicon: Gio$c.icon_new_for_string(`${Me$v.path}/assets/icons/close-symbolic.svg`),
         });
         this.closeButton = new St$h.Button({
             style_class: 'task-close-button',
@@ -3794,7 +3797,7 @@ let TileableItem = class TileableItem extends TaskBarItem {
         });
         this.persistentIcon = new St$h.Icon({
             style_class: 'task-small-icon',
-            gicon: Gio$c.icon_new_for_string(`${Me$t.path}/assets/icons/pin-symbolic.svg`),
+            gicon: Gio$c.icon_new_for_string(`${Me$v.path}/assets/icons/pin-symbolic.svg`),
         });
         this.container.add_child(this.startIconContainer);
         this.container.add_child(this.title);
@@ -3911,7 +3914,7 @@ let IconTaskBarItem = class IconTaskBarItem extends TaskBarItem {
         this.icon = new St$h.Icon({
             gicon,
             style_class: 'app-icon',
-            icon_size: Me$t.msThemeManager.getPanelSizeNotScaled() / 2,
+            icon_size: Me$v.msThemeManager.getPanelSizeNotScaled() / 2,
         });
         this.container.set_child(this.icon);
         this.tileable = tileable;
@@ -3926,7 +3929,7 @@ let IconTaskBarItem = class IconTaskBarItem extends TaskBarItem {
         return [_forHeight, _forHeight];
     }
     vfunc_allocate(box) {
-        const height = Me$t.msThemeManager.getPanelSizeNotScaled() / 2;
+        const height = Me$v.msThemeManager.getPanelSizeNotScaled() / 2;
         if (this.icon && this.icon.get_icon_size() != height) {
             this.buildIconIdle.schedule(height);
         }
@@ -3940,7 +3943,7 @@ IconTaskBarItem = __decorate([
     registerGObjectClass
 ], IconTaskBarItem);
 
-const Me$s = imports.misc.extensionUtils.getCurrentExtension();
+const Me$u = imports.misc.extensionUtils.getCurrentExtension();
 const MainCategories = [
     'Game',
     'Development',
@@ -3968,7 +3971,7 @@ class MsWorkspaceCategory {
     forceCategory(category) {
         this.forcedCategory = category;
         this.refreshCategory();
-        Me$s.stateManager.stateChanged();
+        Me$u.stateManager.stateChanged();
     }
     refreshCategory() {
         this.category = this.determineCategory();
@@ -4027,11 +4030,11 @@ class MsWorkspaceCategory {
 
 const Clutter$k = imports.gi.Clutter;
 const Gio$b = imports.gi.Gio;
-const GObject$2 = imports.gi.GObject;
+const GObject$3 = imports.gi.GObject;
 const St$g = imports.gi.St;
 const { main: Main$e, popupMenu: popupMenu$1 } = imports.ui;
 const DND = imports.ui.dnd;
-const Me$r = imports.misc.extensionUtils.getCurrentExtension();
+const Me$t = imports.misc.extensionUtils.getCurrentExtension();
 let WorkspaceList = class WorkspaceList extends St$g.Widget {
     _init() {
         super._init({
@@ -4042,7 +4045,7 @@ let WorkspaceList = class WorkspaceList extends St$g.Widget {
         this._delegate = this;
         this.connect('destroy', this._onDestroy.bind(this));
         this.msWorkspaceButtonMap = new Map();
-        this.msWorkspaceManager = Me$r.msWorkspaceManager;
+        this.msWorkspaceManager = Me$t.msWorkspaceManager;
         this.menuManager = new popupMenu$1.PopupMenuManager(this);
         this.buttonList = new ReorderableList(true);
         this.buttonList.connect('actor-moved', (_, actor, index) => {
@@ -4050,8 +4053,8 @@ let WorkspaceList = class WorkspaceList extends St$g.Widget {
         });
         this.add_child(this.buttonList);
         this.workspaceActiveIndicator = new WorkspaceActiveIndicator();
-        const panelSizeSignal = Me$r.msThemeManager.connect('panel-size-changed', () => {
-            this.workspaceActiveIndicator.set_height(Me$r.msThemeManager.getPanelSize(Main$e.layoutManager.primaryIndex));
+        const panelSizeSignal = Me$t.msThemeManager.connect('panel-size-changed', () => {
+            this.workspaceActiveIndicator.set_height(Me$t.msThemeManager.getPanelSize());
             this.queue_relayout();
         });
         this.add_child(this.workspaceActiveIndicator);
@@ -4078,7 +4081,7 @@ let WorkspaceList = class WorkspaceList extends St$g.Widget {
             }
         });
         this.connect('destroy', () => {
-            Me$r.msThemeManager.disconnect(panelSizeSignal);
+            Me$t.msThemeManager.disconnect(panelSizeSignal);
         });
     }
     buildButtons() {
@@ -4141,8 +4144,8 @@ let WorkspaceList = class WorkspaceList extends St$g.Widget {
     }
     vfunc_get_preferred_width(_forHeight) {
         return [
-            Me$r.msThemeManager.getPanelSize(Main$e.layoutManager.primaryIndex),
-            Me$r.msThemeManager.getPanelSize(Main$e.layoutManager.primaryIndex),
+            Me$t.msThemeManager.getPanelSize(),
+            Me$t.msThemeManager.getPanelSize(),
         ];
     }
     _onDestroy() {
@@ -4164,7 +4167,7 @@ let WorkspaceButton = class WorkspaceButton extends MatButton {
         this.workspaceButtonIcon = workspaceButtonIcon;
         this._delegate = this;
         this.menu = this.buildMenu();
-        const panelSizeSignal = Me$r.msThemeManager.connect('panel-size-changed', () => {
+        const panelSizeSignal = Me$t.msThemeManager.connect('panel-size-changed', () => {
             this.queue_relayout();
         });
         this.connect('primary-action', () => {
@@ -4183,7 +4186,7 @@ let WorkspaceButton = class WorkspaceButton extends MatButton {
         this.connect('destroy', () => {
             this.menu.menu.destroy();
             this.menu.disconnectSignals();
-            Me$r.msThemeManager.disconnect(panelSizeSignal);
+            Me$t.msThemeManager.disconnect(panelSizeSignal);
         });
         this.mouseData = {
             pressed: false,
@@ -4201,34 +4204,34 @@ let WorkspaceButton = class WorkspaceButton extends MatButton {
         rootMenu.actor.add_style_class_name('panel-menu');
         rootMenu.addMenuItem(new popupMenu$1.PopupSeparatorMenuItem(_('Panel icons style')));
         const panelIconStyleHybridRadio = rootMenu.addAction(_('Hybrid'), () => {
-            Me$r.msThemeManager.panelIconStyle = PanelIconStyleEnum.HYBRID;
-        }, Gio$b.icon_new_for_string(`${Me$r.path}/assets/icons/radiobox-${Me$r.msThemeManager.panelIconStyle ===
+            Me$t.msThemeManager.panelIconStyle = PanelIconStyleEnum.HYBRID;
+        }, Gio$b.icon_new_for_string(`${Me$t.path}/assets/icons/radiobox-${Me$t.msThemeManager.panelIconStyle ===
             PanelIconStyleEnum.HYBRID
             ? 'marked'
             : 'blank'}-symbolic.svg`));
         const panelIconStyleCategoryRadio = rootMenu.addAction(_('Categories only'), () => {
-            Me$r.msThemeManager.panelIconStyle = PanelIconStyleEnum.CATEGORY;
-        }, Gio$b.icon_new_for_string(`${Me$r.path}/assets/icons/radiobox-${Me$r.msThemeManager.panelIconStyle ===
+            Me$t.msThemeManager.panelIconStyle = PanelIconStyleEnum.CATEGORY;
+        }, Gio$b.icon_new_for_string(`${Me$t.path}/assets/icons/radiobox-${Me$t.msThemeManager.panelIconStyle ===
             PanelIconStyleEnum.CATEGORY
             ? 'marked'
             : 'blank'}-symbolic.svg`));
         const panelIconStyleApplicationRadio = rootMenu.addAction(_('Applications preview'), () => {
-            Me$r.msThemeManager.panelIconStyle =
+            Me$t.msThemeManager.panelIconStyle =
                 PanelIconStyleEnum.APPLICATION;
-        }, Gio$b.icon_new_for_string(`${Me$r.path}/assets/icons/radiobox-${Me$r.msThemeManager.panelIconStyle ===
+        }, Gio$b.icon_new_for_string(`${Me$t.path}/assets/icons/radiobox-${Me$t.msThemeManager.panelIconStyle ===
             PanelIconStyleEnum.APPLICATION
             ? 'marked'
             : 'blank'}-symbolic.svg`));
-        const iconStyleSignal = Me$r.msThemeManager.connect('panel-icon-style-changed', () => {
-            assertNotNull(panelIconStyleHybridRadio._icon).set_gicon(Gio$b.icon_new_for_string(`${Me$r.path}/assets/icons/radiobox-${Me$r.msThemeManager.panelIconStyle ===
+        const iconStyleSignal = Me$t.msThemeManager.connect('panel-icon-style-changed', () => {
+            assertNotNull(panelIconStyleHybridRadio._icon).set_gicon(Gio$b.icon_new_for_string(`${Me$t.path}/assets/icons/radiobox-${Me$t.msThemeManager.panelIconStyle ===
                 PanelIconStyleEnum.HYBRID
                 ? 'marked'
                 : 'blank'}-symbolic.svg`));
-            assertNotNull(panelIconStyleCategoryRadio._icon).set_gicon(Gio$b.icon_new_for_string(`${Me$r.path}/assets/icons/radiobox-${Me$r.msThemeManager.panelIconStyle ===
+            assertNotNull(panelIconStyleCategoryRadio._icon).set_gicon(Gio$b.icon_new_for_string(`${Me$t.path}/assets/icons/radiobox-${Me$t.msThemeManager.panelIconStyle ===
                 PanelIconStyleEnum.CATEGORY
                 ? 'marked'
                 : 'blank'}-symbolic.svg`));
-            assertNotNull(panelIconStyleApplicationRadio._icon).set_gicon(Gio$b.icon_new_for_string(`${Me$r.path}/assets/icons/radiobox-${Me$r.msThemeManager.panelIconStyle ===
+            assertNotNull(panelIconStyleApplicationRadio._icon).set_gicon(Gio$b.icon_new_for_string(`${Me$t.path}/assets/icons/radiobox-${Me$t.msThemeManager.panelIconStyle ===
                 PanelIconStyleEnum.APPLICATION
                 ? 'marked'
                 : 'blank'}-symbolic.svg`));
@@ -4247,7 +4250,7 @@ let WorkspaceButton = class WorkspaceButton extends MatButton {
         MainCategories.forEach((key) => {
             subMenu.menu.addAction(key, () => {
                 setCategory(key);
-            }, Gio$b.icon_new_for_string(`${Me$r.path}/assets/icons/category/${key.toLowerCase()}-symbolic.svg`));
+            }, Gio$b.icon_new_for_string(`${Me$t.path}/assets/icons/category/${key.toLowerCase()}-symbolic.svg`));
         });
         rootMenu.addMenuItem(subMenu);
         Main$e.layoutManager.uiGroup.add_actor(rootMenu.actor);
@@ -4259,7 +4262,7 @@ let WorkspaceButton = class WorkspaceButton extends MatButton {
             panelIconStyleApplicationRadio,
             subMenu,
             disconnectSignals: () => {
-                Me$r.msThemeManager.disconnect(iconStyleSignal);
+                Me$t.msThemeManager.disconnect(iconStyleSignal);
             },
         };
     }
@@ -4282,7 +4285,7 @@ let WorkspaceButton = class WorkspaceButton extends MatButton {
     acceptDrop(source) {
         if (source instanceof TaskBarItem) {
             if (source.tileable instanceof MsWindow) {
-                Me$r.msWorkspaceManager.setWindowToMsWorkspace(source.tileable, this.msWorkspace);
+                Me$t.msWorkspaceManager.setWindowToMsWorkspace(source.tileable, this.msWorkspace);
                 this.msWorkspaceManager.stateChanged();
                 this.msWorkspace.activate();
             }
@@ -4292,14 +4295,14 @@ let WorkspaceButton = class WorkspaceButton extends MatButton {
     }
     vfunc_get_preferred_width(_forHeight) {
         return [
-            Me$r.msThemeManager.getPanelSize(Main$e.layoutManager.primaryIndex),
-            Me$r.msThemeManager.getPanelSize(Main$e.layoutManager.primaryIndex),
+            Me$t.msThemeManager.getPanelSize(),
+            Me$t.msThemeManager.getPanelSize(),
         ];
     }
     vfunc_get_preferred_height(_forWidth) {
         return [
-            Me$r.msThemeManager.getPanelSize(Main$e.layoutManager.primaryIndex),
-            Me$r.msThemeManager.getPanelSize(Main$e.layoutManager.primaryIndex),
+            Me$t.msThemeManager.getPanelSize(),
+            Me$t.msThemeManager.getPanelSize(),
         ];
     }
 };
@@ -4308,7 +4311,7 @@ WorkspaceButton.metaInfo = {
     Signals: {
         'drag-dropped': {},
         'drag-over': {
-            param_types: [GObject$2.TYPE_BOOLEAN],
+            param_types: [GObject$3.TYPE_BOOLEAN],
         },
     },
 };
@@ -4333,23 +4336,23 @@ let WorkspaceButtonIcon = class WorkspaceButtonIcon extends St$g.Widget {
             this.buildIcons();
         });
         const themeSignals = [
-            Me$r.msThemeManager.connect('panel-icon-style-changed', () => {
+            Me$t.msThemeManager.connect('panel-icon-style-changed', () => {
                 this.buildIcons();
             }),
-            Me$r.msThemeManager.connect('panel-icon-color-changed', () => {
+            Me$t.msThemeManager.connect('panel-icon-color-changed', () => {
                 this.desaturateIcons();
             }),
-            Me$r.msThemeManager.connect('panel-size-changed', () => {
+            Me$t.msThemeManager.connect('panel-size-changed', () => {
                 this.buildIcons();
             }),
         ];
         this.connect('destroy', () => {
             for (const s of themeSignals)
-                Me$r.msThemeManager.disconnect(s);
+                Me$t.msThemeManager.disconnect(s);
         });
     }
     desaturateIcons() {
-        const shouldDesaturate = !Me$r.msThemeManager.panelIconColor;
+        const shouldDesaturate = !Me$t.msThemeManager.panelIconColor;
         const isDesaturate = this.desaturateEffect !== undefined &&
             this.desaturateEffect === this.get_effect('desaturate_icons');
         if (shouldDesaturate === isDesaturate)
@@ -4392,22 +4395,22 @@ let WorkspaceButtonIcon = class WorkspaceButtonIcon extends St$g.Widget {
                 return entry[0];
             });
             if (this.msWorkspace.msWorkspaceCategory.forcedCategory ||
-                Me$r.msThemeManager.panelIconStyle ===
+                Me$t.msThemeManager.panelIconStyle ===
                     PanelIconStyleEnum.CATEGORY ||
-                (Me$r.msThemeManager.panelIconStyle ===
+                (Me$t.msThemeManager.panelIconStyle ===
                     PanelIconStyleEnum.HYBRID &&
                     sortedByInstanceAppList.length > 1)) {
                 const category = this.msWorkspace.msWorkspaceCategory.category || '';
                 const icon = new St$g.Icon({
-                    gicon: Gio$b.icon_new_for_string(`${Me$r.path}/assets/icons/category/${category.toLowerCase()}-symbolic.svg`),
-                    icon_size: Me$r.msThemeManager.getPanelSizeNotScaled() / 2,
+                    gicon: Gio$b.icon_new_for_string(`${Me$t.path}/assets/icons/category/${category.toLowerCase()}-symbolic.svg`),
+                    icon_size: Me$t.msThemeManager.getPanelSizeNotScaled() / 2,
                 });
                 this.appIconList.push(icon);
                 this.add_child(icon);
             }
             else {
                 sortedByInstanceAppList.forEach((app) => {
-                    const icon = app.create_icon_texture(Me$r.msThemeManager.getPanelSizeNotScaled() / 2);
+                    const icon = app.create_icon_texture(Me$t.msThemeManager.getPanelSizeNotScaled() / 2);
                     this.appIconList.push(icon);
                     this.add_child(icon);
                 });
@@ -4415,8 +4418,8 @@ let WorkspaceButtonIcon = class WorkspaceButtonIcon extends St$g.Widget {
         }
         else {
             const icon = new St$g.Icon({
-                gicon: Gio$b.icon_new_for_string(`${Me$r.path}/assets/icons/plus-symbolic.svg`),
-                icon_size: Me$r.msThemeManager.getPanelSizeNotScaled() / 2,
+                gicon: Gio$b.icon_new_for_string(`${Me$t.path}/assets/icons/plus-symbolic.svg`),
+                icon_size: Me$t.msThemeManager.getPanelSizeNotScaled() / 2,
             });
             this.appIconList.push(icon);
             this.add_child(icon);
@@ -4478,7 +4481,7 @@ let WorkspaceActiveIndicator = class WorkspaceActiveIndicator extends St$g.Widge
         });
     }
     vfunc_get_preferred_height(_for_width) {
-        const height = Me$r.msThemeManager.getPanelSize(Main$e.layoutManager.primaryIndex);
+        const height = Me$t.msThemeManager.getPanelSize();
         return [height, height];
     }
 };
@@ -4487,7 +4490,7 @@ WorkspaceActiveIndicator = __decorate([
 ], WorkspaceActiveIndicator);
 
 const St$f = imports.gi.St;
-const Me$q = imports.misc.extensionUtils.getCurrentExtension();
+const Me$s = imports.misc.extensionUtils.getCurrentExtension();
 let MatDivider = class MatDivider extends St$f.Widget {
     _init(vertical = false) {
         super._init({
@@ -4516,28 +4519,189 @@ MatDivider = __decorate([
     registerGObjectClass
 ], MatDivider);
 
-const Shell$7 = imports.gi.Shell;
+const Clutter$j = imports.gi.Clutter;
 const St$e = imports.gi.St;
+let SearchResultEntry = class SearchResultEntry extends MatButton {
+    _init(icon, title, description, _withMenu) {
+        super._init({});
+        this.layout = new St$e.BoxLayout();
+        this.textLayout = new St$e.BoxLayout({
+            vertical: true,
+            styleClass: 'margin-left-x2 margin-top margin-bottom margin-right-x2',
+            y_align: Clutter$j.ActorAlign.CENTER,
+        });
+        if (icon) {
+            this.icon = icon;
+            this.icon.set_style('margin: 12px');
+            this.layout.add_child(this.icon);
+        }
+        else {
+            this.icon = null;
+        }
+        this.layout.add_child(this.textLayout);
+        this.title = new St$e.Label({
+            text: title,
+        });
+        this.textLayout.add_child(this.title);
+        if (description) {
+            this.description = new St$e.Label({
+                text: description,
+                styleClass: 'caption text-medium-emphasis',
+                style: 'margin-top:2px',
+            });
+            this.textLayout.add_child(this.description);
+        }
+        else {
+            this.description = null;
+        }
+        this.set_child(this.layout);
+    }
+    setSelected(selected) {
+        if (selected) {
+            this.add_style_class_name('highlighted');
+        }
+        else {
+            this.remove_style_class_name('highlighted');
+        }
+    }
+};
+SearchResultEntry.metaInfo = {
+    GTypeName: 'SearchResultEntry',
+    Signals: {
+        activate: {
+            param_types: [],
+            accumulator: 0,
+        },
+    },
+};
+SearchResultEntry = __decorate([
+    registerGObjectClass
+], SearchResultEntry);
+
+const St$d = imports.gi.St;
+let SearchResultHeader = class SearchResultHeader extends St$d.Bin {
+    _init(text) {
+        super._init({
+            style_class: 'subtitle-2 margin margin-top-x2 margin-bottom-x2 text-high-emphasis',
+        });
+        this.label = new St$d.Label({
+            text: text,
+        });
+        this.set_child(this.label);
+    }
+};
+SearchResultHeader.metaInfo = {
+    GTypeName: 'SearchResultHeader',
+};
+SearchResultHeader = __decorate([
+    registerGObjectClass
+], SearchResultHeader);
+
+const Gio$a = imports.gi.Gio;
+const GObject$2 = imports.gi.GObject;
+const St$c = imports.gi.St;
+const Me$r = imports.misc.extensionUtils.getCurrentExtension();
+let ProviderResultList = class ProviderResultList extends St$c.BoxLayout {
+    _init(provider, onClicked) {
+        super._init({ vertical: true, visible: false });
+        this.resultList = [];
+        this.firstResultEntryList = new St$c.BoxLayout({ vertical: true });
+        this.restResultEntryList = new St$c.BoxLayout({ vertical: true });
+        this.maxResultLength = 5;
+        this.provider = provider;
+        this.onClicked = onClicked;
+        this.header = new SearchResultHeader(provider.title);
+        this.add_child(this.header);
+        this.add_child(this.firstResultEntryList);
+        this.add_child(this.restResultEntryList);
+        this.moreResultEntry = new SearchResultEntry(new St$c.Icon({
+            icon_size: 32,
+            gicon: Gio$a.icon_new_for_string(`${Me$r.path}/assets/icons/chevron-down-symbolic.svg`),
+        }), '', '', provider.id === 'applications');
+        this.moreResultEntry.visible = false;
+        this.moreResultEntry.connect('primary-action', () => {
+            this.restResultEntryList.show();
+            this.moreResultEntry.hide();
+        });
+        this.add_child(this.moreResultEntry);
+    }
+    async updateSearch(newResultList, termList) {
+        this.visible = newResultList.length > 0;
+        this.moreResultEntry.visible =
+            newResultList.length > this.maxResultLength;
+        this.restResultEntryList.visible = false;
+        this.firstResultEntryList.remove_all_children();
+        this.restResultEntryList.remove_all_children();
+        this.resultList = newResultList;
+        for (const resultMeta of newResultList) {
+            let icon = resultMeta.createIcon(32);
+            if (!icon)
+                icon = this.provider.createFallbackIcon(32);
+            const entry = new SearchResultEntry(icon, resultMeta.name, resultMeta.description, this.provider.id === 'applications');
+            entry.connect('primary-action', () => {
+                this.onClicked(resultMeta.id);
+            });
+            if (newResultList.length > this.maxResultLength) {
+                this.moreResultEntry.title.text = ngettext('%d more', '%d more', newResultList.length - 5).format(newResultList.length - 5);
+            }
+            if (this.firstResultEntryList.get_children().length <
+                this.maxResultLength) {
+                this.firstResultEntryList.add_child(entry);
+            }
+            else {
+                this.restResultEntryList.add_child(entry);
+            }
+        }
+    }
+};
+ProviderResultList.metaInfo = {
+    GTypeName: 'ProviderResultList',
+    Signals: {
+        activated: {
+            param_types: [GObject$2.TYPE_STRING],
+        },
+    },
+};
+ProviderResultList = __decorate([
+    registerGObjectClass
+], ProviderResultList);
+
+const Shell$6 = imports.gi.Shell;
+const St$b = imports.gi.St;
 const ParentalControlsManager$2 = imports.misc.parentalControlsManager;
 const SystemActions = imports.misc.systemActions;
+const Me$q = imports.misc.extensionUtils.getCurrentExtension();
 class AppSearchProvider {
     constructor() {
         this.isRemoteProvider = false;
-        this._appSys = Shell$7.AppSystem.get_default();
         this.id = 'applications';
+        this.searchInProgress = false;
+        this._appSys = Shell$6.AppSystem.get_default();
         this.canLaunchSearch = false;
         this._systemActions = new SystemActions.getDefault();
         this._parentalControlsManager = ParentalControlsManager$2.getDefault();
     }
+    get title() {
+        return _('Applications');
+    }
+    createFallbackIcon(icon_size) {
+        return null;
+    }
     activateResult(id, terms) {
-        throw new Error('Method not implemented.');
+        const app = Shell$6.AppSystem.get_default().lookup_app(id);
+        if (app) {
+            Me$q.msWindowManager.openApp(app, Me$q.msWorkspaceManager.getActiveMsWorkspace());
+        }
+        else {
+            SystemActions.getDefault().activateAction(id);
+        }
     }
     getResultMetas(apps) {
-        const { scaleFactor } = St$e.ThemeContext.get_for_stage(global.stage);
-        let metas = [];
-        for (let id of apps) {
+        const { scaleFactor } = St$b.ThemeContext.get_for_stage(global.stage);
+        const metas = [];
+        for (const id of apps) {
             if (id.endsWith('.desktop')) {
-                let app = this._appSys.lookup_app(id);
+                const app = this._appSys.lookup_app(id);
                 metas.push({
                     id: app.get_id(),
                     name: app.get_name(),
@@ -4545,9 +4709,9 @@ class AppSearchProvider {
                 });
             }
             else {
-                let name = this._systemActions.getName(id);
-                let iconName = this._systemActions.getIconName(id);
-                const createIcon = (size) => new St$e.Icon({
+                const name = this._systemActions.getName(id);
+                const iconName = this._systemActions.getIconName(id);
+                const createIcon = (size) => new St$b.Icon({
                     icon_name: iconName,
                     width: size * scaleFactor,
                     height: size * scaleFactor,
@@ -4564,7 +4728,7 @@ class AppSearchProvider {
     getInitialResultSet(terms, cancellable) {
         if (!this._parentalControlsManager.initialized) {
             return new Promise((resolve) => {
-                let initializedId = this._parentalControlsManager.connect('app-filter-changed', async () => {
+                const initializedId = this._parentalControlsManager.connect('app-filter-changed', async () => {
                     if (this._parentalControlsManager.initialized) {
                         this._parentalControlsManager.disconnect(initializedId);
                         resolve(await this.getInitialResultSet(terms, cancellable));
@@ -4572,9 +4736,9 @@ class AppSearchProvider {
                 });
             });
         }
-        let query = terms.join(' ');
-        let groups = Shell$7.AppSystem.search(query);
-        let usage = Shell$7.AppUsage.get_default();
+        const query = terms.join(' ');
+        const groups = Shell$6.AppSystem.search(query);
+        const usage = Shell$6.AppUsage.get_default();
         let results = [];
         groups.forEach((group) => {
             group = group.filter((appID) => {
@@ -4592,11 +4756,364 @@ class AppSearchProvider {
     }
 }
 
-const Gio$a = imports.gi.Gio;
-const GLib$f = imports.gi.GLib;
-const Shell$6 = imports.gi.Shell;
-const St$d = imports.gi.St;
 const Me$p = imports.misc.extensionUtils.getCurrentExtension();
+const SEPARATOR = '::';
+const STATE_KEY = 'recent-searches';
+const MAX_HISTORY_SIZE = 100;
+class RecentSearchProvider {
+    constructor() {
+        this.isRemoteProvider = false;
+        this.searchInProgress = false;
+        this.id = 'ms-recent';
+        this.historyList = [];
+    }
+    get title() {
+        return 'Recent';
+    }
+    createFallbackIcon(icon_size) {
+        return null;
+    }
+    activateResult(id, terms) {
+        throw new Error('Should never be called. Remap to original provider instead.');
+    }
+    static splitId(id) {
+        const v = id.split(SEPARATOR);
+        assert(v.length == 2, `Invalid id: ${id}`);
+        return {
+            provider_id: v[0],
+            id: v[1],
+        };
+    }
+    loadHistoryFromExtensionState() {
+        const historyState = Me$p.stateManager.getState(STATE_KEY);
+        if (historyState !== undefined &&
+            historyState.history !== undefined &&
+            Array.isArray(historyState.history)) {
+            this.historyList = historyState.history;
+        }
+    }
+    onResultActivated(provider_id, id, terms) {
+        assert(provider_id != this.id, 'Trying to add recent item to history again. Remap it to the original provider first.');
+        if (provider_id === 'org.gnome.Calculator.desktop') {
+            return;
+        }
+        this.historyList.push({
+            id,
+            provider_id,
+            terms,
+            context: this.getContext(),
+        });
+        if (this.historyList.length > MAX_HISTORY_SIZE) {
+            this.historyList.shift();
+        }
+        Me$p.stateManager.setState(STATE_KEY, {
+            history: this.historyList,
+        });
+    }
+    getContext() {
+        return {
+            timestamp: new Date().getTime(),
+            visible_apps: [
+                ...new Set(Me$p.msWindowManager.msWindowList
+                    .filter((x) => x.lifecycleState.type === 'window' &&
+                    x.msWorkspace.isDisplayed())
+                    .map((x) => x.state.appId)).values(),
+            ],
+            open_apps: [
+                ...new Set(Me$p.msWindowManager.msWindowList
+                    .filter((x) => x.lifecycleState.type === 'window')
+                    .map((x) => x.state.appId)).values(),
+            ],
+            workspace_index: Me$p.msWorkspaceManager.workspaceManager.get_active_workspace_index(),
+        };
+    }
+    search(terms, provider_results) {
+        terms = terms.map((x) => x.toLocaleLowerCase());
+        const seen = new Map();
+        for (const [provider_id, metas] of provider_results) {
+            for (const meta of metas) {
+                seen.set(provider_id + SEPARATOR + meta.id, meta);
+            }
+        }
+        const filteredHistory = [];
+        for (const item of this.historyList) {
+            const key = item.provider_id + SEPARATOR + item.id;
+            const meta = seen.get(key);
+            if (meta !== undefined) {
+                filteredHistory.push(item);
+            }
+        }
+        const forest = new DecisionTree(filteredHistory);
+        const best = forest.eval(this.getContext());
+        if (best.length > 0) {
+            const [dominantItem, count] = getDominantItem(best);
+            const PROBABILITY_THRESHOLD = 0.9;
+            const CONSTANT_OFFSET = 1;
+            if ((count + CONSTANT_OFFSET) / best.length >
+                PROBABILITY_THRESHOLD) {
+                const key = dominantItem.provider_id + SEPARATOR + dominantItem.id;
+                const bestMeta = seen.get(key);
+                return [
+                    {
+                        id: key,
+                        name: bestMeta.name,
+                        description: bestMeta.description,
+                        createIcon: bestMeta.createIcon,
+                        clipboardText: bestMeta.clipboardText,
+                    },
+                ];
+            }
+            else {
+                return [];
+            }
+        }
+        else {
+            return [];
+        }
+    }
+}
+function getDominantItem(items) {
+    assert(items.length > 0, 'Cannot get dominant item from empty list');
+    const counts = new Map();
+    for (const item of items) {
+        const key = item.provider_id + SEPARATOR + item.id;
+        const count = counts.get(key) || 0;
+        counts.set(key, count + 1);
+    }
+    const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1]);
+    const key = sorted[0][0];
+    const [provider_id, id] = key.split(SEPARATOR);
+    const item = items.find((x) => x.provider_id == provider_id && x.id == id);
+    return [item, sorted[0][1]];
+}
+class DecisionTree {
+    constructor(metas) {
+        this.root = DecisionTree.buildTree(metas);
+    }
+    eval(context) {
+        let node = this.root;
+        while (node.type == 'split') {
+            if (DecisionTree.evalCategory(node.split, context)) {
+                node = node.truthy;
+            }
+            else {
+                node = node.falsy;
+            }
+        }
+        return node.items;
+    }
+    static buildTree(items) {
+        if (DecisionTree.entropy(items) == 0.0) {
+            return {
+                type: 'leaf',
+                items,
+            };
+        }
+        const split = DecisionTree.bestSplit(items);
+        if (split === null) {
+            return {
+                type: 'leaf',
+                items,
+            };
+        }
+        return {
+            type: 'split',
+            split: split.split,
+            falsy: DecisionTree.buildTree(split.falsy),
+            truthy: DecisionTree.buildTree(split.truthy),
+        };
+    }
+    static evalCategory(category, context) {
+        switch (category.id) {
+            case 'isAppOpen':
+                return context.open_apps.includes(category.app_id);
+            case 'isTimeOfDay':
+                return getTimeOfDay(context.timestamp) == category.time_of_day;
+            case 'isDayOfWeek':
+                return getDayOfWeek(context.timestamp) == category.day_of_week;
+            case 'isAppVisible':
+                return context.visible_apps.includes(category.app_id);
+            case 'isWorkspaceIndex':
+                return context.workspace_index == category.workspace_index;
+            default:
+                assert(false, 'Invalid category');
+        }
+    }
+    static getCategories(history) {
+        const categories = [];
+        const visible_apps = new Set();
+        const open_apps = new Set();
+        const workspace_indices = new Set();
+        const days_of_week = new Set();
+        const times_of_day = new Set();
+        for (const item of history) {
+            for (const app_id of item.context.visible_apps) {
+                visible_apps.add(app_id);
+            }
+            for (const app_id of item.context.open_apps) {
+                open_apps.add(app_id);
+            }
+            workspace_indices.add(item.context.workspace_index);
+            days_of_week.add(getDayOfWeek(item.context.timestamp));
+            times_of_day.add(getTimeOfDay(item.context.timestamp));
+        }
+        for (const app_id of visible_apps) {
+            categories.push({
+                id: 'isAppVisible',
+                app_id,
+            });
+        }
+        for (const app_id of open_apps) {
+            categories.push({
+                id: 'isAppOpen',
+                app_id,
+            });
+        }
+        for (const day_of_week of days_of_week) {
+            categories.push({
+                id: 'isDayOfWeek',
+                day_of_week,
+            });
+        }
+        for (const time_of_day of times_of_day) {
+            categories.push({
+                id: 'isTimeOfDay',
+                time_of_day,
+            });
+        }
+        for (const workspace_index of workspace_indices) {
+            categories.push({
+                id: 'isWorkspaceIndex',
+                workspace_index,
+            });
+        }
+        return categories;
+    }
+    static bestSplit(history) {
+        assert(history.length > 0, "Can't split empty history");
+        let bestCategory = undefined;
+        let bestScore = -1 / 0;
+        let bestSplit = [[], []];
+        const categories = DecisionTree.getCategories(history);
+        for (const category of categories) {
+            const [falsy, truthy] = DecisionTree.split(history, category);
+            const score = DecisionTree.score(falsy, truthy);
+            if (score > bestScore) {
+                bestScore = score;
+                bestCategory = category;
+                bestSplit = [falsy, truthy];
+            }
+        }
+        if (bestSplit[0].length == 0 || bestSplit[1].length == 0)
+            return null;
+        return {
+            split: bestCategory,
+            falsy: bestSplit[0],
+            truthy: bestSplit[1],
+        };
+    }
+    static entropy(history) {
+        const counts = new Map();
+        for (const item of history) {
+            const key = item.provider_id + SEPARATOR + item.id;
+            const prev = counts.get(key);
+            if (prev === undefined) {
+                counts.set(key, 1);
+            }
+            else {
+                counts.set(key, prev + 1);
+            }
+        }
+        let result = 0;
+        for (const v of counts.values()) {
+            const p = v / history.length;
+            result -= p * Math.log2(p);
+        }
+        return result;
+    }
+    static score(falsy, truthy) {
+        return -(DecisionTree.entropy(falsy) * falsy.length +
+            DecisionTree.entropy(truthy) * truthy.length);
+    }
+    static split(history, category) {
+        const falsy = [];
+        const truthy = [];
+        for (const item of history) {
+            if (this.evalCategory(category, item.context)) {
+                truthy.push(item);
+            }
+            else {
+                falsy.push(item);
+            }
+        }
+        return [falsy, truthy];
+    }
+    toString() {
+        return JSON.stringify(this.root, null, 2);
+    }
+}
+function getTimeOfDay(timestamp) {
+    const hour = new Date(timestamp).getHours();
+    if (hour < 6) {
+        return 'night';
+    }
+    if (hour < 12) {
+        return 'morning';
+    }
+    if (hour < 18) {
+        return 'afternoon';
+    }
+    return 'evening';
+}
+function getDayOfWeek(timestamp) {
+    return new Date(timestamp).getDay();
+}
+function testRandomForest() {
+    const history = [
+        {
+            terms: [],
+            provider_id: 'pa',
+            id: 'a',
+            context: {
+                visible_apps: ['a', 'b'],
+                open_apps: ['a', 'b'],
+                workspace_index: 0,
+                timestamp: 0,
+            },
+        },
+        {
+            terms: [],
+            provider_id: 'pa',
+            id: 'b',
+            context: {
+                visible_apps: ['a'],
+                open_apps: ['a'],
+                workspace_index: 0,
+                timestamp: 0,
+            },
+        },
+    ];
+    const forest = new DecisionTree(history);
+    assert(forest.eval({
+        visible_apps: ['a'],
+        open_apps: ['a'],
+        workspace_index: 0,
+        timestamp: 0,
+    })[0].id === 'b', '');
+    assert(forest.eval({
+        visible_apps: ['a', 'c'],
+        open_apps: ['a', 'q'],
+        workspace_index: 1,
+        timestamp: 42132,
+    })[0].id === 'b', '');
+}
+testRandomForest();
+
+const Gio$9 = imports.gi.Gio;
+const GLib$f = imports.gi.GLib;
+const Shell$5 = imports.gi.Shell;
+const St$a = imports.gi.St;
+const Me$o = imports.misc.extensionUtils.getCurrentExtension();
 const FileUtils = imports.misc.fileUtils;
 const GdkPixbuf = imports.gi.GdkPixbuf;
 const ParentalControlsManager$1 = imports.misc.parentalControlsManager;
@@ -4650,8 +5167,8 @@ const SearchProvider2Iface = `
 </method>
 </interface>
 </node>`;
-var SearchProviderProxyInfo = Gio$a.DBusInterfaceInfo.new_for_xml(SearchProviderIface);
-var SearchProvider2ProxyInfo = Gio$a.DBusInterfaceInfo.new_for_xml(SearchProvider2Iface);
+const SearchProviderProxyInfo = Gio$9.DBusInterfaceInfo.new_for_xml(SearchProviderIface);
+const SearchProvider2ProxyInfo = Gio$9.DBusInterfaceInfo.new_for_xml(SearchProvider2Iface);
 function loadRemoteSearchProviders(searchSettings) {
     const objectPaths = {};
     let loadedProviders = [];
@@ -4676,7 +5193,7 @@ function loadRemoteSearchProviders(searchSettings) {
             let appInfo = null;
             try {
                 const desktopId = keyfile.get_string(group, 'DesktopId');
-                appInfo = Gio$a.DesktopAppInfo.new(desktopId);
+                appInfo = Gio$9.DesktopAppInfo.new(desktopId);
                 if (!appInfo.should_show())
                     return;
             }
@@ -4728,12 +5245,10 @@ function loadRemoteSearchProviders(searchSettings) {
             return enabled.includes(appId);
     });
     loadedProviders.sort((providerA, providerB) => {
-        let idxA, idxB;
-        let appIdA, appIdB;
-        appIdA = providerA.appInfo.get_id();
-        appIdB = providerB.appInfo.get_id();
-        idxA = sortOrder.indexOf(appIdA);
-        idxB = sortOrder.indexOf(appIdB);
+        const appIdA = providerA.appInfo.get_id();
+        const appIdB = providerB.appInfo.get_id();
+        const idxA = sortOrder.indexOf(appIdA);
+        const idxB = sortOrder.indexOf(appIdB);
         if (idxA == -1 && idxB == -1) {
             const nameA = providerA.appInfo.get_name();
             const nameB = providerB.appInfo.get_name();
@@ -4751,15 +5266,16 @@ class RemoteSearchProvider {
     constructor(appInfo, dbusName, dbusPath, autoStart, proxyInfo) {
         this.isRemoteProvider = true;
         this.canLaunchSearch = false;
+        this.searchInProgress = false;
         if (!proxyInfo)
             proxyInfo = SearchProviderProxyInfo;
-        let gFlags = Gio$a.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES;
+        let gFlags = Gio$9.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES;
         if (autoStart)
-            gFlags |= Gio$a.DBusProxyFlags.DO_NOT_AUTO_START_AT_CONSTRUCTION;
+            gFlags |= Gio$9.DBusProxyFlags.DO_NOT_AUTO_START_AT_CONSTRUCTION;
         else
-            gFlags |= Gio$a.DBusProxyFlags.DO_NOT_AUTO_START;
-        this.proxy = new Gio$a.DBusProxy({
-            g_bus_type: Gio$a.BusType.SESSION,
+            gFlags |= Gio$9.DBusProxyFlags.DO_NOT_AUTO_START;
+        this.proxy = new Gio$9.DBusProxy({
+            g_bus_type: Gio$9.BusType.SESSION,
             g_name: dbusName,
             g_object_path: dbusPath,
             g_interface_info: proxyInfo,
@@ -4770,21 +5286,30 @@ class RemoteSearchProvider {
         this.appInfo = appInfo;
         this.id = appInfo.get_id();
     }
+    get title() {
+        return this.appInfo.get_name();
+    }
+    createFallbackIcon(icon_size) {
+        return new St$a.Icon({
+            icon_size,
+            gicon: this.appInfo.get_icon(),
+        });
+    }
     createIcon(size, meta) {
         let gicon = null;
         let icon = null;
         if (meta['icon']) {
-            gicon = Gio$a.icon_deserialize(meta['icon']);
+            gicon = Gio$9.icon_deserialize(meta['icon']);
         }
         else if (meta['gicon']) {
-            gicon = Gio$a.icon_new_for_string(meta['gicon']);
+            gicon = Gio$9.icon_new_for_string(meta['gicon']);
         }
         else if (meta['icon-data']) {
             const [width, height, rowStride, hasAlpha, bitsPerSample, nChannels_, data,] = meta['icon-data'];
-            gicon = Shell$6.util_create_pixbuf_from_data(data, GdkPixbuf.Colorspace.RGB, hasAlpha, bitsPerSample, width, height, rowStride);
+            gicon = Shell$5.util_create_pixbuf_from_data(data, GdkPixbuf.Colorspace.RGB, hasAlpha, bitsPerSample, width, height, rowStride);
         }
         if (gicon)
-            icon = new St$d.Icon({ gicon, icon_size: size });
+            icon = new St$a.Icon({ gicon, icon_size: size });
         return icon;
     }
     filterResults(results, maxNumber) {
@@ -4811,7 +5336,7 @@ class RemoteSearchProvider {
             return results;
         }
         catch (error) {
-            if (!error.matches(Gio$a.IOErrorEnum, Gio$a.IOErrorEnum.CANCELLED))
+            if (!error.matches(Gio$9.IOErrorEnum, Gio$9.IOErrorEnum.CANCELLED))
                 log(`Received error from D-Bus search provider ${this.id}: ${error}`);
             return [];
         }
@@ -4831,7 +5356,7 @@ class RemoteSearchProvider {
             return results;
         }
         catch (error) {
-            if (!error.matches(Gio$a.IOErrorEnum, Gio$a.IOErrorEnum.CANCELLED))
+            if (!error.matches(Gio$9.IOErrorEnum, Gio$9.IOErrorEnum.CANCELLED))
                 log(`Received error from D-Bus search provider ${this.id}: ${error}`);
             return [];
         }
@@ -4851,7 +5376,7 @@ class RemoteSearchProvider {
                 : this.proxy.GetResultMetasAsync(ids, cancellable));
         }
         catch (error) {
-            if (!error.matches(Gio$a.IOErrorEnum, Gio$a.IOErrorEnum.CANCELLED))
+            if (!error.matches(Gio$9.IOErrorEnum, Gio$9.IOErrorEnum.CANCELLED))
                 log(`Received error from D-Bus search provider ${this.id} during GetResultMetas: ${error}`);
             return [];
         }
@@ -4915,168 +5440,6 @@ class RemoteSearchProvider2 extends RemoteSearchProvider {
     }
 }
 
-const Me$o = imports.misc.extensionUtils.getCurrentExtension();
-
-const Clutter$j = imports.gi.Clutter;
-const St$c = imports.gi.St;
-let SearchResultEntry = class SearchResultEntry extends MatButton {
-    _init(icon, title, description, _withMenu) {
-        super._init({});
-        this.layout = new St$c.BoxLayout();
-        this.textLayout = new St$c.BoxLayout({
-            vertical: true,
-            styleClass: 'margin-left-x2 margin-top margin-bottom margin-right-x2',
-            y_align: Clutter$j.ActorAlign.CENTER,
-        });
-        if (icon) {
-            this.icon = icon;
-            this.icon.set_style('margin: 12px');
-            this.layout.add_child(this.icon);
-        }
-        else {
-            this.icon = null;
-        }
-        this.layout.add_child(this.textLayout);
-        this.title = new St$c.Label({
-            text: title,
-        });
-        this.textLayout.add_child(this.title);
-        if (description) {
-            this.description = new St$c.Label({
-                text: description,
-                styleClass: 'caption text-medium-emphasis',
-                style: 'margin-top:2px',
-            });
-            this.textLayout.add_child(this.description);
-        }
-        else {
-            this.description = null;
-        }
-        this.set_child(this.layout);
-    }
-    setSelected(selected) {
-        if (selected) {
-            this.add_style_class_name('highlighted');
-        }
-        else {
-            this.remove_style_class_name('highlighted');
-        }
-    }
-};
-SearchResultEntry.metaInfo = {
-    GTypeName: 'SearchResultEntry',
-    Signals: {
-        activate: {
-            param_types: [],
-            accumulator: 0,
-        },
-    },
-};
-SearchResultEntry = __decorate([
-    registerGObjectClass
-], SearchResultEntry);
-
-const St$b = imports.gi.St;
-let SearchResultHeader = class SearchResultHeader extends St$b.Bin {
-    _init(text) {
-        super._init({
-            style_class: 'subtitle-2 margin margin-top-x2 margin-bottom-x2 text-high-emphasis',
-        });
-        this.label = new St$b.Label({
-            text: text,
-        });
-        this.set_child(this.label);
-    }
-};
-SearchResultHeader.metaInfo = {
-    GTypeName: 'SearchResultHeader',
-};
-SearchResultHeader = __decorate([
-    registerGObjectClass
-], SearchResultHeader);
-
-const Gio$9 = imports.gi.Gio;
-const Shell$5 = imports.gi.Shell;
-const St$a = imports.gi.St;
-let ProviderResultList = class ProviderResultList extends St$a.BoxLayout {
-    _init(provider) {
-        super._init({ vertical: true, visible: false });
-        this.resultList = [];
-        this.firstResultEntryList = new St$a.BoxLayout({ vertical: true });
-        this.restResultEntryList = new St$a.BoxLayout({ vertical: true });
-        this.maxResultLength = 5;
-        this.provider = provider;
-        if (provider instanceof RemoteSearchProvider) {
-            this.header = new SearchResultHeader(provider.appInfo.get_name());
-        }
-        else {
-            this.header = new SearchResultHeader(_('Applications'));
-        }
-        this.add_child(this.header);
-        this.add_child(this.firstResultEntryList);
-        this.add_child(this.restResultEntryList);
-        this.moreResultEntry = new SearchResultEntry(new St$a.Icon({
-            icon_size: 32,
-            gicon: Gio$9.icon_new_for_string(`${Me$o.path}/assets/icons/chevron-down-symbolic.svg`),
-        }), '', '', provider.id === 'applications');
-        this.moreResultEntry.visible = false;
-        this.moreResultEntry.connect('primary-action', () => {
-            this.restResultEntryList.show();
-            this.moreResultEntry.hide();
-        });
-        this.add_child(this.moreResultEntry);
-    }
-    async updateSearch(newResultList, termList) {
-        this.visible = newResultList.length > 0;
-        this.moreResultEntry.visible =
-            newResultList.length > this.maxResultLength;
-        this.restResultEntryList.visible = false;
-        this.firstResultEntryList.remove_all_children();
-        this.restResultEntryList.remove_all_children();
-        for (const resultMeta of newResultList) {
-            let icon = resultMeta.createIcon(32);
-            if (!icon && this.provider instanceof RemoteSearchProvider) {
-                icon = new St$a.Icon({
-                    icon_size: 32,
-                    gicon: this.provider.appInfo.get_icon(),
-                });
-            }
-            const entry = new SearchResultEntry(icon, resultMeta.name, resultMeta.description, this.provider.id === 'applications');
-            entry.connect('primary-action', () => {
-                Me$o.layout.toggleOverview();
-                if (this.provider.isRemoteProvider) {
-                    this.provider.activateResult(resultMeta.id, termList);
-                }
-                else {
-                    const app = Shell$5.AppSystem.get_default().lookup_app(resultMeta.id);
-                    if (app) {
-                        Me$o.msWindowManager.openApp(app, Me$o.msWorkspaceManager.getActiveMsWorkspace());
-                    }
-                    else {
-                        SystemActions.getDefault().activateAction(resultMeta.id);
-                    }
-                }
-            });
-            if (newResultList.length > this.maxResultLength) {
-                this.moreResultEntry.title.text = ngettext('%d more', '%d more', newResultList.length - 5).format(newResultList.length - 5);
-            }
-            if (this.firstResultEntryList.get_children().length <
-                this.maxResultLength) {
-                this.firstResultEntryList.add_child(entry);
-            }
-            else {
-                this.restResultEntryList.add_child(entry);
-            }
-        }
-    }
-};
-ProviderResultList.metaInfo = {
-    GTypeName: 'ProviderResultList',
-};
-ProviderResultList = __decorate([
-    registerGObjectClass
-], ProviderResultList);
-
 const Clutter$i = imports.gi.Clutter;
 const Gio$8 = imports.gi.Gio;
 const GLib$e = imports.gi.GLib;
@@ -5114,6 +5477,13 @@ let SearchResultList = class SearchResultList extends St$9.BoxLayout {
         this.allApplicationList = new St$9.BoxLayout({ vertical: true });
         this.providerDisplayMap = new Map();
         this.navigated = false;
+        this.recentSearchProvider = new RecentSearchProvider();
+        this.recentSearchProvider.loadHistoryFromExtensionState();
+        this.recentSearchProviderSearchThrottled = throttle(() => {
+            this.updateResults(this.recentSearchProvider, this.recentSearchProvider.search(this.terms, new Map([...this.providerDisplayMap.values()]
+                .filter((x) => x.provider != this.recentSearchProvider)
+                .map((x) => [x.provider.id, x.resultList]))));
+        }, 30);
         this.searchEntry = searchEntry;
         this.text = this.searchEntry.clutter_text;
         this.add_child(this.allApplicationList);
@@ -5131,6 +5501,7 @@ let SearchResultList = class SearchResultList extends St$9.BoxLayout {
         this.signalObserver.observe(this.searchSettings, 'changed::enabled', this.reloadRemoteProviders.bind(this));
         this.signalObserver.observe(this.searchSettings, 'changed::disable-external', this.reloadRemoteProviders.bind(this));
         this.signalObserver.observe(this.searchSettings, 'changed::sort-order', this.reloadRemoteProviders.bind(this));
+        this.registerProvider(this.recentSearchProvider);
         this.registerProvider(new AppSearchProvider());
         const appSystem = Shell$4.AppSystem.get_default();
         this.signalObserver.observe(appSystem, 'installed-changed', this.reloadRemoteProviders.bind(this));
@@ -5158,7 +5529,19 @@ let SearchResultList = class SearchResultList extends St$9.BoxLayout {
             !this.parentalControlsManager.shouldShowApp(provider.appInfo))
             return;
         this.providerList.push(provider);
-        const providerDisplay = new ProviderResultList(provider);
+        const providerDisplay = new ProviderResultList(provider, (id) => {
+            Me$n.layout.toggleOverview();
+            let remappedProvider = provider;
+            if (remappedProvider === this.recentSearchProvider) {
+                const splitId = RecentSearchProvider.splitId(id);
+                const actualProvider = this.providerList.find((x) => x.id == splitId.provider_id);
+                assert(actualProvider !== undefined, `Could not find provider with id ${splitId.provider_id}`);
+                remappedProvider = actualProvider;
+                id = splitId.id;
+            }
+            remappedProvider.activateResult(id, this.terms);
+            this.recentSearchProvider.onResultActivated(remappedProvider.id, id, this.terms);
+        });
         this.providerDisplayMap.set(provider, providerDisplay);
         this.add_child(providerDisplay);
     }
@@ -5224,13 +5607,21 @@ let SearchResultList = class SearchResultList extends St$9.BoxLayout {
         provider.searchInProgress = true;
         let results;
         if (this.isSubSearch && previousResults) {
-            results = await provider.getSubsearchResultSet(previousResults, this.terms, this.cancellable);
+            results = await provider
+                .getSubsearchResultSet(previousResults, this.terms, this.cancellable)
+                .catch(logAsyncException);
         }
         else {
-            results = await provider.getInitialResultSet(this.terms, this.cancellable);
+            results = await provider
+                .getInitialResultSet(this.terms, this.cancellable)
+                .catch(logAsyncException);
         }
         this.results[provider.id] = results;
-        this.updateResults(provider, await provider.getResultMetas(results, this.cancellable));
+        const resultsMetas = await provider
+            .getResultMetas(results, this.cancellable)
+            .catch(logAsyncException);
+        if (resultsMetas !== undefined)
+            this.updateResults(provider, resultsMetas);
     }
     async doSearch() {
         this.startingSearch = false;
@@ -5240,7 +5631,9 @@ let SearchResultList = class SearchResultList extends St$9.BoxLayout {
         this.navigated = false;
         for (const provider of this.providerList) {
             const previousProviderResults = previousResults[provider.id];
-            this.doProviderSearch(provider, previousProviderResults);
+            if (provider.id != 'ms-recent') {
+                this.doProviderSearch(provider, previousProviderResults).catch(logAsyncException);
+            }
         }
         this.clearSearchTimeout();
     }
@@ -5297,6 +5690,9 @@ let SearchResultList = class SearchResultList extends St$9.BoxLayout {
             }
         })
             .catch(logAsyncException);
+        if (display.provider != this.recentSearchProvider) {
+            this.recentSearchProviderSearchThrottled();
+        }
     }
     updateAllApplicationResults() {
         this.allApplicationList.remove_all_children();
@@ -5397,7 +5793,6 @@ SearchResultList = __decorate([
 
 const Clutter$h = imports.gi.Clutter;
 const St$8 = imports.gi.St;
-const { main: Main$d } = imports.ui;
 const Util$1 = imports.misc.util;
 const ShellEntry = imports.ui.shellEntry;
 const Me$m = imports.misc.extensionUtils.getCurrentExtension();
@@ -5438,7 +5833,7 @@ let ExtendedPanelContent = class ExtendedPanelContent extends St$8.BoxLayout {
     }
     vfunc_get_preferred_width(_forHeight) {
         const desiredWidth = Me$m.msThemeManager.getScaledSize(448) -
-            Me$m.msThemeManager.getPanelSize(Main$d.layoutManager.primaryIndex);
+            Me$m.msThemeManager.getPanelSize();
         return [desiredWidth, desiredWidth];
     }
 };
@@ -5450,7 +5845,7 @@ let SearchEntryBin = class SearchEntryBin extends St$8.Bin {
         super._init(params);
     }
     vfunc_get_preferred_height(_for_width) {
-        const height = Math.max(Me$m.msThemeManager.getScaledSize(48), Me$m.msThemeManager.getPanelSize(Main$d.layoutManager.primaryIndex));
+        const height = Math.max(Me$m.msThemeManager.getScaledSize(48), Me$m.msThemeManager.getPanelSize());
         return [height, height];
     }
 };
@@ -5461,7 +5856,7 @@ SearchEntryBin = __decorate([
 const Clutter$g = imports.gi.Clutter;
 const Gio$7 = imports.gi.Gio;
 const St$7 = imports.gi.St;
-const { main: Main$c } = imports.ui;
+const { main: Main$d } = imports.ui;
 const Util = imports.misc.util;
 const Me$l = imports.misc.extensionUtils.getCurrentExtension();
 let PanelContent = class PanelContent extends St$7.BoxLayout {
@@ -5507,7 +5902,7 @@ let PanelContent = class PanelContent extends St$7.BoxLayout {
         this.statusArea.disable();
     }
     vfunc_get_preferred_width(_for_height) {
-        const panelSize = Me$l.msThemeManager.getPanelSize(Main$c.layoutManager.primaryIndex);
+        const panelSize = Me$l.msThemeManager.getPanelSize();
         return [panelSize, panelSize];
     }
     setIcon(icon) {
@@ -5539,7 +5934,7 @@ let MsPanel = class MsPanel extends St$7.BoxLayout {
         });
         this.isExpanded = false;
         this.signalObserver = new SignalObserver();
-        this.gnomeShellPanel = Main$c.panel;
+        this.gnomeShellPanel = Main$d.panel;
         this.gnomeShellPanel.hide();
         this.updateStyle();
         this.signalObserver.observe(Me$l.msThemeManager, msThemeSignalEnum.VerticalPanelPositionChanged, this.updateStyle.bind(this));
@@ -5584,7 +5979,7 @@ let MsPanel = class MsPanel extends St$7.BoxLayout {
         }
     }
     vfunc_get_preferred_width(_for_height) {
-        const panelSize = Me$l.msThemeManager.getPanelSize(Main$c.layoutManager.primaryIndex);
+        const panelSize = Me$l.msThemeManager.getPanelSize();
         return [panelSize, panelSize];
     }
     toggle() {
@@ -5614,7 +6009,7 @@ let MsPanel = class MsPanel extends St$7.BoxLayout {
             this.translation_x =
                 (Me$l.msThemeManager.getScaledSize(448) -
                     (Me$l.layout.panelsVisible
-                        ? Me$l.msThemeManager.getPanelSize(Main$c.layoutManager.primaryIndex)
+                        ? Me$l.msThemeManager.getPanelSize()
                         : 0)) *
                     (Me$l.msThemeManager.verticalPanelPosition ===
                         VerticalPanelPositionEnum.LEFT
@@ -5637,7 +6032,7 @@ let MsPanel = class MsPanel extends St$7.BoxLayout {
             this.ease({
                 translation_x: (Me$l.msThemeManager.getScaledSize(448) -
                     (Me$l.layout.panelsVisible
-                        ? Me$l.msThemeManager.getPanelSize(Main$c.layoutManager.primaryIndex)
+                        ? Me$l.msThemeManager.getPanelSize()
                         : 0)) *
                     (Me$l.msThemeManager.verticalPanelPosition ===
                         VerticalPanelPositionEnum.LEFT
@@ -5659,7 +6054,7 @@ let MsPanel = class MsPanel extends St$7.BoxLayout {
         }
     }
     vfunc_get_preferred_height(_forWidth) {
-        const monitor = Main$c.layoutManager.primaryMonitor;
+        const monitor = Main$d.layoutManager.primaryMonitor;
         assert(monitor !== null, 'found no primary monitor');
         return [monitor.height, monitor.height];
     }
@@ -5675,7 +6070,7 @@ let SearchButton = class SearchButton extends MatPanelButton {
         super._init(params);
     }
     vfunc_get_preferred_height(_for_width) {
-        const height = Math.max(Me$l.msThemeManager.getScaledSize(48), Me$l.msThemeManager.getPanelSize(Main$c.layoutManager.primaryIndex));
+        const height = Math.max(Me$l.msThemeManager.getScaledSize(48), Me$l.msThemeManager.getPanelSize());
         return [height, height];
     }
 };
@@ -5847,7 +6242,7 @@ const Clutter$e = imports.gi.Clutter;
 const Meta$7 = imports.gi.Meta;
 const Shell$3 = imports.gi.Shell;
 const St$6 = imports.gi.St;
-const { main: Main$b } = imports.ui;
+const { main: Main$c } = imports.ui;
 const Background = imports.ui.background;
 const Me$j = imports.misc.extensionUtils.getCurrentExtension();
 let MsMain = class MsMain extends St$6.Widget {
@@ -5858,7 +6253,7 @@ let MsMain = class MsMain extends St$6.Widget {
         this.overviewShown = false;
         Me$j.layout = this;
         this.panelsVisible = (_a = Me$j.stateManager.getState('panels-visible')) !== null && _a !== void 0 ? _a : true;
-        Main$b.layoutManager.uiGroup.insert_child_above(this, global.window_group);
+        Main$c.layoutManager.uiGroup.insert_child_above(this, global.window_group);
         this.monitorsContainer = [];
         this.aboveContainer = new Clutter$e.Actor();
         this.add_child(this.aboveContainer);
@@ -5884,10 +6279,10 @@ let MsMain = class MsMain extends St$6.Widget {
         this.updateFullscreenMonitors();
     }
     get primaryMonitor() {
-        return Main$b.layoutManager.primaryMonitor;
+        return Main$c.layoutManager.primaryMonitor;
     }
     get externalMonitors() {
-        return Main$b.layoutManager.monitors.filter((monitor) => monitor !== this.primaryMonitor);
+        return Main$c.layoutManager.monitors.filter((monitor) => monitor !== this.primaryMonitor);
     }
     setBlurBackground(blur) {
         var _a;
@@ -5974,10 +6369,10 @@ let MsMain = class MsMain extends St$6.Widget {
             }),
         });
         this.signals.push({
-            from: Main$b.layoutManager,
-            id: Main$b.layoutManager.connect('monitors-changed', () => {
+            from: Main$c.layoutManager,
+            id: Main$c.layoutManager.connect('monitors-changed', () => {
                 this.primaryMonitorContainer.setMonitor(assertNotNull(this.primaryMonitor));
-                const externalMonitorsDiff = Main$b.layoutManager.monitors.length -
+                const externalMonitorsDiff = Main$c.layoutManager.monitors.length -
                     1 -
                     this.monitorsContainer.length;
                 if (externalMonitorsDiff > 0) {
@@ -6035,14 +6430,14 @@ let MsMain = class MsMain extends St$6.Widget {
         ].forEach((actor) => {
             actor.visible = this.panelsVisible;
             if (this.panelsVisible) {
-                if (Main$b.layoutManager._findActor(actor) === -1) {
-                    Main$b.layoutManager._trackActor(actor, {
+                if (Main$c.layoutManager._findActor(actor) === -1) {
+                    Main$c.layoutManager._trackActor(actor, {
                         affectsStruts: true,
                     });
                 }
             }
             else {
-                Main$b.layoutManager._untrackActor(actor);
+                Main$c.layoutManager._untrackActor(actor);
             }
         });
         this.primaryMonitorContainer.panel.visible = this.panelsVisible;
@@ -6149,7 +6544,7 @@ let MonitorContainer = class MonitorContainer extends St$6.Widget {
         this.msWorkspaceActor.updateUI();
     }
     updateSpacer() {
-        const panelHeight = Me$j.msThemeManager.getPanelSize(this.monitor.index);
+        const panelHeight = Me$j.msThemeManager.getPanelSize();
         const panelPosition = Me$j.msThemeManager.horizontalPanelPosition;
         this.horizontalPanelSpacer.set_size(this.monitor.width, panelHeight);
         this.horizontalPanelSpacer.set_position(0, panelPosition === HorizontalPanelPositionEnum.TOP
@@ -6254,7 +6649,6 @@ let PrimaryMonitorContainer = class PrimaryMonitorContainer extends MonitorConta
             reparentActor(actor, this.workspaceContainer);
         }
         this.msWorkspaceActor = actor;
-        assertNotNull(this.msWorkspaceActor.msWorkspace).refreshFocus(true);
         if (prevActor) {
             this.setTranslation(prevActor, this.msWorkspaceActor);
         }
@@ -6262,7 +6656,7 @@ let PrimaryMonitorContainer = class PrimaryMonitorContainer extends MonitorConta
     updateSpacer() {
         super.updateSpacer();
         if (this.verticalPanelSpacer) {
-            const panelWidth = Me$j.msThemeManager.getPanelSize(this.monitor.index);
+            const panelWidth = Me$j.msThemeManager.getPanelSize();
             const panelPosition = Me$j.msThemeManager.verticalPanelPosition;
             this.verticalPanelSpacer.set_size(panelWidth, this.monitor.height);
             this.verticalPanelSpacer.set_position(panelPosition === VerticalPanelPositionEnum.LEFT
@@ -6290,13 +6684,11 @@ let PrimaryMonitorContainer = class PrimaryMonitorContainer extends MonitorConta
         if (this.panel && this.panel.visible && Me$j.layout.panelsVisible) {
             if (panelPosition === VerticalPanelPositionEnum.LEFT) {
                 msWorkspaceActorBox.x1 =
-                    msWorkspaceActorBox.x1 +
-                        Me$j.msThemeManager.getPanelSize(Main$b.layoutManager.primaryIndex);
+                    msWorkspaceActorBox.x1 + Me$j.msThemeManager.getPanelSize();
             }
             else {
                 msWorkspaceActorBox.x2 =
-                    msWorkspaceActorBox.x2 -
-                        Me$j.msThemeManager.getPanelSize(Main$b.layoutManager.primaryIndex);
+                    msWorkspaceActorBox.x2 - Me$j.msThemeManager.getPanelSize();
             }
         }
         for (const child of this.get_children()) {
@@ -6635,6 +7027,9 @@ let BaseTilingLayout = class BaseTilingLayout extends Clutter$d.LayoutManager {
     }
     afterInit() {
         this.onTileableListChanged(this.msWorkspace.tileableList);
+    }
+    get preferredFocusHistory() {
+        return 'chronological';
     }
     get state() {
         return this._state;
@@ -7562,6 +7957,10 @@ let MaximizeLayout = class MaximizeLayout extends BaseTilingLayout {
         if (!tileable.get_parent()) {
             this.tileableContainer.add_child(tileable);
         }
+        if (this.translationHelper.animationInProgress) {
+            tileable.translation_x = 0;
+            tileable.translation_y = 0;
+        }
     }
     tileTileable(tileable, box) {
         tileable.x = box.x1;
@@ -7686,6 +8085,9 @@ let SplitLayout = class SplitLayout extends BaseResizeableTilingLayout {
     get tileableListVisible() {
         return this.activeTileableList;
     }
+    get preferredFocusHistory() {
+        return 'spatial';
+    }
     updateActiveTileableListFromFocused() {
         this.baseIndex = Math.max(0, Math.min(this.msWorkspace.focusedIndex, this.msWorkspace.tileableList.length -
             this._state.nbOfColumns -
@@ -7809,7 +8211,7 @@ SplitLayout = __decorate([
 ], SplitLayout);
 
 const GLib$b = imports.gi.GLib;
-const { main: Main$a } = imports.ui;
+const { main: Main$b } = imports.ui;
 const Me$e = imports.misc.extensionUtils.getCurrentExtension();
 const layouts = [
     MaximizeLayout,
@@ -7912,9 +8314,9 @@ class LayoutManager extends MsManager {
             return;
         this.tilingInProgress = true;
         GLib$b.idle_add(GLib$b.PRIORITY_DEFAULT, () => {
-            for (const monitor of Main$a.layoutManager.monitors) {
+            for (const monitor of Main$b.layoutManager.monitors) {
                 let msWorkspace;
-                if (monitor.index === Main$a.layoutManager.primaryIndex) {
+                if (monitor.index === Main$b.layoutManager.primaryIndex) {
                     msWorkspace =
                         Me$e.msWorkspaceManager.getActivePrimaryMsWorkspace();
                 }
@@ -7935,7 +8337,7 @@ const Clutter$9 = imports.gi.Clutter;
 const Gio$4 = imports.gi.Gio;
 const GLib$a = imports.gi.GLib;
 const Soup = imports.gi.Soup;
-const { main: Main$9, messageTray } = imports.ui;
+const { main: Main$a, messageTray } = imports.ui;
 const Dialog = imports.ui.dialog;
 const ModalDialog = imports.ui.modalDialog;
 const { PACKAGE_VERSION } = imports.misc.config;
@@ -7999,7 +8401,7 @@ class MsNotificationManager extends MsManager {
     showNotifications(notifications) {
         const source = new MsNotificationSource();
         notifications.forEach((notificationData) => {
-            Main$9.messageTray.add(source);
+            Main$a.messageTray.add(source);
             const notification = new MsNotification(source, notificationData.title, notificationData.content, notificationData.icon, notificationData.action);
             source.showNotification(notification);
         });
@@ -8074,7 +8476,7 @@ MsNotificationDialog = __decorate([
 const GLib$9 = imports.gi.GLib;
 const Meta$5 = imports.gi.Meta;
 const Shell$2 = imports.gi.Shell;
-const { main: Main$8 } = imports.ui;
+const { main: Main$9 } = imports.ui;
 const Me$c = imports.misc.extensionUtils.getCurrentExtension();
 const KeyBindingAction = {
     PREVIOUS_WINDOW: 'previous-window',
@@ -8363,12 +8765,12 @@ class HotKeysModule {
             Me$c.log('Error: Cannot add keybinding. No such action exists: ' + name);
             return;
         }
-        const actionId = Main$8.wm.addKeybinding(name, this.settings, Meta$5.KeyBindingFlags.IGNORE_AUTOREPEAT, Shell$2.ActionMode.NORMAL, actionCallback);
+        const actionId = Main$9.wm.addKeybinding(name, this.settings, Meta$5.KeyBindingFlags.IGNORE_AUTOREPEAT, Shell$2.ActionMode.NORMAL, actionCallback);
         this.actionIdToNameMap.set(actionId, name);
     }
     destroy() {
         for (const [_, value] of this.actionIdToNameMap) {
-            Main$8.wm.removeKeybinding(value);
+            Main$9.wm.removeKeybinding(value);
         }
         this.actionIdToNameMap.clear();
         if (this.connectId) {
@@ -8380,7 +8782,7 @@ class HotKeysModule {
 const Clutter$8 = imports.gi.Clutter;
 const GLib$8 = imports.gi.GLib;
 const Meta$4 = imports.gi.Meta;
-const { main: Main$7 } = imports.ui;
+const { main: Main$8 } = imports.ui;
 const Me$b = imports.misc.extensionUtils.getCurrentExtension();
 class MsDndManager extends MsManager {
     constructor(msWindowManager) {
@@ -8508,12 +8910,12 @@ class MsDndManager extends MsManager {
     checkUnderThePointer() {
         assert(this.dragInProgress !== null, 'No drag in progress');
         const [x, y] = global.get_pointer();
-        const monitor = Main$7.layoutManager.currentMonitor;
+        const monitor = Main$8.layoutManager.currentMonitor;
         const msWindowDragged = this.dragInProgress.msWindow;
         const msWorkspace = msWindowDragged.msWorkspace;
         if (monitor.index !== msWorkspace.monitor.index) {
             let newMsWorkspace;
-            if (monitor === Main$7.layoutManager.primaryMonitor) {
+            if (monitor === Main$8.layoutManager.primaryMonitor) {
                 newMsWorkspace =
                     Me$b.msWorkspaceManager.getActivePrimaryMsWorkspace();
             }
@@ -8525,7 +8927,7 @@ class MsDndManager extends MsManager {
             this.dragInProgress.originalParent =
                 newMsWorkspace.msWorkspaceActor.tileableContainer;
         }
-        const workArea = Main$7.layoutManager.getWorkAreaForMonitor(msWorkspace.monitor.index);
+        const workArea = Main$8.layoutManager.getWorkAreaForMonitor(msWorkspace.monitor.index);
         const relativeX = x - workArea.x;
         const relativeY = y - workArea.y;
         msWorkspace.tileableList
@@ -8581,7 +8983,7 @@ InputGrabber = __decorate([
 ], InputGrabber);
 
 const GLib$7 = imports.gi.GLib;
-const { main: Main$6 } = imports.ui;
+const { main: Main$7 } = imports.ui;
 const Me$a = imports.misc.extensionUtils.getCurrentExtension();
 class MsFocusManager extends MsManager {
     constructor(msWindowManager) {
@@ -8623,7 +9025,7 @@ class MsFocusManager extends MsManager {
             }
             actor = actor.get_parent();
         }
-        if (keyFocus != Main$6.layoutManager.uiGroup) {
+        if (keyFocus != Main$7.layoutManager.uiGroup) {
             this.lastMsWindowFocused = null;
         }
     }
@@ -8646,18 +9048,18 @@ class MsFocusManager extends MsManager {
             !this.msWindowManager.msDndManager.dragInProgress);
     }
     pushModal(actor, options) {
-        const grab = Main$6.pushModal(actor, options);
+        const grab = Main$7.pushModal(actor, options);
         this.actorGrabMap.set(actor, grab);
     }
     popModal(actor) {
         const grab = this.actorGrabMap.get(actor);
         if (grab !== undefined) {
-            if (gnomeVersionGreaterOrEqualTo(Main$6.popModal, '42.0')) {
+            if (gnomeVersionGreaterOrEqualTo(Main$7.popModal, '42.0')) {
                 assert(typeof grab !== 'boolean', 'Expected grab to be a grab object');
-                Main$6.popModal(grab);
+                Main$7.popModal(grab);
             }
             else {
-                Main$6.popModal(actor);
+                Main$7.popModal(actor);
             }
             this.actorGrabMap.delete(actor);
         }
@@ -8906,8 +9308,10 @@ function test_hungarian() {
 
 const Meta$2 = imports.gi.Meta;
 const Shell$1 = imports.gi.Shell;
+const { main: Main$6 } = imports.ui;
 const Signals$1 = imports.signals;
 const Me$8 = imports.misc.extensionUtils.getCurrentExtension();
+const AuthenticationDialog = imports.ui.components.polkitAgent.AuthenticationDialog;
 function matchingCost(desired, found, mismatchCost, skipCost) {
     if (desired !== undefined) {
         return found === desired ? 0 : mismatchCost;
@@ -9272,6 +9676,11 @@ class MsWindowManager extends MsManager {
         for (const msWindow of this.msWindowList) {
             if (msWindow.lifecycleState.type === 'app-placeholder' &&
                 msWindow.lifecycleState.waitingForAppSince !== undefined) {
+                const isAuthenticationDialogDisplayed = Main$6.modalActorFocusStack.length > 0 &&
+                    Main$6.modalActorFocusStack[Main$6.modalActorFocusStack.length - 1].actor instanceof AuthenticationDialog;
+                if (isAuthenticationDialogDisplayed) {
+                    msWindow.lifecycleState.waitingForAppSince = now;
+                }
                 if (now.getTime() -
                     msWindow.lifecycleState.waitingForAppSince.getTime() >
                     5000) {
@@ -9704,7 +10113,7 @@ let HorizontalPanel = class HorizontalPanel extends St$2.BoxLayout {
         this.clockBin = null;
     }
     vfunc_get_preferred_height(_forWidth) {
-        const height = Me$6.msThemeManager.getPanelSize(this.msWorkspace.monitor.index);
+        const height = Me$6.msThemeManager.getPanelSize();
         return [height, height];
     }
     vfunc_allocate(box) {
@@ -9745,6 +10154,7 @@ const GLib$5 = imports.gi.GLib;
 const { AppSystem } = imports.gi.Shell;
 const { main: Main$4 } = imports.ui;
 const Me$5 = imports.misc.extensionUtils.getCurrentExtension();
+const MAX_FOCUS_HISTORY_LENGTH = 5;
 function isMsWindow(argument) {
     return argument instanceof MsWindow;
 }
@@ -9753,6 +10163,7 @@ class MsWorkspace extends WithSignals {
         super();
         this.tileableList = [];
         this.closing = false;
+        this.focusHistory = [];
         this.msWorkspaceManager = msWorkspaceManager;
         this.setMonitor(monitor);
         const initialState = Object.assign({
@@ -9766,10 +10177,8 @@ class MsWorkspace extends WithSignals {
             layoutKey: Me$5.layoutManager.defaultLayoutKey,
         }, state);
         this._state = Object.assign({}, initialState);
-        this.insertedMsWindow = null;
         this.appLauncher = new MsApplicationLauncher(this);
         this.msWorkspaceCategory = new MsWorkspaceCategory(this, initialState.forcedCategory);
-        this.precedentIndex = initialState.focusedIndex;
         this.msWorkspaceActor = new MsWorkspaceActor(this);
         this.tileableList.push(this.appLauncher);
         const appSys = AppSystem.get_default();
@@ -9809,6 +10218,7 @@ class MsWorkspace extends WithSignals {
         this.msWorkspaceCategory.refreshCategory();
         this.setLayoutByKey(initialState.layoutKey);
         this.emit('tileableList-changed', this.tileableList);
+        this.focusTileable(this.tileableList[initialState.focusedIndex] || null);
         this.connect('tileableList-changed', () => {
             this.msWorkspaceCategory.refreshCategory();
         });
@@ -9852,8 +10262,6 @@ class MsWorkspace extends WithSignals {
     }
     get tileableFocused() {
         logAssert(!this.destroyed, 'Workspace is destroyed');
-        if (!this.tileableList)
-            return null;
         return this.tileableList[this.focusedIndex] || null;
     }
     get msWindowList() {
@@ -9902,11 +10310,12 @@ class MsWorkspace extends WithSignals {
         let insertAt = this.tileableList.length - 1;
         if (insert && this.tileableFocused !== this.appLauncher) {
             insertAt = this.focusedIndex + 1;
-            this.insertedMsWindow = msWindow;
         }
+        const oldFocused = this.tileableFocused;
         this.tileableList.splice(insertAt, 0, msWindow);
-        this.msWorkspaceActor.updateUI();
+        this.focusedIndex = this.tileableList.indexOf(oldFocused);
         await this.emitTileableListChangedOnce();
+        this.msWorkspaceActor.updateUI();
         if (focus) {
             this.focusTileable(msWindow);
         }
@@ -9915,23 +10324,41 @@ class MsWorkspace extends WithSignals {
         logAssert(!this.destroyed, 'Workspace is destroyed');
         if (this.msWindowList.indexOf(msWindow) === -1)
             return;
-        const tileableIsFocused = msWindow === this.tileableFocused;
-        const appLauncherFocused = this.appLauncher === this.tileableFocused;
+        const oldFocused = this.tileableFocused;
         const tileableIndex = this.tileableList.indexOf(msWindow);
         this.tileableList.splice(tileableIndex, 1);
-        if ((tileableIsFocused && this.insertedMsWindow) ||
-            this.focusedIndex > tileableIndex) {
-            this.focusedIndex--;
+        if (oldFocused === msWindow) {
+            let newFocusedIndex;
+            const toFocus = this.popTileableFromFocusHistory();
+            const chronologicalFocusIndex = toFocus !== undefined
+                ? this.tileableList.indexOf(toFocus)
+                : undefined;
+            if (this.layout.preferredFocusHistory === 'chronological' &&
+                chronologicalFocusIndex !== undefined) {
+                newFocusedIndex = chronologicalFocusIndex;
+            }
+            else {
+                newFocusedIndex = Math.max(0, Math.min(this.tileableList.length - 1, this.focusedIndex));
+                if (chronologicalFocusIndex === this.focusedIndex ||
+                    chronologicalFocusIndex === this.focusedIndex - 1) {
+                    newFocusedIndex = chronologicalFocusIndex;
+                }
+                if (newFocusedIndex === this.tileableList.length - 1 &&
+                    this.tileableList.length > 1) {
+                    newFocusedIndex--;
+                }
+                if (newFocusedIndex !== chronologicalFocusIndex &&
+                    chronologicalFocusIndex !== undefined) {
+                    this.pushTileableToFocusHistory(this.tileableList[chronologicalFocusIndex]);
+                }
+            }
+            this.focusedIndex = -1;
+            await this.emitTileableListChangedOnce();
+            this.focusTileable(this.tileableList[newFocusedIndex]);
         }
-        this.focusedIndex = Math.max(0, Math.min(this.tileableList.length - 1, this.focusedIndex));
-        if (!appLauncherFocused &&
-            this.focusedIndex === this.tileableList.length - 1 &&
-            this.tileableList.length > 1) {
-            this.focusedIndex--;
-        }
-        await this.emitTileableListChangedOnce();
-        if (tileableIsFocused) {
-            this.focusTileable(this.tileableList[this.focusedIndex], true);
+        else {
+            this.focusedIndex = this.tileableList.indexOf(oldFocused);
+            await this.emitTileableListChangedOnce();
         }
         this.msWorkspaceActor.updateUI();
         this.refreshFocus();
@@ -10010,26 +10437,43 @@ class MsWorkspace extends WithSignals {
         }
         this.focusTileable(this.appLauncher);
     }
-    focusPrecedentTileable() {
-        if (!this.tileableList || this.tileableList.length < 2)
-            return;
-        if (this.focusedIndex !== this.precedentIndex &&
-            this.precedentIndex < this.tileableList.length) {
-            this.focusTileable(this.tileableList[this.precedentIndex]);
+    focusPreviousTileableFromHistory() {
+        const toFocus = this.popTileableFromFocusHistory();
+        if (toFocus !== undefined)
+            this.focusTileable(toFocus);
+    }
+    maintainTileableFocusHistory() {
+        for (let i = this.focusHistory.length - 1; i >= 0; i--) {
+            if (!this.tileableList.includes(this.focusHistory[i])) {
+                this.focusHistory.splice(i, 1);
+            }
         }
+        while (this.focusHistory.length > MAX_FOCUS_HISTORY_LENGTH)
+            this.focusHistory.splice(0, 1);
+    }
+    pushTileableToFocusHistory(tileable) {
+        logAssert(this.tileableList.includes(tileable), "Tileable doesn't exist in workspace");
+        this.focusHistory.push(tileable);
+        this.maintainTileableFocusHistory();
+    }
+    popTileableFromFocusHistory() {
+        this.maintainTileableFocusHistory();
+        return this.focusHistory.pop();
     }
     focusTileable(tileable, forced = false) {
         if (!tileable || (tileable === this.tileableFocused && !forced)) {
             return;
         }
-        if (tileable !== this.insertedMsWindow) {
-            this.insertedMsWindow = null;
-        }
+        const newFocusIndex = this.tileableList.indexOf(tileable);
+        if (newFocusIndex === -1)
+            return;
         const oldTileableFocused = this.tileableFocused;
-        if (tileable !== this.tileableFocused) {
-            this.precedentIndex = this.focusedIndex;
+        if (tileable !== oldTileableFocused &&
+            oldTileableFocused !== null &&
+            oldTileableFocused instanceof MsWindow) {
+            this.pushTileableToFocusHistory(oldTileableFocused);
         }
-        this.focusedIndex = Math.max(this.tileableList.indexOf(tileable), 0);
+        this.focusedIndex = newFocusIndex;
         if (this.msWorkspaceManager.getActiveMsWorkspace() === this) {
             tileable.grab_key_focus();
         }
@@ -10102,6 +10546,9 @@ class MsWorkspace extends WithSignals {
         }
         else {
             workspace.activate(global.get_current_time());
+            const grab = global.stage.grab(this.tileableFocused);
+            this.refreshFocus();
+            grab.dismiss();
         }
     }
     setMonitor(monitor) {
@@ -10184,6 +10631,7 @@ const Shell = imports.gi.Shell;
 const { main: Main$3, windowManager: windowManager$1 } = imports.ui;
 const Me$4 = imports.misc.extensionUtils.getCurrentExtension();
 const WorkspaceTracker = windowManager$1.WorkspaceTracker;
+const beforeGnome44 = compareVersions(gnomeVersionNumber, parseVersion('44.0')) < 0;
 class MsWorkspaceManager extends MsManager {
     constructor(state = {}) {
         super();
@@ -10263,7 +10711,14 @@ class MsWorkspaceManager extends MsManager {
             return false;
         };
         if (this.workspaceTracker._checkWorkspacesId !== 0) {
-            Meta$1.later_remove(this.workspaceTracker._checkWorkspacesId);
+            if (beforeGnome44) {
+                Meta$1.later_remove(this.workspaceTracker._checkWorkspacesId);
+            }
+            else {
+                global.compositor
+                    .get_laters()
+                    .remove(this.workspaceTracker._checkWorkspacesId);
+            }
             this.workspaceTracker._queueCheckWorkspaces();
         }
         this.observe(Main$3.layoutManager, 'monitors-changed', () => {
@@ -10406,9 +10861,9 @@ class MsWorkspaceManager extends MsManager {
                     !Main$3.layoutManager.monitors.includes(msWorkspace.monitor));
             });
             if (msWorkspace) {
-                const workspace = assertNotNull(this.getWorkspaceOfMsWorkspace(msWorkspace));
                 msWorkspace.setMonitor(externalMonitor);
                 if (!Meta$1.prefs_get_dynamic_workspaces()) {
+                    const workspace = assertNotNull(this.getWorkspaceOfMsWorkspace(msWorkspace));
                     this.workspaceManager.remove_workspace(workspace, global.get_current_time());
                 }
             }
@@ -10617,7 +11072,7 @@ class MsWorkspaceManager extends MsManager {
                 2000) {
             return metaWindow.change_workspace(msWindow.msWorkspace.workspace);
         }
-        this.setWindowToMsWorkspace(msWindow, msWorkspace);
+        this.setWindowToMsWorkspaceWithCreationChaosProtection(msWindow, msWorkspace);
     }
     windowEnteredMonitor(metaWindow, monitorIndex) {
         if (this.updatingMonitors)
@@ -10635,7 +11090,26 @@ class MsWorkspaceManager extends MsManager {
         if (!msWorkspace || !metaWindow.msWindow) {
             return;
         }
-        this.setWindowToMsWorkspace(metaWindow.msWindow, msWorkspace);
+        this.setWindowToMsWorkspaceWithCreationChaosProtection(metaWindow.msWindow, msWorkspace);
+    }
+    setWindowToMsWorkspaceWithCreationChaosProtection(msWindow, newMsWorkspace, insert = false) {
+        assert(msWindow.metaWindow !== null, 'This must be called from an MsWindow with an metaWindow');
+        assert(msWindow.metaWindow.createdAt !== undefined, "Can't tell when this window was created");
+        const lifetime = global.display.get_current_time_roundtrip() -
+            msWindow.metaWindow.createdAt;
+        if (lifetime < 200) {
+            Async.addTimeout(GLib$4.PRIORITY_DEFAULT, 200, () => {
+                if (msWindow.metaWindow != null &&
+                    msWindow.metaWindow.get_monitor() ===
+                        newMsWorkspace.monitor.index) {
+                    this.setWindowToMsWorkspace(msWindow, newMsWorkspace, insert);
+                }
+                return GLib$4.SOURCE_REMOVE;
+            });
+        }
+        else {
+            this.setWindowToMsWorkspace(msWindow, newMsWorkspace, insert);
+        }
     }
     setWindowToMsWorkspace(msWindow, newMsWorkspace, insert = false) {
         const oldMsWorkspace = msWindow.msWorkspace;
