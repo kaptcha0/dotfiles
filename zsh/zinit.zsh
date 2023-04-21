@@ -44,14 +44,14 @@ zinit light jirutka/zsh-shift-select
 
 zinit light sunlei/zsh-ssh
 
-zinit ice wait"2"
+zinit ice wait lucid
 zinit light hlissner/zsh-autopair
 
 zinit light marlonrichert/zsh-autocomplete
 zinit light zsh-users/zsh-syntax-highlighting
 
-zinit ice wait"1"
+zinit ice wait lucid
 zinit light Aloxaf/fzf-tab
 
-zinit self-update
-zinit update --parallel
+( zinit self-update > $ZSH/logs/zinit-self-update.log 2>&1 & )
+( zinit update --all > $ZSH/logs/zinit-update.log 2>&1 & )

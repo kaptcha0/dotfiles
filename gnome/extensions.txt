@@ -2,11 +2,8 @@ user-theme@gnome-shell-extensions.gcampax.github.com
 appindicatorsupport@rgcjonas.gmail.com
 drive-menu@gnome-shell-extensions.gcampax.github.com
 dash-to-dock@micxgx.gmail.com
-dash-animator@icedman.github.com
 gestureImprovements@gestures
 tiling-assistant@leleat-on-github
 top-bar-organizer@julian.gse.jsts.xyz
 blur-my-shell@aunetx
-search-light@icedman.github.com
-clipboard-indicator@tudmotu.com
 just-perfection-desktop@just-perfection

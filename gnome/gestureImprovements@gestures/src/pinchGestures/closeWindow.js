@@ -48,6 +48,9 @@ var CloseWindowExtension = class CloseWindowExtension {
 	}
 
 	gestureBegin(tracker) {
+		// if we are currently in middle of animations, ignore this event
+		if (this._focusWindow)
+			return;
 		this._focusWindow = global.display.get_focus_window();
 		if (!this._focusWindow)
 			return;
@@ -113,5 +116,6 @@ var CloseWindowExtension = class CloseWindowExtension {
 		this._preview.hide();
 		this._preview.opacity = 255;
 		this._preview.set_scale(1, 1);
+		this._focusWindow = undefined;
 	}
 };

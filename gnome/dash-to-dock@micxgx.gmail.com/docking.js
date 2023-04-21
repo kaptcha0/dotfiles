@@ -1652,19 +1652,38 @@ var DockManager = class DashToDockDockManager {
 
         Me.imports.extension.dockManager = this;
 
-        this._iconTheme = new Utils.IconTheme();
-        this._remoteModel = new LauncherAPI.LauncherEntryRemoteModel();
         this._signalsHandler = new Utils.GlobalSignalsHandler(this);
         this._methodInjections = new Utils.InjectionsHandler(this);
         this._vfuncInjections = new Utils.VFuncInjectionsHandler(this);
         this._propertyInjections = new Utils.PropertyInjectionsHandler(this);
         this._settings = ExtensionUtils.getSettings('org.gnome.shell.extensions.dash-to-dock');
         this._appSwitcherSettings = new Gio.Settings({ schema_id: 'org.gnome.shell.app-switcher' });
+        this._mapSettingsValues();
+
+        this._iconTheme = new Utils.IconTheme();
+
         this._desktopIconsUsableArea = new DesktopIconsIntegration.DesktopIconsUsableAreaClass();
         this._oldDash = Main.overview.isDummy ? null : Main.overview.dash;
         this._discreteGpuAvailable = AppDisplay.discreteGpuAvailable;
         this._appSpread = new AppSpread.AppSpread();
         this._notificationsMonitor = new NotificationsMonitor.NotificationsMonitor();
+
+        const needsRemoteModel = () =>
+            !this._notificationsMonitor.dndMode && this._settings.showIconsEmblems;
+        if (needsRemoteModel)
+            this._remoteModel = new LauncherAPI.LauncherEntryRemoteModel();
+
+        const ensureRemoteModel = () => {
+            if (needsRemoteModel && !this._remoteModel) {
+                this._remoteModel = new LauncherAPI.LauncherEntryRemoteModel();
+            } else if (!needsRemoteModel && this._remoteModel) {
+                this._remoteModel.destroy();
+                delete this._remoteModel;
+            }
+        };
+
+        this._notificationsMonitor.connect('changed', ensureRemoteModel);
+        this._settings.connect('changed::show-icons-emblems', ensureRemoteModel);
 
         if (this._discreteGpuAvailable === undefined) {
             const updateDiscreteGpuAvailable = () => {
@@ -1885,7 +1904,7 @@ var DockManager = class DashToDockDockManager {
             });
     }
 
-    _bindSettingsChanges() {
+    _mapSettingsValues() {
         this.settings.settingsSchema.list_keys().forEach(key => {
             const camelKey = key.replace(/-([a-z\d])/g, k => k[1].toUpperCase());
             const updateSetting = () => {
@@ -1906,7 +1925,9 @@ var DockManager = class DashToDockDockManager {
         Object.defineProperties(this.settings, {
             dockExtended: { get: () => this.settings.extendHeight },
         });
+    }
 
+    _bindSettingsChanges() {
         // Connect relevant signals to the toggling function
         this._signalsHandler.addWithLabel(Labels.SETTINGS, [
             Utils.getMonitorManager(),
@@ -2549,7 +2570,7 @@ var DockManager = class DashToDockDockManager {
         this._removables?.destroy();
         this._removables = null;
         this._iconTheme.destroy();
-        this._remoteModel.destroy();
+        this._remoteModel?.destroy();
         this._settings.run_dispose();
         this._settings = null;
         this._appSwitcherSettings = null;
@@ -2601,10 +2622,10 @@ var IconAnimator = class DashToDockIconAnimator {
         this._count = 0;
         this._started = false;
         this._animations = {
-            dance: [],
+            wiggle: [],
         };
         this._timeline = new Clutter.Timeline({
-            duration: Environment.adjustAnimationTime(ICON_ANIMATOR_DURATION),
+            duration: Environment.adjustAnimationTime(ICON_ANIMATOR_DURATION) || 1,
             repeat_count: -1,
             actor,
         });
@@ -2615,15 +2636,16 @@ var IconAnimator = class DashToDockIconAnimator {
 
         this._timeline.connect('new-frame', () => {
             const progress = this._timeline.get_progress();
-            const danceRotation = progress < 1 / 6 ? 15 * Math.sin(progress * 24 * Math.PI) : 0;
-            const dancers = this._animations.dance;
-            for (let i = 0, iMax = dancers.length; i < iMax; i++)
-                dancers[i].target.rotation_angle_z = danceRotation;
+            const wiggleRotation = progress < 1 / 6 ? 15 * Math.sin(progress * 24 * Math.PI) : 0;
+            const wigglers = this._animations.wiggle;
+            for (let i = 0, iMax = wigglers.length; i < iMax; i++)
+                wigglers[i].target.rotation_angle_z = wiggleRotation;
         });
     }
 
     _updateSettings() {
-        this._timeline.set_duration(Environment.adjustAnimationTime(ICON_ANIMATOR_DURATION));
+        this._timeline.set_duration(
+            Environment.adjustAnimationTime(ICON_ANIMATOR_DURATION) || 1);
     }
 
     destroy() {

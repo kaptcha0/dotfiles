@@ -5,9 +5,10 @@
   "settings-schema": "org.gnome.shell.extensions.top-bar-organizer",
   "shell-version": [
     "42",
-    "43"
+    "43",
+    "44"
   ],
   "url": "https://gitlab.gnome.org/julianschacher/top-bar-organizer",
   "uuid": "top-bar-organizer@julian.gse.jsts.xyz",
-  "version": 7
+  "version": 9
 }

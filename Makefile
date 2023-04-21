@@ -10,6 +10,13 @@
 	gnome-extensions list --enabled > ./gnome/extensions.txt
 	
 	@echo ""
+	
+	@echo "GRADIENCE PRESETS"
+	@echo "================"
+	@echo "Copying files"
+	cp -vr ~/.var/app/com.github.GradienceTeam.Gradience/config/presets/ ./gnome/gradience
+	
+	@echo ""
 
 ./brew/:
 	@echo "HOMEBREW"

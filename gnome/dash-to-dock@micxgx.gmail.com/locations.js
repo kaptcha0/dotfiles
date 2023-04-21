@@ -32,7 +32,7 @@ const FILE_MANAGER_DESKTOP_APP_ID = 'org.gnome.Nautilus.desktop';
 const ATTRIBUTE_METADATA_CUSTOM_ICON = 'metadata::custom-icon';
 const TRASH_URI = 'trash://';
 const UPDATE_TRASH_DELAY = 1000;
-const LAUNCH_HANDLER_MAX_WAIT = 500;
+const LAUNCH_HANDLER_MAX_WAIT = 200;
 
 const NautilusFileOperations2Interface = '<node>\
     <interface name="org.gnome.Nautilus.FileOperations2">\
@@ -114,6 +114,13 @@ var LocationAppInfo = GObject.registerClass({
             Gio.Cancellable.$gtype),
     },
 }, class LocationAppInfo extends Gio.DesktopAppInfo {
+    static get GJS_BINARY_PATH() {
+        if (!this._gjsBinaryPath)
+            this._gjsBinaryPath = GLib.find_program_in_path('gjs');
+
+        return this._gjsBinaryPath;
+    }
+
     list_actions() {
         return [];
     }
@@ -169,13 +176,7 @@ var LocationAppInfo = GObject.registerClass({
                 Gio.IOErrorEnum.NOT_SUPPORTED, 'Launching with files not supported');
         }
 
-        const handler = this.getHandlerApp();
-        if (handler)
-            return handler.launch_uris([this.location.get_uri()], context);
-
-        const [ret] = GLib.spawn_async(null, this._getFallbackCommandLine().split(' '),
-            context?.get_environment() || null, GLib.SpawnFlags.SEARCH_PATH, null);
-        return ret;
+        return this.getHandlerApp().launch_uris([this.location.get_uri()], context);
     }
 
     vfunc_supports_uris() {
@@ -226,8 +227,11 @@ var LocationAppInfo = GObject.registerClass({
     }
 
     vfunc_get_commandline() {
-        return this.getHandlerApp()?.get_commandline() ??
-            this._getFallbackCommandLine();
+        try {
+            return this.getHandlerApp().get_commandline();
+        } catch {
+            return this._getFallbackCommandLine();
+        }
     }
 
     vfunc_get_display_name() {
@@ -327,7 +331,7 @@ var LocationAppInfo = GObject.registerClass({
             if (!GJS_SUPPORTS_FILE_IFACE_PROMISES) {
                 Gio._promisify(this.location.constructor.prototype,
                     'query_default_handler_async',
-                    'query_default_handler_async_finish');
+                    'query_default_handler_finish');
             }
 
             return await this.location.query_default_handler_async(
@@ -345,60 +349,68 @@ var LocationAppInfo = GObject.registerClass({
         }
     }
 
-    getHandlerApp(cancellable) {
+    _getHandlerAppFromWorker(cancellable) {
+        const locationsWorker = GLib.build_filenamev([Me.path,
+            'locationsWorker.js']);
+        const locationsWorkerArgs = [LocationAppInfo.GJS_BINARY_PATH,
+            locationsWorker, 'handler', this.location.get_uri(),
+            '--timeout', `${LAUNCH_HANDLER_MAX_WAIT}`];
+        const subProcess = Gio.Subprocess.new(locationsWorkerArgs,
+            Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE);
+
+        try {
+            const [, stdOut, stdErr] = subProcess.communicate(null, cancellable);
+            subProcess.wait(cancellable);
+            const errorCode = subProcess.get_exit_status();
+
+            if (errorCode) {
+                const errorLines = imports.byteArray.toString(
+                    stdErr.get_data()).split('\n');
+
+                const error = new GLib.Error(Gio.IOErrorEnum,
+                    errorCode === GLib.MAXUINT8 ? 0 : errorCode, errorLines[0]);
+                error.stack = `${errorLines.slice(3).join('\n')}${error.stack}`;
+                throw error;
+            }
+
+            const desktopId = imports.byteArray.toString(stdOut.get_data()).trim();
+            const handlerApp = Shell.AppSystem.get_default().lookup_app(desktopId)?.appInfo;
+            return handlerApp;
+        } finally {
+            subProcess.force_exit();
+        }
+    }
+
+    getHandlerApp() {
         if (this._handlerApp)
             return this._handlerApp;
 
-        cancellable = cancellable ?? new Utils.CancellableChild(this.cancellable);
+        if (!this.location)
+            return null;
 
-        if (this._launchMaxWaitIds === undefined)
-            this._launchMaxWaitIds = new Set();
+        const cancellable = new Utils.CancellableChild(this.cancellable);
 
-        // GVfs providers could hang when querying the file informations, so we
-        // workaround this by using the async API in a sync way, but we need to
-        // use a timeout to avoid this to hang forever, better than hang the
-        // shell.
-        let handler, error, launchMaxWaitId;
-        Promise.race([
-            this._getHandlerAppAsync(cancellable),
-            new Promise((resolve, reject) => {
-                launchMaxWaitId = GLib.timeout_add(GLib.PRIORITY_DEFAULT,
-                    LAUNCH_HANDLER_MAX_WAIT, () => {
-                        this._launchMaxWaitIds.delete(launchMaxWaitId);
-                        launchMaxWaitId = 0;
-                        cancellable.cancel();
-                        reject(new GLib.Error(Gio.IOErrorEnum,
-                            Gio.IOErrorEnum.TIMED_OUT,
-                            `Searching for ${this.get_id()} handler took too long`));
-                        return GLib.SOURCE_REMOVE;
-                    });
-                this._launchMaxWaitIds.add(launchMaxWaitId);
-            }),
-        ]).then(h => (handler = h)).catch(e => (error = e));
+        try {
+            if (LocationAppInfo.GJS_BINARY_PATH)
+                this._handlerApp = this._getHandlerAppFromWorker(cancellable);
+            else
+                this._handlerApp = this.location.query_default_handler(cancellable);
+        } catch (e) {
+            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_MOUNTED))
+                return getFileManagerApp()?.appInfo;
 
-        while (handler === undefined && error === undefined)
-            GLib.MainContext.default().iteration(false);
+            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED)) {
+                logError(e, 'Impossible to find an URI handler for %s'.format(
+                    this.get_id()));
+            }
 
-        if (launchMaxWaitId) {
-            GLib.source_remove(launchMaxWaitId);
-            this._launchMaxWaitIds.delete(launchMaxWaitId);
+            throw e;
         }
 
-        if (this._handlerApp && error?.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.TIMED_OUT))
-            return this._handlerApp;
-
-        if (error)
-            throw error;
-
-        if (handler)
-            this._handlerApp = handler;
-
-        return handler;
+        return this._handlerApp;
     }
 
     destroy() {
-        this._launchMaxWaitIds?.forEach(id => GLib.source_remove(id));
-        this._launchMaxWaitIds = null;
         this.location = null;
         this.icon = null;
         this.name = null;
@@ -1055,6 +1067,9 @@ function makeLocationApp(params) {
     // FIXME: We need to add a new API to Nautilus to open new windows
     shellApp._mi('can_open_new_window', () => {
         try {
+            if (!shellApp.get_n_windows())
+                return true;
+
             const handlerApp = shellApp.appInfo.getHandlerApp();
 
             if (handlerApp.has_key('SingleMainWindow'))
@@ -1078,10 +1093,16 @@ function makeLocationApp(params) {
 
     shellApp._mi('open_new_window', function (_om, workspace) {
         const context = global.create_app_launch_context(0, workspace);
-        GLib.spawn_async(null,
-            [...this.appInfo.get_commandline().split(' ').filter(
-                t => !t.startsWith('%')), this.appInfo.location.get_uri()],
-            context.get_environment(), GLib.SpawnFlags.SEARCH_PATH, null);
+        if (!this.get_n_windows()) {
+            this.appInfo.launch([], context);
+            return;
+        }
+        const appId = this.appInfo.get_id();
+        Gio.AppInfo.create_from_commandline(this.appInfo.get_commandline(),
+            this.appInfo.get_id(), appId
+                ? Gio.AppInfoCreateFlags.SUPPORTS_STARTUP_NOTIFICATION
+                : Gio.AppInfoCreateFlags.NONE).launch_uris(
+            [this.appInfo.location.get_uri()], context);
     });
 
     if (shellApp.appInfo instanceof MountableVolumeAppInfo) {
