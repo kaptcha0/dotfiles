@@ -9,4 +9,11 @@ export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/opt/metasploit-framework/bin"
 export PATH="$PATH:$(go env GOPATH)/bin"
-source "/home/kaptcha/.rover/env"
+
+if [ -d $HOME/.nix-profile/etc/profile.d ]; then
+  for i in $HOME/.nix-profile/etc/profile.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+fi

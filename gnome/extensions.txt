@@ -4,6 +4,8 @@ drive-menu@gnome-shell-extensions.gcampax.github.com
 dash-to-dock@micxgx.gmail.com
 gestureImprovements@gestures
 tiling-assistant@leleat-on-github
-top-bar-organizer@julian.gse.jsts.xyz
 blur-my-shell@aunetx
+clipboard-indicator@tudmotu.com
 just-perfection-desktop@just-perfection
+RemoveAppMenu@Dragon8oy.com
+widgets@aylur

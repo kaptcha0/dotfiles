@@ -23,18 +23,25 @@ zinit snippet OMZ::plugins/sudo
 ## Completion
 zinit ice svn blockf
 zinit snippet OMZ::plugins/docker
+
 zinit ice svn blockf
 zinit snippet OMZ::plugins/git
+
 zinit ice svn blockf
 zinit snippet OMZ::plugins/fzf
+
 zinit ice svn blockf
 zinit snippet OMZ::plugins/kubectl
+
+zinit ice blockf
+zinit light nix-community/nix-zsh-completions
+
 zinit ice svn blockf
 zinit snippet OMZ::plugins/nmap
-zinit ice svn blockf
-zinit snippet OMZ::plugins/nvm
+
 zinit ice blockf
 zinit light zsh-users/zsh-completions
+
 zinit ice svn
 zinit snippet OMZ::plugins/z
 

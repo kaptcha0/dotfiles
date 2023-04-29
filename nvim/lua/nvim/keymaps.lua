@@ -17,7 +17,7 @@ map('n', '<s-tab>', '<cmd>bprevious<cr>', { silent = true })
 map('i', '<c-s-tab>', '<cmd>bprevious<cr>', { silent = true })
 
 -- Split window
-map('n', 'ss', '<cmd>split<cr><c-w>w', { silent = true })
+map('n', 'sh', '<cmd>split<cr><c-w>w', { silent = true })
 map('n', 'sv', '<cmd>vsplit<cr><c-w>w', { silent = true })
 
 -- Move window

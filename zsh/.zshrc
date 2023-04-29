@@ -10,7 +10,6 @@ setopt SHARE_HISTORY
 # User configuration
 
 eval "$(starship init zsh)"
-eval "$(pyenv init -)"
 
 source "$ZSH/themes/current.zsh"
 
