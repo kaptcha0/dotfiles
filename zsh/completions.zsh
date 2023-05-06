@@ -2,10 +2,11 @@ autoload -Uz compinit
 compinit
 
 source <(gh completion --shell zsh)
-source <(buf completion zsh)
+
+fpath=($HOME/.nix-profile/share/zsh/site-functions $fpath)
 
 if type brew &>/dev/null
 then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 fi
 

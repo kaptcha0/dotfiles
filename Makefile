@@ -3,11 +3,11 @@
 	@echo "================"
 	
 	@echo "Backing up actual extensions"
-	cp -vr ~/.local/share/gnome-shell/extensions/ ./gnome
+	cp -vr ~/.local/share/gnome-shell/extensions/ ./gnome/extensions
 	@echo ""
 	
 	@echo "Saving enabled extension list to file"
-	gnome-extensions list --enabled > ./gnome/extensions.txt
+	gnome-extensions list --enabled > ./gnome/extensions/extensions.txt
 	
 	@echo ""
 	
