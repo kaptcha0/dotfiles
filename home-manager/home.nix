@@ -47,7 +47,6 @@ in
       bettercap
       hashcat
       john
-      metasploit
       nixpkgsUnstable.radare2
       volatility3
 
@@ -61,8 +60,9 @@ in
       nodejs
       nodePackages_latest.pnpm
       nodePackages_latest.yarn
-      skaffold
       python3Full
+      skaffold
+      virtualenv
     ];
   };
 }

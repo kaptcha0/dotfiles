@@ -1,3 +1,6 @@
 [submodule "zsh/fzf-tab-completion"]
 	path = zsh/fzf-tab-completion
 	url = https://github.com/lincheney/fzf-tab-completion.git
+[submodule "catppuccin-gtk"]
+	path = catppuccin-gtk
+	url = http://github.com/catppuccin/gtk.git
