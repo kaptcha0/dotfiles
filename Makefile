@@ -1,16 +1,21 @@
-./gnome/:
+./gnome/extensions:
 	@echo "GNOME EXTENSIONS"
 	@echo "================"
 	
+	mkdir -p $@
+	
 	@echo "Backing up actual extensions"
-	cp -vr ~/.local/share/gnome-shell/extensions/ ./gnome/extensions
+	rsync -av --exclude='**/*cache*' ~/.local/share/gnome-shell/extensions ./gnome/extensions
+	# cp -vr ~/.local/share/gnome-shell/extensions/ ./gnome/extensions
 	@echo ""
 	
 	@echo "Saving enabled extension list to file"
 	gnome-extensions list --enabled > ./gnome/extensions/extensions.txt
 	
 	@echo ""
-	
+
+./gnome/gradience:
+	mkdir -p $@
 	@echo "GRADIENCE PRESETS"
 	@echo "================"
 	@echo "Copying files"
@@ -32,7 +37,7 @@
 	
 	@echo ""
 
-backup: ./gnome/ ./brew/
+backup: ./gnome/gradience ./gnome/extensions ./brew/
 	@echo "$^ updated"
 
 to_unix:

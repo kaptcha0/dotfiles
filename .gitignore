@@ -12,3 +12,4 @@ nvim/plugin
 
 zsh/cache
 zsh/logs
+**/*cache*

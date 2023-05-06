@@ -1,0 +1,27 @@
+
+.gnome-clipboard .modal-dialog {
+    min-width: 400px;
+}
+
+.gnome-clipboard .scroll-view {
+    height: 500px;
+    width: 360px;
+}
+
+.gnome-clipboard .search-box {
+    width: auto;
+}
+
+.gnome-clipboard .action-bar {
+    padding: 0;
+    margin: 0px 8px 0px 0px;
+}
+
+.gnome-clipboard .action-bar-btn {
+    margin: 0px 4px 0px 4px;
+    padding: 4px 12px 4px 12px;
+}
+
+.gnome-clipboard .pin-icon {
+    width: 20px;
+}
