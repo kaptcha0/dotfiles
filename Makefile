@@ -6,7 +6,6 @@
 	
 	@echo "Backing up actual extensions"
 	rsync -av --exclude='**/*cache*' ~/.local/share/gnome-shell/extensions ./gnome/extensions
-	# cp -vr ~/.local/share/gnome-shell/extensions/ ./gnome/extensions
 	@echo ""
 	
 	@echo "Saving enabled extension list to file"

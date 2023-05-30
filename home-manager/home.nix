@@ -38,13 +38,17 @@ in
       htop
       lazydocker
       lazygit
+      ltrace
       ripgrep
       starship
+      strace
       viddy
       nixpkgsUnstable.wl-clipboard
 
       ## Security
       bettercap
+      cewl
+      gobuster
       hashcat
       john
       nixpkgsUnstable.radare2
@@ -60,7 +64,6 @@ in
       nodejs
       nodePackages_latest.pnpm
       nodePackages_latest.yarn
-      python3Full
       skaffold
       virtualenv
     ];
