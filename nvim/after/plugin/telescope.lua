@@ -26,10 +26,9 @@ telescope.setup({
         ['C-q'] = actions.close,
       },
     },
-    prompt_prefix = ' ',
+    prompt_prefix = '⠕ ',
     selection_caret = ' '
   },
-  
   extensions = {
     ['ui-select'] = {
       require('telescope.themes').get_cursor(),

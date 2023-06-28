@@ -26,6 +26,7 @@ in
 
     packages = with pkgs; [
       ## Utilities
+      bat
       binutils
       coreutils-full
       exa
@@ -42,8 +43,8 @@ in
       ripgrep
       starship
       strace
+      tree
       viddy
-      nixpkgsUnstable.wl-clipboard
 
       ## Security
       bettercap
@@ -56,14 +57,10 @@ in
 
       ## Development
       cmake
-      go
       kube3d
       kubectl
       kubernetes-helm
       kustomize
-      nodejs
-      nodePackages_latest.pnpm
-      nodePackages_latest.yarn
       skaffold
       virtualenv
     ];

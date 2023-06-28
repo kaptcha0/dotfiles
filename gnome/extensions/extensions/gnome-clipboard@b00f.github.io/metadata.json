@@ -7,9 +7,10 @@
     "40",
     "41",
     "42",
-    "43"
+    "43",
+    "44"
   ],
   "url": "https://github.com/b00f/gnome-clipboard",
   "uuid": "gnome-clipboard@b00f.github.io",
-  "version": 19
+  "version": 20
 }

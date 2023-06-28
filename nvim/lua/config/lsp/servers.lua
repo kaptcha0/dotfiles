@@ -1,6 +1,8 @@
 local M = {}
 
 M.servers = {
+  'ansible-lint',
+  'ansible-language-server',
   'bash-language-server',
   'clangd',
   'css-lsp',

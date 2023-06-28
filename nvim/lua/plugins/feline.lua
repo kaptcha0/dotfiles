@@ -1,7 +1,24 @@
-local colors = require('utils.colors')
+-- local colors = require('utils.colors')
 local lsp = require('feline.providers.lsp')
 local vi_mode_utils = require('feline.providers.vi_mode')
 local navic = require('nvim-navic')
+
+local palette = require('catppuccin.palettes').get_palette()
+local colors = {
+  fg = palette.text,
+  bg = palette.base,
+  black = palette.crust,
+  skyblue = palette.sky,
+  cyan = palette.teal,
+  green = palette.green,
+  oceanblue = palette.blue,
+  magenta = palette.mauve,
+  orange = palette.peach,
+  red = palette.red,
+  violet = palette.lavender,
+  white = palette.text,
+  yellow = palette.yellow,
+}
 
 local vi_mode_colors = {
   NORMAL = colors.green,
@@ -25,10 +42,10 @@ local icons = {
   macos = ' ',
   windows = ' ',
 
-  errs = ' ',
-  warns = ' ',
-  infos = ' ',
-  hints = ' ',
+  errs = '○',
+  warns = '○',
+  infos = '○',
+  hints = '○',
 
   lsp = ' ',
   git = '',
@@ -80,12 +97,12 @@ end
 local comps = {
   vi_mode = {
     left = {
-      provider = '▊',
+      provider = '',
       hl = vimode_hl,
       right_sep = ' ',
     },
     right = {
-      provider = '▊',
+      provider = '',
       hl = vimode_hl,
       left_sep = ' ',
     },
@@ -130,7 +147,7 @@ local comps = {
     left_sep = ' ',
     hl = {
       fg = colors.blue,
-      style = 'bold',
+      -- style = 'bold',
     },
   },
   diagnos = {
@@ -235,13 +252,16 @@ local properties = {
 local active = {
   {
     comps.vi_mode.left,
-    comps.file.info,
-  },
-  {
     comps.diagnos.err,
     comps.diagnos.warn,
     comps.diagnos.hint,
     comps.diagnos.info,
+  },
+  {
+    comps.navic,
+  },
+  {
+    comps.lsp.name,
 
     comps.git.add,
     comps.git.change,
@@ -249,26 +269,15 @@ local active = {
     comps.git.branch,
     comps.file.os,
     comps.line_percentage,
-    comps.scroll_bar,
     comps.vi_mode.right,
   },
 }
 
-local inactive = {
-  {
-    comps.vi_mode.left,
-    comps.file.info,
-  },
-  {
-    comps.vi_mode.right,
-  },
-}
+local inactive = {}
 
 local feline = require('feline')
 
 feline.setup({
-  default_bg = colors.bg,
-  default_fg = colors.fg,
   components = {
     active = active,
     inactive = inactive,
@@ -277,22 +286,4 @@ feline.setup({
   vi_mode_colors = vi_mode_colors,
 })
 
-local winbar_active = {
-  {
-    comps.vi_mode.left,
-    comps.navic,
-  },
-  {
-    comps.lsp.name,
-    comps.vi_mode.right,
-  },
-}
-
-local winbar_inactive = {}
-
-feline.winbar.setup({
-  components = {
-    active = winbar_active,
-    inactive = winbar_inactive,
-  },
-})
+feline.use_theme(colors)

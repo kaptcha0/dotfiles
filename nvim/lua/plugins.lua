@@ -28,6 +28,7 @@ return require('packer').startup({
     use('cohama/lexima.vim')
     use('nvim-lua/popup.nvim')
     use('nvim-lua/plenary.nvim')
+
     -- LSP --
     use('WhoIsSethDaniel/mason-tool-installer.nvim')
     use({
@@ -64,7 +65,6 @@ return require('packer').startup({
     use('hrsh7th/cmp-nvim-lua')
     use('David-Kunz/cmp-npm')
     use('petertriho/cmp-git')
-    use({ 'rcarriga/cmp-dap', after = 'nvim-dap' })
     use('L3MON4D3/LuaSnip')
     use('Saecki/crates.nvim')
 
@@ -94,7 +94,12 @@ return require('packer').startup({
     -- Editor --
     use('voldikss/vim-floaterm')
     use('b0o/schemastore.nvim')
-    use('simrat39/symbols-outline.nvim')
+    use({
+      'simrat39/symbols-outline.nvim',
+      config = function()
+        require('symbols-outline').setup()
+      end,
+    })
 
     use({
       'nvim-treesitter/nvim-treesitter',
@@ -115,45 +120,6 @@ return require('packer').startup({
       end,
     })
 
-    use({
-      'folke/trouble.nvim',
-      config = function()
-        require('trouble').setup()
-      end,
-    })
-
-    use({
-      'iamcco/markdown-preview.nvim',
-      run = 'cd app && npm install',
-      setup = function()
-        vim.g.mkdp_filetypes = { 'markdown' }
-      end,
-      ft = { 'markdown' },
-    })
-
-    -- Debugger --
-    use('rcarriga/nvim-dap-ui')
-    use('mfussenegger/nvim-dap-python')
-    use('jbyuki/one-small-step-for-vimkind')
-    use({ 'simrat39/rust-tools.nvim', after = 'nvim-lspconfig' })
-
-    use({
-      'mxsdev/nvim-dap-vscode-js',
-      requires = {
-        'microsoft/vscode-js-debug',
-        opt = true,
-        run = 'npm install --legacy-peer-deps && npm run compile',
-      },
-    })
-
-    use({
-      'mfussenegger/nvim-dap',
-      after = { 'nvim-dap-python', 'rust-tools.nvim', 'nvim-dap-ui', 'nvim-dap-vscode-js' },
-      config = function()
-        require('plugins.nvim-dap').setup()
-      end,
-    })
-    --
     -- Files --
     use('kyazdani42/nvim-tree.lua')
     use('nvim-telescope/telescope.nvim')
@@ -167,14 +133,14 @@ return require('packer').startup({
 
     use({
       'nanozuki/tabby.nvim',
+      after = 'catppuccin',
       config = function()
-        -- require('plugins.tabby')
+        require('plugins.tabby')
       end,
     })
 
     use({
       'freddiehaddad/feline.nvim',
-      -- disable = true,
       after = 'catppuccin',
       config = function()
         require('plugins.feline')

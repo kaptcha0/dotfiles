@@ -82,3 +82,14 @@ end, {})
 
 map('n', '<s-a-f>', '<cmd>Format<cr>', { silent = true })
 map('i', '<s-a-f>', '<cmd>Format<cr>', { silent = true })
+
+-- Tabs
+map('n', '<leader>ta', ':$tabnew<CR>', { noremap = true })
+map('n', '<leader>tc', ':tabclose<CR>', { noremap = true })
+map('n', '<leader>to', ':tabonly<CR>', { noremap = true })
+map('n', '<leader>tn', ':tabn<CR>', { noremap = true })
+map('n', '<leader>tp', ':tabp<CR>', { noremap = true })
+-- move current tab to previous position
+map('n', '<leader>tmp', ':-tabmove<CR>', { noremap = true })
+-- move current tab to next position
+map('n', '<leader>tmn', ':+tabmove<CR>', { noremap = true })

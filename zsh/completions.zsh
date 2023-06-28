@@ -2,6 +2,7 @@ autoload -Uz compinit
 compinit
 
 source <(gh completion --shell zsh)
+source <(gobuster completion zsh)
 
 fpath=($HOME/.nix-profile/share/zsh/site-functions $fpath)
 

@@ -1,26 +1,5 @@
 -- Tabby
 -- https://github.com/UserEast/nightfox.nvim/tree/main/mics/tabby.lua
---
--- This file is a complete example of creating the tabby configuration shown in the readme of
--- nightfox. This configuration generates its own highlight groups from the currently applied
--- colorscheme. These highlight groups are regenreated on colorscheme changes.
---
--- Required plugins:
---    - `nanozuki/tabby.nvim`
---
--- This file is required to be in your `lua` folder of your config.  Your colorscheme should also
--- be applied before this file is sourced. This file cannot be located `lua/tabby.lua` as this
--- would clash with the actual plugin require path.
---
---
--- # Example:
---
--- ```lua
--- vim.cmd("colorscheme nightfox")
--- require('user.ui.tabby')
--- ```
---
--- This assumes that this file is located at `lua/user/ui/tabby.lua`
 
 local fmt = string.format
 

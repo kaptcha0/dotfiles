@@ -54,8 +54,11 @@ zinit light sunlei/zsh-ssh
 zinit ice wait lucid
 zinit light hlissner/zsh-autopair
 
-zinit light marlonrichert/zsh-autocomplete
+
+zinit ice wait lucid
 zinit light zsh-users/zsh-syntax-highlighting
+
+zinit light zsh-users/zsh-autosuggestions
 
 zinit ice wait lucid
 zinit light Aloxaf/fzf-tab

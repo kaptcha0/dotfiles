@@ -1,4 +1,3 @@
-alias bettercap="sudo $(which bettercap)"
 alias cbcopy="xclip -selection clipboard"
 alias cbpaste="xclip -selection clipboard -o"
 alias cp="cp -i"
@@ -11,4 +10,6 @@ alias rm="rm -i"
 alias vim="nvim"
 alias watch="viddy"
 alias which="command -v"
-alias wireshark="sudo $(which wireshark)"
+
+alias bettercap="esudo bettercap"
+alias wireshark="esudo wireshark"
