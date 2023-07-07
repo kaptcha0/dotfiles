@@ -41,6 +41,7 @@ in
       lazygit
       ltrace
       ripgrep
+      sqlmap
       starship
       strace
       tree
