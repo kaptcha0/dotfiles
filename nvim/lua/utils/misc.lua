@@ -2,8 +2,8 @@ local M = {}
 
 -- Merge 2 or more tables together
 -- Later tables will override earlier ones
--- @param ... table[]
--- @return table
+---@param ... table[]
+---@return table
 function M.merge(...)
   local temp = {}
   local index = 1
@@ -39,8 +39,8 @@ function M.merge(...)
 end
 
 -- Joins path segments with no separators in them
--- @param ... string[]
--- @return string
+---@param ... string[]
+---@return string
 function M.join(...)
   local sep = IS_WINDOWS and '\\' or '/'
   local segments = { ... }
@@ -57,4 +57,21 @@ function M.join(...)
   return path:gsub((not IS_WINDOWS and '\\' or '/'), sep)
 end
 
+-- Returns the elements from the given list. This function is equivalent to
+--```lua
+--     return list[i], list[i+1], ···, list[j]
+--```
+-- By default, `i` is `1` and `j` is `#list`.
+---@generic T
+---@param list T[]
+---@param i integer?
+---@param j integer?
+---@return T
+function M.unpack(list, i, j)
+  if not table.unpack == nil then
+    return table.unpack(list, i, j)
+  end
+
+  return unpack(list, i, j)
+end
 return M

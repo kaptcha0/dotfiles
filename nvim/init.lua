@@ -1,6 +1,5 @@
 -- Fundamentals
 vim.o.enc = 'utf-8'
-vim.o.nocompatible = true
 vim.o.number = true
 vim.o.fileencodings = 'utf-8,sjis,euc-jp,latin'
 vim.cmd([[syntax enable]])
@@ -10,7 +9,6 @@ vim.o.autoindent = true
 vim.o.smartindent = true
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
-vim.o.nobackup = true
 vim.o.hlsearch = true
 vim.o.cmdheight = 1
 vim.o.laststatus = 2
@@ -20,10 +18,7 @@ vim.o.backupskip = '/tmp/*,/private/tmp/*'
 vim.o.inccommand = 'split'
 
 vim.o.t_BE = nil
-
-vim.o.nosc = true
-vim.o.noru = true
-vim.o.nosm = true
+vim.o.ruler = false
 
 vim.o.lazyredraw = true
 vim.o.ignorecase = true
@@ -105,7 +100,7 @@ if vim.fn.exists('&termguicolors') and vim.fn.exists('&winblend') then
   vim.o.termguicolors = true
   vim.o.winblend = 10
   vim.o.wildoptions = 'pum'
-  vim.o.publend = 5
+  vim.o.pumblend = 5
   vim.o.background = 'dark'
 end
 

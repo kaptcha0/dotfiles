@@ -2,6 +2,7 @@ local M = {}
 local utils = require('utils')
 
 M.tool_names = {
+  'ansible-lint',
   'csharpier',
   {
     'editorconfig_checker',
@@ -9,12 +10,7 @@ M.tool_names = {
   },
   'eslint',
   'flake8',
-  {
-    'golangci_lint',
-    alias = 'golangci-lint',
-  },
   'gitsigns',
-  'goimports',
   {
     'prettier',
     opts = {
@@ -26,7 +22,6 @@ M.tool_names = {
   'pylint',
   'refactoring',
   'stylua',
-  'taplo',
   'yamllint',
 }
 

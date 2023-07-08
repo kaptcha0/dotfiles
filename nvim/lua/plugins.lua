@@ -66,7 +66,6 @@ return require('packer').startup({
     use('David-Kunz/cmp-npm')
     use('petertriho/cmp-git')
     use('L3MON4D3/LuaSnip')
-    use('Saecki/crates.nvim')
 
     use({
       'hrsh7th/nvim-cmp',
@@ -133,28 +132,27 @@ return require('packer').startup({
 
     use({
       'nanozuki/tabby.nvim',
-      after = 'catppuccin',
-      config = function()
-        require('plugins.tabby')
-      end,
+      after = 'onedark.nvim',
+      -- config = function()
+      --   require('plugins.tabby')
+      -- end,
     })
+
+    use {
+      'nvim-lualine/lualine.nvim',
+      after = 'onedark.nvim',
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+      config = function()
+        require('plugins.lualine')
+      end
+    }
 
     use({
-      'freddiehaddad/feline.nvim',
-      after = 'catppuccin',
+      'navarasu/onedark.nvim',
       config = function()
-        require('plugins.feline')
-      end,
+        require('plugins.onedark')
+      end
     })
-
-    use({
-      'catppuccin/nvim',
-      as = 'catppuccin',
-      config = function()
-        require('plugins.catppuccin')
-      end,
-    })
-
     if packer_bootstrap then
       require('packer').sync()
     end

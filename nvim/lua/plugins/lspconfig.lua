@@ -3,6 +3,7 @@ local protocol = require('vim.lsp.protocol')
 local lsp = require('config.lsp.servers')
 local server_configs = require('config.lsp.configs')
 local icons = require('config.lsp.icons')
+local utils = require('utils.misc')
 
 local lspconfig = import('lspconfig')
 local cmp = import('cmp_nvim_lsp')
@@ -49,7 +50,7 @@ function M.setup()
     local exe = vim.fn.exepath(value)
 
     if lang_opts then
-      local cmd = { exe, unpack(lang_opts.args or {}) }
+      local cmd = { exe, utils.unpack(lang_opts.args or {}) }
 
       lang_opts.cmd = cmd
       lang_opts.args = nil

@@ -1,4 +1,5 @@
 local uname = vim.loop.os_uname()
+local utils = require('utils')
 
 _G.OS = uname.sysname
 _G.IS_MAC = OS == 'Darwin'
@@ -7,18 +8,17 @@ _G.IS_WINDOWS = OS:find('Windows') and true or false
 _G.IS_WSL = (IS_LINUX and uname.release:find('Microsoft')) and true or false
 
 -- Turns table to string
+---@param ... table[]
 _G.dump = function(...)
   return vim.inspect(...)
 end
 
 -- Imports module if available and returns it
--- @param name string
--- @param verbosity `M.verbosity`
---  utils.verbosity.warn is the default
--- @return loaded plugin or nil
+---@alias Verbosity `utils.verbosity`
+---@param name string
+---@param verbosity Verbosity?
+---@return table|nil
 _G.import = function(name, verbosity)
-  local utils = require('utils')
-
   local fns = {
     [utils.verbosity.none] = function(...) end,
     [utils.verbosity.info] = utils.info,
@@ -39,10 +39,10 @@ _G.import = function(name, verbosity)
 end
 
 -- Sets neovim keybindings
--- @param mode string
--- @param lhs string
--- @param rhs string/function
--- @param opts table
+---@param mode string
+---@param lhs string
+---@param rhs string|function
+---@param opts table?
 function _G.map(mode, lhs, rhs, opts)
   local options = { noremap = true }
   if opts then
@@ -51,3 +51,5 @@ function _G.map(mode, lhs, rhs, opts)
 
   vim.keymap.set(mode, lhs, rhs, opts)
 end
+
+_G = utils.merge(_G, utils)

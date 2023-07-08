@@ -1,7 +1,6 @@
 local M = {}
 
 M.servers = {
-  'ansible-lint',
   'ansible-language-server',
   'bash-language-server',
   'clangd',
@@ -9,23 +8,20 @@ M.servers = {
   'diagnostic-languageserver',
   'dockerfile-language-server',
   'emmet-ls',
-  'gopls',
   'html-lsp',
   'json-lsp',
   'lua-language-server',
   'marksman',
-  'omnisharp',
   IS_WINDOWS and 'powershell-editor-services',
   'pyright',
-  'rust-analyzer',
   'stylelint-lsp',
-  'taplo',
   'typescript-language-server',
   'vim-language-server',
   'yaml-language-server',
 }
 
 M.lspconfig_mapping = {
+  ['ansible-language-server'] = 'ansiblels',
   ['bash-language-server'] = 'bashls',
   ['css-lsp'] = 'cssls',
   ['diagnostic-languageserver'] = 'diagnosticls',
@@ -35,32 +31,23 @@ M.lspconfig_mapping = {
   ['json-lsp'] = 'jsonls',
   ['lua-language-server'] = 'lua_ls',
   ['powershell-editor-services'] = 'powershell_es',
-  ['rust-analyzer'] = 'rust_analyzer',
   ['stylelint-lsp'] = 'stylelint_lsp',
   ['typescript-language-server'] = 'tsserver',
   ['vim-language-server'] = 'vimls',
   ['yaml-language-server'] = 'yamlls',
 }
 
-M.debuggers = {
-  'codelldb',
-  'debugpy',
-  'go-debug-adapter',
-  'netcoredbg',
-}
-
 M.formatters = {
   'csharpier',
-  'goimports',
   'prettier',
   'stylua',
 }
 
 M.linters = {
+  'ansible-lint',
   'editorconfig-checker',
   'eslint-lsp',
   'flake8',
-  'golangci-lint',
   'pylint',
   'yamllint',
 }
