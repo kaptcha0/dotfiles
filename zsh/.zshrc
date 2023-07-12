@@ -3,7 +3,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt SHARE_HISTORY
 
-fastfetch
+neofetch
 
 # User configuration
 eval "$(starship init zsh)"

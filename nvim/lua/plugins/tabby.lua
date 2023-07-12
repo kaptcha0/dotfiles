@@ -1,12 +1,11 @@
 vim.o.showtabline = 2
-local colors = require('dracula').colors()
+local colors = import('onedark.palette').darker
 
 local theme = {
-  fill = { bg = colors.bg },
-  -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+  fill = { bg = colors.bg1 },
   head = { fg = colors.fg },
-  current_tab = { bg = colors.selection },
-  tab = { fg = colors.fg },
+  current_tab = { bg = colors.bg2 },
+  tab = { bg = colors.bg1 },
   win = { fg = colors.fg },
   tail = { fg = colors.fg },
 }

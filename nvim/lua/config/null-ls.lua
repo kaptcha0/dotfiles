@@ -22,6 +22,7 @@ M.tool_names = {
   'pylint',
   'refactoring',
   'stylua',
+  'taplo',
   'yamllint',
 }
 

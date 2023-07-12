@@ -131,35 +131,29 @@ return require('packer').startup({
     use('SmiteshP/nvim-navic')
 
     use({
-      'Mofiqul/dracula.nvim',
-      config = function()
-        vim.cmd [[colorscheme dracula]]
-        vim.g.lualine_theme = 'dracula-nvim'
-      end
-    })
-    use({
       'nanozuki/tabby.nvim',
-      after = 'dracula.nvim',
+      after = 'onedark.nvim',
       config = function()
         require('plugins.tabby')
       end,
     })
 
-    use {
+    use({
       'nvim-lualine/lualine.nvim',
-      after = 'dracula.nvim',
+      after = 'onedark.nvim',
       requires = { 'nvim-tree/nvim-web-devicons', opt = true },
       config = function()
         require('plugins.lualine')
-      end
-    }
+      end,
+    })
 
-    -- use({
-    --   'navarasu/onedark.nvim',
-    --   config = function()
-    --     require('plugins.onedark')
-    --   end
-    -- })
+    use({
+      'navarasu/onedark.nvim',
+      config = function()
+        require('plugins.onedark')
+      end,
+    })
+
     if packer_bootstrap then
       require('packer').sync()
     end

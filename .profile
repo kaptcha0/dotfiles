@@ -10,10 +10,6 @@ if [ -d $HOME/.nix-profile/etc/profile.d ]; then
   done
 fi
 
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 # pnpm
 export PNPM_HOME="/home/kaptcha/.local/share/pnpm"
 case ":$PATH:" in
@@ -22,8 +18,4 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-alias fix-opera='sudo ~root/.scripts/fix-opera.sh' # Opera fix HTML5 media
+source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"

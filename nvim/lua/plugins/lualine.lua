@@ -6,7 +6,7 @@ end
 
 lualine.setup({
   options = {
-    theme = (vim.g.lualine_theme or 'auto'),
+    theme = 'onedark' or (vim.g.lualine_theme or 'auto'),
     icons_enabled = true,
     section_separators = { left = '', right = '' },
     component_separators = '|',

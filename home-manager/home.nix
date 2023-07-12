@@ -1,22 +1,44 @@
-{ config, pkgs, ... }:
+{ config, pkgs, overlays, username, ... }:
 let
-  nixosUnstable = import <nixos-unstable> { };
+  gitUserName = "kaptcha0";
 in
 {
+  fonts.fontconfig.enable = true;
+  targets.genericLinux.enable = true;
+
+  imports = [
+    ./packages
+  ];
+
   nixpkgs = {
     config.allowUnfreePredicate = (pkg: true);
-    overlays = [
-      (import (builtins.fetchTarball {
-        url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-      }))
+    config.permittedInsecurePackages = [
+      "python-2.7.18.6"
     ];
+
+    overlays = overlays;
   };
 
-  fonts.fontconfig.enable = true;
+  programs = {
+    # Let Home Manager install and manage itself.
+    home-manager.enable = true;
+
+    neovim = {
+      enable = true;
+      viAlias = true;
+      vimAlias = true;
+    };
+
+    git = {
+      enable = true;
+      userName = gitUserName;
+      extraConfig.github.user = gitUserName;
+    };
+  };
 
   home = {
-    username = "kaptcha";
-    homeDirectory = "/home/kaptcha";
+    inherit username;
+    homeDirectory = "/home/${username}";
 
     # This value determines the Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Manager release
@@ -26,69 +48,6 @@ in
     # want to update the value, then make sure to first check the Manager
     # release notes.
     stateVersion = "23.05"; # Please read the comment before changing.
-
-    # The packages option allows you to install Nix packages into your
-    # environment.
-    packages = with pkgs; [
-      ## Utilities
-      ansible
-      bat
-      binutils
-      coreutils-full
-      exa
-      fd
-      fzf
-      gcc
-      gdb
-      gdbgui
-      git
-      gh
-      htop
-      lazydocker
-      lazygit
-      ltrace
-      gnumake
-      ripgrep
-      sqlmap
-      starship
-      strace
-      tmux
-      tree
-      viddy
-
-      nixpkgs-fmt
-      rnix-lsp
-      nerdfonts
-
-      ## Security
-      bettercap
-      cewl
-      gobuster
-      hashcat
-      john
-      nixosUnstable.radare2
-      volatility3
-
-      ## Development
-      ansible-language-server
-      ansible-lint
-      cmake
-      kube3d
-      kubectl
-      kubernetes-helm
-      kustomize
-      skaffold
-      virtualenv
-    ];
   };
 
-  # Let Home Manager install and manage itself.
-  programs = {
-    home-manager.enable = true;
-    neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-    };
-  };
 }

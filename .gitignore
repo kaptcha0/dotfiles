@@ -9,6 +9,7 @@ scoop/
 state.yml
 
 nvim/plugin
+tmux/plugins
 
 zsh/cache
 zsh/logs

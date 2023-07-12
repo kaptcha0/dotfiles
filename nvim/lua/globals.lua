@@ -51,5 +51,3 @@ function _G.map(mode, lhs, rhs, opts)
 
   vim.keymap.set(mode, lhs, rhs, opts)
 end
-
-_G = utils.merge(_G, utils)

@@ -27,6 +27,7 @@ configs.setup {
     'json',
     'lua',
     'markdown',
+    'nix',
     'rust',
     'scss',
     'toml',
