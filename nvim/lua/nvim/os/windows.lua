@@ -1,4 +1,4 @@
-vim.o.clipboard = 'unnamed,unnamedplus' .. vim.o.clipboard
+vim.o.clipboard = 'unnamed,unnamedplus'
 vim.o.fileformat = 'dos'
 vim.o.fileformats = 'dos,unix'
 
