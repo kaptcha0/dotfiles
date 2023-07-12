@@ -21,8 +21,8 @@ zinit ice svn
 zinit snippet OMZ::plugins/sudo
 
 ## Completion
-zinit ice svn blockf
-zinit snippet OMZ::plugins/docker
+zinit ice as"completion"
+zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
 zinit ice svn blockf
 zinit snippet OMZ::plugins/git
