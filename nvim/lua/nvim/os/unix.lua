@@ -6,3 +6,4 @@ vim.o.fileformats = 'unix,dos'
 vim.api.nvim_create_user_command('W', function(opts)
   vim.cmd([[ w !sudo -A tee > /dev/null % ]])
 end, {})
+

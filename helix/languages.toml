@@ -1,0 +1,103 @@
+[[language]]
+name = "bash"
+
+[[language]]
+name = "c"
+
+[[language]]
+name = "cpp"
+
+[[language]]
+name = "cmake"
+
+[[language]]
+name = "css"
+
+[[language]]
+name = "dockerfile"
+
+[[language]]
+name = "go"
+
+[[language]]
+name = "html"
+
+[[language]]
+name = "javascript"
+
+[[language]]
+name = "json"
+
+[[language]]
+name = "jsx"
+
+[[language]]
+name = "lua"
+
+[[language]]
+name = "make"
+
+[[language]]
+name = "markdown"
+
+[[language]]
+name = "nix"
+formatter = { command = "nixpkgs-fmt" }
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+config = {}
+
+
+[[language]]
+name = "python"
+scope = "source.python"
+injection-regex = "python"
+file-types = ["py","pyi","py3","pyw","ptl",".pythonstartup",".pythonrc","SConstruct"]
+shebangs = ["python"]
+roots = ["setup.py", "setup.cfg", "pyproject.toml"]
+comment-token = "#"
+language-servers = ["pyright"]
+indent = { tab-width = 4, unit = "    " }
+
+[[language]]
+name = "regex"
+
+[[language]]
+name = "rust"
+
+[[language]]
+name = "scss"
+
+[[language]]
+name = "sql"
+
+[[language]]
+name = "svelte"
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = ["fmt", "-"] }
+
+[[language]]
+name = "tsx"
+
+[[language]]
+name = "typescript"
+
+[language-server.ansible-language-server]
+command = "ansible-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+file-types = ["yml", "yaml"]
+roots = []
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["yaml-language-server", "ansible-language-server"]
+injection-regex = "yml|yaml"
+
+[[language]]
+name = "xml"

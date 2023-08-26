@@ -8,7 +8,6 @@
     hashcat
     john
     ltrace
-    radare2
     nmap
     sqlmap
     strace
