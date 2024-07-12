@@ -6,12 +6,12 @@ setopt SHARE_HISTORY
 neofetch
 
 # User configuration
+source "$HOME/.zshenv"
 eval "$(starship init zsh)"
 
 source "$ZSH/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-source "$HOME/.zshenv"
 source "$ZSH/functions.zsh"
 
 source "$ZSH/themes/current.zsh"
@@ -57,3 +57,16 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+PATH=~/.console-ninja/.bin:$PATH

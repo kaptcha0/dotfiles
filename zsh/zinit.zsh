@@ -63,5 +63,7 @@ zinit light zsh-users/zsh-autosuggestions
 zinit ice wait lucid
 zinit light Aloxaf/fzf-tab
 
+zinit light "darvid/zsh-poetry"
+
 ( zinit self-update > $ZSH/logs/zinit-self-update.log 2>&1 & )
 ( zinit update --all > $ZSH/logs/zinit-update.log 2>&1 & )

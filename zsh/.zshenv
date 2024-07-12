@@ -5,3 +5,4 @@ source "$ZSH/variables.zsh"
 
 source "$ZSH/aliases.zsh"
 source "$ZSH/zinit.zsh"
+. "$HOME/.cargo/env"

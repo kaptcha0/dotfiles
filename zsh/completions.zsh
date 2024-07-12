@@ -1,13 +1,10 @@
 source <(gh completion --shell zsh)
-source <(gobuster completion zsh)
 
 fpath=($HOME/.nix-profile/share/zsh/site-functions $fpath)
 
-if type brew &>/dev/null
-then
+if type brew &>/dev/null; then
   fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 fi
 
 autoload -Uz compinit
 compinit
-

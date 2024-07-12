@@ -1,0 +1,3 @@
+#! /usr/bin/bash
+
+jq -rf /home/kaptcha/.local/bin/inputs2csv.jq

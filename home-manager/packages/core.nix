@@ -5,16 +5,14 @@
     bat
     binutils
     coreutils-full
-    exa
+    eza
     fd
     fzf
-    gh
     htop
     lazydocker
     lazygit
     ripgrep
-    starship
-    tmux
+    subversion
     tree
     viddy
   ];

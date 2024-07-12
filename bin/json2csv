@@ -1,0 +1,3 @@
+#! /usr/bin/bash
+
+jq -rf ~/.local/bin/json2csv.jq

@@ -27,11 +27,7 @@
     gdb
     gdbgui
     gnumake
-
-    # Rust
-    cargo
-    rustc
-
+    
     # Lua
     stylua
 
@@ -41,10 +37,6 @@
     kubernetes-helm
     kustomize
     skaffold
-
-    # Python
-    python311Full
-    virtualenv
 
     # Node.js
     nodejs_18
