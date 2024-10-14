@@ -1,8 +1,1 @@
-width = (100, 300)
-notification_limit = 5
-origin = top-center
-progress_bar_corner_radius = 4
-icon_corner_radius = 4
-corner_radius = 4
-
-separator_color = auto
+/home/kaptcha/.cache/wal/dunstrc

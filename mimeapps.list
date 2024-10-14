@@ -1,0 +1,11 @@
+[Added Associations]
+text/plain=zed.desktop;
+
+[Default Applications]
+text/plain=zed.desktop;
+inode/directory=org.kde.dolphin.desktop;
+application/x-shellscript=zed.desktop;
+application/pdf=okularApplication_pdf.desktop;
+image/jpeg=okularApplication_kimgio.desktop;
+image/png=okularApplication_kimgio.desktop;
+application/x-blender=blender.desktop;

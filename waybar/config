@@ -50,16 +50,16 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}",
-        "format-full": "{icon}",
+        "format": "{icon} ",
+        "format-full": "{icon} ",
         "format-charging": "",
         "format-plugged": "",
         "tooltip-format": "{capacity}%",
-        "format-good": "{icon}", // An empty format will hide the module
+        "format-good": "{icon} ", // An empty format will hide the module
         "format-icons": ["", "", "", "", ""]
     },
     "power-profiles-daemon": {
-      "format": "{icon}",
+      "format": "{icon} ",
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
       "tooltip": true,
       "format-icons": {
@@ -81,19 +81,19 @@
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "tooltip-format": "{volume}%",
-        "format": "{icon}",
+        "format": "{icon} ",
         "format-bluetooth": "{icon}",
         "format-bluetooth-muted": " {icon}",
         "format-muted": "",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": " ",
-            "hands-free": " ",
-            "headset": " ",
-            "phone": " ",
-            "portable": " ",
-            "car": " ",
-            "default": [" ", " ", " "]
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
     },
