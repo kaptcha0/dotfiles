@@ -4,6 +4,5 @@
     neofetch
     nixpkgs-fmt
     rnix-lsp
-    nerdfonts
   ];
 }

@@ -3,8 +3,6 @@
   packages = with pkgs; [
     ansible
     bat
-    binutils
-    coreutils-full
     eza
     fd
     fzf

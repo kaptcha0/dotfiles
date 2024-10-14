@@ -13,36 +13,32 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 ## OMZ
-zinit ice svn
 zinit snippet OMZ::plugins/command-not-found
-zinit ice svn
 zinit snippet OMZ::plugins/dotenv
-zinit ice svn
 zinit snippet OMZ::plugins/sudo
 
 ## Completion
 zinit ice as"completion"
 zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
-zinit ice svn blockf
+zinit ice blockf
 zinit snippet OMZ::plugins/git
 
-zinit ice svn blockf
+zinit ice blockf
 zinit snippet OMZ::plugins/fzf
 
-zinit ice svn blockf
+zinit ice blockf
 zinit snippet OMZ::plugins/kubectl
 
 zinit ice blockf
 zinit light nix-community/nix-zsh-completions
 
-zinit ice svn blockf
+zinit ice blockf
 zinit snippet OMZ::plugins/nmap
 
 zinit ice blockf
 zinit light zsh-users/zsh-completions
 
-zinit ice svn
 zinit snippet OMZ::plugins/z
 
 
@@ -54,7 +50,6 @@ zinit light sunlei/zsh-ssh
 zinit ice wait lucid
 zinit light hlissner/zsh-autopair
 
-
 zinit ice wait lucid
 zinit light zsh-users/zsh-syntax-highlighting
 
@@ -65,5 +60,7 @@ zinit light Aloxaf/fzf-tab
 
 zinit light "darvid/zsh-poetry"
 
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
 ( zinit self-update > $ZSH/logs/zinit-self-update.log 2>&1 & )
 ( zinit update --all > $ZSH/logs/zinit-update.log 2>&1 & )

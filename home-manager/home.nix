@@ -30,7 +30,7 @@ in
     };
 
     git = {
-      enable = true;
+      enable = false;
       userName = gitUserName;
       extraConfig.github.user = gitUserName;
     };

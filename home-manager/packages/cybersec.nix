@@ -7,10 +7,8 @@
     gobuster
     hashcat
     john
-    ltrace
     nmap
     sqlmap
-    strace
     volatility3
   ];
 }

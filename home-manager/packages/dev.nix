@@ -21,13 +21,6 @@
     ansible-language-server
     ansible-lint
 
-    # C/C++
-    cmake
-    gcc
-    gdb
-    gdbgui
-    gnumake
-    
     # Lua
     stylua
 
@@ -37,11 +30,5 @@
     kubernetes-helm
     kustomize
     skaffold
-
-    # Node.js
-    nodejs_18
-    nodePackages_latest.eslint
-    nodePackages_latest.pnpm
-    nodePackages_latest.prettier
   ];
 }

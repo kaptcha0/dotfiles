@@ -1,0 +1,68 @@
+@import url("/home/kaptcha/.cache/wal/colors-waybar.css");
+
+* {
+  font-size: 12px;
+  transition: cubic-bezier(0.05, 0.9, 0.1, 1.05) 500ms all;
+  color: @foreground;
+  opacity: 0.85;
+}
+
+*:hover {
+  opacity: 1;
+}
+
+window#waybar {
+  background-color: rgba(0, 0, 0, 0);
+  border-bottom: 0;
+}
+
+.modules-left {
+  margin-top: 4px;
+  margin-left: 4px;
+  border-radius: 8px;
+  padding: 0 4px;
+}
+
+.modules-left * {
+  margin: 0 4px;
+  background-color: @background;
+  border-radius: 8px;
+  padding: 0 2px;
+}
+
+.modules-center {
+  border-radius: 4px;
+  margin-top: 4px;
+  padding: 0 4px;
+  background-color: @background;
+}
+
+#clock {
+  padding: 0 4px;
+}
+
+.modules-right {
+  margin-right: 4px;
+  margin-top: 4px;
+  border-radius: 8px;
+  padding: 0 4px;
+  background-color: @background;
+}
+
+.modules-right * {
+  margin: 0 4px;
+}
+
+#workspaces * {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#workspaces button {
+  padding: 0;
+  border-radius: 4px;
+  margin: 0;
+}
+
+#workspaces button.urgent {
+  background-color: @color11;
+}

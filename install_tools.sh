@@ -53,7 +53,7 @@ install "rust" "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh" 
 GO_VERSION="go1.21.5.linux-amd64"
 install "go" "wget https://go.dev/dl/$GO_VERSION.tar.gz ; sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $GO_VERSION.tar.gz && rm -f $GO_VERSION.tar.gz"
 
-install "tmux" "sudo apt install tmux"
+# install "tmux" "sudo apt install tmux"
 install "starship" "curl -sS https://starship.rs/install.sh | sh" "starship"
 
 echo "Complete."
