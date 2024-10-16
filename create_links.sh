@@ -38,6 +38,10 @@ create_config_link "$SCRIPT_DIR/nwg-look"
 create_config_link "$SCRIPT_DIR/nwg-panel"
 create_config_link "$SCRIPT_DIR/wal"
 create_config_link "$SCRIPT_DIR/mimeapps.list"
+create_config_link "$SCRIPT_DIR/zed"
+create_config_link "$SCRIPT_DIR/swaync"
+
+ln -svn $SCRIPT_DIR/systemd/user/* "$CONFIG_DIR/systemd/user/"
 
 mkdir -pv "$SCRIPT_DIR/zsh/logs"
 create_config_link "$SCRIPT_DIR/zsh"
