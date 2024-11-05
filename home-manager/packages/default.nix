@@ -23,6 +23,6 @@ in
 {
   # The packages option allows you to install Nix packages into your
   # environment.
-  # home.packages = corePackages ++ cyberSecPackages ++ devPackages ++ guiPackages ++ miscPackages;
-  home.packages = corePackages ++ devPackages ++ guiPackages ++ miscPackages;
+  home.packages = corePackages ++ cyberSecPackages ++ devPackages ++ guiPackages ++ miscPackages;
+  # home.packages = corePackages ++ devPackages ++ guiPackages ++ miscPackages;
 }

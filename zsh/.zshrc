@@ -79,3 +79,13 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
+source /usr/share/nvm/init-nvm.sh
+
+export PATH=$PATH:/home/kaptcha/.spicetify
+
+# bun completions
+[ -s "/home/kaptcha/.bun/_bun" ] && source "/home/kaptcha/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

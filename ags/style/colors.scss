@@ -1,0 +1,21 @@
+@import "./wal.scss";
+
+.perfect {
+    color: green;
+}
+
+.low {
+    color: aqua;
+}
+
+.normal {
+    color: $foreground;
+}
+
+.warning {
+    color: yellow;
+}
+
+.critical {
+    color: red;
+}

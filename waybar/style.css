@@ -50,11 +50,12 @@ window#waybar {
 }
 
 .modules-right * {
-  margin: 0 4px;
+  margin: 0 2px;
 }
 
 #workspaces * {
   background-color: rgba(0, 0, 0, 0);
+  padding: 0;
 }
 
 #workspaces button {

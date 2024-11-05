@@ -9,6 +9,7 @@
     "modules-left": [
         "custom/apps",
         "hyprland/workspaces",
+        "hyprland/submap",
         "hyprland/window"
     ],
     "modules-center": [
@@ -29,24 +30,26 @@
     ],
     // Modules configuration
     "hyprland/workspaces": {
-        "disable-scroll": true,
+        "disable-scroll": false,
         "all-outputs": true,
         "warp-on-scroll": false,
         "format": "{name} {icon}",
         "format-icons": {
-            "urgent": "",
+            "urgent": "",
             "active": "",
-            "default": ""
+            "default": ""
         }
     },
     "tray": {
         "icon-size": 16,
-        "spacing": 8
+        "spacing": 2
     },
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%m.%d.%Y}"
+        "format": "{:%T}",
+        "format-alt": "{:%m.%d.%Y}",
+        "interval": 1
     },
     "battery": {
         "states": {
@@ -54,17 +57,18 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon} ",
-        "format-full": "{capacity}% {icon} ",
-        "format-charging": "",
-        "format-plugged": "",
+        "interval": 1,
+        "format": "{icon} {capacity}%",
+        "format-full": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
         "tooltip-format": "{capacity}%",
-        "format-good": "{capacity}% {icon} ", // An empty format will hide the module
+        "format-good": "{icon} {capacity}%", // An empty format will hide the module
         "format-icons": ["", "", "", "", ""]
     },
     "power-profiles-daemon": {
       "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip-format": "Profile: {profile} Driver: {driver}",
       "tooltip": true,
       "format-icons": {
         "default": "",
@@ -75,21 +79,21 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": " ",
+        "format-wifi": "",
         "format-ethernet": "󰈁",
-        "tooltip-format": "{ifname} via {gwaddr} ({ipaddr}/{cidr})",
+        "tooltip-format": "{essid} {ifname} via {gwaddr} ({ipaddr}/{cidr})",
         "format-linked": "󰈂",
-        "format-disconnected": "󱚵 ",
+        "format-disconnected": "󱚵",
         "on-click": "rofi-wifi-menu"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "tooltip-format": "{volume}%",
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{icon} ",
-        "format-bluetooth-muted": "{icon} ",
-        "format-muted": "{icon} 󰝟",
-        "format-source-muted": "{icon}  ",
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-bluetooth-muted": "{icon} {volume}%",
+        "format-muted": "{icon} {volume}%",
+        "format-source-muted": "{icon} {volume}%",
         "format-icons": {
             "headphone": "󰋋",
             "hands-free": "󰋎",
@@ -104,10 +108,11 @@
     "bluetooth": {
         "on-click": "rofi-bluetooth",
         "format": "{icon}",
-        "tooltip-format": "{status}",
+        "format-connected": "{icon}",
+        "tooltip-format": "{controller_alias} @ {controller_address}",
         "tooltip-connected": "{status}\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "tooltip-format-enumerate-connected": "{device_alias} @ {device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias} @ {device_address} {device_battery_percentage}%",
         "format-icons": {
           "on": "󰂯",
           "off": "󰂲",
@@ -151,14 +156,14 @@
         "escape": true
     },
     "custom/monitor-temp": {
-        "format": "{} ",
+        "format": " {}",
         "tooltip-format": "{} K",
         "exec": "wl-gammarelay-rs watch {t}",
         "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100",
         "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100"
     },
     "backlight": {
-        "format": "{percent}% ",
+        "format": " {percent}%",
         "tooltip-format": "{percent}%",
         "scroll-step": 2.0
     }
