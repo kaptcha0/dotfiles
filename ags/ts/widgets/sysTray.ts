@@ -8,13 +8,13 @@ export function SysTray() {
         on_primary_click: (_, event) => item.activate(event),
         on_secondary_click: (_, event) => item.openMenu(event),
         tooltip_markup: item.bind("tooltip_markup"),
-        class_name: "button",
+        class_name: "button container",
       }),
     ),
   );
 
   return Widget.Box({
-    class_name: "container sys-tray",
+    class_name: "sys-tray",
     children: items,
   });
 }

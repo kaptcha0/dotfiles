@@ -56,7 +56,7 @@ function Notification(n: notif) {
     class_name: "actions",
     children: n.actions.map(({ id, label }) =>
       Widget.Button({
-        class_name: "action-button",
+        class_name: "action-button button",
         on_clicked: () => {
           n.invoke(id);
           n.dismiss();
@@ -107,6 +107,7 @@ export function NotificationPopups(monitor = 0) {
     name: `notifications${monitor}`,
     class_name: "notification-popups",
     anchor: ["top"],
+    hexpand: true,
     widthRequest: 128,
     child: Widget.Box({
       css: "min-width: 2px; min-height: 2px;",

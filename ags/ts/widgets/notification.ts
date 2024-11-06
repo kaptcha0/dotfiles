@@ -6,7 +6,7 @@ export function Notification() {
   const popups = notifications.bind("popups");
 
   return Widget.Button({
-    class_name: "notification container button",
+    class_name: "notif-btn container button",
     onClicked: (_) => App.toggleWindow(windowNames.notifications),
     child: Widget.Icon({
       icon: popups.as((p) =>

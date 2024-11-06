@@ -1,0 +1,55 @@
+@import "./colors.scss";
+
+.icon {
+    min-width: 24px;
+    min-height: 24px;
+    margin-right: 4px;
+}
+
+.icon image {
+    font-size: 24px;
+    color: $foreground;
+}
+
+.icon box {
+    min-width: 24px;
+    min-height: 24px;
+    border-radius: 8px;
+}
+
+.notification {
+    min-width: 128px;
+    border-radius: 8px;
+    background-color: $background;
+    margin-top: 8px;
+    padding: 4px;
+}
+
+.notification.low {
+    border: 1px solid $color5;
+}
+
+.notification.normal {
+    border: 1px solid $color4;
+}
+
+.notification.critical {
+    border: 1px solid $color3;
+}
+
+.title {
+    color: $foreground;
+    font-size: 16px;
+}
+
+.body {
+    color: $foreground;
+}
+
+.actions .action-button:first-child {
+    margin-left: 0;
+}
+
+.actions .action-button:last-child {
+    margin-right: 0;
+}
