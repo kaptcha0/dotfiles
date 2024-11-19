@@ -21,7 +21,6 @@ function Left() {
     hpack: "start",
     hexpand: false,
     widthRequest: 32,
-    spacing: 4,
     children: [Launcher(), Workspaces()],
   });
 }
@@ -29,7 +28,6 @@ function Left() {
 function Center() {
   return Widget.Box({
     class_name: "center",
-    spacing: 8,
     children: [ClientTitle(), Notification()],
   });
 }
@@ -38,7 +36,6 @@ function Right() {
   return Widget.Box({
     hpack: "end",
     class_name: "right",
-    spacing: 4,
     children: [Clock(), ControlPanel(), SysTray()],
   });
 }
@@ -48,11 +45,10 @@ function Bar(monitor = 0) {
     name: `bar-${monitor}`,
     anchor: ["top", "left", "right"],
     exclusivity: "exclusive",
-    class_name: "bar",
+    class_name: "bar window",
     vexpand: false,
     heightRequest: 14,
     child: Widget.CenterBox({
-      spacing: 8,
       start_widget: Left(),
       center_widget: Center(),
       end_widget: Right(),

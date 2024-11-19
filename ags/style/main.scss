@@ -1,5 +1,6 @@
 @import "./colors.scss";
 @import "./notifications.scss";
+@import "./controlPanel.scss";
 
 * {
     font-size: 12px;
@@ -7,7 +8,7 @@
     color: $foreground;
 }
 
-.bar {
+.window {
     background: none;
 }
 
@@ -35,19 +36,12 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.workspaces > * {
-    background-color: rgba(255, 255, 255, 0);
-}
-
 .workspaces .focused.focused {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-.container.button {
-    margin: 0;
+.container.button,
+.client-title {
     padding: 4px 8px;
-}
-
-.sys-tray .container.button {
-    margin: 0 4px;
+    margin: 0 2px;
 }

@@ -7,5 +7,6 @@ export function ClientTitle() {
     maxWidthChars: 32,
     truncate: "middle",
     visible: hyprland.active.client.bind("title").as((t) => t.length != 0),
+    tooltipText: hyprland.active.client.bind("title"),
   });
 }

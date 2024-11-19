@@ -9,13 +9,15 @@ export function Workspaces() {
         Widget.Button({
           on_clicked: () => hyprland.messageAsync(`dispatch workspace ${id}`),
           child: Widget.Label(`${id}`),
-          class_name: activeId.as((i) => `button ${i === id ? "focused" : ""}`),
+          class_name: activeId.as(
+            (i) => `button container ${i === id ? "focused" : ""}`,
+          ),
         }),
       ),
   );
 
   return Widget.Box({
-    class_name: "workspaces container",
+    class_name: "workspaces",
     children: workspaces,
   });
 }

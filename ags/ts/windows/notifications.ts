@@ -121,6 +121,7 @@ export function NotificationPopups(monitor = 0) {
 export function NotificationWindow(monitor = 0) {
   return Widget.Window({
     monitor,
+    visible: false,
     name: windowNames.notifications,
   });
 }

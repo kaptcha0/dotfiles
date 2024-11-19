@@ -1,7 +1,6 @@
 #! /bin/bash
 
-ags &
-sleep 1
+eww open topbar &
 hyprpaper &
 wl-paste --type text --watch cliphist store &
 wl-paste --type image --watch cliphist store &
