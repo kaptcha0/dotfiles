@@ -1,6 +1,6 @@
-[submodule "zsh/fzf-tab-completion"]
-	path = zsh/fzf-tab-completion
+[submodule "linux/zsh/fzf-tab-completion"]
+	path = linux/zsh/fzf-tab-completion
 	url = https://github.com/lincheney/fzf-tab-completion.git
-[submodule "wordlists"]
-	path = wordlists
+[submodule "cross-platform/wordlists"]
+	path = cross-platform/wordlists
 	url = https://github.com/danielmiessler/SecLists.git
