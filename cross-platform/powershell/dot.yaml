@@ -1,0 +1,7 @@
+windows:
+  links:
+    profile.ps1: ~/Documents/Powershell/Profile.ps1
+    
+linux|darwin:
+  links:
+    profile.ps1: ~/.config/powershell/profile.ps1

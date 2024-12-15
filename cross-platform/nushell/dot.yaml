@@ -1,0 +1,9 @@
+windows:
+  links:
+    config.nu: ~/AppData/Roaming/nushell/config.nu
+    env.nu: ~/AppData/Roaming/nushell/env.nu
+
+linux|darwin:
+  links:
+    config.nu: ~/.config/nushell/config.nu
+    env.nu: ~/.config/nushell/env.nu

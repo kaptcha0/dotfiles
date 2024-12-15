@@ -1,1 +1,0 @@
-export { BrightnessService } from "./brightness";

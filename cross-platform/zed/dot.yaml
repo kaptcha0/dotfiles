@@ -1,0 +1,9 @@
+windows:
+  links:
+    settings.json: ~/AppData/Local/zed/settings.json
+    keymap.json: ~/AppData/Local/zed/keymap.json
+
+linux|darwin:
+  links:
+    settings.json: ~/.config/zed/settings.json
+    keymap.json: ~/.config/zed/keymap.json

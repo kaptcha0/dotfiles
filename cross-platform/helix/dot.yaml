@@ -1,0 +1,9 @@
+windows:
+  links:
+    config.toml: ~/AppData/Roaming/helix/config.toml
+    languages.toml: ~/AppData/Roaming/helix/languages.toml
+
+linux|darwin:
+  links:
+    config.toml: ~/.config/helix/config.toml
+    languages.toml: ~/.config/helix/languages.toml
