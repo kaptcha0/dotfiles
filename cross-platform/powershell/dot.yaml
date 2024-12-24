@@ -1,7 +1,19 @@
 windows:
   links:
     profile.ps1: ~/Documents/Powershell/Profile.ps1
-    
+  installs:
+    cmd: winget install --id Microsoft.PowerShell --source winget    
+    depends:
+      - starship
+  
 linux|darwin:
   links:
     profile.ps1: ~/.config/powershell/profile.ps1
+
+linux:
+  installs:
+    cmd: yay -S powershell-bin
+
+darwin:
+  installs:
+    cmd: brew install powershell/tap/powershell

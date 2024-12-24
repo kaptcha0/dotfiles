@@ -1,0 +1,2 @@
+links:
+  config.yaml: {{ dirs.base.config }}/tabby/config.yaml

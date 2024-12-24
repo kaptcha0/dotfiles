@@ -1,6 +1,5 @@
-global:
-  links:
-    .gdbinit: ~/.gdbinit
-    bgs: ~/Pictures/bgs
-    wordlists: ~/Documents/wordlists
+links:
+  .gdbinit: ~/.gdbinit
+  bgs: ~/Pictures/bgs
+  wordlists: ~/Documents/wordlists
 

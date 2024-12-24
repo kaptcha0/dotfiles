@@ -1,3 +1,10 @@
-global:
-  links:
-    starship.toml: ~/.config/starship.toml
+links:
+  starship.toml: ~/.config/starship.toml
+
+windows:
+  installs:
+    cmd: scoop install starship
+
+linux|darwin:
+  installs:
+    cmd: curl -sS https://starship.rs/install.sh | sh

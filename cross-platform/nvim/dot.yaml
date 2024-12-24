@@ -5,6 +5,8 @@ windows:
     after: ~/AppData/Local/nvim/after
     configs: ~/AppData/Local/nvim/configs
     lua: ~/AppData/Local/nvim/lua
+  installs:
+    cmd: scoop bucket add versions && scoop install versions/neovim-nightly
 
 linux|darwin:
   links:
@@ -13,4 +15,12 @@ linux|darwin:
     after: ~/.config/nvim/after
     configs: ~/.config/nvim/configs
     lua: ~/.config/nvim/lua
+
+linux:
+  installs:
+    cmd: yay -S neovim-nightly
+
+darwin:
+  installs:
+    cmd: brew install --HEAD neovim
 

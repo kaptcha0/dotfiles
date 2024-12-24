@@ -2,8 +2,12 @@ windows:
   links:
     config.nu: ~/AppData/Roaming/nushell/config.nu
     env.nu: ~/AppData/Roaming/nushell/env.nu
+  installs:
+    cmd: scoop install nu
 
 linux|darwin:
   links:
     config.nu: ~/.config/nushell/config.nu
     env.nu: ~/.config/nushell/env.nu
+  installs:
+    cmd: brew install nushell
