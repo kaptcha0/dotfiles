@@ -1,0 +1,37 @@
+{
+  "helix-mellow": {
+    "display:name": "Helix Mellow",
+    "display:order": 1,
+    "cmdtext": "",
+    "foreground": "#c9c7cd",
+    "selectionBackground": "#2a2a2d",
+    "background": "#161617",
+    "cursorAccent": "#57575f",
+
+    "black": "#27272a",
+    "brightBlack": "#353539",
+
+    "red": "#f5a191",
+    "brightRed": "#ffae9f",
+
+    "green": "#90b99f",
+    "brightGreen": "#9dc6ac",
+
+    "yellow": "#e6b99d",
+    "brightYellow": "#f0c5a9",
+
+    "blue": "#aca1cf",
+    "brightBlue": "#b9aeda",
+
+    "magenta": "#e29eca",
+    "brightMagenta": "#ecaad6",
+
+    "cyan": "#ea83a5",
+    "brightCyan": "#f591b2",
+
+    "white": "#c1c0d4",
+    "brightWhite": "#cac9dd",
+
+    "gray": "#1b1b1d"
+  }
+}
