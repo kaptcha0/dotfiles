@@ -189,27 +189,27 @@ hotkeys:
 terminal:
   searchOptions: {}
   colorScheme:
-    name: base2tone-cave-dark
-    foreground: '#9f999b'
-    background: '#222021'
-    cursor: '#996e00'
+    name: Atom
+    foreground: '#c5c8c6'
+    background: '#161719'
+    cursor: '#d0d0d0'
     colors:
-      - '#222021'
-      - '#936c7a'
-      - '#cca133'
-      - '#ffcc4d'
-      - '#9c818b'
-      - '#cca133'
-      - '#d27998'
-      - '#9f999b'
-      - '#635f60'
-      - '#ddaf3c'
-      - '#2f2d2e'
-      - '#565254'
-      - '#706b6d'
-      - '#f0a8c1'
-      - '#c39622'
-      - '#ffebf2'
+      - '#000000'
+      - '#fd5ff1'
+      - '#87c38a'
+      - '#ffd7b1'
+      - '#85befd'
+      - '#b9b6fc'
+      - '#85befd'
+      - '#e0e0e0'
+      - '#000000'
+      - '#fd5ff1'
+      - '#94fa36'
+      - '#f5ffa8'
+      - '#96cbfe'
+      - '#b9b6fc'
+      - '#85befd'
+      - '#e0e0e0'
   ligatures: true
   font: CaskaydiaCove NF SemiBold
   bell: audible
@@ -217,6 +217,11 @@ terminal:
   profile: local:custom:PowerShell-Core:5ca2780d-4987-45b5-a836-560514d57b7f
 ssh:
   warnOnClose: true
+  knownHosts:
+    - host: nas
+      port: 22
+      type: ecdsa-sha2-nistp256
+      digest: zbvLivQUoe4k0EyQyb6gG2GJ5c/8ccyQht+yIeHd2HY=
 clickableLinks: {}
 accessibility: {}
 appearance:
