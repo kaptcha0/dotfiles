@@ -1,6 +1,4 @@
 linux|darwin:
   links:
    config.nix: ~/.config/nixpkgs/config.nix
-  installs:
-   depends:
-    - nix
+  installs: false

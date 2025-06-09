@@ -3,11 +3,7 @@ linux|darwin:
    nix.conf: /etc/nix/nix.conf
 
 linux:
-  installs:
-   cmd: sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
-   depends: false
+  installs: sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
 
 darwin:
-  installs:
-   cmd: sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
-   depends: false
+  installs: sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
