@@ -5,8 +5,7 @@ profiles:
     options:
       env:
         WT_SESSION: 0
-      command: nu.exe
-      args: []
+      command: C:/Users/kaptcha/AppData/Local/Programs/nu/bin/nu.exe
     id: local:custom:PowerShell-Core:5ca2780d-4987-45b5-a836-560514d57b7f
     icon: >-
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0
@@ -186,6 +185,7 @@ hotkeys:
     - Ctrl-Shift-E
   command-selector:
     - Ctrl-Shift-P
+  group-selectors: {}
 terminal:
   searchOptions: {}
   colorScheme:
