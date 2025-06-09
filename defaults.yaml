@@ -1,6 +1,6 @@
 linux:
-  installs: yay -Syu --noconfirm {{name}}
+  installs: yay -Syu --noconfirm {{ file_name name }}
 darwin:
-  installs: brew install {{name}}
+  installs: brew install {{ file_name name }}
 windows:
-  installs: scoop install {{name}}
+  installs: scoop install {{ file_name name }}
