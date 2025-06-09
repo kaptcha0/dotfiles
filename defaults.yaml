@@ -1,5 +1,5 @@
 linux:
-  installs: yay -S {{name}}
+  installs: yay -Syu --noconfirm {{name}}
 darwin:
   installs: brew install {{name}}
 windows:
