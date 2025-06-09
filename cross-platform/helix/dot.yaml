@@ -2,8 +2,6 @@ windows:
   links:
     config.toml: ~/AppData/Roaming/helix/config.toml
     languages.toml: ~/AppData/Roaming/helix/languages.toml
-  installs:
-    cmd: scoop install helix
     
 
 linux|darwin:
@@ -14,7 +12,3 @@ linux|darwin:
 linux:
   installs:
     cmd: yay -S helix-git
-
-darwin:
-  installs:
-    cmd: brew install helix

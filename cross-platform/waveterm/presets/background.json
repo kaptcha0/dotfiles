@@ -1,9 +1,0 @@
-{
-  "bg@helix-mellow": {
-    "display:name": "Helix Mellow",
-    "bg:*": true,
-    "bg": "#131314",
-    "bg:opacity": 1,
-    "bg:activebordercolor": "rgba(255, 255, 255, 0.2)"
-  }
-}

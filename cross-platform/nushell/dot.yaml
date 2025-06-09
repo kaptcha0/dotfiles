@@ -9,5 +9,3 @@ linux|darwin:
   links:
     config.nu: ~/.config/nushell/config.nu
     env.nu: ~/.config/nushell/env.nu
-  installs:
-    cmd: brew install nushell

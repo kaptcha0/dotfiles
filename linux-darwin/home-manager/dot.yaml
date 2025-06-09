@@ -1,0 +1,10 @@
+linux|darwin:
+  links:
+    packages: ~/.config/home-manager/packages
+    flake.lock: ~/.config/home-manager/flake.lock
+    flake.nix: ~/.config/home-manager/flake.nix
+    home.nix: ~/.config/home-manager/home.nix
+  installs:
+    cmd: sh ./install.sh
+    depends:
+      - nix

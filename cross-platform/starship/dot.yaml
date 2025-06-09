@@ -1,9 +1,6 @@
-links:
-  starship.toml: ~/.config/starship.toml
-
-windows:
-  installs:
-    cmd: scoop install starship
+global:
+  links:
+    starship.toml: ~/.config/starship.toml
 
 linux|darwin:
   installs:

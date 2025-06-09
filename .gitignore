@@ -5,7 +5,6 @@ fish/functions
 fish/fish_variables
 fish/completions
 
-scoop/
 state.yml
 
 nvim/plugin

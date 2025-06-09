@@ -1,4 +1,0 @@
-linux|darwin:
-  links:
-    bin: ~/.local/bin
-    .profile: ~/.profile

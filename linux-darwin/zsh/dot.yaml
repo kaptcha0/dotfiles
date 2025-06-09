@@ -1,0 +1,12 @@
+linux|darwin:
+  links:
+    themes: ~/.config/zsh/themes
+    fzf-tab-completion: ~/.config/zsh/fzf-tab-completion
+    .fzf.zsh: ~/.config/zsh/.fzf.zsh
+    .zshenv: ~/.config/zsh/.zshenv
+    .zshrc: ~/.config/zsh/.zshrc
+    aliases.zsh: ~/.config/zsh/aliases.zsh
+    completions.zsh: ~/.config/zsh/completions.zsh
+    functions.zsh: ~/.config/zsh/functions.zsh
+    variables.zsh: ~/.config/zsh/variables.zsh
+    zinit.zsh: ~/.config/zsh/zinit.zsh

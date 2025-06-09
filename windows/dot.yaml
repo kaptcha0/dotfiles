@@ -1,0 +1,4 @@
+windows:
+  links:
+    bin: ~/AppData/Local/bin
+  installs: false

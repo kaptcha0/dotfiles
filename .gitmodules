@@ -2,5 +2,5 @@
 	path = cross-platform/wordlists
 	url = https://github.com/danielmiessler/SecLists.git
 [submodule "fzf-tab-completion"]
-	path = linux/zsh/fzf-tab-completion
+	path = linux-darwin/zsh/fzf-tab-completion
 	url = https://github.com/lincheney/fzf-tab-completion.git

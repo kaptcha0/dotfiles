@@ -1,0 +1,7 @@
+linux|darwin:
+  links:
+   themes: ~/.config/tmux/themes
+   keybinds.tmux: ~/.config/tmux/keybinds.tmux
+   plugins.tmux: ~/.config/tmux/plugins.tmux
+   theme.tmux: ~/.config/tmux/theme.tmux
+   tmux.conf: ~/.config/tmux/tmux.conf
