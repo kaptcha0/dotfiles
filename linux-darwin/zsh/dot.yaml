@@ -12,4 +12,4 @@ linux|darwin:
     zinit.zsh: ~/.config/zsh/zinit.zsh
 
 windows:
-  install: false
+  installs: false

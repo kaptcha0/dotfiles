@@ -1,6 +1,6 @@
 linux:
   installs: echo y | LANG=C yay -S --answerclean None --answerdiff None --noprovides --mflags "--noconfirm" {{ file_name name }}
 darwin:
-  installs: brew install {{ file_name name }}
+  installs: yes | brew install {{ file_name name }}
 windows:
   installs: scoop install {{ file_name name }}
