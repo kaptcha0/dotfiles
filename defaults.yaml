@@ -1,5 +1,5 @@
 linux:
-  installs: yay -Syu --noconfirm {{ file_name name }}
+  installs: yes | yay -Syu --noconfirm {{ file_name name }}
 darwin:
   installs: brew install {{ file_name name }}
 windows:
