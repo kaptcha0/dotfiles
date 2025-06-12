@@ -18,9 +18,9 @@ linux|darwin:
 
 linux:
   installs:
-    cmd: yay -S neovim-nightly
+    cmd: echo y | LANG=C yay --answerdiff None --answerclean None --mflags "--noconfirm" neovim-nightly
 
 darwin:
   installs:
-    cmd: brew install --HEAD neovim
+    cmd: yes | brew install --HEAD neovim
 

@@ -1,5 +1,5 @@
 linux:
-  installs: echo y | LANG=C yay -S --answerclean None --answerdiff None --noprovides --mflags "--noconfirm" {{ file_name name }}
+  installs: echo y | LANG=C yay -S --answerclean None --answerdiff None --mflags "--noconfirm" {{ file_name name }}
 darwin:
   installs: yes | brew install {{ file_name name }}
 windows:
