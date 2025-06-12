@@ -8,3 +8,6 @@ linux|darwin:
     cmd: sh ./install.sh
     depends:
       - nix
+
+windows:
+  installs: false

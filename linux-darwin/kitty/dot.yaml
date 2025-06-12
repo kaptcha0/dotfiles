@@ -3,3 +3,6 @@ linux|darwin:
    themes: ~/.config/kitty/themes
    keybinds.conf: ~/.config/kitty/keybinds.conf
    kitty.conf: ~/.config/kitty/kitty.conf
+
+windows:
+  installs: false

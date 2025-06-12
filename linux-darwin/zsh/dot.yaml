@@ -10,3 +10,6 @@ linux|darwin:
     functions.zsh: ~/.config/zsh/functions.zsh
     variables.zsh: ~/.config/zsh/variables.zsh
     zinit.zsh: ~/.config/zsh/zinit.zsh
+
+windows:
+  install: false

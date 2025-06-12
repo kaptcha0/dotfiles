@@ -12,7 +12,7 @@ linux|darwin:
 
 linux:
   installs:
-    cmd: yay -S powershell-bin
+    cmd: echo y | LANG=C yay --noprovides --answerdiff None --answerclean None --mflags "--noconfirm" powershell-bin
 
 darwin:
   installs:

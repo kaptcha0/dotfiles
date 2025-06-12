@@ -8,7 +8,3 @@ linux|darwin:
   links:
     config.toml: ~/.config/helix/config.toml
     languages.toml: ~/.config/helix/languages.toml
-  
-linux:
-  installs:
-    cmd: yay -S helix-git
