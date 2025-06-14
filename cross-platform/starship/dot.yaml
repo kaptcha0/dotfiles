@@ -4,4 +4,4 @@ global:
 
 linux|darwin:
   installs:
-    cmd: curl -sS https://starship.rs/install.sh | sh
+    cmd: curl -sS https://starship.rs/install.sh | sh -s -- -y
