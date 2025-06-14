@@ -4,10 +4,10 @@ linux|darwin:
     flake.lock: ~/.config/home-manager/flake.lock
     flake.nix: ~/.config/home-manager/flake.nix
     home.nix: ~/.config/home-manager/home.nix
-  installs:
-    cmd: sh ./install.sh
-    depends:
-      - nix
+  installs: false
+  #  cmd: sh ./install.sh
+  #  depends:
+  #    - nix
 
 windows:
   installs: false

@@ -5,6 +5,7 @@ line-number = "relative"
 mouse = true
 bufferline = "multiple"
 color-modes = true
+true-color = true
 
 [editor.statusline]
 left = ["mode", "spinner", "diagnostics"]

@@ -40,10 +40,6 @@ name = "make"
 [[language]]
 name = "markdown"
 
-[[language]]
-name = "nix"
-formatter = { command = "nixpkgs-fmt" }
-
 [language-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
@@ -85,10 +81,6 @@ name = "tsx"
 
 [[language]]
 name = "typescript"
-
-[language-server.ansible-language-server]
-command = "ansible-language-server"
-args = ["--stdio"]
 
 [[language]]
 name = "yaml"

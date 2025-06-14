@@ -1,5 +1,11 @@
 source $HOME/.local/share/zinit/zinit.git/zinit.zsh
 
+export FZF_BASE=/home/linuxbrew/.linuxbrew/opt/fzf
+
+autoload -Uz compinit
+compinit
+
+
 [ ! $(which zinit) ] && bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 
 # Load a few important annexes, without Turbo

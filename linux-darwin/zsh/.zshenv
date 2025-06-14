@@ -5,4 +5,4 @@ source "$ZSH/variables.zsh"
 
 source "$ZSH/aliases.zsh"
 source "$ZSH/zinit.zsh"
-. "$HOME/.cargo/env"
+[ -s "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"

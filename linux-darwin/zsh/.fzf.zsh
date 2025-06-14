@@ -1,7 +1,7 @@
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "$HOME/.nix-profile/share/fzf/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------
-source "$HOME/.nix-profile/share/fzf/key-bindings.zsh"
+source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh"

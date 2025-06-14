@@ -1,6 +1,0 @@
-linux|darwin:
-  links:
-   config.nix: ~/.config/nixpkgs/config.nix
-
-global:
-  installs: false
