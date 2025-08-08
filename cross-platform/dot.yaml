@@ -1,6 +1,0 @@
-global:
-  installs: false
-  links:
-    .gdbinit: ~/.gdbinit
-    bgs: ~/Pictures/bgs
-    wordlists: ~/Documents/wordlists

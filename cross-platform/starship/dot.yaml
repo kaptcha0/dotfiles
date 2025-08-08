@@ -1,7 +1,0 @@
-global:
-  links:
-    starship.toml: ~/.config/starship.toml
-
-linux|darwin:
-  installs:
-    cmd: curl -sS https://starship.rs/install.sh | sh -s -- -y

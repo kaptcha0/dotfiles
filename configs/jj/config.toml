@@ -1,0 +1,11 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[user]
+name = "J'C Kabunga (kaptcha0)"
+email = "50426223+kaptcha0@users.noreply.github.com"
+
+[revsets]
+log = "present(@) | ancestors(immutable_heads().., 2) | present(trunk())"
+
+[git]
+auto-local-bookmark = true
