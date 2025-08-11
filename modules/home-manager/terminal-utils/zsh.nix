@@ -13,6 +13,7 @@
   config = lib.mkIf config.zsh.enable {
     home.packages = with pkgs; [
       viddy
+      bat
       fzf
       eza
       neofetch

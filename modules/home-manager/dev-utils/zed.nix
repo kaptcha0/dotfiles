@@ -1,4 +1,9 @@
-{ lib, pkgs, config, osConfig, ... }:
+{
+  lib,
+  config,
+  osConfig,
+  ...
+}:
 
 {
   config = lib.mkIf osConfig.zed.enable {

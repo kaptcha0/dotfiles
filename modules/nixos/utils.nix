@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
 
@@ -10,6 +10,10 @@
     environment.systemPackages = with pkgs; [
       vim
       wget
+      pciutils
+      net-tools
+      usbutils
+      binutils
 
       kdePackages.discover
       kdePackages.kcalc

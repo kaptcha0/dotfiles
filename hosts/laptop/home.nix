@@ -8,6 +8,7 @@
 
   terminal-utils-bundle.enable = true;
   dev-utils-bundle.enable = true;
+  cyber-utils-bundle.enable = true;
 
   theming.enable = true;
   mime.enable = true;

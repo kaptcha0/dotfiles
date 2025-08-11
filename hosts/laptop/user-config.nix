@@ -31,6 +31,7 @@ in
       "wheel"
       "networkmanager"
       "audio"
+      "wireshark"
     ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
   };
