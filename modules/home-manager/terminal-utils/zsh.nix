@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   options = {
@@ -21,6 +26,14 @@
 
       ".zshenv" = {
         source = "${config.home.homeDirectory}/.dotfiles/configs/zsh/.zshenv";
+      };
+
+      ".xprofile" = {
+        source = "${config.home.homeDirectory}/.dotfiles/configs/zsh/.profile";
+      };
+
+      ".profile" = {
+        source = "${config.home.homeDirectory}/.dotfiles/configs/zsh/.profile";
       };
 
       ".config/zsh/" = {

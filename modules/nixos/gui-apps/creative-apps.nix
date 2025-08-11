@@ -25,13 +25,6 @@
 
     musnix.enable = music.enable;
 
-    environment.sessionVariables = {
-      PATH = [
-        "$PATH"
-      ]
-      ++ (lib.optional music.enable "/run/current-system/sw/lib/");
-    };
-
     environment.systemPackages =
       with pkgs;
       [ ]
@@ -46,10 +39,10 @@
         qjackctl
         carla
 
-        (yabridge.override { wine = wineWowPackages.stagingFull; })
-        (yabridgectl.override { wine = wineWowPackages.stagingFull; })
+        (yabridge.override { wine = wineWowPackages.yabridge; })
+        (yabridgectl.override { wine = wineWowPackages.yabridge; })
         winetricks
-        wineWowPackages.stagingFull
+        wineWowPackages.yabridge
 
         vital
         decent-sampler

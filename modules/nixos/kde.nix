@@ -1,4 +1,8 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 
 {
   options = {
@@ -6,8 +10,8 @@
   };
 
   config = lib.mkIf config.kde.enable {
-    services.displayManager.gdm.enable = true;
-    services.displayManager.gdm.wayland = true;
+    services.displayManager.sddm.enable = true;
+    services.displayManager.sddm.wayland.enable = true;
     services.desktopManager.plasma6.enable = true;
   };
 }
