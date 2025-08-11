@@ -1,9 +1,10 @@
-{ lib, pkgs, config, ... }:
+{ ... }:
 
 {
   imports = [
     ./kde.nix
     ./utils.nix
+    ./tailscale.nix
     ./gui-apps
   ];
 }

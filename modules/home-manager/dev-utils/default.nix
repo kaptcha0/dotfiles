@@ -14,7 +14,6 @@
   config = lib.mkIf config.dev-utils-bundle.enable {
     lang-servers.enable = true;
 
-    mise.enable = true;
     direnv.enable = true;
   };
 }

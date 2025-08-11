@@ -1,6 +1,6 @@
 export ZSH="$HOME/.config/zsh"
 export EDITOR="hx"
-export VISUAL="zeditor"
+export VISUAL="zeditor --wait"
 
 source "$HOME/.profile"
 source "$ZSH/variables.zsh"

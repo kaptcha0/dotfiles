@@ -42,6 +42,9 @@
   services.printing.enable = true;
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "libsoup-2.74.3"
+  ];
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

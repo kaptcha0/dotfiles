@@ -22,7 +22,6 @@
       ++ lib.optionals config.vpn.enable [
         openvpn
         openvpn3
-        tailscale
       ];
   };
 }
