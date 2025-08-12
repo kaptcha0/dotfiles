@@ -16,6 +16,7 @@
       serif = [ "GoMono Nerd Font" ];
       sansSerif = [
         "Iosevka Nerd Font"
+        "Noto Nerd Font"
         "Noto Sans"
       ];
       monospace = [
@@ -28,9 +29,11 @@
       libsForQt5.breeze-qt5
       libsForQt5.breeze-gtk
 
-      bibata-cursors-translucent
+      volantes-cursors
 
-      nerd-fonts
+      nerd-fonts.iosevka
+      nerd-fonts.hurmit
+      nerd-fonts.noto
     ];
 
     gtk = {
