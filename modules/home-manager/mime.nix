@@ -12,10 +12,10 @@
       enable = true;
       defaultApplications = {
         "x-scheme-handler/native-access" = [ "Native Access.desktop" ];
-        "x-scheme-handler/http" = "zen-twilight.desktop";
-        "x-scheme-handler/https" = "zen-twilight.desktop";
-        "x-scheme-handler/about" = "zen-twilight.desktop";
-        "x-scheme-handler/unknown" = "zen-twilight.desktop";
+        "x-scheme-handler/http" = "zen-beta.desktop";
+        "x-scheme-handler/https" = "zen-beta.desktop";
+        "x-scheme-handler/about" = "zen-beta.desktop";
+        "x-scheme-handler/unknown" = "zen-beta.desktop";
       };
     };
   };

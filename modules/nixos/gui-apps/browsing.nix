@@ -20,7 +20,7 @@
 
     environment.systemPackages = [
       (lib.mkIf config.zen.enable (
-        inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight.override {
+        inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
           nativeMessagingHosts = [ pkgs.firefoxpwa ];
         }
       ))

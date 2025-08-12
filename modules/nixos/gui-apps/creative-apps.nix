@@ -25,6 +25,8 @@
 
     musnix.enable = music.enable;
 
+    programs.nix-ld.enable = true;
+
     environment.systemPackages =
       with pkgs;
       [ ]

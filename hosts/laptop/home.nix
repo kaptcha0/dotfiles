@@ -10,7 +10,6 @@
   dev-utils-bundle.enable = true;
   cyber-utils-bundle.enable = true;
 
-  theming.enable = true;
   mime.enable = true;
 
   # This value determines the Home Manager release that your configuration is

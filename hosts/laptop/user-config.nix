@@ -10,7 +10,9 @@ in
   kde.enable = true;
   hyprland.enable = true;
   utils.enable = true;
+  nix-ld.enable = true;
   gui-apps-bundle.enable = true;
+  theming.enable = true;
 
   programs.zsh.enable = true;
 

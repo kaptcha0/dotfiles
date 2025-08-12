@@ -7,5 +7,6 @@
     ./tailscale.nix
     ./gui-apps
     ./hyprland.nix
+    ./stylix.nix
   ];
 }
