@@ -11,9 +11,26 @@
   };
 
   config = lib.mkIf config.theming.enable {
+    fonts.fontconfig.enable = true;
+    fonts.fontconfig.defaultFonts = {
+      serif = [ "GoMono Nerd Font" ];
+      sansSerif = [
+        "Iosevka Nerd Font"
+        "Noto Sans"
+      ];
+      monospace = [
+        "Hurmit Nerd Font"
+        "Noto Sans Mono"
+      ];
+    };
+
     home.packages = with pkgs; [
       libsForQt5.breeze-qt5
       libsForQt5.breeze-gtk
+
+      bibata-cursors-translucent
+
+      nerd-fonts
     ];
 
     gtk = {

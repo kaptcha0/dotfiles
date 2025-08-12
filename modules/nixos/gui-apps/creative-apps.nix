@@ -51,7 +51,7 @@
         gimp3-with-plugins
         krita
         rapidraw
-        darktable
+        rawtherapee
       ]
       ++ lib.optionals video.enable [
         davinci-resolve

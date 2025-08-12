@@ -8,8 +8,10 @@ let
 in
 {
   kde.enable = true;
+  hyprland.enable = true;
   utils.enable = true;
   gui-apps-bundle.enable = true;
+
   programs.zsh.enable = true;
 
   home-manager = {

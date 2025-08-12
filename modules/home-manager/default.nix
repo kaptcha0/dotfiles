@@ -8,5 +8,6 @@
 
     ./theming.nix
     ./mime.nix
+    ./hyprland.nix
   ];
 }
