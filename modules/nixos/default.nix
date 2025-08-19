@@ -8,5 +8,6 @@
     ./gui-apps
     ./hyprland.nix
     ./stylix.nix
+    ./xdg.nix
   ];
 }
