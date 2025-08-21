@@ -54,8 +54,6 @@ in
 
     musnix.enable = music.enable;
 
-    programs.nix-ld.enable = true;
-
     environment.systemPackages =
       with pkgs;
       lib.optionals music.enable [
@@ -77,6 +75,7 @@ in
         vital
         decent-sampler
         lsp-plugins
+        chow-tape-model
       ]
       ++ lib.optionals photo.enable [
         gimp3-with-plugins

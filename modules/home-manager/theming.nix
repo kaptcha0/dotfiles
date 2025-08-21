@@ -6,8 +6,11 @@
 
 {
   config = lib.mkIf osConfig.theming.enable {
-    stylix.targets.starship.enable = false;
-    stylix.targets.qt.platform = "qtct";
-    # stylix.targets.zed.enable = false;
+    stylix.targets = {
+      starship.enable = false;
+      qt.platform = "qtct";
+
+      zen-browser.profileNames = [ "default" ];
+    };
   };
 }

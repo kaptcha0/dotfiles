@@ -15,7 +15,8 @@
       enable = true;
       polarity = "dark";
       autoEnable = true;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/material-darker.yaml";
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/twilight.yaml";
+      image = /home/kaptcha0/.dotfiles/configs/bgs/default;
 
       fonts = {
         serif = {
@@ -23,8 +24,8 @@
           name = "Noto Sans";
         };
         sansSerif = {
-          package = pkgs.notonoto;
-          name = "Noto Sans";
+          package = pkgs.inter;
+          name = "Inter var";
         };
         monospace = {
           package = pkgs.nerd-fonts.caskaydia-cove;

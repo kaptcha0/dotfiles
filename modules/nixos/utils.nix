@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  options,
   ...
 }:
 
@@ -14,6 +15,7 @@
 
   config = {
     programs.nix-ld.enable = config.nix-ld.enable;
+    programs.nix-ld.libraries = options.programs.nix-ld.libraries.default ++ (with pkgs; [ freetype ]);
 
     environment.systemPackages =
       with pkgs;
