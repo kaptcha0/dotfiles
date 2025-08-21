@@ -1,0 +1,18 @@
+scheme: "Aquamarine Gold Hard Light"
+author: "kaptcha0"
+base00: "fafaf7" # light background (was base07)
+base01: "f0ede4"
+base02: "e6e6e0"
+base03: "c0c8c8"
+base04: "7a8585"
+base05: "384444" # default text (dark gray teal)
+base06: "243030"
+base07: "102020" # darkest foreground (was base01)
+base08: "d87474" # softer coral red
+base09: "c99a60" # muted golden orange
+base0A: "e6cc8f" # sandy gold
+base0B: "6dbb8a" # mint green
+base0C: "63c9c4" # aquamarine highlight
+base0D: "5ea6d0" # sky blue
+base0E: "a98bb8" # muted orchid
+base0F: "bca57c" # golden beige

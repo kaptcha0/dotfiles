@@ -4,4 +4,5 @@ swww-daemon &
 dbus-update-activation-environment --systemd HYPRLAND_INSTANCE_SIGNATURE &
 udiskie &
 hyprsunset &
-hyprpanel &
+
+ags run ~/.dotfiles/configs/app.ts

@@ -3,18 +3,23 @@ $fg-color: #{"@theme_fg_color"};
 $bg-color: #{"@theme_bg_color"};
 
 window.Bar {
+  background: transparent;
+  color: $fg-color;
+  font-weight: bold;
+  padding: 8px 0px;
+  padding-left: 4px;
+
+  > centerbox {
     background: transparent;
-    color: $fg-color;
-    font-weight: bold;
+  }
 
-    >centerbox {
-        background: $bg-color;
-        border-radius: 10px;
-        margin: 8px;
-    }
-
-    button {
-        border-radius: 8px;
-        margin: 2px;
-    }
+  button {
+    border-radius: 4px;
+    margin: 2px;
+    padding: 8px;
+  }
+  
+  image {
+    margin: 4px 0px;
+  }
 }

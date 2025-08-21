@@ -15,7 +15,7 @@
       enable = true;
       polarity = "dark";
       autoEnable = true;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/twilight.yaml";
+      base16Scheme = /home/kaptcha0/.dotfiles/configs/themes/aquamarine-gold-soft-dark.yaml;
       image = /home/kaptcha0/.dotfiles/configs/bgs/default;
 
       fonts = {
@@ -43,7 +43,5 @@
         size = 24;
       };
     };
-
-    environment.systemPackages = [ pkgs.base16-schemes ];
   };
 }
