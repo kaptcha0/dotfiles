@@ -4,22 +4,30 @@ import { ORIENTATION } from "../common"
 
 export default function MediaModule() {
   const wp = AstalWp.get_default()
-  const default_speaker = wp.audio.default_speaker
-  const default_mic = wp.audio.default_microphone
+  // const { defaultSpeaker, defaultMicrophone } = wp.audio
 
-  const volumeIcon = createBinding(default_speaker, "volumeIcon")
-  const micIcon = createBinding(default_mic, "volumeIcon")
+  // const volumeIcon = createBinding(defaultSpeaker, "volumeIcon")
+  // const micIcon = createBinding(defaultMicrophone, "volumeIcon")
+  //
+  const audio = createBinding(wp, "audio")
 
   return (
     <button>
-      <box orientation={ORIENTATION}>
-        <With value={volumeIcon}>
-          {(iconName) => <image iconName={iconName} />}
-        </With>
-        <With value={micIcon}>
-          {(iconName) => <image iconName={iconName} />}
-        </With>
-      </box>
+      <With value={audio}>
+        {({ defaultSpeaker, defaultMicrophone }) => (
+          <box orientation={ORIENTATION}>
+            {/*<With value={volumeIcon}>
+              {(iconName) => <image iconName={iconName} />}
+            </With>
+            <With value={micIcon}>
+              {(iconName) => <image iconName={iconName} />}
+            </With>*/}
+
+            <image iconName={defaultSpeaker.volumeIcon} />
+            <image iconName={defaultMicrophone.volumeIcon} />
+          </box>
+        )}
+      </With>
     </button>
   )
 }

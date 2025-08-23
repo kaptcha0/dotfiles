@@ -2,6 +2,20 @@
 $fg-color: #{"@theme_fg_color"};
 $bg-color: #{"@theme_bg_color"};
 
+button {
+  border-radius: 4px;
+  margin: 2px;
+  padding: 8px;
+}
+
+image {
+  margin: 4px 0px;
+}
+
+label {
+  font-weight: bold;
+}
+
 window.Bar {
   background: transparent;
   color: $fg-color;
@@ -12,14 +26,24 @@ window.Bar {
   > centerbox {
     background: transparent;
   }
+}
 
-  button {
-    border-radius: 4px;
-    margin: 2px;
+window.Popup {
+  color: $fg-color;
+
+  > box {
+    background-color: $bg-color;
     padding: 8px;
+    border-radius: 8px;
   }
-  
-  image {
-    margin: 4px 0px;
+}
+
+window#calendar > box {
+  > label {
+    margin-bottom: 4px;
+  }
+
+  calendar.view label {
+    font-weight: normal;
   }
 }

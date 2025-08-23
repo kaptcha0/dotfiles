@@ -1,6 +1,6 @@
 import app from "ags/gtk4/app"
 import { Astal, Gdk } from "ags/gtk4"
-import { ORIENTATION } from "./common"
+import { Anchors, ORIENTATION } from "./common"
 import AppLauncherModule from "./modules/AppLauncher"
 import ClockModule from "./modules/Clock"
 import ControlPanelModule from "./modules/ControlPannel"
@@ -8,18 +8,22 @@ import MediaModule from "./modules/Media"
 import SysTrayModule from "./modules/SysTray"
 import WorkspacesModule from "./modules/Worksplaces"
 
-export default function Bar(gdkmonitor: Gdk.Monitor) {
-  const { TOP, LEFT, BOTTOM } = Astal.WindowAnchor
+interface Props {
+  monitor: Gdk.Monitor
+  $?: (self: any) => void
+}
 
+export default function Bar({ monitor, $ }: Props) {
   return (
     <window
       visible
       name="bar"
       class="Bar"
-      gdkmonitor={gdkmonitor}
+      gdkmonitor={monitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      anchor={LEFT | TOP | BOTTOM}
+      anchor={Anchors.LEFT | Anchors.TOP | Anchors.BOTTOM}
       application={app}
+      $={$}
     >
       <centerbox orientation={ORIENTATION}>
         <box orientation={ORIENTATION} $type="start">
