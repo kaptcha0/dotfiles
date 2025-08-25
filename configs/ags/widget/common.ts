@@ -1,5 +1,6 @@
 import GObject from "ags/gobject"
 import { Astal, Gtk } from "ags/gtk4"
+import app from "ags/gtk4/app"
 
 export const ORIENTATION = Gtk.Orientation.VERTICAL
 
@@ -20,5 +21,15 @@ interface Windows {
   [key: string]: {
     name: string
     widget: (...args: any[]) => GObject.Object
+  }
+}
+
+export function generateOnClicked(name: string) {
+  return () => {
+    const popup = app.get_window(name)
+
+    if (!popup) return
+
+    popup.visible = !popup.visible
   }
 }

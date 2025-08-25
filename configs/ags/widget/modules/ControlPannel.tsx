@@ -16,11 +16,23 @@ export default function ControlPanelModule() {
 
     switch (iface) {
       case AstalNetwork.Primary.WIFI:
-        return <image iconName={network.wifi.iconName} />
+        return (
+          <image
+            tooltipText={"Connected: " + network.wifi.ssid}
+            iconName={network.wifi.iconName}
+          />
+        )
       case AstalNetwork.Primary.WIRED:
-        return <image iconName={network.wired.iconName} />
+        return (
+          <image
+            tooltipText={"Connected: " + network.wired.speed}
+            iconName={network.wired.iconName}
+          />
+        )
       default:
-        return <image iconName={network.wifi.iconName} />
+        return (
+          <image tooltipText="Disconnected" iconName={network.wifi.iconName} />
+        )
     }
   }
 
@@ -32,18 +44,30 @@ export default function ControlPanelModule() {
     }
 
     if (bluetooth.isConnected) {
-      return <image iconName={icons.paired} />
+      const devicesTooltip = bluetooth.devices.map((d) => d.name)
+
+      return (
+        <image
+          tooltipText={["Connected:", ...devicesTooltip].join("\n")}
+          iconName={icons.paired}
+        />
+      )
     }
 
     if (bluetooth.isPowered) {
-      return <image iconName={icons.active} />
+      return <image tooltipText="Bluetooth on" iconName={icons.active} />
     }
 
-    return <image iconName={icons.inactive} />
+    return <image tooltipText="Bluetooth off" iconName={icons.inactive} />
   }
 
   const BatteryIcon = (_: RefreshProps) => {
-    return <image iconName={battery.iconName} />
+    return (
+      <image
+        tooltipText={battery.percentage * 100 + "%"}
+        iconName={battery.iconName}
+      />
+    )
   }
 
   return (

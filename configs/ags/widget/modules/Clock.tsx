@@ -1,6 +1,6 @@
 import { createPoll } from "ags/time"
 import { With } from "ags"
-import { ORIENTATION } from "../common"
+import { generateOnClicked, ORIENTATION } from "../common"
 import app from "ags/gtk4/app"
 
 export default function ClockModule() {
@@ -10,7 +10,7 @@ export default function ClockModule() {
     <With value={clock}>
       {(time) => {
         return (
-          <button onClicked={onClicked}>
+          <button onClicked={generateOnClicked("calendar")}>
             <box orientation={ORIENTATION}>
               {fmt(time).map((t) => (
                 <label label={t} />
@@ -31,12 +31,4 @@ const fmt = (time: string) => {
     date.getMinutes().toString().padStart(2, "0"),
     date.getSeconds().toString().padStart(2, "0"),
   ]
-}
-
-const onClicked = () => {
-  const calendarWidget = app.get_window("calendar")
-
-  if (!calendarWidget) return
-
-  calendarWidget.visible = !calendarWidget.visible
 }
