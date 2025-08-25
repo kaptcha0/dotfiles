@@ -28,6 +28,14 @@ window.Bar {
   }
 }
 
+window.Bar#top-bar {
+  padding: 4px 8px;
+
+  button {
+    padding: 2px;
+  }
+}
+
 window.Popup {
   color: $fg-color;
 
@@ -54,4 +62,8 @@ window#launcher {
   image {
     margin-right: 16px;
   }
+}
+
+window#control-panel image {
+  margin-right: 16px;
 }

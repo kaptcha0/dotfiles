@@ -5,4 +5,4 @@ dbus-update-activation-environment --systemd HYPRLAND_INSTANCE_SIGNATURE &
 udiskie &
 hyprsunset &
 
-ags run ~/.dotfiles/configs/app.ts
+kaptcha0-bar &

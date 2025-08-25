@@ -19,8 +19,8 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      pname = "my-shell";
-      entry = "app.ts";
+      pname = "kaptcha0-bar";
+      entry = "app.tsx";
 
       astalPackages = with ags.packages.${system}; [
         io
@@ -82,5 +82,22 @@
           ];
         };
       };
+
+      nixosModules.${pname} =
+        {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
+        let
+          cfg = config.${pname};
+        in
+        {
+          options.${pname}.enable = lib.mkEnableOption "Enable ${pname}";
+          config = lib.mkIf cfg.enable {
+            environment.systemPackages = [ self.packages.${system}.default ];
+          };
+        };
     };
 }

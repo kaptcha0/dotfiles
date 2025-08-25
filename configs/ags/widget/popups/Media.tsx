@@ -3,6 +3,7 @@ import PopupWindow from "./Popup"
 import { Accessed, Accessor, createBinding, createState, For, With } from "ags"
 import { Gtk } from "ags/gtk4"
 import { exec } from "ags/process"
+import { ORIENTATION } from "../common"
 
 export default function MediaWindow() {
   const wp = AstalWp.get_default()
@@ -28,7 +29,7 @@ export default function MediaWindow() {
 
   return (
     <PopupWindow valign={Gtk.Align.END} halign={Gtk.Align.START} name="media">
-      <box orientation={Gtk.Orientation.VERTICAL}>
+      <box orientation={ORIENTATION}>
         <DeviceList devices={speakers} label="Outputs" />
         <DeviceList devices={mics} label="Inputs" />
       </box>
@@ -47,7 +48,7 @@ function DeviceList({
   const wp = AstalWp.get_default()
 
   return (
-    <box orientation={Gtk.Orientation.VERTICAL}>
+    <box orientation={ORIENTATION}>
       <button
         onClicked={() => (deviceList.revealChild = !deviceList.revealChild)}
       >
@@ -62,7 +63,7 @@ function DeviceList({
                 exec(["wpctl", "set-default", device.id.toString()])
               }
             >
-              <box orientation={Gtk.Orientation.VERTICAL}>
+              <box orientation={ORIENTATION}>
                 <box>
                   <label label={device.description} />
                   <togglebutton

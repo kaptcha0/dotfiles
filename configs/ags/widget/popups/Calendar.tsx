@@ -1,5 +1,5 @@
 import { Gtk } from "ags/gtk4"
-import { Anchors } from "../common"
+import { Anchors, ORIENTATION } from "../common"
 import { createPoll } from "ags/time"
 import { With } from "ags"
 import PopupWindow from "./Popup"
@@ -15,7 +15,7 @@ export default function CalendarWindow() {
     >
       <With value={date}>
         {(d) => (
-          <box orientation={Gtk.Orientation.VERTICAL}>
+          <box orientation={ORIENTATION}>
             <label valign={Gtk.Align.CENTER} label={fmt(d)} />
             <Gtk.Calendar />
           </box>

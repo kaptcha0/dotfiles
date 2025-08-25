@@ -3,7 +3,7 @@ import { Astal, Gdk } from "ags/gtk4"
 import { Anchors, ORIENTATION } from "./common"
 import AppLauncherModule from "./modules/AppLauncher"
 import ClockModule from "./modules/Clock"
-import ControlPanelModule from "./modules/ControlPannel"
+import ControlPanelModule from "./modules/ControlPanel"
 import MediaModule from "./modules/Media"
 import SysTrayModule from "./modules/SysTray"
 import WorkspacesModule from "./modules/Worksplaces"
@@ -13,7 +13,7 @@ interface Props {
   $?: (self: any) => void
 }
 
-export default function Bar({ monitor, $ }: Props) {
+export default function SideBar({ monitor, $ }: Props) {
   return (
     <window
       visible

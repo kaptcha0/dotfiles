@@ -13,6 +13,8 @@
   };
 
   config = lib.mkIf config.hyprland.enable {
+    kaptcha0-bar.enable = true;
+
     programs.hyprland = {
       enable = true;
       xwayland.enable = true;

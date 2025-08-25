@@ -26,6 +26,9 @@
         net-tools
         usbutils
         binutils
+        file
+
+        kitty
 
         kdePackages.discover
         kdePackages.kcalc

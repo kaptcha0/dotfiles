@@ -10,6 +10,9 @@ interface Props {
   valign?: Gtk.Align
   halign?: Gtk.Align
   children?: Gtk.Widget | JSX.Element
+  widthRequest?: number
+  heightRequest?: number
+
   onNotifyVisible?: (visible: boolean) => void
   onKey?: (
     _e: Gtk.EventControllerKey,
@@ -26,6 +29,8 @@ export default function PopupWindow({
   class: className,
   valign,
   halign,
+  widthRequest,
+  heightRequest,
   children,
   onNotifyVisible,
   onKey: oK,
@@ -79,7 +84,13 @@ export default function PopupWindow({
     >
       <Gtk.EventControllerKey onKeyPressed={onKey} />
       <Gtk.GestureClick onPressed={onClick} />
-      <box $={(ref) => (contentbox = ref)} valign={valign} halign={halign}>
+      <box
+        widthRequest={widthRequest}
+        heightRequest={heightRequest}
+        $={(ref) => (contentbox = ref)}
+        valign={valign}
+        halign={halign}
+      >
         {children}
       </box>
     </window>

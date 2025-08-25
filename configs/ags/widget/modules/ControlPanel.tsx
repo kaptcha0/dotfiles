@@ -1,6 +1,6 @@
 import { createPoll } from "ags/time"
 import { With } from "ags"
-import { RefreshProps, ORIENTATION } from "../common"
+import { RefreshProps, ORIENTATION, generateOnClicked } from "../common"
 import AstalNetwork from "gi://AstalNetwork"
 import AstalBluetooth from "gi://AstalBluetooth"
 import AstalBattery from "gi://AstalBattery"
@@ -65,7 +65,7 @@ export default function ControlPanelModule() {
     return (
       <image
         tooltipText={battery.percentage * 100 + "%"}
-        iconName={battery.iconName}
+        iconName={battery.batteryIconName}
       />
     )
   }
@@ -73,7 +73,7 @@ export default function ControlPanelModule() {
   return (
     <With value={time}>
       {(trigger) => (
-        <button>
+        <button onClicked={generateOnClicked("control-panel")}>
           <box orientation={ORIENTATION}>
             <LanIcon trigger={trigger} />
             <BluetoothIcon trigger={trigger} />

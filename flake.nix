@@ -17,6 +17,10 @@
       url = "github:musnix/musnix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    kaptcha0-bar = {
+      url = "path:./configs/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     { self, nixpkgs, ... }@inputs:
@@ -29,6 +33,7 @@
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.default
           inputs.musnix.nixosModules.musnix
+          inputs.kaptcha0-bar.nixosModules.kaptcha0-bar
         ];
       };
 

@@ -3,6 +3,7 @@ import { Astal, Gtk, Gdk } from "ags/gtk4"
 import AstalApps from "gi://AstalApps"
 import Graphene from "gi://Graphene"
 import PopupWindow from "./Popup"
+import { ORIENTATION } from "../common"
 
 export default function Applauncher() {
   let contentbox: Gtk.Box
@@ -59,7 +60,7 @@ export default function Applauncher() {
       <box
         $={(ref) => (contentbox = ref)}
         name="launcher-content"
-        orientation={Gtk.Orientation.VERTICAL}
+        orientation={ORIENTATION}
         widthRequest={1080}
       >
         <entry
@@ -68,7 +69,7 @@ export default function Applauncher() {
           placeholderText="Start typing to search"
         />
         <Gtk.Separator visible={list((l) => l.length > 0)} />
-        <box orientation={Gtk.Orientation.VERTICAL}>
+        <box orientation={ORIENTATION}>
           <For each={list}>
             {(app, index) => (
               <button onClicked={() => launch(app)}>
