@@ -10,7 +10,7 @@
   dev-utils-bundle.enable = true;
   cyber-utils-bundle.enable = true;
 
-  mime.enable = true;
+  mime.enable = false;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

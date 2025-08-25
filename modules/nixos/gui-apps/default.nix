@@ -28,6 +28,7 @@
     vivaldi.enable = true;
     firefox.enable = true;
     edge.enable = true;
+    chrome.enable = true;
 
     creative-apps.music.enable = true;
     creative-apps.video.enable = true;

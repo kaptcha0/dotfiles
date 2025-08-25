@@ -2,10 +2,23 @@
 $fg-color: #{"@theme_fg_color"};
 $bg-color: #{"@theme_bg_color"};
 
+@function transparent($color, $alpha) {
+  @return unquote("alpha(#{$color}, #{$alpha})");
+}
+
 button {
+  background: transparent($fg-color, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid transparent($fg-color, 0.3);
   border-radius: 4px;
   margin: 2px;
   padding: 8px;
+  transition: all 256ms ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background: transparent($fg-color, 0.2);
+  }
 }
 
 image {
@@ -30,10 +43,6 @@ window.Bar {
 
 window.Bar#top-bar {
   padding: 4px 8px;
-
-  button {
-    padding: 2px;
-  }
 }
 
 window.Popup {

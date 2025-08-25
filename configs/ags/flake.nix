@@ -50,7 +50,7 @@
       packages.${system} = {
         default = pkgs.stdenv.mkDerivation {
           name = pname;
-          src = ./.;
+          src = pkgs.lib.cleanSource ./.;
 
           nativeBuildInputs = with pkgs; [
             wrapGAppsHook

@@ -55,36 +55,38 @@ function DeviceList({
         <label label={label} />
       </button>
       <revealer $={(self) => (deviceList = self)} revealChild={false}>
-        <For each={devices}>
-          {(device) => (
-            <button
-              css="background: transparent;"
-              onClicked={() =>
-                exec(["wpctl", "set-default", device.id.toString()])
-              }
-            >
-              <box orientation={ORIENTATION}>
-                <box>
-                  <label label={device.description} />
-                  <togglebutton
-                    active={device.mute}
-                    onClicked={() => device.set_mute(!device.mute)}
-                    iconName={device.icon}
-                    tooltipText={device.mute ? "Unmute" : "Mute"}
-                  />
+        <box orientation={ORIENTATION}>
+          <For each={devices}>
+            {(device) => (
+              <button
+                css="background: transparent;"
+                onClicked={() =>
+                  exec(["wpctl", "set-default", device.id.toString()])
+                }
+              >
+                <box orientation={ORIENTATION}>
+                  <box>
+                    <label label={device.description} />
+                    <togglebutton
+                      active={device.mute}
+                      onClicked={() => device.set_mute(!device.mute)}
+                      iconName={device.icon}
+                      tooltipText={device.mute ? "Unmute" : "Mute"}
+                    />
+                  </box>
+                  <revealer revealChild={device.isDefault}>
+                    <slider
+                      value={device.volume}
+                      onChangeValue={(s, a, volume) =>
+                        volumeChange(device, volume)
+                      }
+                    />
+                  </revealer>
                 </box>
-                <revealer revealChild={device.isDefault}>
-                  <slider
-                    value={device.volume}
-                    onChangeValue={(s, a, volume) =>
-                      volumeChange(device, volume)
-                    }
-                  />
-                </revealer>
-              </box>
-            </button>
-          )}
-        </For>
+              </button>
+            )}
+          </For>
+        </box>
       </revealer>
     </box>
   )

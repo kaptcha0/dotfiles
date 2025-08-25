@@ -56,7 +56,7 @@
   };
 
   services.libinput.enable = true;
-  services.openssh.enable = true;
+  services.openssh.enable = false;
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;

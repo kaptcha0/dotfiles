@@ -17,6 +17,7 @@ in
   config = lib.mkIf osConfig.theming.enable {
     stylix.targets = {
       starship.enable = false;
+      kitty.enable = true;
       qt.platform = "qtct";
 
       zen-browser.profileNames = [ "default" ];
@@ -28,6 +29,7 @@ in
       dark = "Fluent";
       light = "Fluent";
     };
+
     home.packages = [ icon-theme ];
   };
 }

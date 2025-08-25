@@ -34,12 +34,16 @@ export default function TopBar({ monitor, $ }: Props) {
         <box $type="start"></box>
         <box $type="center">
           <With value={currentWindow}>
-            {(window) => window && <label label={window.title} />}
+            {(window) =>
+              window && (
+                <button>
+                  <label label={window.title} />
+                </button>
+              )
+            }
           </With>
         </box>
-        <With value={currentWindow}>
-          {(window) => window && <box $type="end"></box>}
-        </With>
+        <box $type="end"></box>
       </centerbox>
     </window>
   )

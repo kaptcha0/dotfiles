@@ -13,6 +13,7 @@
     vivaldi.enable = lib.mkEnableOption "enable vivaldi browser";
     firefox.enable = lib.mkEnableOption "enable firefox browser";
     edge.enable = lib.mkEnableOption "enable edge browser";
+    chrome.enable = lib.mkEnableOption "enable chrome browser";
   };
 
   config = {
@@ -28,6 +29,7 @@
       (lib.mkIf config.vivaldi.enable pkgs.vivaldi)
       (lib.mkIf config.firefox.enable pkgs.firefox)
       (lib.mkIf config.edge.enable pkgs.microsoft-edge)
+      (lib.mkIf config.chrome.enable pkgs.google-chrome)
     ];
   };
 }

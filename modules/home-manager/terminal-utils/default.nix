@@ -10,6 +10,7 @@
     ./tmux.nix
     ./mise.nix
     ./jujutsu.nix
+    ./kitty.nix
   ];
 
   options = {
@@ -25,5 +26,6 @@
     mise.enable = true;
     tmux.enable = true;
     jujutsu.enable = true;
+    kitty.enable = true;
   };
 }

@@ -24,11 +24,12 @@
         wget
         pciutils
         net-tools
+        traceroute
         usbutils
         binutils
         file
 
-        kitty
+        bluetui
 
         kdePackages.discover
         kdePackages.kcalc

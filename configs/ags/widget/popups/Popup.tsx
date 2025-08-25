@@ -24,6 +24,8 @@ interface Props {
   $?: (self: Astal.Window) => void
 }
 
+type PopupProps = Props & Partial<Astal.Window.ConstructorProps>
+
 export default function PopupWindow({
   name,
   class: className,
@@ -36,7 +38,8 @@ export default function PopupWindow({
   onKey: oK,
   onClick: oC,
   $,
-}: Props) {
+  ...args
+}: PopupProps) {
   let contentbox: Gtk.Box
   let win: Astal.Window
 
@@ -81,6 +84,7 @@ export default function PopupWindow({
       anchor={Anchors.TOP | Anchors.LEFT | Anchors.BOTTOM | Anchors.RIGHT}
       application={app}
       onNotifyVisible={({ visible }) => onNotifyVisible?.(visible)}
+      {...args}
     >
       <Gtk.EventControllerKey onKeyPressed={onKey} />
       <Gtk.GestureClick onPressed={onClick} />

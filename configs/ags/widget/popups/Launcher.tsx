@@ -51,6 +51,7 @@ export default function Applauncher() {
       $={(ref) => (win = ref)}
       valign={Gtk.Align.CENTER}
       halign={Gtk.Align.CENTER}
+      exclusivity={Astal.Exclusivity.IGNORE}
       onKey={onKey}
       onNotifyVisible={(visible) => {
         if (visible) searchentry.grab_focus()

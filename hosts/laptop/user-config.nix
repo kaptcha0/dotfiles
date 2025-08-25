@@ -14,6 +14,7 @@ in
   gui-apps-bundle.enable = true;
   theming.enable = true;
 
+  tailscale.enable = true;
   programs.zsh.enable = true;
 
   home-manager = {
