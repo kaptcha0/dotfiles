@@ -11,6 +11,14 @@ interface Props {
   halign?: Gtk.Align
   children?: Gtk.Widget | JSX.Element
   onNotifyVisible?: (visible: boolean) => void
+  onKey?: (
+    _e: Gtk.EventControllerKey,
+    keyval: number,
+    _: number,
+    mod: number,
+  ) => boolean
+  onClick?: (_e: Gtk.GestureClick, _: number, x: number, y: number) => boolean
+  $?: (self: Astal.Window) => void
 }
 
 export default function PopupWindow({
@@ -20,6 +28,9 @@ export default function PopupWindow({
   halign,
   children,
   onNotifyVisible,
+  onKey: oK,
+  onClick: oC,
+  $,
 }: Props) {
   let contentbox: Gtk.Box
   let win: Astal.Window
@@ -32,6 +43,8 @@ export default function PopupWindow({
     _: number,
     mod: number,
   ) {
+    if (oK?.(_e, keyval, _, mod)) return
+
     if (keyval === Gdk.KEY_Escape) {
       win.visible = false
       return
@@ -43,6 +56,8 @@ export default function PopupWindow({
     const [, rect] = contentbox.compute_bounds(win)
     const position = new Graphene.Point({ x, y })
 
+    if (oC?.(_e, _, x, y)) return
+
     if (!rect.contains_point(position)) {
       win.visible = false
       return true
@@ -51,7 +66,10 @@ export default function PopupWindow({
 
   return (
     <window
-      $={(ref) => (win = ref)}
+      $={(ref) => {
+        win = ref
+        $?.(ref)
+      }}
       name={name}
       class={["Popup", className].join(" ")}
       keymode={Astal.Keymode.EXCLUSIVE}

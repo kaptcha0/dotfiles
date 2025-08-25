@@ -47,3 +47,11 @@ window#calendar > box {
     font-weight: normal;
   }
 }
+
+window#launcher {
+  background: transparent;
+
+  image {
+    margin-right: 16px;
+  }
+}

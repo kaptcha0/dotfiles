@@ -1,4 +1,5 @@
 import { exec } from "ags/process"
+import { generateOnClicked } from "../common"
 
 export default function AppLauncherModule() {
   const osInfo = exec(["cat", "/etc/os-release"])
@@ -11,7 +12,7 @@ export default function AppLauncherModule() {
   )
 
   return (
-    <button>
+    <button onClicked={generateOnClicked("launcher")}>
       <image iconName={infoMap.LOGO} />
     </button>
   )
