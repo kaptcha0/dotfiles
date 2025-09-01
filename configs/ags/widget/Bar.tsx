@@ -1,12 +1,13 @@
 import app from "ags/gtk4/app"
-import { Astal, Gdk } from "ags/gtk4"
+import { Astal, Gdk, Gtk } from "ags/gtk4"
 import { Anchors, ORIENTATION } from "./common"
 import AppLauncherModule from "./modules/AppLauncher"
 import ClockModule from "./modules/Clock"
-import ControlPanelModule from "./modules/ControlPanel"
+import BatteryModule from "./modules/Battery"
 import MediaModule from "./modules/Media"
 import SysTrayModule from "./modules/SysTray"
 import WorkspacesModule from "./modules/Worksplaces"
+import { onCleanup } from "ags"
 
 interface Props {
   monitor: Gdk.Monitor
@@ -14,16 +15,25 @@ interface Props {
 }
 
 export default function SideBar({ monitor, $ }: Props) {
+  let win: Gtk.Window
+
+  onCleanup(() => {
+    win.destroy()
+  })
+
   return (
     <window
       visible
+      $={(self) => {
+        win = self
+        $?.(self)
+      }}
       name="bar"
-      class="Bar"
+      cssClasses={["Bar", "kaptcha0-bar"]}
       gdkmonitor={monitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      anchor={Anchors.LEFT | Anchors.TOP | Anchors.BOTTOM}
+      anchor={Anchors.TOP | Anchors.LEFT | Anchors.RIGHT}
       application={app}
-      $={$}
     >
       <centerbox orientation={ORIENTATION}>
         <box orientation={ORIENTATION} $type="start">
@@ -34,8 +44,7 @@ export default function SideBar({ monitor, $ }: Props) {
           <ClockModule />
         </box>
         <box orientation={ORIENTATION} $type="end">
-          <MediaModule />
-          <ControlPanelModule />
+          <BatteryModule />
           <SysTrayModule />
         </box>
       </centerbox>

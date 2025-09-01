@@ -1,5 +1,5 @@
 import app from "ags/gtk4/app"
-import { createState } from "gnim"
+import { createState, onCleanup } from "ags"
 import { Anchors } from "../common"
 import Graphene from "gi://Graphene?version=1.0"
 import { Astal, Gdk, Gtk } from "ags/gtk4"
@@ -42,6 +42,10 @@ export default function PopupWindow({
 }: PopupProps) {
   let contentbox: Gtk.Box
   let win: Astal.Window
+
+  onCleanup(() => {
+    win.destroy()
+  })
 
   // close on ESC
   // handle alt + number key

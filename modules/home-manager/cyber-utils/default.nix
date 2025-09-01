@@ -15,7 +15,11 @@
     nmap.enable = true;
     tcpdump.enable = true;
     vpn.enable = true;
+    
+    recon-ng.enable = true;
+    setoolkit.enable = true;
 
+    caido.enable = true;
     wireshark.enable = true;
     radare.enable = true;
     binwalk.enable = true;

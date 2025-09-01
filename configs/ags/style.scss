@@ -1,23 +1,25 @@
 // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-$fg-color: #{"@theme_fg_color"};
-$bg-color: #{"@theme_bg_color"};
-
+@use "sass:string";
 @function transparent($color, $alpha) {
-  @return unquote("alpha(#{$color}, #{$alpha})");
+  @return string.unquote("alpha(#{$color}, #{$alpha})");
 }
 
+$fg-color: #{"@theme_fg_color"};
+$bg-color-base: #{"@theme_bg_color"};
+$bg-color: transparent($bg-color-base, 0.3);
+
+$selected-bg-color: #{"@theme_selected_bg_color"};
+$selected-fg-color: #{"@theme_selected_fg_color"};
+
 button {
-  background: transparent($fg-color, 0.1);
-  backdrop-filter: blur(16px);
-  border: 1px solid transparent($fg-color, 0.3);
+  background-color: transparent;
   border-radius: 4px;
   margin: 2px;
-  padding: 8px;
+  padding: 4px 8px;
   transition: all 256ms ease-in-out;
 
   &:hover {
-    cursor: pointer;
-    background: transparent($fg-color, 0.2);
+    background: $bg-color;
   }
 }
 
@@ -30,10 +32,7 @@ label {
 }
 
 window.Bar {
-  background: transparent;
-  color: $fg-color;
-  font-weight: bold;
-  padding: 8px 0px;
+  padding: 0px 8px;
   padding-left: 4px;
 
   > centerbox {
@@ -41,38 +40,43 @@ window.Bar {
   }
 }
 
-window.Bar#top-bar {
-  padding: 4px 8px;
-}
-
 window.Popup {
-  color: $fg-color;
-
   > box {
-    background-color: $bg-color;
     padding: 8px;
     border-radius: 8px;
   }
 }
 
-window#calendar > box {
+popover.calendar box {
+  background-color: transparent;
+
   > label {
     margin-bottom: 4px;
   }
 
+  calendar.view {
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid $bg-color;
+  }
+
   calendar.view label {
     font-weight: normal;
+
+    &.today {
+      background-color: $selected-bg-color;
+      color: $selected-fg-color;
+    }
   }
 }
 
 window#launcher {
-  background: transparent;
-
   image {
     margin-right: 16px;
   }
 }
 
-window#control-panel image {
-  margin-right: 16px;
+window,
+popover > * {
+  background-color: transparent;
 }

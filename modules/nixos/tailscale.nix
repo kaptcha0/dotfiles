@@ -14,7 +14,7 @@
       extraSetFlags = [
         "--accept-dns"
         "--accept-routes"
-        "--exit-node=pve"
+        "--exit-node="
         "--exit-node-allow-lan-access=true"
       ];
     };

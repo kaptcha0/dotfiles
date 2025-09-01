@@ -21,6 +21,9 @@
     };
 
     programs.hyprlock.enable = true;
+    services.hypridle.enable = true;
+
+    programs.nm-applet.enable = true;
 
     environment.sessionVariables = {
       # Just in case cursor becomes invisible
@@ -31,19 +34,18 @@
 
     environment.systemPackages = with pkgs; [
       ags
-      # launcher
-      wofi
       # notifs
       dunst
       libnotify
       # wallpaper
-      swww
+      hyprpaper
       # utilities
       kdePackages.networkmanager-qt
       kdePackages.kdeconnect-kde
       kdePackages.bluedevil
 
-      hypridle
+      hyprland-qtutils
+      hyprdisplay
       hyprpolkitagent
       udiskie
       brightnessctl
@@ -51,6 +53,9 @@
       hyprsunset
       hyprshot
       wl-clipboard
+      pasystray
+      pavucontrol
+      easyeffects
     ];
 
     xdg.portal = {

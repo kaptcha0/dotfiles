@@ -65,6 +65,7 @@ in
 
         jack2
         qjackctl
+        qpwgraph
         carla
 
         (yabridge.override { wine = wineWowPackages.yabridge; })

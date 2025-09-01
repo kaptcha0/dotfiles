@@ -48,6 +48,7 @@ export default function Applauncher() {
   return (
     <PopupWindow
       name="launcher"
+      class="kaptcha0-bar"
       $={(ref) => (win = ref)}
       valign={Gtk.Align.CENTER}
       halign={Gtk.Align.CENTER}
@@ -61,7 +62,7 @@ export default function Applauncher() {
       <box
         $={(ref) => (contentbox = ref)}
         name="launcher-content"
-        orientation={ORIENTATION}
+        orientation={Gtk.Orientation.VERTICAL}
         widthRequest={1080}
       >
         <entry
@@ -70,7 +71,7 @@ export default function Applauncher() {
           placeholderText="Start typing to search"
         />
         <Gtk.Separator visible={list((l) => l.length > 0)} />
-        <box orientation={ORIENTATION}>
+        <box orientation={Gtk.Orientation.VERTICAL}>
           <For each={list}>
             {(app, index) => (
               <button onClicked={() => launch(app)}>
