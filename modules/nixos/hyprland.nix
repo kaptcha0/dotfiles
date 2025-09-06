@@ -35,7 +35,7 @@
     environment.systemPackages = with pkgs; [
       ags
       # notifs
-      dunst
+      hyprnotify
       libnotify
       # wallpaper
       hyprpaper
@@ -45,7 +45,6 @@
       kdePackages.bluedevil
 
       hyprland-qtutils
-      hyprdisplay
       hyprpolkitagent
       udiskie
       brightnessctl
