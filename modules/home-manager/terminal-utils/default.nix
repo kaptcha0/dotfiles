@@ -13,6 +13,7 @@
     ./jujutsu.nix
     ./kitty.nix
     ./misc.nix
+    ./zellij.nix
   ];
 
   options = {
@@ -31,5 +32,6 @@
     jujutsu.enable = true;
     kitty.enable = true;
     misc.enable = true;
+    zellij.enable = true;
   };
 }

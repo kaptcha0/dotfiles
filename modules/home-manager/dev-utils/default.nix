@@ -15,5 +15,6 @@
     lang-servers.enable = true;
 
     direnv.enable = true;
+    zed.enable = true;
   };
 }

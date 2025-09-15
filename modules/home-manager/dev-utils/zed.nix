@@ -1,16 +1,21 @@
 {
   lib,
   config,
-  osConfig,
   ...
 }:
 
 {
-  config = lib.mkIf osConfig.zed.enable {
-    programs.zed-editor.enable = true;
-    # home.file.".config/zed" = {
-    #   source = "${config.home.homeDirectory}/.dotfiles/configs/zed";
-    #   recursive = true;
-    # };
+  options = {
+    zed.enable = lib.mkEnableOption "enable zed";
+  };
+
+  config = lib.mkIf config.zed.enable {
+    programs.zed-editor = {
+      enable = true;
+      userSettings = {
+        helix_mode = true;
+        terminal.shell.program = "nu";
+      };
+    };
   };
 }

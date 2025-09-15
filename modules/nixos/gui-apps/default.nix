@@ -6,7 +6,7 @@
 
 {
   imports = [
-    ./dev-apps.nix
+    # ./dev-apps.nix
     ./browsing.nix
     ./creative-apps.nix
     ./productivity-apps.nix
@@ -20,9 +20,9 @@
   };
 
   config = lib.mkIf config.gui-apps-bundle.enable {
-    zed.enable = true;
-    vscode.enable = true;
-    warp.enable = true;
+    # zed.enable = true;
+    # vscode.enable = true;
+    # warp.enable = true;
 
     zen.enable = true;
     brave.enable = true;
