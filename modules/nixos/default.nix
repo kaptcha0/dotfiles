@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./greeter.nix
     ./kde.nix
     ./utils.nix
     ./tailscale.nix

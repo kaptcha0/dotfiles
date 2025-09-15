@@ -1,6 +1,11 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    volatile.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,10 +28,14 @@
     };
   };
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    { nixpkgs, volatile, ... }@inputs:
+    let
+      system = "x86_64-linux";
+      volatilePkgs = import volatile { inherit system; };
+    in
     {
       nixosConfigurations.kaptcha0-laptop = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs volatilePkgs; };
         modules = [
           ./hosts/laptop/configuration.nix
           ./modules/nixos
@@ -34,6 +43,7 @@
           inputs.home-manager.nixosModules.default
           inputs.musnix.nixosModules.musnix
           inputs.kaptcha0-bar.nixosModules.kaptcha0-bar
+          inputs.spicetify-nix.nixosModules.default
         ];
       };
 

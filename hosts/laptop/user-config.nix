@@ -7,6 +7,7 @@ let
   username = "kaptcha0";
 in
 {
+  greeter.enable = true;
   kde.enable = true;
   hyprland.enable = true;
   utils.enable = true;
@@ -16,6 +17,12 @@ in
 
   tailscale.enable = true;
   programs.zsh.enable = true;
+  
+  services.logind.settings.Login = {
+    HandleLidSwitch = "sleep";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+  };
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };

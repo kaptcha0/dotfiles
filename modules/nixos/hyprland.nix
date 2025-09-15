@@ -30,6 +30,8 @@
       WLR_NO_HARDWARE_CURSORS = "1";
       # Tells electron apps to use Wayland
       NIXOS_OZONE_WL = "1";
+      XDG_SESSION_TYPE = "wayland";
+      QT_QPA_PLATFORM = "wayland";
     };
 
     environment.systemPackages = with pkgs; [
@@ -43,26 +45,40 @@
       kdePackages.networkmanager-qt
       kdePackages.kdeconnect-kde
       kdePackages.bluedevil
+      kdePackages.kservice
+
+      xdg-utils
+      shared-mime-info
+      mime-types
+      desktop-file-utils
 
       hyprland-qtutils
       hyprpolkitagent
+      hypridle
+      hyprsunset
+      
       udiskie
       brightnessctl
       playerctl
-      hyprsunset
-      hyprshot
+      
       wl-clipboard
+      cliphist
       pasystray
       pavucontrol
       easyeffects
+
+      nwg-displays
+      nwg-clipman
+      swappy
+      nwg-icon-picker
     ];
 
     xdg.portal = {
       enable = true;
+      config.Hyprland.default = [ "gtk" "hyprland" ];
       extraPortals = with pkgs; [
-        xdg-desktop-portal
         xdg-desktop-portal-hyprland
-        kdePackages.xdg-desktop-portal-kde
+        xdg-desktop-portal-gtk
       ];
     };
   };

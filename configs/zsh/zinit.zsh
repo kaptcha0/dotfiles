@@ -39,9 +39,6 @@ zinit snippet OMZ::plugins/nmap
 zinit ice blockf
 zinit light zsh-users/zsh-completions
 
-zinit snippet OMZ::plugins/z
-
-
 ## Others
 zinit light jirutka/zsh-shift-select
 

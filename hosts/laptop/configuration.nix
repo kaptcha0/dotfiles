@@ -16,7 +16,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = [ "i915.enable_dc=0" ];
-
   networking.hostName = "kaptcha0-laptop"; # Define your hostname. Pick only one of the below networking options.
   # networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
@@ -24,6 +23,12 @@
   # Set your time zone.
   services.automatic-timezoned.enable = true;
   services.geoclue2.geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
+
+  services.logind.settings.Login = {
+    HandleLidSwitch = "sleep";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+  };
 
   hardware.graphics = {
     enable = true;

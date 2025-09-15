@@ -8,9 +8,6 @@ source "$HOME/.zshenv"
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 
-eval "$(ssh-agent -s)"
-ssh-add
-
 source "$ZSH/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
@@ -20,8 +17,6 @@ source "$ZSH/themes/current.zsh"
 
 source "$ZSH/bindings.zsh"
 source "$ZSH/completions.zsh"
-
-[ -f $ZSH/.fzf.zsh ] && source $ZSH/.fzf.zsh
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -38,5 +33,5 @@ autoload -Uz _zinit
 
 ### End of Zinit's installer chunk
 
-neofetch
+fastfetch
 

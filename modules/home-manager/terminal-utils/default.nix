@@ -7,10 +7,12 @@
     ./helix.nix
     ./nushell.nix
     ./starship.nix
+    ./ssh.nix
     ./tmux.nix
     ./mise.nix
     ./jujutsu.nix
     ./kitty.nix
+    ./misc.nix
   ];
 
   options = {
@@ -23,9 +25,11 @@
     helix.enable = true;
     nushell.enable = true;
     starship.enable = true;
+    ssh.enable = true;
     mise.enable = true;
     tmux.enable = true;
     jujutsu.enable = true;
     kitty.enable = true;
+    misc.enable = true;
   };
 }

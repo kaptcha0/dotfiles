@@ -11,7 +11,11 @@
   };
 
   config = lib.mkIf config.kitty.enable {
-    programs.kitty.enable = true;
+    programs.kitty = {
+      enable = true;
+      extraConfig = builtins.readFile "${config.home.homeDirectory}/.dotfiles/configs/kitty/kitty.conf";
+    };
+
     home.file = {
       ".config/kitty" = {
         source = "${config.home.homeDirectory}/.dotfiles/configs/kitty";

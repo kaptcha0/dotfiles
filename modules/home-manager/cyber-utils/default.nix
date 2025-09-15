@@ -15,6 +15,11 @@
     nmap.enable = true;
     tcpdump.enable = true;
     vpn.enable = true;
+
+    sherlock.enable = true;
+    harvester.enable = true;
+    cewler.enable = true;
+    ronin.enable = true;
     
     recon-ng.enable = true;
     setoolkit.enable = true;

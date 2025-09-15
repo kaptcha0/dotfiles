@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  volatilePkgs,
   config,
   ...
 }:
@@ -66,7 +67,7 @@ in
         jack2
         qjackctl
         qpwgraph
-        carla
+        volatilePkgs.carla
 
         (yabridge.override { wine = wineWowPackages.yabridge; })
         (yabridgectl.override { wine = wineWowPackages.yabridge; })

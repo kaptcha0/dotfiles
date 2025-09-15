@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 
@@ -11,24 +10,13 @@
   };
 
   config = lib.mkIf config.zsh.enable {
-    home.packages = with pkgs; [
-      viddy
-      bat
-      fzf
-      eza
-      neofetch
-      ripgrep-all
-    ];
+    programs.zsh = {
+      enable = true;
+      initContent = builtins.readFile "${config.home.homeDirectory}/.dotfiles/configs/zsh/.zshrc";
+      envExtra = builtins.readFile "${config.home.homeDirectory}/.dotfiles/configs/zsh/.zshenv";
+    };
 
     home.file = {
-      ".zshrc" = {
-        source = "${config.home.homeDirectory}/.dotfiles/configs/zsh/.zshrc";
-      };
-
-      ".zshenv" = {
-        source = "${config.home.homeDirectory}/.dotfiles/configs/zsh/.zshenv";
-      };
-
       ".xprofile" = {
         source = "${config.home.homeDirectory}/.dotfiles/configs/zsh/.profile";
       };

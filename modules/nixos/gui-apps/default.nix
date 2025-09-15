@@ -10,6 +10,7 @@
     ./browsing.nix
     ./creative-apps.nix
     ./productivity-apps.nix
+    ./entertainment.nix
 
     ./wireshark.nix
   ];
@@ -36,6 +37,9 @@
 
     obsidian.enable = true;
     office.enable = true;
+
+    spotify.enable = true;
+    spotify.useSpicetify = true;
 
     wireshark.enable = config.home-manager.users."kaptcha0".wireshark.enable;
   };
