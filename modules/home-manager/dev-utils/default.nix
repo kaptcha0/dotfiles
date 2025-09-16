@@ -15,6 +15,8 @@
     lang-servers.enable = true;
 
     direnv.enable = true;
+    kubectl.enable = true;
+
     zed.enable = true;
   };
 }

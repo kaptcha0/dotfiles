@@ -63,6 +63,8 @@
   services.libinput.enable = true;
   services.openssh.enable = false;
 
+  security.pam.sshAgentAuth.enable = true;
+
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 

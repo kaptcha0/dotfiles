@@ -17,6 +17,10 @@
       VISUAL = "zeditor";
     };
 
+    home.shellAliases = {
+      md = "mkdir";
+    };
+
     home.packages = with pkgs; [
       viddy
       bat
@@ -24,6 +28,13 @@
       fastfetch
       ripgrep-all
     ];
+
+    programs.btop = {
+      enable = true;
+      settings = {
+        vim_keys = true;
+      };
+    };
 
     programs.carapace.enable = true;
     programs.zoxide.enable = true;
