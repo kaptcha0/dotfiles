@@ -52,18 +52,29 @@
 
         bluetui
 
-        kdePackages.discover
-        kdePackages.kcalc
-        kdePackages.kcharselect
-        kdePackages.kcolorchooser
-        kdePackages.kolourpaint
-        kdePackages.ksystemlog
-        kdePackages.sddm-kcm
-        kdiff3
+        nautilus
+        nautilus-open-any-terminal
+        showtime
+        papers
+        baobab
+        gnomecast
+        gnome-logs
+        gnome-maps
+        gnome-frog
+        gnome-usage
+        gnome-tecla
+        gnome-music
+        gnome-tweaks
+        gnome-photos
+        gnome-weather
+        gnome-system-monitor
+        gnome-network-displays
+        
         kdePackages.isoimagewriter
         kdePackages.partitionmanager
         hardinfo2
         haruna
+
         wayland-utils
         wl-clipboard
       ];
