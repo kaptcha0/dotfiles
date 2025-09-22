@@ -1,12 +1,9 @@
 import { For, createState } from "ags"
 import { Astal, Gtk, Gdk } from "ags/gtk4"
 import AstalApps from "gi://AstalApps"
-import Graphene from "gi://Graphene"
 import PopupWindow from "./Popup"
-import { ORIENTATION } from "../common"
 
-export default function Applauncher() {
-  let contentbox: Gtk.Box
+export default function Applauncher({ monitor }: { monitor: Gdk.Monitor }) {
   let searchentry: Gtk.Entry
   let win: Astal.Window
 
@@ -25,7 +22,6 @@ export default function Applauncher() {
     }
   }
 
-  // close on ESC
   // handle alt + number key
   function onKey(
     _e: Gtk.EventControllerKey,
@@ -49,6 +45,7 @@ export default function Applauncher() {
     <PopupWindow
       name="launcher"
       class="kaptcha0-bar"
+      gdkmonitor={monitor}
       $={(ref) => (win = ref)}
       valign={Gtk.Align.CENTER}
       halign={Gtk.Align.CENTER}
@@ -60,7 +57,6 @@ export default function Applauncher() {
       }}
     >
       <box
-        $={(ref) => (contentbox = ref)}
         name="launcher-content"
         orientation={Gtk.Orientation.VERTICAL}
         widthRequest={1080}

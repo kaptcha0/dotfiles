@@ -13,7 +13,7 @@ function main() {
       {(monitor) => (
         <This this={app}>
           <Bar monitor={monitor} />
-          <LauncherWindow />
+          <LauncherWindow monitor={monitor} />
           <NotificationPopups monitor={monitor} />
         </This>
       )}

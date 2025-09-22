@@ -43,12 +43,7 @@ export default function PopupWindow({
   let contentbox: Gtk.Box
   let win: Astal.Window
 
-  onCleanup(() => {
-    win.destroy()
-  })
-
   // close on ESC
-  // handle alt + number key
   function onKey(
     _e: Gtk.EventControllerKey,
     keyval: number,
@@ -79,8 +74,12 @@ export default function PopupWindow({
   return (
     <window
       $={(ref) => {
+        if (!ref) return
         win = ref
         $?.(ref)
+        onCleanup(() => {
+          win.destroy()
+        })
       }}
       name={name}
       class={["Popup", className].join(" ")}

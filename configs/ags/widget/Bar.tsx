@@ -13,19 +13,21 @@ interface Props {
   $?: (self: any) => void
 }
 
-export default function SideBar({ monitor, $ }: Props) {
+export default function Bar({ monitor, $ }: Props) {
   let win: Gtk.Window
 
-  onCleanup(() => {
-    win.destroy()
-  })
 
   return (
     <window
       visible
       $={(self) => {
+        if (!self) return
+
         win = self
         $?.(self)
+        onCleanup(() => {
+          win.destroy()
+        })
       }}
       name="bar"
       cssClasses={["Bar", "kaptcha0-bar"]}

@@ -38,6 +38,13 @@
         webkitgtk_4_1
       ]);
 
+    programs.nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 7d --optimise --keep 8";
+      flake = "${config.users.users.kaptcha0.home}/.dotfiles"; # sets NH_OS_FLAKE variable for you
+    };
+
     environment.systemPackages =
       with pkgs;
       lib.optionals config.utils.enable [
@@ -69,7 +76,8 @@
         gnome-weather
         gnome-system-monitor
         gnome-network-displays
-        
+        gnome-font-viewer
+
         kdePackages.isoimagewriter
         kdePackages.partitionmanager
         hardinfo2

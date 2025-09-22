@@ -1,8 +1,7 @@
-import app from "ags/gtk4/app"
 import { Astal, Gtk } from "ags/gtk4"
 import AstalNotifd from "gi://AstalNotifd"
 import Notification from "../modules/Notification"
-import { createBinding, For, createState, onCleanup } from "ags"
+import { For, createState, onCleanup } from "ags"
 import Gdk from "gi://Gdk?version=4.0"
 
 interface Props {
@@ -37,8 +36,8 @@ export default function NotificationPopups({ monitor }: Props) {
 
   return (
     <window
-      $={(self) => onCleanup(() => self.destroy())}
-      monitor={monitor}
+      $={(self) => self && onCleanup(() => self.destroy())}
+      gdkmonitor={monitor}
       class="NotificationPopups"
       visible={notifications((ns) => ns.length > 0)}
       anchor={Astal.WindowAnchor.TOP}

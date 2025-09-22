@@ -12,6 +12,7 @@
     ./mise.nix
     ./jujutsu.nix
     ./kitty.nix
+    ./ghostty.nix
     ./misc.nix
     ./zellij.nix
   ];
@@ -33,5 +34,6 @@
     kitty.enable = true;
     misc.enable = true;
     zellij.enable = true;
+    ghostty.enable = true;
   };
 }

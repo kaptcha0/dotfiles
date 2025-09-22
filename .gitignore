@@ -10,6 +10,8 @@ state.yml
 nvim/plugin
 tmux/plugins
 
+.direnv
+
 zsh/cache
 zsh/logs
 **/*cache*

@@ -11,7 +11,7 @@ export default function WorkspacesModule() {
       <With value={currentWorkspace}>
         {(workspace) => (
           <button>
-            <label label={workspace.id.toString()} />
+            <label label={workspace?.id.toString()} />
           </button>
         )}
       </With>

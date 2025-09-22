@@ -12,6 +12,9 @@
   config = lib.mkIf config.gnome.enable {
     services.displayManager.gdm.enable = true;
     services.desktopManager.gnome.enable = true;
+    services.gnome.gnome-browser-connector.enable = true;
+
+    environment.systemPackages = with pkgs; [ gnome-extension-manager gnomeExtensions.gsconnect ];
 
     # To disable installing GNOME's suite of applications
     # and only be left with GNOME shell.

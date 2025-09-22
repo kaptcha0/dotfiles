@@ -41,6 +41,7 @@
       libnotify
       # wallpaper
       hyprpaper
+      waypaper
       # utilities
       kdePackages.networkmanager-qt
       kdePackages.kdeconnect-kde

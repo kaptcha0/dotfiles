@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  apple-fonts,
   ...
 }:
 
@@ -20,16 +21,16 @@
 
       fonts = {
         serif = {
-          package = pkgs.nerd-fonts.go-mono;
-          name = "Noto Sans";
+          name = "NewYork Nerd Font";
+          package = apple-fonts.packages.${pkgs.system}.ny-nerd;
         };
         sansSerif = {
-          package = pkgs.inter;
-          name = "Inter var";
+          name = "SFProDisplay Nerd Font";
+          package = apple-fonts.packages.${pkgs.system}.sf-pro-nerd;
         };
         monospace = {
-          package = pkgs.nerd-fonts.caskaydia-cove;
-          name = "CaskaydiaMono Nerd Font";
+          name = "SFMono Nerd Font";
+          package = apple-fonts.packages.${pkgs.system}.sf-mono-nerd;
         };
         sizes = {
           applications = 12;

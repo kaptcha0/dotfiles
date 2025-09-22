@@ -12,9 +12,7 @@
         common = {
           default = [
             "hyprland"
-            "kde"
           ];
-          "org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
         };
         Hyprland.default = [ "gtk" "wlr" "hyprland" ];
       };
@@ -22,7 +20,6 @@
         xdg-desktop-portal-hyprland
         xdg-desktop-portal-gtk
         xdg-desktop-portal-wlr
-        kdePackages.xdg-desktop-portal-kde
       ];
     };
   };

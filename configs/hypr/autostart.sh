@@ -3,6 +3,7 @@ systemctl --user start hyprpolkitagent
 systemctl --user start nm-applet
 hyprpaper &
 hypridle &
+waypaper --restore &
 wl-paste --type text --watch cliphist store &
 wl-paste --type image --watch cliphist store &
 
