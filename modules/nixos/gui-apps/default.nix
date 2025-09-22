@@ -40,6 +40,9 @@
 
     spotify.enable = true;
     spotify.useSpicetify = true;
+    boxes.enable = true;
+    steam-run.enable = true;
+    steam.enable = true;
 
     wireshark.enable = config.home-manager.users."kaptcha0".wireshark.enable;
   };

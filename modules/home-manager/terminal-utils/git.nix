@@ -20,6 +20,7 @@
 
     programs.git = {
       enable = true;
+      lfs.enable = true;
       extraConfig = {
         user.name = "kaptcha0";
         user.email = "50426223+kaptcha0@users.noreply.github.com";

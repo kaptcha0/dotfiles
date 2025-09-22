@@ -7,13 +7,15 @@ let
   username = "kaptcha0";
 in
 {
-  greeter.enable = true;
-  kde.enable = true;
+  greeter.enable = false;
+  kde.enable = false;
+  gnome.enable = true;
   hyprland.enable = true;
   utils.enable = true;
   nix-ld.enable = true;
   gui-apps-bundle.enable = true;
   theming.enable = true;
+  xdg-conf.enable = true;
 
   tailscale.enable = true;
   programs.zsh.enable = true;

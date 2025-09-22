@@ -73,13 +73,5 @@
       nwg-icon-picker
     ];
 
-    xdg.portal = {
-      enable = true;
-      config.Hyprland.default = [ "gtk" "hyprland" ];
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-hyprland
-        xdg-desktop-portal-gtk
-      ];
-    };
   };
 }

@@ -18,10 +18,10 @@ in
     stylix.targets = {
       starship.enable = false;
       kitty.enable = true;
-      qt.platform = "qtct";
 
       zen-browser.profileNames = [ "default" ];
     };
+
 
     stylix.icons = {
       enable = true;

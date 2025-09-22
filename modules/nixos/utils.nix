@@ -15,7 +15,28 @@
 
   config = {
     programs.nix-ld.enable = config.nix-ld.enable;
-    programs.nix-ld.libraries = options.programs.nix-ld.libraries.default ++ (with pkgs; [ freetype ]);
+    programs.nix-ld.libraries =
+      options.programs.nix-ld.libraries.default
+      ++ (with pkgs; [
+        freetype
+        xorg.libX11
+        xorg.libXext
+        xorg.libXrender
+        xorg.libXtst
+        xorg.libXi
+        libGL
+        mesa_glu
+        fontconfig
+        freetype
+        alsa-lib
+
+        gtk3
+        glib
+        cairo
+        pango
+        gdk-pixbuf
+        webkitgtk_4_1
+      ]);
 
     environment.systemPackages =
       with pkgs;

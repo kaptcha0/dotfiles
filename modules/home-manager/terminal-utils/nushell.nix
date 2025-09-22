@@ -44,7 +44,7 @@
           $ssh_agent_env | save --force $ssh_agent_file
         }
 
-        try { ^ssh-add -l | ignore } catch { ^ssh-add ~/.ssh/id_ed25519 }
+        try { ssh-add -l | ignore } catch { ssh-add ~/.ssh/id_ed25519 }
       '';
     };
   };
