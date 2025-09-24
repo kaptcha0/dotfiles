@@ -16,6 +16,8 @@
     boxes.enable = lib.mkEnableOption "enable boxes";
     steam-run.enable = lib.mkEnableOption "enable steam-run";
     steam.enable = lib.mkEnableOption "enable steam";
+
+    matrix.enable = lib.mkEnableOption "enable matrix client";
   };
 
   config = {
@@ -45,6 +47,7 @@
       [
         (lib.mkIf config.boxes.enable gnome-boxes)
         (lib.mkIf config.steam-run.enable steam-run)
+        (lib.mkIf config.matrix.enable fluffychat)
       ]
       ++ lib.optional (config.spotify.enable && !config.spotify.useSpicetify) pkgs.spotify;
   };

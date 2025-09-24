@@ -57,6 +57,7 @@
       hyprpolkitagent
       hypridle
       hyprsunset
+      hyprshot
       
       udiskie
       brightnessctl

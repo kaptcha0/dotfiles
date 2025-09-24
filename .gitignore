@@ -11,6 +11,7 @@ nvim/plugin
 tmux/plugins
 
 .direnv
+.qmlls.ini
 
 zsh/cache
 zsh/logs

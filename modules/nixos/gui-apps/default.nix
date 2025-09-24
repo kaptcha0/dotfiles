@@ -43,6 +43,7 @@
     boxes.enable = true;
     steam-run.enable = true;
     steam.enable = true;
+    matrix.enable = true;
 
     wireshark.enable = config.home-manager.users."kaptcha0".wireshark.enable;
   };
