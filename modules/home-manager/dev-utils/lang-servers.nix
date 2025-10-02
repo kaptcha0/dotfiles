@@ -13,7 +13,6 @@
   config = lib.mkIf config.lang-servers.enable {
     home.packages = with pkgs; [
       asm-lsp
-      ansible-language-server
       bash-language-server
       cmake-language-server
       dockerfile-language-server-nodejs

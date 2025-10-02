@@ -19,7 +19,7 @@ in
 
   tailscale.enable = true;
   programs.zsh.enable = true;
-  
+
   services.logind.settings.Login = {
     HandleLidSwitch = "sleep";
     HandleLidSwitchExternalPower = "ignore";
@@ -49,4 +49,6 @@ in
     ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
   };
+
+  nix.settings.trusted-users = [ "@wheel" ];
 }

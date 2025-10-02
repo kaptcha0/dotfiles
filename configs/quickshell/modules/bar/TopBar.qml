@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import "../widgets/"
 
 PanelWindow {
+    id: root
     implicitHeight: 32
     color: "transparent"
 
@@ -31,6 +32,8 @@ PanelWindow {
                 Row {
                     spacing: 8
                     anchors.verticalCenter: parent.verticalCenter
+
+                    OsIcon {}
 
                     WorkspacesWidget {}
                 }
@@ -64,6 +67,8 @@ PanelWindow {
                     ClockWidget {
                         color: "#f1f1f1"
                     }
+
+                    Battery {}
                 }
             }
         }

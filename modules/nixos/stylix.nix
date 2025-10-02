@@ -12,6 +12,8 @@
   };
 
   config = lib.mkIf config.theming.enable {
+    environment.systemPackages = with pkgs; [ corefonts vista-fonts ];
+    
     stylix = {
       enable = true;
       polarity = "dark";

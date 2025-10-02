@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 
@@ -11,8 +10,6 @@
   };
 
   config = lib.mkIf config.nushell.enable {
-    home.packages = with pkgs; [ nushell ];
-
     programs.nushell = {
       enable = true;
       configFile.source = "${config.home.homeDirectory}/.dotfiles/configs/nushell/config.nu";

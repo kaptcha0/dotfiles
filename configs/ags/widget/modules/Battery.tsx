@@ -17,7 +17,7 @@ const BatteryDialog = () => {
   const { battery, percentage } = getBattery()
   const [revealed, setRevealed] = createState(false)
   const powerprofiles = AstalPowerProfiles.get_default()
-  const active = createBinding(powerprofiles, "activeProfile")
+  // const active = createBinding(powerprofiles, "activeProfile")
 
   const setProfile = (profile: string) => {
     powerprofiles.set_active_profile(profile)
@@ -31,9 +31,9 @@ const BatteryDialog = () => {
             <box $type="start">
               <label label={percentage} />
             </box>
-            <box $type="end">
+            {/* <box $type="end">
               <label label={active} />
-            </box>
+            </box> */}
           </centerbox>
           <levelbar
             orientation={Gtk.Orientation.HORIZONTAL}
@@ -41,7 +41,7 @@ const BatteryDialog = () => {
           />
         </box>
       </button>
-      <revealer revealChild={revealed}>
+      {/* <revealer revealChild={revealed}>
         <box orientation={Gtk.Orientation.VERTICAL}>
           {powerprofiles.get_profiles().map(({ profile }) => (
             <button onClicked={() => setProfile(profile)}>
@@ -55,7 +55,7 @@ const BatteryDialog = () => {
             </button>
           ))}
         </box>
-      </revealer>
+      </revealer> */}
     </box>
   )
 }
