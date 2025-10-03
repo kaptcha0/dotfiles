@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 
@@ -25,6 +26,7 @@ PanelWindow {
 
             Rectangle {
                 color: "transparent"
+                Layout.leftMargin: 8
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignLeft
@@ -55,6 +57,7 @@ PanelWindow {
 
             Rectangle {
                 color: "transparent"
+                Layout.rightMargin: 8
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignRight
@@ -69,6 +72,8 @@ PanelWindow {
                     }
 
                     Battery {}
+
+                    SysTray {}
                 }
             }
         }
