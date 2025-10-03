@@ -8,6 +8,7 @@ IconImage {
     FileView {
         id: osRelease
         path: "/etc/os-release"
+        blockLoading: true
     }
 
     implicitSize: 18

@@ -14,8 +14,7 @@
 
     home.sessionVariables = {
       EDITOR = "hx";
-      VISUAL = "zeditor";
-      FOO = "BAR";
+      VISUAL = "zeditor --wait";
     };
 
     home.shellAliases = {

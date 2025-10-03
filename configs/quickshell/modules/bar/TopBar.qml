@@ -4,6 +4,7 @@ import QtQuick
 import QtQuick.Layouts
 
 import "../widgets/"
+import "../singletons"
 
 PanelWindow {
     id: root
@@ -17,22 +18,22 @@ PanelWindow {
     }
 
     Rectangle {
-        color: "#1e1e1e"
+        color: Configs.colors.base00
         anchors.fill: parent
 
         RowLayout {
-            spacing: 8
+            spacing: Configs.sizes.spacing
             anchors.fill: parent
 
             Rectangle {
                 color: "transparent"
-                Layout.leftMargin: 8
+                Layout.leftMargin: Configs.sizes.margin
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignLeft
 
                 Row {
-                    spacing: 8
+                    spacing: Configs.sizes.spacing
                     anchors.verticalCenter: parent.verticalCenter
 
                     OsIcon {}
@@ -48,7 +49,7 @@ PanelWindow {
                 Layout.alignment: Qt.AlignCenter
 
                 Row {
-                    spacing: 8
+                    spacing: Configs.sizes.spacing
                     anchors.centerIn: parent
 
                     WindowTitleWidget {}
@@ -57,13 +58,13 @@ PanelWindow {
 
             Rectangle {
                 color: "transparent"
-                Layout.rightMargin: 8
+                Layout.rightMargin: Configs.sizes.margin
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignRight
 
                 Row {
-                    spacing: 8
+                    spacing: Configs.sizes.spacing
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
 

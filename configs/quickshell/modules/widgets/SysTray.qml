@@ -3,10 +3,11 @@ import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
+
+import "../singletons"
 
 RowLayout {
-    spacing: 8
+    spacing: Configs.sizes.spacing
 
     Repeater {
         model: SystemTray.items
@@ -14,12 +15,12 @@ RowLayout {
         Item {
             id: item
             required property SystemTrayItem modelData
-            implicitHeight: 18
-            implicitWidth: 18
+            implicitHeight: Configs.sizes.iconSize
+            implicitWidth: Configs.sizes.iconSize
 
             IconImage {
                 id: icon
-                implicitSize: 18
+                implicitSize: Configs.sizes.iconSize
                 anchors.centerIn: parent
 
                 source: item.modelData.icon
