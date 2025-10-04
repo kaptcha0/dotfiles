@@ -3,8 +3,16 @@ import Quickshell.Services.UPower
 import Quickshell.Widgets
 import QtQuick
 
-IconImage {
-    source: Quickshell.iconPath(UPower.displayDevice.iconName)
+import "../wrappers"
+import "../singletons"
 
-    implicitSize: 18
+ClickableWrapper {
+    implicitHeight: Configs.sizes.iconSize
+    implicitWidth: Configs.sizes.iconSize
+
+    IconImage {
+        source: Quickshell.iconPath(UPower.displayDevice.iconName)
+
+        implicitSize: Configs.sizes.iconSize
+    }
 }

@@ -1,9 +1,12 @@
 import Quickshell.Hyprland
 import QtQuick
 
+import "../singletons"
+
 Text {
     readonly property HyprlandToplevel activeWindow: Hyprland.activeToplevel
-    color: "#f1f1f1"
+    color: Configs.colors.base05
 
     text: activeWindow ? activeWindow.title : ""
+    font.bold: true
 }

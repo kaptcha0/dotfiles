@@ -1,7 +1,7 @@
 //@ pragma UseQApplication
 import Quickshell
 
-import "./modules/bar"
+import "./modules"
 
 Scope {
     id: root
@@ -9,7 +9,7 @@ Scope {
     Variants {
         model: Quickshell.screens
 
-        TopBar {
+        Shell {
             required property var modelData
             screen: modelData
         }
