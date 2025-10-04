@@ -11,7 +11,8 @@ Singleton {
             iconSize: 18,
             fontSize: 16,
             radius: 8,
-            spacing: 8
+            spacing: 8,
+            barSize: 32
         };
     }
 

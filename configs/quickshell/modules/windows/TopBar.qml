@@ -1,5 +1,4 @@
 import Quickshell
-import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 
@@ -8,8 +7,8 @@ import "../singletons"
 
 PanelWindow {
     id: root
-    implicitHeight: 32
-    color: "transparent"
+    implicitHeight: Configs.sizes.barSize
+    color: Configs.colors.base00
 
     anchors {
         top: true
@@ -18,7 +17,7 @@ PanelWindow {
     }
 
     Rectangle {
-        color: Configs.colors.base00
+        color: "transparent"
         anchors.fill: parent
 
         RowLayout {

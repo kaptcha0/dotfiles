@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 systemctl --user start hyprpolkitagent
 systemctl --user start nm-applet
-hyprpaper &
 hypridle &
-waypaper --restore &
 wl-paste --type text --watch cliphist store &
 wl-paste --type image --watch cliphist store &
 
@@ -14,4 +12,4 @@ pasystray &
 blueman-applet &
 kdeconnect-indicator &
 
-kaptcha0-bar &
+quickshell -p ~/.dotfiles/configs/quickshell
