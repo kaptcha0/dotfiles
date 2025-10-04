@@ -20,7 +20,7 @@
                   eval $(ssh-agent -s)
               fi
 
-              `ssh-add -l > /dev/null 2>&1 || ssh-add ~/.ssh/id_ed25519`
+              `ssh-add -l > /dev/null 2>&1 || ssh-add`
             ''
           else
             ""

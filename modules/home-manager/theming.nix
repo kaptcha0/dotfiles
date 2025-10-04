@@ -7,9 +7,8 @@
 
 let
   icon-theme = (
-    pkgs.fluent-icon-theme.overrideAttrs {
-      roundedIcons = true;
-      colorVariants = [ "green" ];
+    pkgs.whitesur-icon-theme.overrideAttrs {
+      themeVariants = [ "green" ];
     }
   );
 in
@@ -17,7 +16,6 @@ in
   config = lib.mkIf osConfig.theming.enable {
     stylix.targets = {
       starship.enable = false;
-      kitty.enable = true;
 
       zen-browser.profileNames = [ "default" ];
     };
@@ -26,8 +24,8 @@ in
     stylix.icons = {
       enable = true;
       package = icon-theme;
-      dark = "Fluent";
-      light = "Fluent";
+      dark = "WhiteSur-dark";
+      light = "WhiteSur-light";
     };
 
     home.packages = [ icon-theme ];

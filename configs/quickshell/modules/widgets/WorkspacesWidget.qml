@@ -29,6 +29,13 @@ Repeater {
                 font.pixelSize: Configs.sizes.iconSize / 2
                 anchors.centerIn: parent
             }
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: Configs.animations.duration + 256
+                    easing: Configs.animations.easing
+                }
+            }
         }
 
         Behavior on implicitWidth {
