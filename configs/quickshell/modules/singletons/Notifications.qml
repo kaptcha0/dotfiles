@@ -1,85 +1,50 @@
 pragma Singleton
 
-import Quickshell
-import Quickshell.Services.Notifications
 import QtQuick
+import Quickshell
+import Quickshell.Io
 
 Singleton {
     id: root
-    readonly property alias trackedNotifications: server.trackedNotifications
-    property list<Notification> newNotifications: []
-    property var newNotificationsMetadata: []
+    property bool newNotif: false
+    property bool dndOn: false
+    property string tooltip: ""
 
-    signal newNotification(Notification notif)
-    signal newCount(real c)
-
-    function dismissNotification(notif: Notification) {
-        notif.dismiss();
-
-        root.newNotificationsMetadata = root.newNotificationsMetadata.filter(item => item.id == notif.id);
-
-        root.newNotifications = root.newNotifications.filter(item => i.id == notif.id);
+    function togglePanel() {
+        toggle.running = true;
     }
 
-    NotificationServer {
-        id: server
+    function toggleDnd() {
+        dnd.running = true;
+        dndOn = !dndOn
+    }
 
-        imageSupported: true
-        persistenceSupported: true
-        actionIconsSupported: true
-        bodyMarkupSupported: true
+    Process {
+        running: true
+        command: ["swaync-client", "-swb"]
+        stdout: SplitParser {
+            onRead: data => {
+                console.log(data);
+                const msg = JSON.parse(data);
 
-        onNotification: notif => {
-            notif.tracked = true;
-            root.newNotification(notif);
+                root.tooltip = msg.tooltip;
+                root.newNotif = msg.class.includes("notification");
+                root.dndOn = msg.alt.includes("dnd")
 
-            const now = Date.now();
-            const expiresAt = now + (notif.expireTimeout < 0 ? 5000 : notif.expireTimeout);
-            var item = Object.assign({}, notif);
-            item.created = now;
-            item.expiresAt = expiresAt;
-
-            root.newNotifications.push(notif);
-            root.newNotificationsChanged(); // force property update
-            root.newNotificationsMetadata.push(item);
-            root.newNotificationsMetadataChanged(); // force property update
-            root.newCount(root.newNotifications.length);
-
-            root.scheduleNextCleanup();
+                console.log('singleton', JSON.stringify(root))
+            }
         }
     }
 
-    Timer {
-        id: cleanupTimer
-        repeat: false
-        onTriggered: {
-            const now = Date.now();
-            const toRemove = root.newNotificationsMetadata.filter(item => item.expiresAt <= now);
-            root.newNotificationsMetadata = root.newNotificationsMetadata.filter(item => item.expiresAt > now);
-
-            root.newNotifications = root.newNotifications.filter(item => !toRemove.some(i => i.id == item.id));
-
-            const l = root.newNotifications.length;
-            root.newCount(l);
-
-            root.scheduleNextCleanup();
-        }
+    Process {
+        id: toggle
+        running: false
+        command: ["swaync-client", "-t"]
     }
 
-    // Schedule the next cleanup based on soonest expiration
-    function scheduleNextCleanup() {
-        if (root.newNotifications.length === 0) {
-            cleanupTimer.stop();
-            return;
-        }
-
-        // Find earliest expiration
-        const nextExpire = Math.min.apply(null, root.newNotifications.map(i => i.expiresAt));
-
-        const nextDelay = Math.max(0, nextExpire - Date.now());
-        cleanupTimer.interval = nextDelay;
-        cleanupTimer.start();
+    Process {
+        id: dnd
+        running: false
+        command: ["swaync-client", "-d"]
     }
-
-    Component.onCompleted: root.scheduleNextCleanup()
 }

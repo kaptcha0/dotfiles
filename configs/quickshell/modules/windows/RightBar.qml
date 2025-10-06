@@ -64,8 +64,6 @@ PanelWindow {
                     anchors.horizontalCenter: parent.horizontalCenter
                     spacing: Configs.sizes.spacing
                     bottomPadding: childrenRect.height
-
-                    ClockWidget {}
                 }
             }
         }

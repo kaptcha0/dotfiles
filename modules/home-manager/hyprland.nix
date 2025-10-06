@@ -26,6 +26,7 @@ let
 
     cargoHash = "sha256-D2/L7vQkjEgawde9cZH45s0FSLluihqYSSwW5eLNMxM=";
   };
+  colors = config.lib.stylix.colors;
 in
 {
   config = lib.mkIf osConfig.hyprland.enable {
@@ -37,6 +38,19 @@ in
     };
 
     home.packages = [ sherlock-clp ];
+
+    services.swaync = {
+      enable = true;
+      style = # css
+        ''
+          :root {
+            --border: none
+            --border-radius: 8px;
+
+            --notification-shadow: none,
+          }
+        '';
+    };
 
     programs.sherlock = {
       enable = true;
@@ -146,7 +160,32 @@ in
           }
 
           :root {
-            
+            --background: ${"#" + colors.base00};
+            --foreground: ${"#" + colors.base01};
+            --text: ${"#" + colors.base05};
+            --border: ${"#" + colors.base01};
+
+            --tag-background: ${"#" + colors.base02};
+            --tag-color: ${"#" + colors.base04};
+            --error: ${"#" + colors.base08};
+            --warning: ${"#" + colors.base0A};
+            --success: ${"#" + colors.base0B};
+          }
+
+          window:not(#backdrop),
+          #shortcut-holder,
+          .calc-tile,
+          #mpris-icon-holder,
+          gridview child box,
+          #context-menu,
+          #context-menu row {
+            border-radius: 8px
+          }
+
+          .tag,
+          .status-bar #shortcut-key,
+          .status-bar #shortcut-modifier {
+            border-radius: 4px
           }
         '';
     };
