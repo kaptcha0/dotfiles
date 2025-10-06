@@ -35,7 +35,6 @@
     };
 
     environment.systemPackages = with pkgs; [
-      ags
       quickshell
       # notifs
       hyprnotify

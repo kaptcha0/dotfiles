@@ -10,6 +10,8 @@ Item {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+        propagateComposedEvents: false
+        preventStealing: true
         cursorShape: Qt.PointingHandCursor
         onClicked: mouse => parent.clicked(mouse)
         onWheel: wheel => parent.wheel(wheel)

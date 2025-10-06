@@ -56,6 +56,7 @@
         usbutils
         binutils
         file
+        socat
 
         bluetui
 

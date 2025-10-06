@@ -3,12 +3,13 @@ import QtQuick
 import QtQuick.Layouts
 
 import "../widgets/"
-import "../singletons"
+import "../singletons/"
 
 PanelWindow {
     id: root
     implicitHeight: Configs.sizes.barSize
     color: Configs.colors.base00
+    aboveWindows: false
 
     anchors {
         top: true
@@ -19,14 +20,17 @@ PanelWindow {
     Rectangle {
         color: "transparent"
         anchors.fill: parent
+        anchors.margins: {
+            left: Configs.sizes.margin;
+            right: Configs.sizes.margin;
+        }
 
         RowLayout {
             spacing: Configs.sizes.spacing
             anchors.fill: parent
 
-            Rectangle {
-                color: "transparent"
-                Layout.leftMargin: Configs.sizes.margin
+            Item {
+                Layout.leftMargin: Configs.sizes.barSize
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignLeft
@@ -41,8 +45,7 @@ PanelWindow {
                 }
             }
 
-            Rectangle {
-                color: "transparent"
+            Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignCenter
@@ -55,9 +58,8 @@ PanelWindow {
                 }
             }
 
-            Rectangle {
-                color: "transparent"
-                Layout.rightMargin: Configs.sizes.margin
+            Item {
+                Layout.rightMargin: Configs.sizes.barSize
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignRight
@@ -66,10 +68,6 @@ PanelWindow {
                     spacing: Configs.sizes.spacing
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
-
-                    ClockWidget {
-                        color: "#f1f1f1"
-                    }
 
                     Battery {}
 
