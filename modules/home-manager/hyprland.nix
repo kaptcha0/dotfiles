@@ -44,9 +44,7 @@ in
       style = # css
         ''
           :root {
-            --border: none
             --border-radius: 8px;
-
             --notification-shadow: none,
           }
         '';
