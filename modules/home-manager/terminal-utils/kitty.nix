@@ -1,6 +1,8 @@
 {
   lib,
   config,
+  inputs,
+  pkgs,
   ...
 }:
 
@@ -13,18 +15,12 @@
   config = lib.mkIf config.kitty.enable {
     programs.kitty = {
       enable = true;
-      extraConfig = builtins.readFile "${config.home.homeDirectory}/.dotfiles/configs/kitty/kitty.conf";
+      package = pkgs.emptyDirectory;
+      extraConfig = builtins.readFile (inputs.self + /configs/kitty/kitty.conf);
       settings = {
         shell = "zellij";
         editor = ".";
       };
-    };
-
-    home.file = {
-      # ".config/kitty" = {
-      #   source = "${config.home.homeDirectory}/.dotfiles/configs/kitty";
-      #   recursive = true;
-      # };
     };
   };
 }

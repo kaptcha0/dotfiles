@@ -6,21 +6,49 @@
   ...
 }:
 let
-  ardourFHSPkgs = pkgs.buildFHSEnv {
-    name = "ardour-fhs";
-    runScript = "ardour8"; # Command that runs inside the env
+  winePkg = pkgs.wineWowPackages.waylandFull;
+  ardourFHSWrapper = pkgs.buildFHSEnv {
+    name = "ardour-fhs-env";
     targetPkgs =
       pkgs: with pkgs; [
-        ardour
+        xorg.libX11
+        xorg.libXcursor
+        xorg.libXrandr
+        xorg.libXext
+        xorg.libXfixes
+        xorg.libXi
+        xorg.libXrender
+        xorg.libxcb
+        libGL
+        libGLU
+        mesa
+        vulkan-loader
+        gtk3
+        cairo
+        pango
+        gdk-pixbuf
+        alsa-lib
+        jack2
+        libjack2
         freetype
         fontconfig
-        alsa-lib
+        expat
         nghttp2
+        ardour
+        winePkg
+        samba
       ];
   };
-  ardourFHS = pkgs.makeDesktopItem {
+
+  # Make a real executable that launches Ardour inside that env
+  ardourFHS = pkgs.writeShellScriptBin "ardour-fhs" ''
+    exec ${ardourFHSWrapper}/bin/ardour-fhs-env ardour8 "$@"
+  '';
+
+  # Optional desktop entry
+  ardourDesktop = pkgs.makeDesktopItem {
     name = "Ardour (FHS)";
-    exec = "${ardourFHSPkgs}/bin/ardour-fhs";
+    exec = "${ardourFHS}/bin/ardour-fhs";
     icon = "ardour";
     comment = "Ardour Digital Audio Workstation inside FHS environment";
     desktopName = "Ardour (FHS)";
@@ -59,6 +87,8 @@ in
       with pkgs;
       lib.optionals music.enable [
         ardourFHS
+        ardourDesktop
+        # ardour
 
         reaper
         reaper-sws-extension
@@ -69,10 +99,11 @@ in
         qpwgraph
         volatilePkgs.carla
 
-        (yabridge.override { wine = wineWowPackages.yabridge; })
-        (yabridgectl.override { wine = wineWowPackages.yabridge; })
+        (yabridge.override { wine = winePkg; })
+        (yabridgectl.override { wine = winePkg; })
         winetricks
-        wineWowPackages.yabridge
+        winePkg
+        samba
 
         vital
         decent-sampler

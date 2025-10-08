@@ -29,6 +29,7 @@ PanelWindow {
             anchors.fill: parent
 
             Item {
+                Layout.topMargin: Configs.sizes.barSize
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -55,6 +56,7 @@ PanelWindow {
             }
 
             Item {
+                Layout.bottomMargin: Configs.sizes.barSize
                 Layout.alignment: Qt.AlignBottom
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -64,6 +66,8 @@ PanelWindow {
                     anchors.horizontalCenter: parent.horizontalCenter
                     spacing: Configs.sizes.spacing
                     bottomPadding: childrenRect.height
+
+                    SysTray {}
                 }
             }
         }

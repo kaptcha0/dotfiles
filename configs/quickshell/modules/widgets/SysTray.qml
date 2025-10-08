@@ -2,13 +2,12 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 
 import "../singletons"
 import "../wrappers"
 
-RowLayout {
+ColumnLayout {
     spacing: Configs.sizes.spacing
 
     Repeater {
@@ -23,7 +22,8 @@ RowLayout {
             acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
             onClicked: mouse => {
                 if (mouse.button == Qt.LeftButton) {
-                    if (!menu.opened) return;
+                    if (!menu.opened)
+                        return;
 
                     menu.open();
                 } else if (mouse.button == Qt.RightButton) {
@@ -51,7 +51,7 @@ RowLayout {
                 id: menu
                 menu: item.modelData.menu
                 anchor.item: item
-                anchor.margins.top: Configs.sizes.iconSize + Configs.sizes.margin
+                anchor.margins.right: Configs.sizes.iconSize + Configs.sizes.margin
             }
         }
     }

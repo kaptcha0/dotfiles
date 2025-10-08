@@ -1,0 +1,33 @@
+[32m  INFO[0m: Launching config: "/home/kaptcha0/.dotfiles/configs/quickshell/shell.qml"
+[32m  INFO[0m: Shell ID: "16c8d094981f847a23fe91a0079f1ef9" Path ID "16c8d094981f847a23fe91a0079f1ef9"
+[32m  INFO[0m: Saving logs to "/run/user/1000/quickshell/by-id/hqr13taj4t/log.qslog"
+[32m  INFO[0m: QML tooling support enabled
+[33m  WARN[0m: Could not load icon "notification-inactive" at size QSize(18, 18) from request
+[33m  WARN[0m: Could not load icon "open-menu-symbolic" at size QSize(18, 18) from request
+[33m  WARN[0m: Could not load icon "" at size QSize(18, 18) from request
+[32m  INFO[0m: Configuration Loaded
+[33m  WARN[0m: Could not load icon "battery-full-charging-symbolic" at size QSize(18, 18) from request
+[33m  WARN[0m: Could not load icon "notification-active" at size QSize(18, 18) from request
+[32m  INFO[0m: Launching config: "/home/kaptcha0/.dotfiles/configs/quickshell/shell.qml"
+[32m  INFO[0m: Shell ID: "16c8d094981f847a23fe91a0079f1ef9" Path ID "16c8d094981f847a23fe91a0079f1ef9"
+[32m  INFO[0m: Saving logs to "/run/user/1000/quickshell/by-id/3vr1ataj4t/log.qslog"
+[32m  INFO[0m: QML tooling support enabled
+[33m  WARN[0m: Could not load icon "notification-inactive" at size QSize(18, 18) from request
+[33m  WARN[0m: Could not load icon "open-menu-symbolic" at size QSize(18, 18) from request
+[33m  WARN[0m: Could not load icon "" at size QSize(18, 18) from request
+[32m  INFO[0m: Configuration Loaded
+[33m  WARN[0m: Could not load icon "battery-full-charging-symbolic" at size QSize(18, 18) from request
+[33m  WARN[0m: Could not load icon "notification-active" at size QSize(18, 18) from request
+[33m  WARN[0m: Hyprland event socket error: QLocalSocket::PeerClosedError
+[33m  WARN[0m: The Wayland connection broke. Did the Wayland compositor die?
+No running instances for "/home/kaptcha0/.dotfiles/configs/quickshell/shell.qml"
+[32m  INFO[0m: Launching config: "/home/kaptcha0/.dotfiles/configs/quickshell/shell.qml"
+[32m  INFO[0m: Shell ID: "16c8d094981f847a23fe91a0079f1ef9" Path ID "16c8d094981f847a23fe91a0079f1ef9"
+[32m  INFO[0m: Saving logs to "/run/user/1000/quickshell/by-id/bnhayqj4t/log.qslog"
+[32m  INFO[0m: QML tooling support enabled
+[33m  WARN[0m: Could not load icon "notification-inactive" at size QSize(18, 18) from request
+[33m  WARN[0m: Could not load icon "" at size QSize(18, 18) from request
+[32m  INFO[0m: Configuration Loaded
+[33m  WARN[0m: Could not load icon "notification-active" at size QSize(18, 18) from request
+[33m  WARN[0m: Hyprland event socket error: QLocalSocket::PeerClosedError
+[33m  WARN[0m: The Wayland connection broke. Did the Wayland compositor die?

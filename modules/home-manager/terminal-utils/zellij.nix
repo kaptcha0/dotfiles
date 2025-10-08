@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   options = {
@@ -8,10 +8,17 @@
   config = lib.mkIf config.zellij.enable {
     programs.zellij = {
       enable = true;
-      attachExistingSession = true;
+      package = pkgs.stdenv.mkDerivation {
+          name = "zellij-fake";
+          version = "9999";  # A version greater than 0.32.0
+          buildCommand = ''
+            mkdir -p $out
+          '';
+        };
       settings = {
-        default_shell = "nu";
+        default_shell = "zsh";
         show_startup_tips = false;
+        default_layout = "compact";
       };
     };
   };

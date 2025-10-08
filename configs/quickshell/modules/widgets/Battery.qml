@@ -10,9 +10,19 @@ ClickableWrapper {
     implicitHeight: Configs.sizes.iconSize
     implicitWidth: Configs.sizes.iconSize
 
-    IconImage {
-        source: Quickshell.iconPath(UPower.displayDevice.iconName)
+    Row {
+        spacing: Configs.sizes.spacing
 
-        implicitSize: Configs.sizes.iconSize
+        // Text {
+        //     text: UPower.displayDevice.percentage
+        //     color: Configs.colors.base05
+        // }
+
+        IconImage {
+            source: Quickshell.iconPath(UPower.displayDevice.iconName)
+
+            implicitSize: Configs.sizes.iconSize
+        }
+
     }
 }

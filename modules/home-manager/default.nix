@@ -6,8 +6,7 @@
     ./dev-utils
     ./cyber-utils
 
-    ./theming.nix
-    ./mime.nix
+    ./stylix.nix
     ./hyprland.nix
   ];
 }

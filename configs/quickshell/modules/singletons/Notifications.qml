@@ -24,14 +24,11 @@ Singleton {
         command: ["swaync-client", "-swb"]
         stdout: SplitParser {
             onRead: data => {
-                console.log(data);
                 const msg = JSON.parse(data);
 
                 root.tooltip = msg.tooltip;
                 root.newNotif = msg.class.includes("notification");
                 root.dndOn = msg.alt.includes("dnd")
-
-                console.log('singleton', JSON.stringify(root))
             }
         }
     }

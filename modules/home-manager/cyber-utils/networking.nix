@@ -20,8 +20,8 @@
         (lib.mkIf config.tcpdump.enable tcpdump)
       ]
       ++ lib.optionals config.vpn.enable [
-        openvpn
-        openvpn3
+        (config.lib.nixGL.wrap openvpn)
+        (config.lib.nixGL.wrap openvpn3)
       ];
   };
 }

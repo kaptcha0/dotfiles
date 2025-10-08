@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 {
   options = {
@@ -17,7 +17,7 @@
     };
 
     home.file.".config/mise/config.toml" = {
-      source = "${config.home.homeDirectory}/.dotfiles/configs/mise/mise.toml";
+      source = inputs.self + /configs/mise/mise.toml;
     };
   };
 

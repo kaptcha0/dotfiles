@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 {
   options = {
@@ -6,14 +6,15 @@
   };
 
   config = lib.mkIf config.helix.enable {
-    home.packages = with pkgs; [ helix ];
+    programs.helix = {
+      enable = true;
+      defaultEditor = true;
+      package = pkgs.emptyDirectory;
+      extraConfig = builtins.readFile (inputs.self + /configs/helix/config.toml);
+    };
 
-    programs.helix.defaultEditor = true;
-    programs.helix.enable = true;
-
-    home.file.".config/helix" = {
-      source = "${config.home.homeDirectory}/.dotfiles/configs/helix";
-      recursive = true;
+    home.file.".config/helix/ignore" = {
+      source = inputs.self + /configs/helix/ignore;
     };
   };
 

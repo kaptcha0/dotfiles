@@ -2,8 +2,8 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
-import "../widgets/"
-import "../singletons/"
+import "../widgets"
+import "../singletons"
 
 PanelWindow {
     id: root
@@ -30,7 +30,6 @@ PanelWindow {
             anchors.fill: parent
 
             Item {
-                Layout.leftMargin: Configs.sizes.barSize
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignLeft
@@ -59,7 +58,6 @@ PanelWindow {
             }
 
             Item {
-                Layout.rightMargin: Configs.sizes.barSize
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignRight
@@ -70,8 +68,6 @@ PanelWindow {
                     anchors.right: parent.right
 
                     Battery {}
-
-                    SysTray {}
                 }
             }
         }

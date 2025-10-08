@@ -14,7 +14,12 @@
     services.desktopManager.gnome.enable = true;
     services.gnome.gnome-browser-connector.enable = true;
 
-    environment.systemPackages = with pkgs; [ gnome-extension-manager gnomeExtensions.gsconnect ];
+    environment.systemPackages = with pkgs; [
+      gnome-extension-manager
+      gnomeExtensions.gsconnect
+      qgnomeplatform-qt6
+      qgnomeplatform
+    ];
 
     # To disable installing GNOME's suite of applications
     # and only be left with GNOME shell.

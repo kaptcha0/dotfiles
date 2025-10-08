@@ -1,4 +1,4 @@
-theme = "mellow"
+# theme = "mellow"
 
 [editor]
 line-number = "relative"
@@ -6,6 +6,11 @@ mouse = true
 bufferline = "multiple"
 color-modes = true
 true-color = true
+end-of-line-diagnostics = "hint"
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+other-lines = "warning"
 
 [editor.statusline]
 left = ["mode", "spinner", "diagnostics"]

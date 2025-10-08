@@ -21,14 +21,15 @@ PanelWindow {
         color: "transparent"
 
         anchors.margins: {
-            top: Configs.sizes.margin;
-            bottom: Configs.sizes.margin;
+            top: Configs.sizes.margin + Configs.sizes.barSize;
+            bottom: Configs.sizes.margin + Configs.sizes.barSize;
         }
 
         ColumnLayout {
             anchors.fill: parent
 
             Item {
+                Layout.topMargin: Configs.sizes.barSize
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -53,6 +54,7 @@ PanelWindow {
             }
 
             Item {
+                Layout.bottomMargin: Configs.sizes.barSize
                 Layout.alignment: Qt.AlignBottom
                 Layout.fillWidth: true
                 Layout.fillHeight: true

@@ -1,7 +1,11 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    volatile.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    hyprland.url = "github:hyprwm/Hyprland?rev=71a1216abcc7031776630a6d88f105605c4dc1c9";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
     apple-fonts = {
       url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,39 +22,44 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
+    system-manager = {
+      url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    musnix = {
-      url = "github:musnix/musnix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixgl.url = "github:nix-community/nixGL";
   };
   outputs =
     {
       nixpkgs,
-      volatile,
-      apple-fonts,
+      home-manager,
+      system-manager,
+      nixgl,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
-      volatilePkgs = import volatile { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ nixgl.overlay ];
+      };
     in
     {
-      nixosConfigurations.kaptcha0-laptop = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs apple-fonts volatilePkgs; };
+      systemConfigs.kaptcha0-laptop = system-manager.lib.makeSystemConfig {
         modules = [
-          ./hosts/laptop/configuration.nix
-          ./modules/nixos
-          inputs.stylix.nixosModules.stylix
-          inputs.home-manager.nixosModules.default
-          inputs.musnix.nixosModules.musnix
-          inputs.spicetify-nix.nixosModules.default
+          ./hosts/kaptcha0-laptop/system.nix
+          ./modules/system-manager
         ];
       };
+      homeConfigurations."kaptcha0@kaptcha0-laptop" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { inherit inputs nixgl; };
 
-      homeManagerModules.default = ./modules/home-manager;
+        modules = [
+          ./hosts/kaptcha0-laptop/home.nix
+          ./modules/home-manager
+          inputs.stylix.homeModules.stylix
+          inputs.spicetify-nix.homeManagerModules.spicetify
+        ];
+      };
     };
 }

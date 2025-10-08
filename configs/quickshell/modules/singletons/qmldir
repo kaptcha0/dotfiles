@@ -1,0 +1,4 @@
+module singletons
+singleton Configs 1.0 Configs.qml
+singleton Notifications 1.0 Notifications.qml
+singleton Time 1.0 Time.qml

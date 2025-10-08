@@ -19,13 +19,13 @@
     sherlock.enable = true;
     harvester.enable = true;
     cewler.enable = true;
+    cook-framework.enable = true;
     ronin.enable = true;
-    
+
     recon-ng.enable = true;
     setoolkit.enable = true;
 
     caido.enable = true;
-    wireshark.enable = true;
     radare.enable = true;
     binwalk.enable = true;
 
@@ -34,5 +34,7 @@
     hashcat.enable = true;
     aircrack.enable = true;
     bettercap.enable = true;
+    wordlists.enable = true;
+    wordlists.seclists.enable = true;
   };
 }

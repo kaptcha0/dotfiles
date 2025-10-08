@@ -1,6 +1,8 @@
 {
   lib,
   config,
+  inputs,
+  pkgs,
   ...
 }:
 
@@ -11,10 +13,11 @@
 
   config = lib.mkIf config.tmux.enable {
     programs.tmux.enable = true;
+    programs.tmux.package = pkgs.emptyDirectory;
 
     home.file = {
       ".config/tmux" = {
-        source = "${config.home.homeDirectory}/.dotfiles/configs/tmux";
+        source = inputs.self + /configs/tmux;
         recursive = true;
       };
     };

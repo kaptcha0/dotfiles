@@ -14,16 +14,11 @@
 
     home.sessionVariables = {
       EDITOR = "hx";
-      VISUAL = "zeditor --wait";
+      VISUAL = "zed --wait";
     };
 
     home.shellAliases = {
       md = "mkdir";
-    };
-
-    programs.nushell = {
-      shellAliases = config.home.shellAliases;
-      environmentVariables = config.home.sessionVariables;
     };
 
     home.packages = with pkgs; [
@@ -44,6 +39,14 @@
 
     programs.carapace.enable = true;
     programs.zoxide.enable = true;
-    programs.fzf.enable = true;
+
+    programs.fzf = {
+      enable = true;
+      historyWidgetOptions = [
+        "--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'"
+        "--color header:italic"
+        "--header 'Press CTRL-Y to copy command into clipboard'"
+      ];
+    };
   };
 }

@@ -1,6 +1,8 @@
 {
   lib,
   config,
+  inputs,
+  pkgs,
   ...
 }:
 
@@ -12,6 +14,7 @@
   config = lib.mkIf config.zsh.enable {
     programs.zsh = {
       enable = true;
+      package = pkgs.emptyDirectory;
       initContent = ''
         ${
           if config.services.ssh-agent.enable then
@@ -25,22 +28,22 @@
           else
             ""
         }
-        ${builtins.readFile "${config.home.homeDirectory}/.dotfiles/configs/zsh/.zshrc"}
+        ${builtins.readFile (inputs.self + /configs/zsh/.zshrc)}
       '';
-      envExtra = builtins.readFile "${config.home.homeDirectory}/.dotfiles/configs/zsh/.zshenv";
+      envExtra = builtins.readFile (inputs.self + /configs/zsh/.zshenv);
     };
 
     home.file = {
       ".xprofile" = {
-        source = "${config.home.homeDirectory}/.dotfiles/configs/zsh/.profile";
+        source = inputs.self + /configs/zsh/.profile;
       };
 
       ".profile" = {
-        source = "${config.home.homeDirectory}/.dotfiles/configs/zsh/.profile";
+        source = inputs.self + /configs/zsh/.profile;
       };
 
       ".config/zsh/" = {
-        source = "${config.home.homeDirectory}/.dotfiles/configs/zsh";
+        source = inputs.self + /configs/zsh;
         recursive = true;
       };
     };

@@ -15,26 +15,26 @@ zinit light-mode for \
 ## OMZ
 zinit snippet OMZ::plugins/command-not-found
 zinit snippet OMZ::plugins/dotenv
-zinit snippet OMZ::plugins/sudo
+# zinit snippet OMZ::plugins/sudo
 
 ## Completion
-zinit ice as"completion"
-zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+# zinit ice as"completion"
+# zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
-zinit ice blockf
-zinit snippet OMZ::plugins/git
+# zinit ice blockf
+# zinit snippet OMZ::plugins/git
 
-zinit ice blockf
-zinit snippet OMZ::plugins/fzf
+# zinit ice blockf
+# zinit snippet OMZ::plugins/fzf
 
-zinit ice blockf
-zinit snippet OMZ::plugins/kubectl
+# zinit ice blockf
+# zinit snippet OMZ::plugins/kubectl
 
-zinit ice blockf
-zinit light nix-community/nix-zsh-completions
+# zinit ice blockf
+# zinit light nix-community/nix-zsh-completions
 
-zinit ice blockf
-zinit snippet OMZ::plugins/nmap
+# zinit ice blockf
+# zinit snippet OMZ::plugins/nmap
 
 zinit ice blockf
 zinit light zsh-users/zsh-completions
@@ -55,9 +55,13 @@ zinit light zsh-users/zsh-autosuggestions
 zinit ice wait lucid
 zinit light Aloxaf/fzf-tab
 
-zinit light "darvid/zsh-poetry"
+# zinit ice depth=1
+# zinit light jeffreytse/zsh-vi-mode
 
-zinit ice depth=1
-zinit light jeffreytse/zsh-vi-mode
+zinit ice lucid wait'0'
+zinit light joshskidmore/zsh-fzf-history-search
+
+zinit snippet https://github.com/Multirious/zsh-helix-mode/blob/main/zsh-helix-mode.zsh
+
 ( zinit self-update > $ZSH/logs/zinit-self-update.log 2>&1 & )
 ( zinit update --all > $ZSH/logs/zinit-update.log 2>&1 & )

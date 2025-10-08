@@ -1,3 +1,4 @@
+//@ pragma UseQApplication
 pragma ComponentBehavior: Bound
 
 import QtQuick.Controls.Material
@@ -9,72 +10,74 @@ import "./modules/windows"
 Scope {
     id: root
 
-    Variants {
-        model: Quickshell.screens
+    Loader {
+        id: topBar
+        asynchronous: false
 
-        Loader {
-            id: topBar
-            required property var modelData
-            asynchronous: false
+        Variants {
+            model: Quickshell.screens
 
             TopBar {
-                screen: topBar.modelData
+                required property var modelData
+                screen: modelData
             }
         }
     }
 
-    Variants {
-        model: Quickshell.screens
+    Loader {
+        id: bottomBar
+        asynchronous: false
 
-        Loader {
-            id: bottomBar
-            required property var modelData
-            asynchronous: false
+        Variants {
+            model: Quickshell.screens
 
             BottomBar {
-                screen: bottomBar.modelData
+                required property var modelData
+                screen: modelData
             }
         }
     }
 
-    Variants {
-        model: Quickshell.screens
+    Loader {
+        id: leftBar
+        asynchronous: false
+        active: topBar.status == Loader.Ready && bottomBar.status == Loader.Ready
 
-        Loader {
-            id: leftBar
-            required property var modelData
-            active: topBar.status == Loader.Ready && bottomBar.status == Loader.Ready
+        Variants {
+            model: Quickshell.screens
 
             LeftBar {
-                screen: leftBar.modelData
+                required property var modelData
+                screen: modelData
             }
         }
     }
 
-    Variants {
-        model: Quickshell.screens
-
-        Loader {
-            id: rightBar
-            required property var modelData
-            active: topBar.status == Loader.Ready && bottomBar.status == Loader.Ready
+    Loader {
+        id: rightBar
+        asynchronous: false
+        active: topBar.status == Loader.Ready && bottomBar.status == Loader.Ready
+        Variants {
+            model: Quickshell.screens
 
             RightBar {
-                screen: rightBar.modelData
+                required property var modelData
+                screen: modelData
             }
         }
     }
 
-    Variants {
-        model: Quickshell.screens
+    Loader {
+        id: wallpaper
+        asynchronous: false
+        active: leftBar.status == Loader.Ready && rightBar.status == Loader.Ready
 
-        Loader {
-            id: wallpaper
-            required property var modelData
-            active: leftBar.status == Loader.Ready && rightBar.status == Loader.Ready
+        Variants {
+            model: Quickshell.screens
 
             Wallpaper {
-                screen: wallpaper.modelData
+                required property var modelData
+                screen: modelData
             }
         }
     }

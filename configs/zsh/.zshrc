@@ -16,7 +16,6 @@ source "$ZSH/functions.zsh"
 source "$ZSH/themes/current.zsh"
 
 source "$ZSH/bindings.zsh"
-source "$ZSH/completions.zsh"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then

@@ -20,8 +20,9 @@
 
     programs.git = {
       enable = true;
+      package = pkgs.emptyDirectory;
       lfs.enable = true;
-      extraConfig = {
+      settings = {
         user.name = "kaptcha0";
         user.email = "50426223+kaptcha0@users.noreply.github.com";
         init.defaultBranch = "main";

@@ -56,6 +56,8 @@
         usbutils
         binutils
         file
+        unzip
+        p7zip
         socat
 
         bluetui

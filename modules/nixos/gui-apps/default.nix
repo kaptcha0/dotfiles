@@ -44,7 +44,9 @@
     steam-run.enable = true;
     steam.enable = true;
     matrix.enable = true;
-
+    zoom.enable = true;
+    teams.enable = true;
+    
     wireshark.enable = config.home-manager.users."kaptcha0".wireshark.enable;
   };
 }

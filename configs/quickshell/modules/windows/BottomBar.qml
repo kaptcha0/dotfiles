@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 
 import "../singletons"
+import "../widgets"
 
 PanelWindow {
     id: root
@@ -28,9 +29,7 @@ PanelWindow {
             anchors.fill: parent
 
             Item {
-                Layout.leftMargin: Configs.sizes.barSize
                 Layout.alignment: Qt.AlignLeft
-                Layout.fillWidth: true
                 Layout.fillHeight: true
             }
 
@@ -38,12 +37,15 @@ PanelWindow {
                 Layout.alignment: Qt.AlignCenter
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+
+                MpriWidget {
+                    anchors.fill: parent
+                    anchors.centerIn: parent
+                }
             }
 
             Item {
-                Layout.rightMargin: Configs.sizes.barSize
                 Layout.alignment: Qt.AlignRight
-                Layout.fillWidth: true
                 Layout.fillHeight: true
             }
         }

@@ -13,11 +13,11 @@
   config = lib.mkIf config.starship.enable {
     home.packages = with pkgs; [ starship ];
 
-    home.file = {
-      ".config/starship.toml" = {
-        source = "${config.home.homeDirectory}/.dotfiles/configs/starship/starship.toml";
-      };
-    };
+    # home.file = {
+    #   ".config/starship.toml" = {
+    #     source = inputs.self + /configs/starship/starship.toml;
+    #   };
+    # };
 
     programs.starship = {
       enable = true;
@@ -25,7 +25,9 @@
       enableBashIntegration = true;
       enableNushellIntegration = true;
       enableZshIntegration = true;
+
+      settings = {
+      };
     };
   };
-
 }

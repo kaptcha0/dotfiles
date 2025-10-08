@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 {
   options = {
@@ -11,7 +11,7 @@
     programs.jujutsu.enable = true;
 
     home.file.".config/jj" = {
-      source = "${config.home.homeDirectory}/.dotfiles/configs/jj";
+      source = inputs.self + /configs/jj;
       recursive = true;
     };
   };

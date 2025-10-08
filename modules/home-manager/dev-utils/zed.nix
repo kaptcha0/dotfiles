@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 
@@ -12,9 +13,14 @@
   config = lib.mkIf config.zed.enable {
     programs.zed-editor = {
       enable = true;
+      package = pkgs.emptyDirectory;
       userSettings = {
+        features = {
+          edit_prediction_provider = "copilot";
+        };
         helix_mode = true;
-        terminal.shell.program = "nu";
+        terminal.shell.program = "zsh";
+        terminal.font_family = config.stylix.fonts.monospace.name;
       };
     };
   };

@@ -4,6 +4,8 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
+import Qt.labs.platform
+
 Singleton {
     readonly property var sizes: {
         return {
@@ -42,7 +44,7 @@ Singleton {
 
     FileView {
         id: stylix
-        path: "/etc/stylix/palette.json"
+        path: Qt.resolvedUrl("../../assets/palette.json")
         blockLoading: true
         watchChanges: true
         onFileChanged: this.reload()

@@ -15,7 +15,7 @@
       asm-lsp
       bash-language-server
       cmake-language-server
-      dockerfile-language-server-nodejs
+      docker-language-server
       hyprls
       marksman
       nil
