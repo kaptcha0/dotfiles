@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -26,8 +27,7 @@
       enableNushellIntegration = true;
       enableZshIntegration = true;
 
-      settings = {
-      };
+      settings = builtins.fromTOML (builtins.readFile (inputs.self + /configs/starship/starship.toml));
     };
   };
 }

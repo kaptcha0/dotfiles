@@ -1,4 +1,10 @@
-{ lib, config, pkgs, inputs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   options = {
@@ -10,7 +16,12 @@
       enable = true;
       defaultEditor = true;
       package = pkgs.emptyDirectory;
-      extraConfig = builtins.readFile (inputs.self + /configs/helix/config.toml);
+      settings = builtins.fromTOML (
+        builtins.readFile (inputs.self + /configs/helix/config.toml)
+      );
+      languages = builtins.fromTOML (
+        builtins.readFile (inputs.self + /configs/helix/languages.toml)
+      );
     };
 
     home.file.".config/helix/ignore" = {

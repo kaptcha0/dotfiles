@@ -4,6 +4,7 @@
   imports = [
     ./zed.nix
     ./lang-servers.nix
+    ./android-studio.nix
     ./misc.nix
   ];
 
@@ -14,8 +15,10 @@
   config = lib.mkIf config.dev-utils-bundle.enable {
     lang-servers.enable = true;
 
+    android-studio.enable = true;
     direnv.enable = true;
     devenv.enable = true;
+    fh.enable = true;
     kubectl.enable = true;
 
     zed.enable = true;

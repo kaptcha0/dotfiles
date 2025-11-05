@@ -20,6 +20,8 @@ in
   };
 
   config = lib.mkIf config.theming.enable {
+    fonts.fontconfig.enable = lib.mkForce true;
+
     stylix = {
       enable = true;
       polarity = "dark";
@@ -31,6 +33,7 @@ in
     stylix.targets = {
       # starship.enable = false;
       qt.enable = true;
+      fontconfig.enable = true;
       obsidian.vaultNames = [ "pkm" ];
     };
 

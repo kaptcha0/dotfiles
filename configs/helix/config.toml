@@ -35,7 +35,7 @@ select = "underline"
 
 [editor.file-picker]
 hidden = false
-git-ignore = false
+# git-ignore = false
 
 [editor.whitespace.render]
 space = "all"

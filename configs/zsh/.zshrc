@@ -8,12 +8,9 @@ source "$HOME/.zshenv"
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 
-source "$ZSH/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 source "$ZSH/functions.zsh"
-
-source "$ZSH/themes/current.zsh"
 
 source "$ZSH/bindings.zsh"
 

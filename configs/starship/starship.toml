@@ -1,21 +1,20 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-add_newline = false
+# add_newline = false
 format = """
-$localip[$username$hostname](bold)\
-$directory\
+[$username](bold)$localip$hostname \
+$battery\
 $git_branch\
 $git_state\
 $git_status\
-$battery\
 $all\
 $line_break\
-$cmd_duration\
+$directory\
 $shell $character\
 """
 
-right_format = "$time"
+right_format = "$cmd_duration$time"
 
 [aws]
 symbol = "  "
@@ -47,8 +46,8 @@ symbol = " "
 symbol = " "
 
 [character]
-success_symbol = "[➜](green) "
-error_symbol = "[➜](red) "
+success_symbol = "[#](bold green) "
+error_symbol = "[#](bold red) "
 
 [cmd_duration]
 format = "[$duration]($style) "
@@ -80,6 +79,9 @@ symbol = " "
 format = "[$symbol$branch(:$remote_branch)]($style) "
 symbol = " "
 
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\):'
+
 [git_status]
 format = """(\
 [\
@@ -106,7 +108,7 @@ symbol = " "
 symbol = " "
 
 [hostname]
-format = "@[$ssh_symbol$hostname]($style) "
+format = '[\($ssh_symbol$hostname\)]($style)'
 style = "cyan dimmed bold"
 ssh_only = false
 
@@ -117,7 +119,7 @@ symbol = " "
 symbol = " "
 
 [localip]
-format = "[$localipv4]($style) as "
+format = "@[$localipv4]($style)"
 style = "bold bright-black"
 ssh_only = false
 disabled = false
@@ -146,7 +148,7 @@ symbol = "🅢 "
 
 [time]
 disabled = false
-format = "at [$time]($style)"
+format = "[$time]($style)"
 style = "bold bright-black"
 
 [rust]

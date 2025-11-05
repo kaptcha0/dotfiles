@@ -8,7 +8,7 @@ PanelWindow {
     id: root
     implicitWidth: Configs.sizes.barSize
     color: Configs.colors.base00
-    aboveWindows: false
+    aboveWindows: true
 
     anchors {
         top: true

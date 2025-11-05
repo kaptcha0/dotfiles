@@ -10,6 +10,7 @@
     direnv.enable = lib.mkEnableOption "enable direnv";
     devenv.enable = lib.mkEnableOption "enable devenv";
     kubectl.enable = lib.mkEnableOption "enable kubectl";
+    fh.enable = lib.mkEnableOption "enable flakehub cli";
   };
 
   config = {
@@ -21,6 +22,7 @@
     home.packages = with pkgs; [
       (lib.mkIf config.kubectl.enable kubectl)
       (lib.mkIf config.devenv.enable devenv)
+      (lib.mkIf config.fh.enable fh)
     ];
   };
 }

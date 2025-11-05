@@ -14,6 +14,7 @@
     ./kitty.nix
     ./ghostty.nix
     ./misc.nix
+    ./yazi.nix
     ./zellij.nix
   ];
 
@@ -35,5 +36,6 @@
     misc.enable = true;
     zellij.enable = true;
     ghostty.enable = true;
+    yazi.enable = true;
   };
 }

@@ -21,10 +21,13 @@
       nil
       nixd
       pyright
+      basedpyright
       kdePackages.qtdeclarative # provides qmlls
+      ruff
       taplo
       terraform-ls
       typescript-language-server
+      uv
       vscode-langservers-extracted
       yaml-language-server
       zls

@@ -20,12 +20,12 @@
     harvester.enable = true;
     cewler.enable = true;
     cook-framework.enable = true;
-    ronin.enable = true;
+    # ronin.enable = true;
 
     recon-ng.enable = true;
     setoolkit.enable = true;
 
-    caido.enable = true;
+    # caido.enable = true;
     radare.enable = true;
     binwalk.enable = true;
 

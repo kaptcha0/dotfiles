@@ -38,10 +38,6 @@
         source = inputs.self + /configs/zsh/.profile;
       };
 
-      ".profile" = {
-        source = inputs.self + /configs/zsh/.profile;
-      };
-
       ".config/zsh/" = {
         source = inputs.self + /configs/zsh;
         recursive = true;

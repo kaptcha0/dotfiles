@@ -1,6 +1,6 @@
 export ZSH="$HOME/.config/zsh"
 
-source "$HOME/.profile"
+[ -f "$HOME/.profile" ] && source "$HOME/.profile"
 source "$ZSH/variables.zsh"
 
 source "$ZSH/aliases.zsh"

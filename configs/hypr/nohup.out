@@ -1,0 +1,51 @@
+[32m  INFO[0m: Launching config: "/home/kaptcha0/.dotfiles/configs/quickshell/shell.qml"
+[32m  INFO[0m: Shell ID: "16c8d094981f847a23fe91a0079f1ef9" Path ID "16c8d094981f847a23fe91a0079f1ef9"
+[32m  INFO[0m: Saving logs to "/run/user/1000/quickshell/by-id/oq02p67m5t/log.qslog"
+[32m  INFO[0m: QML tooling support enabled
+[33m  WARN[0m: Could not load icon "" at size QSize(18, 18) from request
+[32m  INFO[0m: Configuration Loaded
+[32m  INFO[97m qt.qpa.wayland[0m: There are no outputs - creating placeholder screen
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[97m quickshell.hyprland.ipc[0m: Got removal for monitor "FALLBACK" which was not previously tracked.
+[32m  INFO[97m qt.qpa.wayland[0m: There are no outputs - creating placeholder screen
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[32m  INFO[97m qt.qpa.wayland[0m: There are no outputs - creating placeholder screen
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[32m  INFO[97m qt.qpa.wayland[0m: There are no outputs - creating placeholder screen
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[32m  INFO[97m qt.qpa.wayland[0m: There are no outputs - creating placeholder screen
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[97m kf.windowsystem[0m: Could not find any platform plugin
+[32m  INFO[97m qt.qpa.wayland[0m: There are no outputs - creating placeholder screen
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[32m  INFO[97m qt.qpa.wayland[0m: There are no outputs - creating placeholder screen
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: Layershell screen does not corrospond to a real screen. Letting the compositor pick.
+[33m  WARN[0m: The Wayland connection broke. Did the Wayland compositor die?

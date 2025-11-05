@@ -40,22 +40,25 @@ name = "make"
 [[language]]
 name = "markdown"
 
-[language-server.pyright]
-command = "pyright-langserver"
-args = ["--stdio"]
-config = {}
-
-
 [[language]]
 name = "python"
-scope = "source.python"
-injection-regex = "python"
-file-types = ["py","pyi","py3","pyw","ptl",".pythonstartup",".pythonrc","SConstruct"]
-shebangs = ["python"]
-roots = ["setup.py", "setup.cfg", "pyproject.toml"]
+language-id = "python"
+roots = ["pyproject.toml", ".git", ".jj", ".venv/"]
+language-servers = ["basedpyright", "ruff"]
+auto-format = true
+formatter = { command = "ruff", args = ["format", "-"] }
+file-types = ["py", "ipynb"]
 comment-token = "#"
-language-servers = ["pyright"]
-indent = { tab-width = 4, unit = "    " }
+shebangs = ["python"]
+
+[language-server.basedpyright]
+command = "basedpyright-langserver"
+args = ["--stdio"]
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+environment = { "RUFF_TRACE" = "messages" }
 
 [[language]]
 name = "regex"
@@ -75,6 +78,7 @@ name = "svelte"
 [[language]]
 name = "toml"
 formatter = { command = "taplo", args = ["fmt", "-"] }
+auto-format = true
 
 [[language]]
 name = "tsx"
@@ -88,7 +92,7 @@ scope = "source.yaml"
 file-types = ["yml", "yaml"]
 roots = []
 indent = { tab-width = 2, unit = "  " }
-language-servers = ["yaml-language-server", "ansible-language-server"]
+language-servers = ["yaml-language-server"]
 injection-regex = "yml|yaml"
 
 [[language]]

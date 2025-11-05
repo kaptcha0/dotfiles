@@ -9,7 +9,7 @@ PanelWindow {
     id: root
     implicitHeight: Configs.sizes.barSize
     color: Configs.colors.base00
-    aboveWindows: false
+    aboveWindows: true
 
     anchors {
         right: true

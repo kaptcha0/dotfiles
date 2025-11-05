@@ -26,7 +26,6 @@ let
     cargoHash = "sha256-D2/L7vQkjEgawde9cZH45s0FSLluihqYSSwW5eLNMxM=";
   };
   colors = config.lib.stylix.colors;
-  hypr-plugins = inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   options = {
@@ -40,36 +39,37 @@ in
       package = null;
       portalPackage = null;
       extraConfig = builtins.readFile (inputs.self + /configs/hypr/hyprland.conf);
-
-      plugins = [
-        hypr-plugins.hyprexpo
-        hypr-plugins.hyprscrolling
-      ];
     };
 
     services.network-manager-applet = {
       enable = true;
+      # package = null;
       package = (config.lib.nixGL.wrap pkgs.networkmanagerapplet);
     };
 
     services.blueman-applet = {
       enable = true;
+      # package = null;
       package = (config.lib.nixGL.wrap pkgs.blueman);
     };
 
     programs.hyprlock = {
       enable = true;
-      package = (config.lib.nixGL.wrap pkgs.hyprlock);
+      # package = null;
+      # package = (config.lib.nixGL.wrap pkgs.hyprlock);
       extraConfig = builtins.readFile (inputs.self + /configs/hypr/hyprlock.conf);
     };
 
     services.hyprpaper = {
       enable = true;
-      settings = {};
+      package = null;
+      settings = { };
     };
 
     services.hyprsunset = {
       enable = true;
+      package = pkgs.emptyDirectory;
+      # package = null;
       settings = {
         max-gamma = 150;
 
@@ -120,7 +120,7 @@ in
       hyprland-qtutils
       hyprpolkitagent
       hypridle
-      hyprshot
+      # hyprshot
 
       udiskie
       brightnessctl
