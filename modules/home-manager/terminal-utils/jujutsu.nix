@@ -6,7 +6,7 @@
   };
 
   config = lib.mkIf config.jujutsu.enable {
-    home.packages = with pkgs; [ jujutsu ];
+    home.packages = with pkgs; [ jjui ];
 
     programs.jujutsu.enable = true;
 
