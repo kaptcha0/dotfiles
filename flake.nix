@@ -4,6 +4,11 @@
     fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*";
     nixgl.url = "github:nix-community/nixGL";
 
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     apple-fonts = {
       url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -52,7 +57,7 @@
           ./modules/system-manager
         ];
       };
-      homeConfigurations."kaptcha0@kaptcha0-laptop" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."kaptcha0" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs nixgl; };
 
@@ -61,6 +66,8 @@
           ./modules/home-manager
           inputs.stylix.homeModules.stylix
           inputs.spicetify-nix.homeManagerModules.spicetify
+          inputs.niri-flake.homeModules.niri
+          inputs.niri-flake.homeModules.stylix
         ];
       };
     };

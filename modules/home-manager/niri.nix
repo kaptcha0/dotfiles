@@ -1,0 +1,283 @@
+{
+  config,
+  lib,
+  ...
+}:
+let
+  term = "kitty";
+  launcher = "sherlock-launcher";
+  locker = "swaylock";
+  file-browser = "nautilus";
+  notes = "obsidian";
+  browser = "zen-browser";
+  editor = "zeditor";
+in
+{
+  options.niri.enable = lib.mkEnableOption "enable niri";
+
+  config = lib.mkIf config.niri.enable {
+    programs.niri = {
+      enable = true;
+      settings = {
+        prefer-no-csd = true;
+        input.mod-key = "Super";
+        input.focus-follows-mouse.enable = true;
+
+        spawn-at-startup = [
+          {
+            argv = [
+              "qs"
+              "-p"
+              "~/.dotfiles/configs/quickshell"
+            ];
+          }
+          {
+            argv = ["awww-daemon"];
+          }
+          {
+            argv = ["awww" "img" (config.stylix.image)];
+          }
+        ];
+
+        layout = {
+          gaps = 8;
+          always-center-single-column = true;
+          center-focused-column = "on-overflow";
+          focus-ring.enable = false;
+
+          border = {
+            enable = true;
+            width = 1;
+          };
+
+          default-column-width.proportion = 1. / 2.;
+
+          preset-column-widths = [
+            { proportion = 1. / 3.; }
+            { proportion = 1. / 2.; }
+            { proportion = 2. / 3.; }
+            { proportion = 3. / 4.; }
+          ];
+        };
+
+        window-rules = [
+          {
+            clip-to-geometry = true;
+            geometry-corner-radius = {
+              bottom-left = 8.;
+              bottom-right = 8.;
+              top-left = 8.;
+              top-right = 8.;
+            };
+          }
+        ];
+
+        outputs = {
+          "eDP-1".scale = 1.0;
+        };
+
+        binds = {
+          "Mod+Shift+Slash".action.show-hotkey-overlay = { };
+
+          "Mod+Return" = {
+            hotkey-overlay.title = "open a terminal: ${term}";
+            action.spawn = term;
+          };
+
+          "Mod+Space" = {
+            hotkey-overlay.title = "open launcher: ${launcher}";
+            action.spawn = launcher;
+          };
+
+          "Mod+Ctrl+Shift+L" = {
+            hotkey-overlay.title = "lock the screen: ${locker}";
+            action.spawn = locker;
+          };
+
+          "Mod+E" = {
+            hotkey-overlay.title = "open file explorer: ${file-browser}";
+            action.spawn = file-browser;
+          };
+
+          "Mod+N" = {
+            hotkey-overlay.title = "open notes app: ${notes}";
+            action.spawn = notes;
+          };
+
+          "Mod+B" = {
+            hotkey-overlay.title = "open browser: ${browser}";
+            action.spawn = browser;
+          };
+
+          "Mod+W" = {
+            hotkey-overlay.title = "open code editor: ${editor}";
+            action.spawn = editor;
+          };
+
+          "Mod+Alt+B" = {
+            hotkey-overlay.title = "refresh wallpaper";
+            action.spawn-sh = "awww img ${config.stylix.image} --transition-type center";
+          };
+
+          "XF86AudioRaiseVolume" = {
+            allow-when-locked = true;
+            action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0";
+          };
+          "XF86AudioLowerVolume" = {
+            allow-when-locked = true;
+            action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+          };
+
+          "XF86AudioMute" = {
+            allow-when-locked = true;
+            action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          };
+          "XF86AudioMicMute" = {
+            allow-when-locked = true;
+            action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+          };
+
+          "XF86AudioPlay" = {
+            allow-when-locked = true;
+            action.spawn-sh = "playerctl play-pause";
+          };
+
+          "XF86AudioStop" = {
+            allow-when-locked = true;
+            action.spawn-sh = "playerctl stop";
+          };
+
+          "XF86AudioPrev" = {
+            allow-when-locked = true;
+            action.spawn-sh = "playerctl previous";
+          };
+
+          "XF86AudioNext" = {
+            allow-when-locked = true;
+            action.spawn-sh = "playerctl next";
+          };
+
+          "XF86MonBrightnessUp" = {
+            allow-when-locked = true;
+            action.spawn = [
+              "brightnessctl"
+              "--class=backlight"
+              "set"
+              "+10%"
+            ];
+          };
+
+          "XF86MonBrightnessDown" = {
+            allow-when-locked = true;
+            action.spawn = [
+              "brightnessctl"
+              "--class=backlight"
+              "set"
+              "10%-"
+            ];
+          };
+
+          "Mod+O" = {
+            repeat = false;
+            action.toggle-overview = { };
+          };
+
+          "Mod+Q" = {
+            repeat = false;
+            action.close-window = { };
+          };
+
+          "Mod+H".action.focus-column-left = { };
+          "Mod+J".action.focus-window-up = { };
+          "Mod+K".action.focus-window-down = { };
+          "Mod+L".action.focus-column-right = { };
+
+          "Mod+Shift+H".action.move-column-left = { };
+          "Mod+Shift+J".action.move-window-up = { };
+          "Mod+Shift+K".action.move-window-down = { };
+          "Mod+Shift+L".action.move-column-right = { };
+
+          "Mod+Home".action.focus-column-first = { };
+          "Mod+End".action.focus-column-last = { };
+
+          "Mod+Shift+Home".action.move-column-to-first = { };
+          "Mod+Shift+End".action.move-column-to-last = { };
+
+          "Mod+Alt+H".action.focus-monitor-left = { };
+          "Mod+Alt+J".action.focus-monitor-down = { };
+          "Mod+Alt+K".action.focus-monitor-up = { };
+          "Mod+Alt+L".action.focus-monitor-right = { };
+
+          "Mod+Shift+Alt+H".action.move-column-to-monitor-left = { };
+          "Mod+Shift+Alt+J".action.move-column-to-monitor-down = { };
+          "Mod+Shift+Alt+K".action.move-column-to-monitor-up = { };
+          "Mod+Shift+Alt+L".action.move-column-to-monitor-right = { };
+
+          "Mod+Ctrl+Alt+H".action.move-workspace-to-monitor-left = { };
+          "Mod+Ctrl+Alt+J".action.move-workspace-to-monitor-down = { };
+          "Mod+Ctrl+Alt+K".action.move-workspace-to-monitor-up = { };
+          "Mod+Ctrl+Alt+L".action.move-workspace-to-monitor-right = { };
+
+          "Mod+Page_Down".action.focus-workspace-down = { };
+          "Mod+Page_Up".action.focus-workspace-up = { };
+
+          "Mod+Ctrl+Page_Down".action.move-column-to-workspace-down = { };
+          "Mod+Ctrl+Page_Up".action.move-column-to-workspace-up = { };
+
+          "Mod+Shift+Page_Down".action.move-workspace-down = { };
+          "Mod+Shift+Page_Up".action.move-workspace-up = { };
+
+          "Mod+WheelScrollRight".action.focus-column-right = { };
+          "Mod+WheelScrollLeft".action.focus-column-left = { };
+          "Mod+Ctrl+WheelScrollRight".action.move-column-right = { };
+          "Mod+Ctrl+WheelScrollLeft".action.move-column-left = { };
+
+          "Mod+Shift+WheelScrollDown".action.focus-column-right = { };
+          "Mod+Shift+WheelScrollUp".action.focus-column-left = { };
+          "Mod+Ctrl+Shift+WheelScrollDown".action.move-column-right = { };
+          "Mod+Ctrl+Shift+WheelScrollUp".action.move-column-left = { };
+
+          "Mod+BracketLeft".action.consume-or-expel-window-left = { };
+          "Mod+BracketRight".action.consume-or-expel-window-right = { };
+
+          "Mod+Comma".action.consume-window-into-column = { };
+          "Mod+Period".action.expel-window-from-column = { };
+
+          "Mod+R".action.switch-preset-column-width = { };
+          "Mod+Shift+R".action.switch-preset-window-height = { };
+          "Mod+Ctrl+R".action.switch-preset-column-width = { };
+          "Mod+F".action.maximize-column = { };
+          "Mod+Shift+F".action.fullscreen-window = { };
+
+          "Mod+Ctrl+F".action.expand-column-to-available-width = { };
+          "Mod+C".action.center-column = { };
+          "Mod+Ctrl+C".action.center-visible-columns = { };
+
+          "Mod+Minus".action.set-column-width = "-10%";
+          "Mod+Equal".action.set-column-width = "+10%";
+          "Mod+Shift+Minus".action.set-window-height = "-10%";
+          "Mod+Shift+Equal".action.set-window-height = "+10%";
+
+          "Mod+V".action.toggle-window-floating = { };
+          "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = { };
+
+          "Mod+T".action.toggle-column-tabbed-display = { };
+
+          "Print".action.screenshot = { };
+          "Ctrl+Print".action.screenshot-screen = { };
+          "Alt+Print".action.screenshot-window = { };
+
+          "Mod+Escape" = {
+            allow-inhibiting = true;
+            action.toggle-keyboard-shortcuts-inhibit = { };
+          };
+
+          "Mod+Shift+E".action.quit = { };
+          "Ctrl+Alt+Delete".action.quit = { };
+
+          "Mod+Shift+P".action.power-off-monitors = { };
+        };
+      };
+    };
+  };
+}

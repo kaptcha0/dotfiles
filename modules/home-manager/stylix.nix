@@ -26,8 +26,8 @@ in
       enable = true;
       polarity = "dark";
       autoEnable = true;
-      base16Scheme = inputs.self + /configs/themes/kanagawa.yaml;
-      image = inputs.self + /configs/bgs/your-name-4k.jpg;
+      base16Scheme = inputs.self + /configs/themes/forestfoxpuccin.yaml;
+      image = inputs.self + /configs/bgs/sea-train.png;
     };
 
     stylix.targets = {
@@ -74,5 +74,10 @@ in
       corefonts
       vista-fonts
     ];
+
+    home.file.bg = {
+      target = ".config/stylix/bg";
+      source = config.stylix.image;
+    };
   };
 }

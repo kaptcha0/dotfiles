@@ -6,79 +6,105 @@ import Quickshell
 import QtQuick
 
 import "./modules/windows"
+import "./modules/singletons"
 
 Scope {
     id: root
 
-    Loader {
-        id: topBar
-        asynchronous: false
+    PanelWindow {
+        anchors {
+            top: true
+            bottom: true
+            left: true
+            right: true
+        }
 
-        Variants {
-            model: Quickshell.screens
+        // color: Configs.colors.base00
+        color: "transparent"
+        aboveWindows: false
 
-            TopBar {
-                required property var modelData
-                screen: modelData
-            }
+        mask: Region {
+            item: rect
+            intersection: Intersection.Xor
+        }
+
+        Rectangle {
+            id: rect
+            anchors.fill: parent
+            radius: Configs.sizes.radius
+            color: "transparent"
         }
     }
 
-    Loader {
-        id: bottomBar
-        asynchronous: false
+    // Loader {
+    //     id: topBar
+    //     asynchronous: false
 
-        Variants {
-            model: Quickshell.screens
+    //     Variants {
+    //         model: Quickshell.screens
 
-            BottomBar {
-                required property var modelData
-                screen: modelData
-            }
-        }
-    }
+    //         TopBar {
+    //             required property var modelData
+    //             screen: modelData
+    //         }
+    //     }
+    // }
 
-    Loader {
-        id: leftBar
-        asynchronous: false
-        active: topBar.status == Loader.Ready && bottomBar.status == Loader.Ready
+    // Loader {
+    //     id: bottomBar
+    //     asynchronous: false
 
-        Variants {
-            model: Quickshell.screens
+    //     Variants {
+    //         model: Quickshell.screens
 
-            LeftBar {
-                required property var modelData
-                screen: modelData
-            }
-        }
-    }
+    //         BottomBar {
+    //             required property var modelData
+    //             screen: modelData
+    //         }
+    //     }
+    // }
 
-    Loader {
-        id: rightBar
-        asynchronous: false
-        active: topBar.status == Loader.Ready && bottomBar.status == Loader.Ready
-        Variants {
-            model: Quickshell.screens
+    // Loader {
+    //     id: leftBar
+    //     asynchronous: false
+    //     active: topBar.status == Loader.Ready && bottomBar.status == Loader.Ready
 
-            RightBar {
-                required property var modelData
-                screen: modelData
-            }
-        }
-    }
+    //     Variants {
+    //         model: Quickshell.screens
 
-    Loader {
-        id: wallpaper
-        asynchronous: false
-        active: leftBar.status == Loader.Ready && rightBar.status == Loader.Ready
+    //         LeftBar {
+    //             required property var modelData
+    //             screen: modelData
+    //         }
+    //     }
+    // }
 
-        Variants {
-            model: Quickshell.screens
+    // Loader {
+    //     id: rightBar
+    //     asynchronous: false
+    //     active: topBar.status == Loader.Ready && bottomBar.status == Loader.Ready
+    //     Variants {
+    //         model: Quickshell.screens
 
-            Wallpaper {
-                required property var modelData
-                screen: modelData
-            }
-        }
-    }
+    //         RightBar {
+    //             required property var modelData
+    //             screen: modelData
+    //         }
+    //     }
+    // }
+
+    // Loader {
+    //     id: wallpaper
+    //     asynchronous: false
+    //     active: leftBar.status == Loader.Ready && rightBar.status == Loader.Ready
+
+    //     Variants {
+    //         model: Quickshell.screens
+
+    //         Wallpaper {
+    //             required property var modelData
+    //             screen: modelData
+    //         }
+    //     }
+    // }
 }
