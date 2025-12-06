@@ -31,12 +31,6 @@ in
               "~/.dotfiles/configs/quickshell"
             ];
           }
-          {
-            argv = ["awww-daemon"];
-          }
-          {
-            argv = ["awww" "img" (config.stylix.image)];
-          }
         ];
 
         layout = {
@@ -112,11 +106,6 @@ in
           "Mod+W" = {
             hotkey-overlay.title = "open code editor: ${editor}";
             action.spawn = editor;
-          };
-
-          "Mod+Alt+B" = {
-            hotkey-overlay.title = "refresh wallpaper";
-            action.spawn-sh = "awww img ${config.stylix.image} --transition-type center";
           };
 
           "XF86AudioRaiseVolume" = {
