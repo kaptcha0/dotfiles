@@ -10,7 +10,6 @@
     programs.noctalia-shell = with config.lib.stylix.colors; {
       enable = true;
       settings = {
-        floating = true;
         wallpaper.directory = "~/.dotfiles/configs/bgs";
         appLauncher.enableClipboardHistory = true;
       };
