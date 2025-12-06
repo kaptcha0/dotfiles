@@ -18,7 +18,7 @@ PanelWindow {
     margins {
         top: Configs.sizes.barSize
         bottom: Configs.sizes.barSize
-        left: Configs.sizes.barSize
+        left: Configs.sizes.fullSize
         right: Configs.sizes.barSize
     }
 

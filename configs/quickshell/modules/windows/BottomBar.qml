@@ -21,33 +21,8 @@ PanelWindow {
         anchors.fill: parent
         color: "transparent"
         anchors.margins: {
-            top: Configs.sizes.margin
-            bottom: Configs.sizes.margin
-        }
-
-        RowLayout {
-            anchors.fill: parent
-
-            Item {
-                Layout.alignment: Qt.AlignLeft
-                Layout.fillHeight: true
-            }
-
-            Item {
-                Layout.alignment: Qt.AlignCenter
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-
-                MpriWidget {
-                    anchors.fill: parent
-                    anchors.centerIn: parent
-                }
-            }
-
-            Item {
-                Layout.alignment: Qt.AlignRight
-                Layout.fillHeight: true
-            }
+            top: Configs.sizes.margin;
+            bottom: Configs.sizes.margin;
         }
     }
 }

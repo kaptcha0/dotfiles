@@ -24,52 +24,5 @@ PanelWindow {
             left: Configs.sizes.margin;
             right: Configs.sizes.margin;
         }
-
-        RowLayout {
-            spacing: Configs.sizes.spacing
-            anchors.fill: parent
-
-            Item {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.alignment: Qt.AlignLeft
-
-                Row {
-                    spacing: Configs.sizes.spacing
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    OsIcon {}
-
-                    WorkspacesWidget {}
-                }
-            }
-
-            Item {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.alignment: Qt.AlignCenter
-
-                Row {
-                    spacing: Configs.sizes.spacing
-                    anchors.centerIn: parent
-
-                    WindowTitleWidget {}
-                }
-            }
-
-            Item {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.alignment: Qt.AlignRight
-
-                Row {
-                    spacing: Configs.sizes.spacing
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.right: parent.right
-
-                    Battery {}
-                }
-            }
-        }
     }
 }

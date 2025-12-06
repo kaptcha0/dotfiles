@@ -4,8 +4,6 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-import Qt.labs.platform
-
 Singleton {
     readonly property var sizes: {
         return {
@@ -14,7 +12,8 @@ Singleton {
             fontSize: 16,
             radius: 8,
             spacing: 8,
-            barSize: 32
+            barSize: 8,
+            fullSize: 32
         };
     }
 

@@ -22,6 +22,10 @@ in
         prefer-no-csd = true;
         input.mod-key = "Super";
         input.focus-follows-mouse.enable = true;
+        input.warp-mouse-to-focus = {
+          enable = true;
+          mode = "center-xy";
+        };
 
         spawn-at-startup = [
           {
@@ -152,7 +156,7 @@ in
               "brightnessctl"
               "--class=backlight"
               "set"
-              "+10%"
+              "+5%"
             ];
           };
 
@@ -162,7 +166,7 @@ in
               "brightnessctl"
               "--class=backlight"
               "set"
-              "10%-"
+              "5%-"
             ];
           };
 

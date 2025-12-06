@@ -3,10 +3,11 @@ import QtQuick
 import QtQuick.Layouts
 
 import "../singletons"
+import "../widgets"
 
 PanelWindow {
     id: root
-    implicitWidth: Configs.sizes.barSize
+    implicitWidth: Configs.sizes.fullSize
     color: Configs.colors.base00
     aboveWindows: true
 
@@ -26,19 +27,15 @@ PanelWindow {
         }
 
         ColumnLayout {
+            spacing: Configs.sizes.spacing
             anchors.fill: parent
 
             Item {
-                Layout.topMargin: Configs.sizes.barSize
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
-                Column {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.top
-                    spacing: Configs.sizes.spacing
-                }
+                OsIcon {}
             }
 
             Item {
@@ -46,25 +43,15 @@ PanelWindow {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
-                Column {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                    spacing: Configs.sizes.spacing
+                ClockWidget {
+                    anchors.fill: parent
                 }
             }
 
             Item {
-                Layout.bottomMargin: Configs.sizes.barSize
                 Layout.alignment: Qt.AlignBottom
                 Layout.fillWidth: true
-                Layout.fillHeight: true
-
-                Column {
-                    anchors.verticalCenter: parent.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    spacing: Configs.sizes.spacing
-                    bottomPadding: childrenRect.height
-                }
+                // Layout.fillHeight: true
             }
         }
     }
