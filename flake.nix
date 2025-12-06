@@ -8,6 +8,10 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     apple-fonts = {
       url = "github:Lyndeno/apple-fonts.nix";
@@ -68,6 +72,7 @@
           inputs.spicetify-nix.homeManagerModules.spicetify
           inputs.niri-flake.homeModules.niri
           inputs.niri-flake.homeModules.stylix
+          inputs.noctalia.homeModules.default
         ];
       };
     };

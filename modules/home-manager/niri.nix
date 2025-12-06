@@ -1,12 +1,23 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
+  noctalia =
+    cmd:
+    [
+      "qs"
+      "-p"
+      "/etc/xdg/quickshell/noctalia-shell"
+      "ipc"
+      "call"
+    ]
+    ++ (pkgs.lib.splitString " " cmd);
   term = "kitty";
-  launcher = "sherlock-launcher";
-  locker = "swaylock";
+  launcher = noctalia "launcher toggle";
+  locker = noctalia "lockScreen toggle";
   file-browser = "nautilus";
   notes = "obsidian";
   browser = "zen-browser";
@@ -28,14 +39,8 @@ in
             argv = [
               "qs"
               "-p"
-              "~/.dotfiles/configs/quickshell"
+              "/etc/xdg/quickshell/noctalia-shell"
             ];
-          }
-          {
-            argv = ["awww-daemon"];
-          }
-          {
-            argv = ["awww" "img" (config.stylix.image)];
           }
         ];
 
@@ -72,6 +77,13 @@ in
           }
         ];
 
+        layer-rules = [
+          {
+            matches = [ { namespace = "^noctalia-overview"; } ];
+            place-within-backdrop = true;
+          }
+        ];
+
         outputs = {
           "eDP-1".scale = 1.0;
         };
@@ -85,12 +97,12 @@ in
           };
 
           "Mod+Space" = {
-            hotkey-overlay.title = "open launcher: ${launcher}";
+            hotkey-overlay.title = "open launcher";
             action.spawn = launcher;
           };
 
           "Mod+Ctrl+Shift+L" = {
-            hotkey-overlay.title = "lock the screen: ${locker}";
+            hotkey-overlay.title = "lock the screen";
             action.spawn = locker;
           };
 
@@ -114,67 +126,79 @@ in
             action.spawn = editor;
           };
 
-          "Mod+Alt+B" = {
-            hotkey-overlay.title = "refresh wallpaper";
-            action.spawn-sh = "awww img ${config.stylix.image} --transition-type center";
-          };
+          # "Mod+Shift+V" = {
+          #   hotkey-overlay.title = "open clipboard history";
+          #   action.spawn = noctalia "launcher clipboard";
+          # };
 
           "XF86AudioRaiseVolume" = {
             allow-when-locked = true;
-            action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0";
+            # action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0";
+            action.spawn = noctalia "volume increase";
           };
+
           "XF86AudioLowerVolume" = {
             allow-when-locked = true;
-            action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+            # action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+            action.spawn = noctalia "volume decrease";
           };
 
           "XF86AudioMute" = {
             allow-when-locked = true;
-            action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+            # action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+            action.spawn = noctalia "volume muteOutput";
           };
+
           "XF86AudioMicMute" = {
             allow-when-locked = true;
-            action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+            # action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+            action.spawn = noctalia "volume muteInput";
           };
 
           "XF86AudioPlay" = {
             allow-when-locked = true;
-            action.spawn-sh = "playerctl play-pause";
+            # action.spawn-sh = "playerctl play-pause";
+            action.spawn = noctalia "media playPause";
           };
 
           "XF86AudioStop" = {
             allow-when-locked = true;
-            action.spawn-sh = "playerctl stop";
+            # action.spawn-sh = "playerctl stop";
+            action.spawn = noctalia "pause";
           };
 
           "XF86AudioPrev" = {
             allow-when-locked = true;
-            action.spawn-sh = "playerctl previous";
+            # action.spawn-sh = "playerctl previous";
+            action.spawn = noctalia "media previus";
           };
 
           "XF86AudioNext" = {
             allow-when-locked = true;
-            action.spawn-sh = "playerctl next";
+            # action.spawn-sh = "playerctl next";
+            action.spawn = noctalia "media next";
           };
 
           "XF86MonBrightnessUp" = {
             allow-when-locked = true;
-            action.spawn = [
-              "brightnessctl"
-              "--class=backlight"
-              "set"
-              "+10%"
-            ];
+            # action.spawn = [
+            #   "brightnessctl"
+            #   "--class=backlight"
+            #   "set"
+            #   "+10%"
+            # ];
+            action.spawn = noctalia "brightness increase";
           };
 
           "XF86MonBrightnessDown" = {
             allow-when-locked = true;
-            action.spawn = [
-              "brightnessctl"
-              "--class=backlight"
-              "set"
-              "10%-"
-            ];
+            # action.spawn = [
+            #   "brightnessctl"
+            #   "--class=backlight"
+            #   "set"
+            #   "10%-"
+            # ];
+            action.spawn = noctalia "brightness decrease";
           };
 
           "Mod+O" = {
@@ -188,13 +212,13 @@ in
           };
 
           "Mod+H".action.focus-column-left = { };
-          "Mod+J".action.focus-window-up = { };
-          "Mod+K".action.focus-window-down = { };
+          "Mod+J".action.focus-window-down = { };
+          "Mod+K".action.focus-window-up = { };
           "Mod+L".action.focus-column-right = { };
 
           "Mod+Shift+H".action.move-column-left = { };
-          "Mod+Shift+J".action.move-window-up = { };
-          "Mod+Shift+K".action.move-window-down = { };
+          "Mod+Shift+J".action.move-window-down = { };
+          "Mod+Shift+K".action.move-window-up = { };
           "Mod+Shift+L".action.move-column-right = { };
 
           "Mod+Home".action.focus-column-first = { };

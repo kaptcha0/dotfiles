@@ -1,4 +1,4 @@
-{ pkgs, nixgl, ... }:
+{ nixgl, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -11,7 +11,8 @@
   cyber-utils-bundle.enable = true;
 
   niri.enable = true;
-  sherlock-launcher.enable = true;
+  noctalia.enable = true;
+  # sherlock-launcher.enable = true;
   theming.enable = true;
 
   # This value determines the Home Manager release that your configuration is

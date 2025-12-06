@@ -10,5 +10,6 @@
     ./hyprland.nix
     ./sherlock-launcher.nix
     ./niri.nix
+    ./noctalia.nix
   ];
 }
