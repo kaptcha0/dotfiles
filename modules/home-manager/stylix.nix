@@ -31,10 +31,8 @@ in
     };
 
     stylix.targets = {
-      # starship.enable = false;
       qt.enable = true;
       fontconfig.enable = true;
-      obsidian.vaultNames = [ "pkm" ];
     };
 
     stylix.fonts = {

@@ -16,16 +16,17 @@
     tcpdump.enable = true;
     vpn.enable = true;
 
+    apktool.enable = true;
     sherlock.enable = true;
     harvester.enable = true;
     cewler.enable = true;
     cook-framework.enable = true;
-    # ronin.enable = true;
+    wpscan.enable = true;
+    dex2jar.enable = true;
 
     recon-ng.enable = true;
     setoolkit.enable = true;
 
-    # caido.enable = true;
     radare.enable = true;
     binwalk.enable = true;
 

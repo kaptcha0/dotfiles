@@ -12,7 +12,6 @@
 
   niri.enable = true;
   noctalia.enable = true;
-  # sherlock-launcher.enable = true;
   theming.enable = true;
 
   # This value determines the Home Manager release that your configuration is

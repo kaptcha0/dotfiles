@@ -16,6 +16,9 @@
     harvester.enable = lib.mkEnableOption "enable theHarvester";
     cewler.enable = lib.mkEnableOption "enable cewler";
     cook-framework.enable = lib.mkEnableOption "enable cook framework";
+    wpscan.enable = lib.mkEnableOption "enable wpscan";
+    dex2jar.enable = lib.mkEnableOption "enable dex2jar";
+    apktool.enable = lib.mkEnableOption "enable apktool";
     # ronin.enable = lib.mkEnableOption "enable ronin";
   };
 
@@ -24,14 +27,15 @@
       with pkgs;
       [
         (lib.mkIf config.binwalk.enable binwalk)
-        # (lib.mkIf config.caido.enable (config.lib.nixGL.wrap caido))
         (lib.mkIf config.recon-ng.enable recon-ng)
         (lib.mkIf config.setoolkit.enable social-engineer-toolkit)
         (lib.mkIf config.sherlock.enable sherlock)
         (lib.mkIf config.harvester.enable theharvester)
         (lib.mkIf config.cewler.enable cewler)
         (lib.mkIf config.cook-framework.enable cook-framework)
-        # (lib.mkIf config.ronin.enable (config.lib.nixGL.wrap ronin))
+        (lib.mkIf config.wpscan.enable wpscan)
+        (lib.mkIf config.dex2jar.enable dex2jar)
+        (lib.mkIf config.apktool.enable apktool)
       ]
       ++ lib.optionals config.radare.enable [
         radare2

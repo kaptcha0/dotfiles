@@ -13,8 +13,8 @@
     home.shell.enableShellIntegration = true;
 
     home.sessionVariables = {
-      EDITOR = "hx";
-      VISUAL = "zed --wait";
+      EDITOR = lib.mkForce "hx";
+      VISUAL = lib.mkForce "zeditor --wait";
     };
 
     home.shellAliases = {

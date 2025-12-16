@@ -8,4 +8,4 @@ email = "50426223+kaptcha0@users.noreply.github.com"
 log = "present(@) | ancestors(immutable_heads().., 2) | present(trunk())"
 
 [git]
-auto-local-bookmark = true
+auto-track-bookmark = true
