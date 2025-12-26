@@ -17,6 +17,7 @@
       cmake-language-server
       docker-language-server
       hyprls
+      jdt-language-server
       marksman
       nil
       nixd

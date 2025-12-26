@@ -6,6 +6,7 @@
     ./lang-servers.nix
     ./android-studio.nix
     ./misc.nix
+    ./kubernetes.nix
   ];
 
   options = {
@@ -19,7 +20,7 @@
     direnv.enable = true;
     devenv.enable = true;
     fh.enable = true;
-    kubectl.enable = true;
+    kubernetes.enable = true;
 
     zed.enable = true;
   };

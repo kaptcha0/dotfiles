@@ -95,5 +95,12 @@ indent = { tab-width = 2, unit = "  " }
 language-servers = ["yaml-language-server"]
 injection-regex = "yml|yaml"
 
+[language-server.yaml-language-server.config.yaml]
+format = { enable = true }
+validation = true
+
+[language-server.yaml-language-server.config.yaml.schemas]
+kubernetes = "/*.yaml"
+
 [[language]]
 name = "xml"

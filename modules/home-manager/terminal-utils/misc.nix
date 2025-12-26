@@ -28,6 +28,7 @@
       fastfetch
       ripgrep-all
       fd
+      mtr
     ];
 
     programs.btop = {

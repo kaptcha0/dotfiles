@@ -10,7 +10,7 @@ end-of-line-diagnostics = "hint"
 
 [editor.inline-diagnostics]
 cursor-line = "warning"
-other-lines = "warning"
+other-lines = "disable"
 
 [editor.statusline]
 left = ["mode", "spinner", "diagnostics"]

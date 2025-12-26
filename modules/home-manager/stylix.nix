@@ -45,8 +45,10 @@ in
         package = apple-fonts.packages.${pkgs.system}.sf-pro-nerd;
       };
       monospace = {
-        name = "SFMono Nerd Font";
-        package = apple-fonts.packages.${pkgs.system}.sf-mono-nerd;
+        # name = "SFMono Nerd Font";
+        # package = apple-fonts.packages.${pkgs.system}.sf-mono-nerd;
+        name = "Liga SFMono Nerd Font";
+        package = pkgs.sf-mono-liga-bin;
       };
       sizes = {
         applications = 12;

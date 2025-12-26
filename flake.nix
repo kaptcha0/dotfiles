@@ -17,6 +17,10 @@
       url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sf-mono-liga-src = {
+      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
+      flake = false;
+    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,9 +52,27 @@
       fh-overlay = final: prev: {
         fh = inputs.fh.packages."${prev.system}".default;
       };
+      sf-mono-ligatures-overlay = (
+        final: prev: {
+          sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation  {
+            pname = "sf-mono-liga-bin";
+            version = "dev";
+            src = inputs.sf-mono-liga-src;
+            dontConfigure = true;
+            installPhase = ''
+              mkdir -p $out/share/fonts/opentype
+              cp -R $src/*.otf $out/share/fonts/opentype/
+            '';
+          };
+        }
+      );
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ nixgl.overlay fh-overlay ];
+        overlays = [
+          nixgl.overlay
+          fh-overlay
+          sf-mono-ligatures-overlay
+        ];
       };
     in
     {

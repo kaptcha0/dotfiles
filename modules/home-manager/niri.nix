@@ -17,11 +17,16 @@ let
     ++ (pkgs.lib.splitString " " cmd);
   term = "kitty";
   launcher = noctalia "launcher toggle";
-  locker = noctalia "lockScreen toggle";
+  locker = noctalia "lockScreen lock";
   file-browser = "nautilus";
   notes = "obsidian";
   browser = "zen-browser";
   editor = "zeditor";
+  qs = [
+    "qs"
+    "-p"
+    "/etc/xdg/quickshell/noctalia-shell"
+  ];
 in
 {
   options.niri.enable = lib.mkEnableOption "enable niri";
@@ -31,16 +36,20 @@ in
       enable = true;
       settings = {
         prefer-no-csd = true;
-        input.mod-key = "Super";
-        input.focus-follows-mouse.enable = true;
+
+        input = {
+          mod-key = "Super";
+          focus-follows-mouse.enable = true;
+
+          warp-mouse-to-focus = {
+            enable = true;
+            mode = "center-xy-always";
+          };
+        };
 
         spawn-at-startup = [
           {
-            argv = [
-              "qs"
-              "-p"
-              "/etc/xdg/quickshell/noctalia-shell"
-            ];
+            argv = qs;
           }
         ];
 
@@ -101,7 +110,7 @@ in
             action.spawn = launcher;
           };
 
-          "Mod+Ctrl+Shift+L" = {
+          "Mod+Comma" = {
             hotkey-overlay.title = "lock the screen";
             action.spawn = locker;
           };
@@ -126,10 +135,32 @@ in
             action.spawn = editor;
           };
 
-          # "Mod+Shift+V" = {
-          #   hotkey-overlay.title = "open clipboard history";
-          #   action.spawn = noctalia "launcher clipboard";
-          # };
+          "Mod+Ctrl+V" = {
+            hotkey-overlay.title = "open clipboard history";
+            action.spawn = noctalia "launcher clipboard";
+          };
+
+          "Mod+Period" = {
+            hotkey-overlay.title = "open emoji selector";
+            action.spawn = noctalia "launcher emoji";
+          };
+
+          "Mod+S" = {
+            hotkey-overlay.title = "open session manager";
+            action.spawn = noctalia "sessionMenu toggle";
+          };
+
+          "Mod+Alt+R" = {
+            hotkey-overlay.title = "restart noctalia";
+            action.spawn = [
+              "zsh"
+              "-c"
+              (
+                (lib.strings.concatStringsSep " " qs) + " kill ; "
+                + (lib.strings.concatStringsSep " " qs) + " & disown"
+              )
+            ];
+          };
 
           "XF86AudioRaiseVolume" = {
             allow-when-locked = true;
@@ -264,8 +295,8 @@ in
           "Mod+BracketLeft".action.consume-or-expel-window-left = { };
           "Mod+BracketRight".action.consume-or-expel-window-right = { };
 
-          "Mod+Comma".action.consume-window-into-column = { };
-          "Mod+Period".action.expel-window-from-column = { };
+          "Mod+Ctrl+Comma".action.consume-window-into-column = { };
+          "Mod+Ctrl+Period".action.expel-window-from-column = { };
 
           "Mod+R".action.switch-preset-column-width = { };
           "Mod+Shift+R".action.switch-preset-window-height = { };
