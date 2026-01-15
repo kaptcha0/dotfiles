@@ -27,6 +27,76 @@ let
     "-p"
     "/etc/xdg/quickshell/noctalia-shell"
   ];
+
+  animations = {
+    easeOutQuint = duration-ds: {
+      easing = {
+        curve = "cubic-bezier";
+        duration-ms = builtins.ceil (duration-ds * 100);
+        curve-args = [
+          0.23
+          1
+          0.32
+          1
+        ];
+      };
+    };
+    easeInOutCubic = duration-ds: {
+      easing = {
+        curve = "cubic-bezier";
+        duration-ms = builtins.ceil (duration-ds * 100);
+        curve-args = [
+          0.65
+          0
+          05
+          0.36
+          1
+        ];
+      };
+    };
+    linear = duration-ds: {
+      easing = {
+        curve = "cubic-bezier";
+        duration-ms = builtins.ceil (duration-ds * 100);
+        curve-args = [
+          0
+          0
+          1
+          1
+        ];
+      };
+    };
+    almostLinear = duration-ds: {
+      easing = {
+        curve = "cubic-bezier";
+        duration-ms = builtins.ceil (duration-ds * 100);
+        curve-args = [
+          0.5
+          0
+          5
+          0.75
+          1
+        ];
+      };
+    };
+    quick = duration-ds: {
+      easing = {
+        curve = "cubic-bezier";
+        duration-ms = builtins.ceil (duration-ds * 100);
+        curve-args = [
+          0.15
+          0
+          0.1
+          1
+        ];
+      };
+    };
+    bounce.spring = {
+      damping-ratio = 0.8;
+      stiffness = 800;
+      epsilon = 0.001;
+    };
+  };
 in
 {
   options.niri.enable = lib.mkEnableOption "enable niri";
@@ -84,6 +154,15 @@ in
               top-right = 8.;
             };
           }
+          {
+            matches = [
+              { title = "Picture-in-Picture"; }
+            ];
+
+            default-column-width.proportion = 0.2;
+            default-window-height.proportion = 0.2;
+            open-floating = true;
+          }
         ];
 
         layer-rules = [
@@ -95,6 +174,16 @@ in
 
         outputs = {
           "eDP-1".scale = 1.0;
+        };
+
+        animations = {
+          window-open.kind = animations.bounce;
+          window-close.kind = animations.bounce;
+          window-movement.kind = animations.bounce;
+          horizontal-view-movement.kind = animations.bounce;
+          overview-open-close.kind = animations.bounce;
+          workspace-switch.kind = animations.bounce;
+          window-resize.kind = animations.bounce;
         };
 
         binds = {
@@ -156,79 +245,61 @@ in
               "zsh"
               "-c"
               (
-                (lib.strings.concatStringsSep " " qs) + " kill ; "
-                + (lib.strings.concatStringsSep " " qs) + " & disown"
+                (lib.strings.concatStringsSep " " qs)
+                + " kill ; "
+                + (lib.strings.concatStringsSep " " qs)
+                + " & disown"
               )
             ];
           };
 
           "XF86AudioRaiseVolume" = {
             allow-when-locked = true;
-            # action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0";
             action.spawn = noctalia "volume increase";
           };
 
           "XF86AudioLowerVolume" = {
             allow-when-locked = true;
-            # action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
             action.spawn = noctalia "volume decrease";
           };
 
           "XF86AudioMute" = {
             allow-when-locked = true;
-            # action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             action.spawn = noctalia "volume muteOutput";
           };
 
           "XF86AudioMicMute" = {
             allow-when-locked = true;
-            # action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
             action.spawn = noctalia "volume muteInput";
           };
 
           "XF86AudioPlay" = {
             allow-when-locked = true;
-            # action.spawn-sh = "playerctl play-pause";
             action.spawn = noctalia "media playPause";
           };
 
           "XF86AudioStop" = {
             allow-when-locked = true;
-            # action.spawn-sh = "playerctl stop";
             action.spawn = noctalia "pause";
           };
 
           "XF86AudioPrev" = {
             allow-when-locked = true;
-            # action.spawn-sh = "playerctl previous";
             action.spawn = noctalia "media previus";
           };
 
           "XF86AudioNext" = {
             allow-when-locked = true;
-            # action.spawn-sh = "playerctl next";
             action.spawn = noctalia "media next";
           };
 
           "XF86MonBrightnessUp" = {
             allow-when-locked = true;
-            # action.spawn = [
-            #   "brightnessctl"
-            #   "--class=backlight"
-            #   "set"
-            #   "+10%"
-            # ];
             action.spawn = noctalia "brightness increase";
           };
 
           "XF86MonBrightnessDown" = {
             allow-when-locked = true;
-            # action.spawn = [
-            #   "brightnessctl"
-            #   "--class=backlight"
-            #   "set"
-            #   "10%-"
-            # ];
             action.spawn = noctalia "brightness decrease";
           };
 
