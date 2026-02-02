@@ -110,17 +110,17 @@ in
         enable = true;
         timeouts = [
           {
-            timeout = 15;
+            timeout = 30;
             command = lib.strings.join " " (noctalia "brightness set 10");
             resumeCommand = lib.strings.join " " (noctalia "brightness set 50");
           }
           {
-            timeout = 45;
+            timeout = 60;
             command = display "off";
             resumeCommand = display "on";
           }
           {
-            timeout = 60;
+            timeout = 60 * 2;
             command = lib.strings.join " " locker;
           }
           {
