@@ -8,6 +8,7 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,14 +18,17 @@
       url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     sf-mono-liga-src = {
       url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
       flake = false;
     };
+
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,16 +38,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    system-manager = {
-      url = "github:numtide/system-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs =
     {
       nixpkgs,
       home-manager,
-      system-manager,
       nixgl,
       ...
     }@inputs:
@@ -76,13 +75,6 @@
       };
     in
     {
-      systemConfigs.kaptcha0-laptop = system-manager.lib.makeSystemConfig {
-        extraSpecialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/kaptcha0-laptop/system.nix
-          ./modules/system-manager
-        ];
-      };
       homeConfigurations."kaptcha0" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs nixgl; };
@@ -90,6 +82,7 @@
         modules = [
           ./hosts/kaptcha0-laptop/home.nix
           ./modules/home-manager
+
           inputs.stylix.homeModules.stylix
           inputs.spicetify-nix.homeManagerModules.spicetify
           inputs.niri-flake.homeModules.niri

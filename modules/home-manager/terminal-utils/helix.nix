@@ -14,7 +14,7 @@
   config = lib.mkIf config.helix.enable {
     programs.helix = {
       enable = true;
-      defaultEditor = true;
+      # defaultEditor = true;
       package = pkgs.emptyDirectory;
       settings = builtins.fromTOML (
         builtins.readFile (inputs.self + /configs/helix/config.toml)

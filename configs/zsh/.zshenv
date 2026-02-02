@@ -1,7 +1,5 @@
-export ZSH="$HOME/.config/zsh"
+export ZSH_CUSTOM_CONFIG_DIR="$HOME/.config/zsh"
 
 [ -f "$HOME/.profile" ] && source "$HOME/.profile"
-source "$ZSH/variables.zsh"
 
-source "$ZSH/aliases.zsh"
-source "$ZSH/zinit.zsh"
+source "$ZSH_CUSTOM_CONFIG_DIR/aliases.zsh"

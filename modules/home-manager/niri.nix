@@ -8,7 +8,7 @@ let
   noctalia =
     cmd:
     [
-      "qs"
+      "/usr/bin/qs"
       "-p"
       "/etc/xdg/quickshell/noctalia-shell"
       "ipc"
@@ -23,7 +23,7 @@ let
   browser = "zen-browser";
   editor = "zeditor";
   qs = [
-    "qs"
+    "/usr/bin/qs"
     "-p"
     "/etc/xdg/quickshell/noctalia-shell"
   ];
@@ -102,6 +102,52 @@ in
   options.niri.enable = lib.mkEnableOption "enable niri";
 
   config = lib.mkIf config.niri.enable {
+    services.swayidle =
+      let
+        display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
+      in
+      {
+        enable = true;
+        timeouts = [
+          {
+            timeout = 15;
+            command = lib.strings.join " " (noctalia "brightness set 10");
+            resumeCommand = lib.strings.join " " (noctalia "brightness set 50");
+          }
+          {
+            timeout = 45;
+            command = display "off";
+            resumeCommand = display "on";
+          }
+          {
+            timeout = 60;
+            command = lib.strings.join " " locker;
+          }
+          {
+            timeout = 60 * 5;
+            command = "/usr/bin/systemctl suspend";
+          }
+        ];
+        events = [
+          {
+            event = "before-sleep";
+            command = (display "off") + "; " + (lib.strings.join " " locker);
+          }
+          {
+            event = "after-resume";
+            command = display "on";
+          }
+          {
+            event = "lock";
+            command = (display "off") + "; " + (lib.strings.join " " locker);
+          }
+          {
+            event = "unlock";
+            command = display "on";
+          }
+        ];
+      };
+
     programs.niri = {
       enable = true;
       settings = {
@@ -162,6 +208,13 @@ in
             default-column-width.proportion = 0.2;
             default-window-height.proportion = 0.2;
             open-floating = true;
+          }
+          {
+            matches = [
+              { app-id = "org.kde.kdenlive"; }
+              { app-id = "Ardour-.*"; }
+            ];
+            open-maximized = true;
           }
         ];
 

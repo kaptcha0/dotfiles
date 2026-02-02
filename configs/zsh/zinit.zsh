@@ -14,7 +14,7 @@ zinit light-mode for \
 
 ## OMZ
 zinit snippet OMZ::plugins/command-not-found
-zinit snippet OMZ::plugins/dotenv
+# zinit snippet OMZ::plugins/dotenv
 # zinit snippet OMZ::plugins/sudo
 
 ## Completion

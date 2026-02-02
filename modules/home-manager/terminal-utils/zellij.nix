@@ -16,7 +16,6 @@
           '';
         };
       settings = {
-        default_shell = "nu";
         show_startup_tips = false;
         default_layout = "compact";
       };
