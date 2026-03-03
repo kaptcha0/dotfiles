@@ -6,6 +6,7 @@
     ./dev-utils
     ./cyber-utils
 
+    ./agents.nix
     ./stylix.nix
     ./hyprland.nix
     ./sherlock-launcher.nix

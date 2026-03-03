@@ -1,0 +1,20 @@
+scheme: "Material FoxPuccin"
+author: "ChatGPT"
+
+base00: "1e2323" # Default Background (neutral deep green-gray)
+base01: "262b2c" # Lighter Background (app bars, drawers)
+base02: "3a4142" # Selection Background / Cards
+base03: "5b6366" # Comments / Disabled
+base04: "a0a8b0" # Dark Foreground (secondary text)
+base05: "dfe4ea" # Default Foreground (primary text)
+base06: "eceff4" # Light Foreground (high emphasis)
+base07: "f6f3ee" # Light Background (inverted text)
+
+base08: "e67e80" # Red (Error)
+base09: "e5b184" # Orange (Warning)
+base0A: "d8c98f" # Yellow (Accent 1)
+base0B: "a7c080" # Green (Success / Primary Accent alt)
+base0C: "89dceb" # Cyan (Info)
+base0D: "81a1c1" # Blue (Primary)
+base0E: "b48ead" # Purple (Secondary)
+base0F: "d699b6" # Pink (Tertiary / Special)

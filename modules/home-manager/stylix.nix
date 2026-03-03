@@ -26,8 +26,8 @@ in
       enable = true;
       polarity = "dark";
       autoEnable = true;
-      base16Scheme = inputs.self + /configs/themes/forestfoxpuccin.yaml;
-      image = inputs.self + /configs/bgs/sea-train.png;
+      base16Scheme = inputs.self + /configs/themes/material-foxpuccin.yaml;
+      image = inputs.self + /configs/bgs/midnight-symphony.png;
     };
 
     stylix.targets = {
@@ -38,15 +38,15 @@ in
     stylix.fonts = {
       serif = {
         name = "NewYork Nerd Font";
-        package = apple-fonts.packages.${pkgs.system}.ny-nerd;
+        package = apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.ny-nerd;
       };
       sansSerif = {
         name = "SFProDisplay Nerd Font";
-        package = apple-fonts.packages.${pkgs.system}.sf-pro-nerd;
+        package = apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro-nerd;
       };
       monospace = {
         # name = "SFMono Nerd Font";
-        # package = apple-fonts.packages.${pkgs.system}.sf-mono-nerd;
+        # package = apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-mono-nerd;
         name = "Liga SFMono Nerd Font";
         package = pkgs.sf-mono-liga-bin;
       };

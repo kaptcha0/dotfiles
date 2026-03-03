@@ -31,7 +31,7 @@
       uv
       vscode-langservers-extracted
       yaml-language-server
-      zls
+      # zls
     ];
   };
 }

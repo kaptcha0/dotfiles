@@ -10,6 +10,7 @@
   dev-utils-bundle.enable = true;
   cyber-utils-bundle.enable = true;
 
+  agents.enable = true;
   niri.enable = true;
   noctalia.enable = true;
   theming.enable = true;

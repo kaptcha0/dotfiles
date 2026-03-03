@@ -12,6 +12,7 @@
   config = lib.mkIf config.yazi.enable {
     programs.yazi = {
       enable = true;
+      shellWrapperName = "yy";
       settings = {
         show_hidden = true;
       };

@@ -37,7 +37,7 @@ in
 
       # If wanted, you can use this line for the _latest_ package. / Otherwise, you're relying on nixpkgs to update it frequently enough.
       # For this to work, make sure to add sherlock as a flake input!
-      # package = inputs.sherlock.packages.${pkgs.system}.default;
+      # package = inputs.sherlock.packages.${pkgs.stdenv.hostPlatform.system}.default;
       package = (config.lib.nixGL.wrap sherlock-launcher);
       # package = null;
 

@@ -49,7 +49,7 @@
     let
       system = "x86_64-linux";
       fh-overlay = final: prev: {
-        fh = inputs.fh.packages."${prev.system}".default;
+        fh = inputs.fh.packages."${prev.stdenv.hostPlatform.system}".default;
       };
       sf-mono-ligatures-overlay = (
         final: prev: {

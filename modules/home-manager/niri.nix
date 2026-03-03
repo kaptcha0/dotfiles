@@ -5,16 +5,21 @@
   ...
 }:
 let
+  qs = [
+    "qs"
+    "-p"
+    "/etc/xdg/quickshell/noctalia-shell"
+  ];
   noctalia =
     cmd:
-    [
-      "/usr/bin/qs"
-      "-p"
-      "/etc/xdg/quickshell/noctalia-shell"
-      "ipc"
-      "call"
-    ]
-    ++ (pkgs.lib.splitString " " cmd);
+    (
+      qs
+      ++ [
+        "ipc"
+        "call"
+      ]
+      ++ (pkgs.lib.splitString " " cmd)
+    );
   term = "kitty";
   launcher = noctalia "launcher toggle";
   locker = noctalia "lockScreen lock";
@@ -22,11 +27,6 @@ let
   notes = "obsidian";
   browser = "zen-browser";
   editor = "zeditor";
-  qs = [
-    "/usr/bin/qs"
-    "-p"
-    "/etc/xdg/quickshell/noctalia-shell"
-  ];
 
   animations = {
     easeOutQuint = duration-ds: {
@@ -110,42 +110,30 @@ in
         enable = true;
         timeouts = [
           {
-            timeout = 30;
+            timeout = 60;
             command = lib.strings.join " " (noctalia "brightness set 10");
             resumeCommand = lib.strings.join " " (noctalia "brightness set 50");
           }
           {
-            timeout = 60;
+            timeout = 60 * 2;
             command = display "off";
             resumeCommand = display "on";
           }
           {
-            timeout = 60 * 2;
+            timeout = 60 * 5;
             command = lib.strings.join " " locker;
           }
           {
-            timeout = 60 * 5;
+            timeout = 60 * 10;
             command = "/usr/bin/systemctl suspend";
           }
         ];
-        events = [
-          {
-            event = "before-sleep";
-            command = (display "off") + "; " + (lib.strings.join " " locker);
-          }
-          {
-            event = "after-resume";
-            command = display "on";
-          }
-          {
-            event = "lock";
-            command = (display "off") + "; " + (lib.strings.join " " locker);
-          }
-          {
-            event = "unlock";
-            command = display "on";
-          }
-        ];
+        events = {
+          "before-sleep" = (display "off") + "; " + (lib.strings.join " " locker);
+          "after-resume" = display "on";
+          "lock" = (display "off") + "; " + (lib.strings.join " " locker);
+          "unlock" = display "on";
+        };
       };
 
     programs.niri = {
@@ -168,6 +156,8 @@ in
             argv = qs;
           }
         ];
+
+        debug.honor-xdg-activation-with-invalid-serial = { };
 
         layout = {
           gaps = 8;
@@ -255,6 +245,7 @@ in
           "Mod+Comma" = {
             hotkey-overlay.title = "lock the screen";
             action.spawn = locker;
+            allow-when-locked = true;
           };
 
           "Mod+E" = {
@@ -294,6 +285,7 @@ in
 
           "Mod+Alt+R" = {
             hotkey-overlay.title = "restart noctalia";
+            allow-when-locked = true;
             action.spawn = [
               "zsh"
               "-c"
