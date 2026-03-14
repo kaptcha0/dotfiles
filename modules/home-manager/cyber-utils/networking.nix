@@ -21,7 +21,6 @@
       ]
       ++ lib.optionals config.vpn.enable [
         (config.lib.nixGL.wrap openvpn)
-        (config.lib.nixGL.wrap openvpn3)
       ];
   };
 }

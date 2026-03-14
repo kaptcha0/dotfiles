@@ -1,0 +1,23 @@
+scheme: "Mononoke Neutral Light"
+author: "derived from muted-mononoke & material-theme"
+variant: "light"
+
+# ── Neutral ramp ──────────────────────────────────────────────────────────────
+base00: "F9F9F8"   # Main background           neutral-99 / near-white
+base01: "EEEEED"   # Raised panels             surfaceContainerLow light
+base02: "E2E2E1"   # Selection background      surfaceContainerHighest light
+base03: "8E9594"   # Comments / disabled       outline mid-tone
+base04: "5C5F5E"   # Subtle foreground         neutral-40
+base05: "191C1B"   # Body text                 onBackground light
+base06: "303032"   # Emphasized text           neutral-20 adjusted
+base07: "101111"   # Darkest                   neutral-5
+
+# ── Accent colors (darkened for contrast on light backgrounds) ─────────────────
+base08: "C2201D"   # Red       — vars / deleted       error light
+base09: "985228"   # Orange    — integers / booleans  warm derived
+base0A: "7A6800"   # Olive     — classes / warnings   warm derived
+base0B: "2A4D4A"   # Dark teal — strings / success    mononoke onPrimaryFixedVariant
+base0C: "006A60"   # Teal      — escape / regex       material primary light
+base0D: "456179"   # Blue      — functions / links    material tertiary light
+base0E: "5E5973"   # Purple    — keywords             mononoke tertiary light
+base0F: "7A4848"   # Brown     — deprecated / embed   warm derived

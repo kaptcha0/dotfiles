@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mangowm = {
+      url = "github:mangowm/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     apple-fonts = {
       url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -88,6 +93,7 @@
           inputs.niri-flake.homeModules.niri
           inputs.niri-flake.homeModules.stylix
           inputs.noctalia.homeModules.default
+          inputs.mangowm.hmModules.mango
         ];
       };
     };

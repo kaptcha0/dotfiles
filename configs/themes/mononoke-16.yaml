@@ -1,0 +1,18 @@
+scheme: "Mononoke"
+author: "kaptcha0"
+base00: "0e1513" # Default Background
+base01: "1a2120" # Lighter Background
+base02: "334b47" # Selection Background
+base03: "727976" # Comments, Invisibles
+base04: "8b9290" # Dark Support Text
+base05: "dde4e1" # Default Foreground
+base06: "ebf2ef" # Light Support Text
+base07: "ffffff" # Lightest Background
+base08: "ffb4ab" # Variables, XML Tags
+base09: "adcae6" # Integers, Constants
+base0A: "b1ccc6" # Classes, Search Incremental
+base0B: "82d5c8" # Strings, Markup Code
+base0C: "91b2ab" # Support, Escape Characters
+base0D: "779791" # Functions, Methods
+base0E: "5e7d77" # Keywords, Storage
+base0F: "ba1a1a" # Deprecated, Embedded Tags

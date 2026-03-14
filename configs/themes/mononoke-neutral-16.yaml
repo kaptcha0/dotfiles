@@ -1,0 +1,23 @@
+scheme: "Mononoke Neutral"
+author: "derived from muted-mononoke & material-theme"
+variant: "dark"
+
+# ── Neutral ramp (near-achromatic, sourced from neutral palette) ──────────────
+base00: "1E2020"   # Main background          surfaceContainerLow dark
+base01: "292A2A"   # Raised panels / popups   surfaceContainerHigh dark
+base02: "333535"   # Selection background      surfaceContainerHighest dark
+base03: "525454"   # Comments / disabled       neutral-35 adj.
+base04: "8A9291"   # Subtle foreground         outline dark
+base05: "C1C8C6"   # Body text                 onSurfaceVariant light
+base06: "DCE3E1"   # Emphasized text           onBackground dark tint
+base07: "EFF2F0"   # Brightest / titles        inverseOnSurface dark
+
+# ── Accent colors ──────────────────────────────────────────────────────────────
+base08: "F28B82"   # Red       — vars / deleted       softened error dark
+base09: "D49370"   # Orange    — integers / booleans  warm derived
+base0A: "C8B870"   # Yellow    — classes / warnings   warm derived
+base0B: "A9CECA"   # Teal      — strings / success    mononoke primary dark
+base0C: "82D5C8"   # Cyan      — escape / regex       material primary dark
+base0D: "ADCAE6"   # Blue      — functions / links    material tertiary dark
+base0E: "CAC2E2"   # Purple    — keywords             mononoke tertiary dark
+base0F: "B09090"   # Brown     — deprecated / embed   warm neutral derived

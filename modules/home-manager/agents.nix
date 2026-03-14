@@ -1,11 +1,14 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
+let
+  model = "qwen3.5:0.8b";
+in
 {
   options.agents.enable = lib.mkEnableOption "enable ai agents";
   config = lib.mkIf config.agents.enable {
     home.sessionVariables = {
       ANTHROPIC_BASE_URL = "http://localhost:11434/v1";
       ANTHROPIC_AUTH_TOKEN = "ollama"; # Required to bypass the login check
-      ANTHROPIC_MODEL = "qwen2.5-coder:1.5b"; # Or your preferred local model
+      ANTHROPIC_MODEL = model; # Or your preferred local model
     };
 
     services.ollama = {
@@ -18,7 +21,11 @@
     };
 
     home.shellAliases = {
-      ccode = "${config.services.ollama.package}/bin/ollama launch claude --model qwen2.5-coder:1.5b";
+      ccode = "${config.services.ollama.package}/bin/ollama launch claude --model ${model}";
     };
+
+    home.packages = with pkgs; [
+      open-webui
+    ];
   };
 }

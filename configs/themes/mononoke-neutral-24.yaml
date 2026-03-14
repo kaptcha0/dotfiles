@@ -1,0 +1,31 @@
+scheme: "Mononoke Neutral"
+author: "derived from muted-mononoke & material-theme"
+variant: "dark"
+
+# ── Base16 slots ──────────────────────────────────────────────────────────────
+base00: "1E2020"
+base01: "292A2A"
+base02: "333535"
+base03: "525454"
+base04: "8A9291"
+base05: "C1C8C6"
+base06: "DCE3E1"
+base07: "EFF2F0"
+base08: "F28B82"
+base09: "D49370"
+base0A: "C8B870"
+base0B: "A9CECA"
+base0C: "82D5C8"
+base0D: "ADCAE6"
+base0E: "CAC2E2"
+base0F: "B09090"
+
+# ── Base24 extensions ─────────────────────────────────────────────────────────
+base10: "151716"   # Deep background — below main bg       surfaceDim dark
+base11: "0D0F0E"   # Deepest — terminal, absolute bottom   surfaceContainerLowest
+base12: "FF9D96"   # Bright red      brighter base08
+base13: "E5A882"   # Bright orange   brighter base09
+base14: "BDE8E4"   # Bright teal     brighter base0B       primaryFixed dim
+base15: "9FECE0"   # Bright cyan     brighter base0C       material primaryFixed
+base16: "C0D9F0"   # Bright blue     brighter base0D
+base17: "DDD8F0"   # Bright purple   brighter base0E       tertiaryFixed dim

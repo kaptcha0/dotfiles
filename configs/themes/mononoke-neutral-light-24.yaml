@@ -1,0 +1,31 @@
+scheme: "Mononoke Neutral Light"
+author: "derived from muted-mononoke & material-theme"
+variant: "light"
+
+# ── Base16 slots ──────────────────────────────────────────────────────────────
+base00: "F9F9F8"
+base01: "EEEEED"
+base02: "E2E2E1"
+base03: "8E9594"
+base04: "5C5F5E"
+base05: "191C1B"
+base06: "303032"
+base07: "101111"
+base08: "C2201D"
+base09: "985228"
+base0A: "7A6800"
+base0B: "2A4D4A"
+base0C: "006A60"
+base0D: "456179"
+base0E: "5E5973"
+base0F: "7A4848"
+
+# ── Base24 extensions ─────────────────────────────────────────────────────────
+base10: "FFFFFF"   # Pure white — above main bg
+base11: "F2F0EF"   # Near-white — neutral-95
+base12: "E03030"   # Bright red      vivid accent
+base13: "B06030"   # Bright orange   vivid accent
+base14: "40625F"   # Bright teal     mononoke primary light
+base15: "1A7A70"   # Bright cyan     material primary mid
+base16: "4A6E8A"   # Bright blue     tertiary mid
+base17: "6B6585"   # Bright purple   tertiary mononoke mid

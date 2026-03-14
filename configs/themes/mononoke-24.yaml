@@ -1,0 +1,26 @@
+scheme: "Mononoke"
+author: "kaptcha0"
+base00: "0e1513" # System Background
+base01: "161d1c" # Surface Low
+base02: "1a2120" # Surface Medium
+base03: "252b2a" # Surface High
+base04: "334b47" # Selection / UI Accent
+base05: "727976" # Muted Text
+base06: "8b9290" # Secondary Text
+base07: "dde4e1" # Main Foreground
+base08: "ebf2ef" # Bright Foreground
+base09: "ffffff" # Emphasis Foreground
+base0A: "ffb4ab" # Error / Deleted
+base0B: "adcae6" # Info / Changed
+base0C: "82d5c8" # Success / Added
+base0D: "c8eae2" # Warning / Modified
+base0E: "779791" # Primary Accent
+base0F: "91b2ab" # Secondary Accent
+base10: "5e7d77" # Tertiary Accent
+base11: "45645f" # Deep Primary
+base12: "2e4c47" # Darker Accent
+base13: "22413c" # Shadow / Depth
+base14: "ba1a1a" # Critical
+base15: "585f67" # Slate Muted
+base16: "40474f" # Slate Dark
+base17: "2a3138" # Deep Navy/Slate

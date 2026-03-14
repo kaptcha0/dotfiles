@@ -11,9 +11,13 @@
   cyber-utils-bundle.enable = true;
 
   agents.enable = true;
-  niri.enable = true;
-  noctalia.enable = true;
   theming.enable = true;
+
+  wms = {
+    mangowm.enable = true;
+    swayidle.enable = true;
+    noctalia.enable = true;
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

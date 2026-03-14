@@ -26,8 +26,8 @@ in
       enable = true;
       polarity = "dark";
       autoEnable = true;
-      base16Scheme = inputs.self + /configs/themes/material-foxpuccin.yaml;
-      image = inputs.self + /configs/bgs/midnight-symphony.png;
+      base16Scheme = inputs.self + /configs/themes/mononoke-neutral-16.yaml;
+      image = inputs.self + /configs/bgs/sea-train.png;
     };
 
     stylix.targets = {

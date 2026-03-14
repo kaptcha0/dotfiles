@@ -5,13 +5,15 @@
   inputs,
   ...
 }:
-
+let
+  cfg = config.wms.hyprland;
+  in
 {
   options = {
-    hyprland.enable = lib.mkEnableOption "enable hyprland";
+    wms.hyprland.enable = lib.mkEnableOption "enable hyprland";
   };
 
-  config = lib.mkIf config.hyprland.enable {
+  config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
       # set the flake package
