@@ -16,7 +16,7 @@
       enable = true;
       package = pkgs.emptyDirectory;
       envExtra = builtins.readFile (inputs.self + /configs/zsh/.zshenv);
-      initContent = ''
+      initContent = /* zsh */ ''
         ${builtins.readFile (inputs.self + /configs/zsh/.zshrc)}
         source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
         zstyle ':fzf-tab:*' use-fzf-default-opts yes

@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  model = "qwen3.5:0.8b";
+  model = "gemma4:e2b";
 in
 {
   options.agents.enable = lib.mkEnableOption "enable ai agents";
