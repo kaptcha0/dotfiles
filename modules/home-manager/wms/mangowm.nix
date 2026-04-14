@@ -48,8 +48,8 @@ in
 
         border_radius = 8;
         no_radius_when_single = 0;
-        focused_opacity = 0.95;
-        unfocused_opacity = 0.85;
+        focused_opacity = common.settings.opacity.active;
+        unfocused_opacity = common.settings.opacity.inactive;
 
         # Animation Configuration(support type:zoom,slide)
         # tag_animation_direction: 1-horizontal,0-vertical
@@ -377,7 +377,7 @@ in
     };
 
     xdg.portal = {
-      enable = true;
+      # enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-wlr
         xdg-desktop-portal-gtk

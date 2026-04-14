@@ -31,7 +31,7 @@ in
     };
 
     stylix.targets = {
-      qt.enable = false;
+      qt.enable = true;
       fontconfig.enable = true;
     };
 

@@ -147,12 +147,28 @@ in
       window-rules = [
         {
           clip-to-geometry = true;
+          # background-effect.blur = true;
+
           geometry-corner-radius = {
             bottom-left = 8.;
             bottom-right = 8.;
             top-left = 8.;
             top-right = 8.;
           };
+        }
+        {
+          matches = [
+            { is-active = false; }
+          ];
+
+          opacity = 0.85;
+        }
+        {
+          matches = [
+            { is-active = true; }
+          ];
+
+          opacity = 0.95;
         }
         {
           matches = [
@@ -176,6 +192,7 @@ in
         {
           matches = [ { namespace = "^common.noctalia-overview"; } ];
           place-within-backdrop = true;
+          # background-effect.blur = true;
         }
       ];
 

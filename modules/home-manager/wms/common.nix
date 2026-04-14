@@ -21,4 +21,11 @@ rec {
   notes = "obsidian";
   browser = "zen-browser";
   editor = "zeditor";
+
+  settings = {
+    opacity = {
+      active = 0.95;
+      inactive = 0.85;
+    };
+  };
 }

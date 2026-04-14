@@ -14,6 +14,7 @@
   theming.enable = true;
 
   wms = {
+    # hyprland.enable = true;
     mangowm.enable = true;
     niri.enable = true;
     swayidle.enable = true;
