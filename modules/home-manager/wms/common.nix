@@ -14,7 +14,7 @@ rec {
       ]
       ++ (builtins.filter builtins.isString (builtins.split " " cmd))
     );
-  term = "kitty";
+  term = "ghostty";
   launcher = noctalia "launcher toggle";
   locker = noctalia "lockScreen lock";
   file-browser = "nautilus";

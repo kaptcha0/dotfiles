@@ -377,13 +377,14 @@ in
     };
 
     xdg.portal = {
-      # enable = true;
+      enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-wlr
         xdg-desktop-portal-gtk
+        xdg-desktop-portal-gnome
       ];
       config = {
-        common.default = [ "gtk" ];
+        common.default = [ "wlr" "gnome" "gtk" ];
         mango = {
           default = "gtk";
           "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];

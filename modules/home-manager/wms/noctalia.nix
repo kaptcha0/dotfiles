@@ -10,7 +10,8 @@
 
   config = lib.mkIf cfg.enable {
     stylix.targets.noctalia-shell.enable = true;
-    programs.noctalia-shell = {
+
+    programs.noctalia = {
       enable = true;
       package = pkgs.emptyDirectory;
       settings = {

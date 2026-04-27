@@ -9,6 +9,7 @@
     home.packages = with pkgs; [ jjui ];
 
     programs.jujutsu.enable = true;
+    home.shellAliases.jj = "EDITOR=\"${config.home.sessionVariables.EDITOR}\" VISUAL=\"${config.home.sessionVariables.VISUAL}\" jj";
 
     home.file.".config/jj" = {
       source = inputs.self + /configs/jj;

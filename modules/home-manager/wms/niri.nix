@@ -81,24 +81,14 @@ in
   options.wms.niri.enable = lib.mkEnableOption "enable niri";
 
   config = lib.mkIf cfg.enable {
-    xdg.configFile."niri/config.kdl" = lib.mkForce { enable = false; };
-    xdg.configFile."niri/niri-nix.kdl" = {
-      text = config.programs.niri.finalConfig;
-    };
-
-    home.activation.niriMutableConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          config_path="${config.xdg.configHome}/niri/config.kdl"
-          # Seed if missing, OR replace if it's still a Nix-managed symlink
-          if [ ! -e "$config_path" ] || [ -L "$config_path" ]; then
-            $DRY_RUN_CMD mkdir -p "$(dirname "$config_path")"
-            $DRY_RUN_CMD rm -f "$config_path"
-            $DRY_RUN_CMD cat > "$config_path" <<'EOF'
-      // Nix-managed settings — do not edit this include line
-      include "niri-nix.kdl"
-
-      // Monique will write output blocks below this line
-      EOF
-          fi
+    xdg.configFile.niri-config.target = lib.mkForce "niri/nix-config.kdl";
+    home.activation.setupNiriConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      CONFIG_PATH="$HOME/.config/niri/config.kdl"
+      if [ -L "$CONFIG_PATH" ] || [ ! -e "$CONFIG_PATH" ]; then
+        rm -f "$CONFIG_PATH"
+        echo 'include "nix-config.kdl"' > "$CONFIG_PATH"
+        echo '// Add manual changes below' >> "$CONFIG_PATH"
+      fi
     '';
 
     programs.niri.enable = true;
@@ -127,11 +117,10 @@ in
         gaps = 8;
         always-center-single-column = true;
         center-focused-column = "on-overflow";
-        focus-ring.enable = false;
 
         border = {
           enable = true;
-          width = 1;
+          width = 2;
         };
 
         default-column-width.proportion = 1. / 2.;
@@ -159,6 +148,7 @@ in
         {
           matches = [
             { is-active = false; }
+            { is-floating = true; }
           ];
 
           opacity = 0.85;
@@ -168,7 +158,7 @@ in
             { is-active = true; }
           ];
 
-          opacity = 0.95;
+          opacity = 1.0;
         }
         {
           matches = [
@@ -177,20 +167,32 @@ in
 
           default-column-width.proportion = 0.2;
           default-window-height.proportion = 0.2;
+          opacity = 1.0;
+          open-floating = true;
+        }
+        {
+          matches = [
+            {
+              title = "Kdenlive";
+              app-id = "org.kde.kdenlive";
+            }
+          ];
+
           open-floating = true;
         }
         {
           matches = [
             { app-id = "org.kde.kdenlive"; }
-            { app-id = "Ardour-.*"; }
+            { app-id = "Ardour.*"; }
           ];
           open-maximized = true;
+          opacity = 1.0;
         }
       ];
 
       layer-rules = [
         {
-          matches = [ { namespace = "^common.noctalia-overview"; } ];
+          matches = [ { namespace = "^noctalia-overview"; } ];
           place-within-backdrop = true;
           # background-effect.blur = true;
         }

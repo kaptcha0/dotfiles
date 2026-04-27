@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   model = "gemma4:e2b";
 in
@@ -20,8 +25,24 @@ in
       enable = true;
     };
 
+    programs.opencode = {
+      enable = true;
+      settings = {
+        permission = {
+          "*" = "allow";
+          "edit" = "ask";
+          "bash" = "ask";
+          "task" = "ask";
+          "skill" = "ask";
+          "webfetch" = "ask";
+          "external_directory" = "ask";
+        };
+      };
+    };
+
     home.shellAliases = {
       ccode = "${config.services.ollama.package}/bin/ollama launch claude --model ${model}";
+      ocode = "EDITOR=\"${config.home.sessionVariables.EDITOR}\" opencode";
     };
 
     home.packages = with pkgs; [
