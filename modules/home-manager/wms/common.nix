@@ -1,22 +1,20 @@
 rec {
   qs = [
-    "/usr/bin/qs"
-    "-p"
-    "/etc/xdg/quickshell/noctalia-shell"
+    "/home/kaptcha0/.nix-profile/bin/noctalia"
   ];
   noctalia =
     cmd:
     (
       qs
       ++ [
-        "ipc"
-        "call"
+        "msg"
       ]
       ++ (builtins.filter builtins.isString (builtins.split " " cmd))
     );
   term = "ghostty";
-  launcher = noctalia "launcher toggle";
-  locker = noctalia "lockScreen lock";
+  launcher = noctalia "panel-toggle launcher";
+  locker = noctalia "session lock";
+  clipboard = noctalia "panel-toggle clipboard";
   file-browser = "nautilus";
   notes = "obsidian";
   browser = "zen-browser";

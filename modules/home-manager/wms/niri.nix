@@ -249,61 +249,61 @@ in
 
         "Mod+Ctrl+V" = {
           hotkey-overlay.title = "open clipboard history";
-          action.spawn = common.noctalia "launcher clipboard";
+          action.spawn = common.clipboard;
         };
 
         "Mod+Period" = {
           hotkey-overlay.title = "open emoji selector";
-          action.spawn = common.noctalia "launcher emoji";
+          action.spawn = common.launcher ++ [ " /emo" ];
         };
 
         "Mod+S" = {
           hotkey-overlay.title = "open session manager";
-          action.spawn = common.noctalia "sessionMenu toggle";
+          action.spawn = common.noctalia "panel-toggle session";
         };
 
         "Mod+Alt+R" = {
           hotkey-overlay.title = "restart common.noctalia";
           allow-when-locked = true;
-          action.spawn = [
-            "zsh"
-            "-c"
-            (
-              (lib.strings.concatStringsSep " " common.qs)
-              + " kill && "
-              + (lib.strings.concatStringsSep " " common.qs)
-            )
-          ];
+          action.spawn =
+            let
+              qs = lib.strings.concatStringsSep " " common.qs;
+            in
+            [
+              "zsh"
+              "-c"
+              "pkill ${qs} && ${qs}"
+            ];
         };
 
         "XF86AudioRaiseVolume" = {
           allow-when-locked = true;
-          action.spawn = common.noctalia "volume increase";
+          action.spawn = common.noctalia "volume-up";
         };
 
         "XF86AudioLowerVolume" = {
           allow-when-locked = true;
-          action.spawn = common.noctalia "volume decrease";
+          action.spawn = common.noctalia "volume-down";
         };
 
         "XF86AudioMute" = {
           allow-when-locked = true;
-          action.spawn = common.noctalia "volume muteOutput";
+          action.spawn = common.noctalia "volume-mute";
         };
 
         "XF86AudioMicMute" = {
           allow-when-locked = true;
-          action.spawn = common.noctalia "volume muteInput";
+          action.spawn = common.noctalia "mic-mute";
         };
 
         "XF86AudioPlay" = {
           allow-when-locked = true;
-          action.spawn = common.noctalia "media playPause";
+          action.spawn = common.noctalia "media toggle";
         };
 
         "XF86AudioStop" = {
           allow-when-locked = true;
-          action.spawn = common.noctalia "media pause";
+          action.spawn = common.noctalia "media stop";
         };
 
         "XF86AudioPrev" = {
@@ -318,12 +318,12 @@ in
 
         "XF86MonBrightnessUp" = {
           allow-when-locked = true;
-          action.spawn = common.noctalia "brightness increase";
+          action.spawn = common.noctalia "brightness-up";
         };
 
         "XF86MonBrightnessDown" = {
           allow-when-locked = true;
-          action.spawn = common.noctalia "brightness decrease";
+          action.spawn = common.noctalia "brightness-up";
         };
 
         "Mod+O" = {

@@ -58,7 +58,7 @@
       };
       sf-mono-ligatures-overlay = (
         final: prev: {
-          sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation  {
+          sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation {
             pname = "sf-mono-liga-bin";
             version = "dev";
             src = inputs.sf-mono-liga-src;

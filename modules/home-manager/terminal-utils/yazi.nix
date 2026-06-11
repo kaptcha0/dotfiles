@@ -14,7 +14,7 @@
       enable = true;
       shellWrapperName = "yy";
       settings = {
-        show_hidden = true;
+        mgr.show_hidden = true;
       };
     };
   };
