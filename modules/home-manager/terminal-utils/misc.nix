@@ -13,8 +13,8 @@
     home.shell.enableShellIntegration = true;
 
     home.sessionVariables = {
-      EDITOR = lib.mkForce "helix";
-      VISUAL = lib.mkForce "zeditor --wait";
+      EDITOR = lib.mkDefault "helix";
+      VISUAL = lib.mkDefault "zeditor --wait";
     };
 
     home.shellAliases = {
@@ -22,7 +22,7 @@
       hx = "helix";
       cp = "cp -i";
       rm = "rm -i";
-      ls = "eza -lag --group-directories-first --git --header --icons";
+      ls = "eza -lag --group-directories-first --git --header --icons auto";
     };
 
     home.packages = with pkgs; [
@@ -61,7 +61,7 @@
         "--marker '○ '"
         "--pointer '-'"
       ];
-      historyWidgetOptions = [
+      historyWidget.options = [
         "--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'"
         "--color header:italic"
         "--header 'Press CTRL-Y to copy command into clipboard'"

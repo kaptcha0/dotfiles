@@ -43,6 +43,22 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ## zsh plugins
+    zsh-helix-mode = {
+      url = "github:Multirious/zsh-helix-mode/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zsh-shift-select = {
+      url = "github:jirutka/zsh-shift-select";
+      flake = false; # no flake.nix in this repo
+    };
+
+    zsh-ssh = {
+      url = "github:sunlei/zsh-ssh";
+      flake = false; # no flake.nix in this repo
+    };
   };
   outputs =
     {
@@ -72,6 +88,7 @@
       );
       pkgs = import nixpkgs {
         inherit system;
+        config.allowUnfree = true;
         overlays = [
           nixgl.overlay
           fh-overlay
@@ -80,21 +97,40 @@
       };
     in
     {
-      homeConfigurations."kaptcha0" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = { inherit inputs nixgl; };
+      homeConfigurations = {
+        "kaptcha0" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs nixgl; };
 
-        modules = [
-          ./hosts/kaptcha0-laptop/home.nix
-          ./modules/home-manager
+          modules = [
+            ./hosts/kaptcha0-laptop/home.nix
+            ./modules/home-manager
 
-          inputs.stylix.homeModules.stylix
-          inputs.spicetify-nix.homeManagerModules.spicetify
-          inputs.niri-flake.homeModules.niri
-          inputs.niri-flake.homeModules.stylix
-          inputs.noctalia.homeModules.default
-          inputs.mangowm.hmModules.mango
-        ];
+            inputs.stylix.homeModules.stylix
+            inputs.spicetify-nix.homeManagerModules.spicetify
+            inputs.niri-flake.homeModules.niri
+            inputs.niri-flake.homeModules.stylix
+            inputs.noctalia.homeModules.default
+            inputs.mangowm.hmModules.mango
+          ];
+        };
+
+        "jkabunga" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs nixgl; };
+
+          modules = [
+            ./hosts/work-wsl/home.nix
+            ./modules/home-manager
+
+            inputs.stylix.homeModules.stylix
+            inputs.spicetify-nix.homeManagerModules.spicetify
+            inputs.niri-flake.homeModules.niri
+            inputs.niri-flake.homeModules.stylix
+            inputs.noctalia.homeModules.default
+            inputs.mangowm.hmModules.mango
+          ];
+        };
       };
     };
 }

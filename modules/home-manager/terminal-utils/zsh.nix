@@ -16,47 +16,68 @@
       enable = true;
       package = pkgs.emptyDirectory;
       envExtra = builtins.readFile (inputs.self + /configs/zsh/.zshenv);
-      initContent = /* zsh */ ''
-        ${builtins.readFile (inputs.self + /configs/zsh/.zshrc)}
-        source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
-        zstyle ':fzf-tab:*' use-fzf-default-opts yes
-      '';
+      enableCompletion = true;
+      initContent = builtins.readFile (inputs.self + /configs/zsh/.zshrc);
 
-      autosuggestion = {
-        enable = true;
-        strategy = [
-          "history"
-          "completion"
-        ];
-      };
+    };
 
-      syntaxHighlighting = {
-        enable = true;
-        highlighters = [
-          "main"
-          "brackets"
-          "cursor"
-          "root"
-        ];
-      };
-
-      oh-my-zsh = {
-        enable = true;
-        plugins = [
-          "sudo"
-          "command-not-found"
-          "fzf"
-          "zsh-interactive-cd"
-        ];
-      };
-
-      plugins = [
-        {
-          name = "zsh-fzf-tab";
-          src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
-        }
+    programs.zsh.autosuggestion = {
+      enable = true;
+      strategy = [
+        "history"
+        "completion"
       ];
     };
+
+    programs.zsh.syntaxHighlighting = {
+      enable = true;
+      highlighters = [
+        "main"
+        "brackets"
+        "cursor"
+        "root"
+      ];
+    };
+
+    programs.zsh.oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "sudo"
+        "command-not-found"
+        "fzf"
+        "zsh-interactive-cd"
+      ];
+    };
+
+    programs.zsh.plugins = [
+      {
+        name = "zsh-fzf-tab";
+        src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
+      }
+      {
+        name = "zsh-autopair";
+        src = "${pkgs.zsh-autopair}/share/zsh/zsh-autopair";
+      }
+      {
+        name = "zsh-completions";
+        src = "${pkgs.zsh-completions}/share/zsh-completions";
+      }
+      {
+        name = "zsh-shift-select";
+        src = inputs.zsh-shift-select;
+        file = "zsh-shift-select.plugin.zsh";
+      }
+      {
+        name = "zsh-ssh";
+        src = inputs.zsh-ssh;
+        file = "zsh-ssh.plugin.zsh";
+      }
+      {
+        name = "zsh-helix-mode";
+        src = inputs.zsh-helix-mode;
+        file = "zsh-helix-mode.plugin.zsh";
+      }
+    ];
 
     home.file = {
       ".xprofile" = {

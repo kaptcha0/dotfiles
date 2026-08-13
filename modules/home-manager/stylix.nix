@@ -21,6 +21,7 @@ in
 
   config = lib.mkIf config.theming.enable {
     fonts.fontconfig.enable = lib.mkForce true;
+    home.pointerCursor.enable = true;
 
     stylix = {
       enable = true;
