@@ -323,7 +323,7 @@ in
 
         "XF86MonBrightnessDown" = {
           allow-when-locked = true;
-          action.spawn = common.noctalia "brightness-up";
+          action.spawn = common.noctalia "brightness-down";
         };
 
         "Mod+O" = {

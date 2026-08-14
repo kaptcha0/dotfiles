@@ -17,7 +17,7 @@
     # hyprland.enable = true;
     mangowm.enable = true;
     niri.enable = true;
-    swayidle.enable = true;
+    swayidle.enable = false;
     noctalia.enable = true;
   };
 
