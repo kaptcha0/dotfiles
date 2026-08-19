@@ -591,7 +591,10 @@
         "noctalia": "noctalia",
         "sf-mono-liga-src": "sf-mono-liga-src",
         "spicetify-nix": "spicetify-nix",
-        "stylix": "stylix"
+        "stylix": "stylix",
+        "zsh-helix-mode": "zsh-helix-mode",
+        "zsh-shift-select": "zsh-shift-select",
+        "zsh-ssh": "zsh-ssh"
       }
     },
     "rust-analyzer-src": {
@@ -742,11 +745,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1785048222,
-        "narHash": "sha256-LjFVfwxensz76SjnvofF1Jsw+xTLd8Qp31W0J6nh2XI=",
+        "lastModified": 1786855359,
+        "narHash": "sha256-yeKMWFCPeoIKmPBLLvP1/15ulOJO8i9ZIlSSXGuW6aw=",
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "rev": "17e524f330c282d31c32dfe076222d4a12277886",
+        "rev": "0f478ff79b82abb785160cd4531293f61d21be86",
         "type": "github"
       },
       "original": {
@@ -942,6 +945,59 @@
       "original": {
         "owner": "Supreeeme",
         "repo": "xwayland-satellite",
+        "type": "github"
+      }
+    },
+    "zsh-helix-mode": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774203535,
+        "narHash": "sha256-YggmEZ5hRySwXR+VZFKKZ+HzH5Cvz0661QeiAjlE30E=",
+        "owner": "Multirious",
+        "repo": "zsh-helix-mode",
+        "rev": "e8d4940588f9809ab5658aa7c9c664921d547879",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Multirious",
+        "ref": "main",
+        "repo": "zsh-helix-mode",
+        "type": "github"
+      }
+    },
+    "zsh-shift-select": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659047364,
+        "narHash": "sha256-ekA8acUgNT/t2SjSBGJs2Oko5EB7MvVUccC6uuTI/vc=",
+        "owner": "jirutka",
+        "repo": "zsh-shift-select",
+        "rev": "da460999b7d31aef0f0a82a3e749d70edf6f2ef9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jirutka",
+        "repo": "zsh-shift-select",
+        "type": "github"
+      }
+    },
+    "zsh-ssh": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1780076268,
+        "narHash": "sha256-1yJasYai4+T8j76lCvIhSFh4fm7VUoF4F4E+v8WSr2I=",
+        "owner": "sunlei",
+        "repo": "zsh-ssh",
+        "rev": "cee8c2a119dd53f01dc6aef1ce79faa783aa2e3f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sunlei",
+        "repo": "zsh-ssh",
         "type": "github"
       }
     }
