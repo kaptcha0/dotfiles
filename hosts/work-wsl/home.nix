@@ -9,6 +9,7 @@
   home.sessionVariables.VISUAL = config.home.sessionVariables.EDITOR;
   home.sessionPath = [
     "/snap/bin"
+    "${config.home.homeDirectory}/.toolbox/bin"
   ];
 
   terminal-utils-bundle.enable = true;
