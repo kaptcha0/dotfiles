@@ -1,0 +1,5 @@
+{ ... }: {
+  nix-homebrew = {
+    trust.commands = [ ];
+  };
+}

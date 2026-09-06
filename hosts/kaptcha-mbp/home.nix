@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "kaptcha0";
-  home.homeDirectory = "/home/kaptcha0";
+  home.username = "kaptcha";
+  home.homeDirectory = "/home/kaptcha";
 
   terminal-utils-bundle.enable = true;
   dev-utils-bundle.enable = true;
@@ -13,13 +13,8 @@
   agents.enable = true;
   theming.enable = true;
 
-  wms = {
-    # hyprland.enable = true;
-    mangowm.enable = true;
-    niri.enable = true;
-    swayidle.enable = false;
-    noctalia.enable = true;
-  };
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -30,16 +25,4 @@
   # release notes.
   home.stateVersion = "26.05"; # Please read the comment before changing.
 
-  targets.genericLinux = {
-    nixGL.packages = nixgl.packages;
-    nixGL.defaultWrapper = "mesa";
-    nixGL.installScripts = [ "mesa" ];
-  };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-  home.sessionVariables = {
-    WINEESYNC = 1;
-    WINEFSYNC = 1;
-  };
 }

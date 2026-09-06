@@ -44,6 +44,24 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    # Optional: Declarative tap management
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+
     ## zsh plugins
     zsh-helix-mode = {
       url = "github:Multirious/zsh-helix-mode/main";
@@ -64,6 +82,7 @@
     {
       nixpkgs,
       home-manager,
+      nix-darwin,
       nixgl,
       ...
     }@inputs:
@@ -98,7 +117,7 @@
     in
     {
       homeConfigurations = {
-        "kaptcha0" = home-manager.lib.homeManagerConfiguration {
+        "kaptcha" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs nixgl; };
 
@@ -131,6 +150,15 @@
             inputs.mangowm.hmModules.mango
           ];
         };
+      };
+      darwinConfigurations."JCs-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/kaptcha-mbp/system.nix
+          ./modules/darwin
+
+          inputs.nix-homebrew.darwinModules.nix-homebrew
+        ];
       };
     };
 }
