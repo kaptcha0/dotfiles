@@ -5,7 +5,8 @@
   ...
 }:
 let
-  model = "gemma4:e2b";
+  models = ["qwen3.5:9b" "gemma4:e2b"];
+  model = builtins.elemAt models 0;
 in
 {
   options.agents.enable = lib.mkEnableOption "enable ai agents";
@@ -42,11 +43,11 @@ in
 
     home.shellAliases = {
       ccode = "${config.services.ollama.package}/bin/ollama launch claude --model ${model}";
-      ocode = "EDITOR=\"${config.home.sessionVariables.EDITOR}\" opencode";
+      ocode = "EDITOR=\"${config.home.sessionVariables.EDITOR}\" ollama launch opencode --model ${model}";
     };
 
     home.packages = with pkgs; [
-      open-webui
+      (lib.mkIf stdenv.hostPlatform.isLinux open-webui)
     ];
   };
 }

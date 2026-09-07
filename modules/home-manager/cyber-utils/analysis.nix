@@ -36,10 +36,7 @@
         (lib.mkIf config.wpscan.enable wpscan)
         (lib.mkIf config.dex2jar.enable dex2jar)
         (lib.mkIf config.apktool.enable apktool)
-      ]
-      ++ lib.optionals config.radare.enable [
-        radare2
-        (config.lib.nixGL.wrap iaito)
+        (lib.mkIf config.radare.enable radare2)
       ];
   };
 }

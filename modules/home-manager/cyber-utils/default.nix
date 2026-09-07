@@ -12,30 +12,30 @@
   };
 
   config = lib.mkIf config.cyber-utils-bundle.enable {
-    nmap.enable = true;
-    tcpdump.enable = true;
-    vpn.enable = true;
+    nmap.enable = lib.mkDefault true;
+    tcpdump.enable = lib.mkDefault true;
+    vpn.enable = lib.mkDefault true;
 
-    apktool.enable = true;
-    sherlock.enable = true;
-    harvester.enable = true;
-    cewler.enable = true;
-    cook-framework.enable = true;
-    wpscan.enable = true;
-    dex2jar.enable = true;
+    apktool.enable = lib.mkDefault true;
+    sherlock.enable = lib.mkDefault true;
+    harvester.enable = lib.mkDefault true;
+    cewler.enable = lib.mkDefault true;
+    cook-framework.enable = lib.mkDefault true;
+    wpscan.enable = lib.mkDefault true;
+    dex2jar.enable = lib.mkDefault true;
 
-    recon-ng.enable = true;
-    setoolkit.enable = true;
+    recon-ng.enable = lib.mkDefault true;
+    setoolkit.enable = lib.mkDefault true;
 
-    radare.enable = true;
-    binwalk.enable = true;
+    radare.enable = lib.mkDefault true;
+    binwalk.enable = lib.mkDefault true;
 
-    metasploit.enable = true;
-    jtr.enable = true;
-    hashcat.enable = true;
-    aircrack.enable = true;
-    bettercap.enable = true;
-    wordlists.enable = true;
-    wordlists.seclists.enable = true;
+    metasploit.enable = lib.mkDefault true;
+    jtr.enable = lib.mkDefault true;
+    hashcat.enable = lib.mkDefault true;
+    aircrack.enable = lib.mkDefault true;
+    bettercap.enable = lib.mkDefault true;
+    wordlists.enable = lib.mkDefault true;
+    wordlists.seclists.enable = lib.mkDefault true;
   };
 }

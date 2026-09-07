@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./claude-code.nix
     ./git.nix
     ./zsh.nix
     ./helix.nix
@@ -24,7 +23,6 @@
   };
 
   config = lib.mkIf config.terminal-utils-bundle.enable {
-    claude-code.enable = true;
     git.enable = true;
     zsh.enable = true;
     helix.enable = true;

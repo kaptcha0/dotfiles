@@ -15,9 +15,7 @@
       enable = true;
       package = pkgs.emptyDirectory;
       userSettings = {
-        features = {
-          edit_prediction_provider = "copilot";
-        };
+        edit_predictions.provider = "ollama";
         helix_mode = true;
         terminal.shell.program = "zsh";
         terminal.font_family = config.stylix.fonts.monospace.name;

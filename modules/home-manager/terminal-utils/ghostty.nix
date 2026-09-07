@@ -20,7 +20,6 @@ in
       enable = true;
       package = pkgs.emptyDirectory;
       settings = {
-        command = if config.zellij.enable then "zellij" else "";
         custom-shader = customShader;
       };
     };

@@ -1,8 +1,8 @@
 {
   lib,
   config,
-  inputs,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -18,7 +18,7 @@
       package = pkgs.emptyDirectory;
       extraConfig = builtins.readFile (inputs.self + /configs/kitty/kitty.conf);
       settings = {
-        shell = "zellij";
+        shell = if config.zellij.enable then "${pkgs.zellij}/bin/zellij" else "";
         editor = ".";
       };
     };

@@ -1,5 +1,8 @@
 { ... }: {
   homebrew.casks = [
+    "blip"
+    "anytype"
+    "desktoppr"
   ];
 
   nix-homebrew = {

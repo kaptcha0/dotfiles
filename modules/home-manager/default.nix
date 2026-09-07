@@ -5,10 +5,10 @@
     ./terminal-utils
     ./dev-utils
     ./cyber-utils
-    ./wms
+    # ./wms
 
     ./agents.nix
     ./stylix.nix
-    ./sherlock-launcher.nix
+    # ./sherlock-launcher.nix
   ];
 }

@@ -51,6 +51,8 @@
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
+    mac-app-util.url = "github:hraban/mac-app-util";
+
     # Optional: Declarative tap management
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
@@ -157,7 +159,10 @@
           ./hosts/kaptcha-mbp/system.nix
           ./modules/darwin
 
+          inputs.stylix.darwinModules.stylix
           inputs.nix-homebrew.darwinModules.nix-homebrew
+          inputs.mac-app-util.darwinModules.default
+          home-manager.darwinModules.home-manager
         ];
       };
     };

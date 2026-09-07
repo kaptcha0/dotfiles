@@ -13,13 +13,13 @@
     home.shell.enableShellIntegration = true;
 
     home.sessionVariables = {
-      EDITOR = lib.mkDefault "helix";
+      EDITOR = lib.mkDefault "hx";
       VISUAL = lib.mkDefault "zeditor --wait";
     };
 
     home.shellAliases = {
       md = "mkdir";
-      hx = "helix";
+      # hx = "helix";
       cp = "cp -i";
       rm = "rm -i";
       ls = "eza -lag --group-directories-first --git --header --icons auto";

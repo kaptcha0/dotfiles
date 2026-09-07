@@ -7,11 +7,11 @@
 }:
 
 let
-  icon-theme = (
-    pkgs.whitesur-icon-theme.overrideAttrs {
+  icon-theme = if pkgs.stdenv.hostPlatform.isLinux
+    then pkgs.whitesur-icon-theme.overrideAttrs {
       themeVariants = [ "green" ];
     }
-  );
+    else pkgs.emptyDirectory;
   apple-fonts = inputs.apple-fonts;
 in
 {
@@ -21,18 +21,16 @@ in
 
   config = lib.mkIf config.theming.enable {
     fonts.fontconfig.enable = lib.mkForce true;
-    home.pointerCursor.enable = true;
-
+    home.pointerCursor.enable = pkgs.stdenv.hostPlatform.isLinux;
     stylix = {
       enable = true;
       polarity = "dark";
-      autoEnable = true;
       base16Scheme = inputs.self + /configs/themes/mononoke-neutral-16.yaml;
       image = inputs.self + /configs/bgs/sea-train.png;
     };
 
     stylix.targets = {
-      qt.enable = true;
+      qt.enable = pkgs.stdenv.hostPlatform.isLinux;
       fontconfig.enable = true;
     };
 
@@ -46,10 +44,10 @@ in
         package = apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro-nerd;
       };
       monospace = {
-        # name = "SFMono Nerd Font";
-        # package = apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-mono-nerd;
-        name = "Liga SFMono Nerd Font";
-        package = pkgs.sf-mono-liga-bin;
+        name = "SFMono Nerd Font";
+        package = apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-mono-nerd;
+        # name = "Liga SFMono Nerd Font";
+        # package = pkgs.sf-mono-liga-bin;
       };
       sizes = {
         applications = 12;
@@ -57,14 +55,14 @@ in
       };
     };
 
-    stylix.icons = {
+    stylix.icons = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       enable = true;
       package = icon-theme;
       dark = "WhiteSur-dark";
       light = "WhiteSur-light";
     };
 
-    stylix.cursor = {
+    stylix.cursor = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       package = pkgs.volantes-cursors;
       name = "volantes_cursors";
       size = 24;

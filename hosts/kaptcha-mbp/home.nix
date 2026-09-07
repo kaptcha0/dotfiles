@@ -1,14 +1,19 @@
-{ nixgl, ... }:
+{ self, ... }:
 
 {
+  imports = [
+    "${self}/modules/home-manager"
+  ];
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "kaptcha";
-  home.homeDirectory = "/home/kaptcha";
-
   terminal-utils-bundle.enable = true;
   dev-utils-bundle.enable = true;
-  cyber-utils-bundle.enable = true;
+  cyber-utils-bundle = {
+    enable = true;
+  };
+    jtr.enable = false;
+    bettercap.enable = false;
 
   agents.enable = true;
   theming.enable = true;
