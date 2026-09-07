@@ -16,3 +16,5 @@ tmux/plugins
 zsh/cache
 zsh/logs
 **/*cache*
+
+**/*.DS_Store

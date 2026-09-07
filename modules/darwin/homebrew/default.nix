@@ -8,8 +8,6 @@
     ./taps.nix
   ];
 
-  system.primaryUser = "kaptcha";
-
   homebrew = {
     enable = true;
 
